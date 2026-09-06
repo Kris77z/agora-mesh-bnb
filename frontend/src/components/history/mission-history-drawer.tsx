@@ -1,7 +1,7 @@
 'use client';
 
 import { useI18n } from '@/components/i18n/locale-provider';
-import { formatMON } from '@/lib/format';
+import { formatTokenAmount } from '@/lib/format';
 import { formatRelativeMilliseconds } from '@/lib/i18n';
 import type { MissionRecord } from '@/hooks/use-mission-history';
 import { CheckCircle2, XCircle, Clock, Trash2, X } from 'lucide-react';
@@ -103,8 +103,8 @@ export function MissionHistoryDrawer({
                                         {rec.duration !== undefined && (
                                             <span>{rec.duration}s</span>
                                         )}
-                                        {rec.spentWei && (
-                                            <span>{formatMON(rec.spentWei)} MON</span>
+                                        {rec.spentAmount && (
+                                            <span>{formatTokenAmount(rec.spentAmount, rec.assetDecimals ?? 18)} {rec.assetSymbol ?? 'tBNB'}</span>
                                         )}
                                         {rec.score !== undefined && (
                                             <span>⭑ {rec.score}/10</span>

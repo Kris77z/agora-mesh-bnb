@@ -2,10 +2,12 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
 import { WriterError } from "./errors.js";
+import { writerConfig } from "./config.js";
 
 const skillConfigSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
+  enabledByDefault: z.boolean().default(true),
   description: z.string().optional(),
   taskTypes: z.array(z.string().min(1)).min(1),
   skills: z.array(z.string().min(1)).default([]),
@@ -68,7 +70,7 @@ function loadCatalog(): SkillCatalog {
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name);
 
-  const skills = directories
+  const allSkills = directories
     .map((skillName) => {
       const skillDir = path.join(servicesRoot, skillName);
       const promptPath = path.join(skillDir, "prompt.md");
@@ -91,8 +93,18 @@ function loadCatalog(): SkillCatalog {
     .filter((item): item is LoadedSkill => Boolean(item))
     .sort((a, b) => a.config.id.localeCompare(b.config.id));
 
+  const enabledIds = new Set(writerConfig.serviceSkillIds.map((item) => normalizeKey(item)));
+  const skills = enabledIds.size === 0
+    ? allSkills.filter((skill) => skill.config.enabledByDefault)
+    : allSkills.filter((skill) => enabledIds.has(normalizeKey(skill.config.id)));
+
   if (skills.length === 0) {
-    throw new WriterError(500, "SKILL_NOT_FOUND", "No valid skill definitions found");
+    throw new WriterError(
+      500,
+      "SKILL_NOT_FOUND",
+      `No skills enabled for SERVICE_PROFILE=${writerConfig.serviceProfile}`,
+      { requestedSkillIds: writerConfig.serviceSkillIds }
+    );
   }
 
   const byKey = new Map<string, LoadedSkill>();

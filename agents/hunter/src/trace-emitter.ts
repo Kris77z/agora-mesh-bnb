@@ -1,6 +1,8 @@
 import type { HunterTraceEvent, HunterTraceEventType, LanguageCode } from "@rebel/shared";
 
 export interface HunterRunOptions {
+  /** Stable id assigned and durably admitted before any paid work begins. */
+  missionId?: string;
   onEvent?: (event: HunterTraceEvent) => void;
   signal?: AbortSignal;
   locale?: LanguageCode;

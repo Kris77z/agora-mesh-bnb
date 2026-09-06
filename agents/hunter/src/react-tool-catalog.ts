@@ -19,6 +19,7 @@ import { requestServiceQuoteWithFallback, submitPaymentAndGetResult } from "./to
 import { evaluateResultTool, verifyReceiptTool } from "./tools/verify.js";
 import { createGiveFeedbackTool } from "./react-feedback-tool.js";
 import type { Experience } from "./memory.js";
+import { hunterConfig } from "./config.js";
 
 export interface QuoteAttempt {
   serviceId: string;
@@ -175,7 +176,7 @@ export function createReactTools(state: HunterRuntimeState): Record<string, Reac
       }
     },
     check_balance: {
-      description: "Check Hunter wallet balance on Monad",
+      description: `Check Hunter wallet balance on ${hunterConfig.chain.name}`,
       schema: z.object({}),
       jsonSchema: {
         type: "object",
@@ -185,7 +186,7 @@ export function createReactTools(state: HunterRuntimeState): Record<string, Reac
       execute: async () => checkBalanceTool()
     },
     make_payment: {
-      description: "Send native MON transfer according to quote",
+      description: `Send native ${hunterConfig.chain.nativeAsset.symbol} transfer according to quote`,
       schema: z.object({}),
       jsonSchema: {
         type: "object",
@@ -243,7 +244,10 @@ export function createReactTools(state: HunterRuntimeState): Record<string, Reac
         if (!state.execution) {
           throw new HunterError(400, "MISSING_EXECUTION", "submit_payment must be called first");
         }
-        const check = verifyReceiptTool(state.execution.receipt);
+        const check = verifyReceiptTool(state.execution.receipt, {
+          result: state.execution.result,
+          provider: state.service?.provider
+        });
         state.receiptVerified = check.isValid;
         return check;
       }

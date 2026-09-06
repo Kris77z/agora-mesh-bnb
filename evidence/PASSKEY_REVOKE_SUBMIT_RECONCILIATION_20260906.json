@@ -1,0 +1,52 @@
+{
+  "authorityId": "browser-cbb87207-05c8-4e4b-b053-e538b849c291",
+  "checkedAt": "2026-09-06T09:08:06.033Z",
+  "quoteHash": "0x9a68760a52f7f73ab7532f148019d944c48f2868d1e3377150310b2913ea38bd",
+  "quoteTtl": 1788685463,
+  "intentNonce": "3",
+  "currentNonce": "3",
+  "allowance": "400000000000000000",
+  "history": [
+    {
+      "id": "0xf61fc9666efab88e90a2e90adaced178e3fcb96f15a6fd71f6b8674caf6a6748",
+      "status": 200,
+      "transactions": [
+        {
+          "chainId": "0x61",
+          "transactionHash": "0x202e584aacc1e2a19673a6affa5614e63fe2c28541d808ababd267d4b9492f69"
+        }
+      ]
+    },
+    {
+      "id": "0x766da2bb2d432252675f21206fe48d96780508cee00014921ce61b0d18ac7df8",
+      "status": 200,
+      "transactions": [
+        {
+          "chainId": "0x61",
+          "transactionHash": "0x3e0c0c7b570f24a5a5deaaa420be8a4cfea5b34fa2fe69e5d2fcd47a6daf740d"
+        }
+      ]
+    },
+    {
+      "id": "0xacd902081703ddb2e269453c1a957bc95135f0934ba879906cfd9249eca50fbc",
+      "status": 200,
+      "transactions": [
+        {
+          "chainId": "0x61",
+          "transactionHash": "0xf6bca5bd130e6c20766f8c0c4bcf2009e93dd7a7f97b4fd8d388155b8ed77e31"
+        }
+      ]
+    },
+    {
+      "id": "0xe25644f8593665044e6ff840bdbdf0ad6f3a415164b0c2d5da8778bada5c0576",
+      "status": 200,
+      "transactions": [
+        {
+          "chainId": "0x61",
+          "transactionHash": "0xc4d06adaa1ac2038387668a20491afe22fb3cf664070d9ae721a9a1b262cf833"
+        }
+      ]
+    }
+  ],
+  "action": "Allow fresh preparation of the same zero-allowance operation after expired quote and unconsumed nonce; never replay the captured signature"
+}

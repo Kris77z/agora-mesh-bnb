@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "artifactKind": "three-consecutive-paid-rehearsals",
+  "status": "completed",
+  "chainId": 97,
+  "authorityId": "agora-termix-stability-20260902",
+  "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+  "startedAt": "2026-09-02T15:02:07.845Z",
+  "completedAt": "2026-09-02T15:27:49.591Z",
+  "expectedEconomics": {
+    "chainId": 97,
+    "asset": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "runs": 3,
+    "auditor": {
+      "serviceId": "auditor-v1",
+      "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+      "amountRaw": "500000000000000000"
+    },
+    "verifier": {
+      "serviceId": "verifier-v1",
+      "recipient": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb",
+      "amountRaw": "250000000000000000"
+    },
+    "intendedSpendRaw": "2250000000000000000",
+    "maximumAuthoritySpendRaw": "2250000000000000000"
+  },
+  "actualSpendRaw": "2250000000000000000",
+  "medianDurationMs": 307120,
+  "runs": [
+    {
+      "runNumber": 1,
+      "status": "completed",
+      "deliveryMode": "live-response",
+      "missionId": "bb9c4274-af7a-4ff5-8c84-1e878ded7db1",
+      "durationMs": 307120,
+      "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+      "payments": {
+        "auditor": {
+          "serviceId": "auditor-v1",
+          "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+          "amountRaw": "500000000000000000",
+          "assetAddress": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+          "transaction": "0x5f525c48d6879d28d99b89e06565f1bebd35b906879fa487a52724094ee54508"
+        },
+        "verifier": {
+          "serviceId": "verifier-v1",
+          "recipient": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb",
+          "amountRaw": "250000000000000000",
+          "assetAddress": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+          "transaction": "0xa99f325d81b5c4fe018243bc030ae6360da580d3dc7d4c003c22fa3f27c0481a"
+        }
+      },
+      "receiptsVerified": true,
+      "hunterEvaluation": {
+        "score": 9,
+        "summary": "Detailed and high-signal output."
+      },
+      "verifier": {
+        "engine": {
+          "method": "static-analysis",
+          "name": "slither",
+          "version": "0.11.6"
+        },
+        "summary": {
+          "confirmed": 3,
+          "rejected": 0,
+          "partial": 0,
+          "inconclusive": 0,
+          "missed": 1
+        }
+      }
+    },
+    {
+      "runNumber": 2,
+      "status": "completed",
+      "deliveryMode": "live-response",
+      "missionId": "0eb3cf2c-0635-4809-beab-07c75693f7f0",
+      "durationMs": 283812,
+      "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+      "payments": {
+        "auditor": {
+          "serviceId": "auditor-v1",
+          "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+          "amountRaw": "500000000000000000",
+          "assetAddress": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+          "transaction": "0x96fe0f6a5d247e37cf8c2d5c99a71a131f6a7df61ddc52c0aac707503327bf8c"
+        },
+        "verifier": {
+          "serviceId": "verifier-v1",
+          "recipient": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb",
+          "amountRaw": "250000000000000000",
+          "assetAddress": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+          "transaction": "0x91507121186f5005b9fcaf2e48140a109c515b7e298b219db1e4e301a770ce3d"
+        }
+      },
+      "receiptsVerified": true,
+      "hunterEvaluation": {
+        "score": 9,
+        "summary": "Detailed and high-signal output."
+      },
+      "verifier": {
+        "engine": {
+          "method": "static-analysis",
+          "name": "slither",
+          "version": "0.11.6"
+        },
+        "summary": {
+          "confirmed": 3,
+          "rejected": 0,
+          "partial": 0,
+          "inconclusive": 0,
+          "missed": 1
+        }
+      }
+    },
+    {
+      "runNumber": 3,
+      "status": "completed",
+      "deliveryMode": "settlement-reconciled",
+      "missionId": "a53af28d-e790-46c2-9c5c-487230c9623c",
+      "durationMs": 666225,
+      "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+      "payments": {
+        "auditor": {
+          "serviceId": "auditor-v1",
+          "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+          "amountRaw": "500000000000000000",
+          "assetAddress": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+          "transaction": "0xb9ba67af7e6c99cbb01c009ab0fb79aadfb3fa4265fe4e126be06a5baeb9a21b"
+        },
+        "verifier": {
+          "serviceId": "verifier-v1",
+          "recipient": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb",
+          "amountRaw": "250000000000000000",
+          "assetAddress": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+          "transaction": "0xfdd6a138ef14e3126fc1a2aebedf51601b9bdefa2fd814c63e210bc891665eef"
+        }
+      },
+      "receiptsVerified": true,
+      "hunterEvaluation": {
+        "score": 9,
+        "summary": "Detailed and high-signal output."
+      },
+      "verifier": {
+        "engine": {
+          "method": "static-analysis",
+          "name": "slither",
+          "version": "0.11.6"
+        },
+        "summary": {
+          "confirmed": 2,
+          "rejected": 0,
+          "partial": 0,
+          "inconclusive": 0,
+          "missed": 1
+        }
+      }
+    }
+  ]
+}

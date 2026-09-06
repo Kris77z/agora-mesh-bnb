@@ -32,7 +32,11 @@ export interface OnchainStatus {
 export interface HunterIdentityResponse {
     identity: AgentIdentity;
     onchain?: OnchainStatus;
-    balance?: { wei: string; mon: string };
+    balance?: {
+        asset: { chainId: number; kind: 'native' | 'erc20'; address?: string; symbol: string; decimals: number };
+        amount: string;
+    };
+    balanceFormatted?: string;
 }
 
 export interface WriterIdentityResponse {

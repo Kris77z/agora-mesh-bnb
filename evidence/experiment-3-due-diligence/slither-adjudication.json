@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "artifactKind": "post-freeze-slither-adjudication",
+  "status": "reviewed-by-independent-ai",
+  "experimentId": "full-due-diligence",
+  "reviewer": {
+    "provider": "Anthropic",
+    "models": [
+      "claude-haiku-4-5-20251001",
+      "claude-sonnet-5"
+    ],
+    "reviewerType": "independent-ai",
+    "independentHuman": false,
+    "blindToAgentOutputs": true,
+    "blindToGroundTruth": true
+  },
+  "source": {
+    "rawSlitherArtifact": "evidence/experiment-3-due-diligence/baseline-slither-output-attempt-2.json",
+    "rawSlitherArtifactHash": "sha256:a0a32ede3084549b8450c8ba554beb467596119c7265178d625e27abcf7cc5fe",
+    "independentReviewArtifact": "evidence/experiment-3-due-diligence/claude-blind-review-candidate.json",
+    "independentReviewArtifactHash": "sha256:7a1aafeabed633b9ec94a6f7fccb6bcf20b09a807e019f9b5ad59fe3e40eda6b",
+    "verifiedSourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c"
+  },
+  "summary": {
+    "total": 24,
+    "verdictCounts": {
+      "dependency-signal": 12,
+      "true-positive": 12
+    },
+    "exploitableHighOrCriticalConfirmed": 0,
+    "interpretation": "All 24 raw rows were adjudicated. True-positive rows are benign naming/timestamp signals; dependency signals are expected OpenZeppelin patterns, not confirmed exploits."
+  },
+  "adjudications": [
+    {
+      "index": 0,
+      "check": "incorrect-exp",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "lines": [
+        117
+      ],
+      "verdict": "dependency-signal",
+      "reason": "The `^` in `inverse = (3 * denominator) ^ 2` is part of OpenZeppelin's audited Newton-Raphson modular-inverse seed for mulDiv (Remco Bloemen's full-precision 512-bit division algorithm), not an accidental substitution for exponentiation. Unmodified third-party dependency code.",
+      "confidence": "high"
+    },
+    {
+      "index": 1,
+      "check": "divide-before-multiply",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "lines": [
+        102
+      ],
+      "verdict": "dependency-signal",
+      "reason": "Part of OZ's standard mulDiv full-precision algorithm; the division-then-multiplication sequence is intentional and mathematically exact by construction, not a truncation bug. Unmodified dependency code.",
+      "confidence": "high"
+    },
+    {
+      "index": 2,
+      "check": "divide-before-multiply",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "lines": [
+        102
+      ],
+      "verdict": "dependency-signal",
+      "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site within the same audited routine.",
+      "confidence": "high"
+    },
+    {
+      "index": 3,
+      "check": "divide-before-multiply",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "lines": [
+        102
+      ],
+      "verdict": "dependency-signal",
+      "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site.",
+      "confidence": "high"
+    },
+    {
+      "index": 4,
+      "check": "divide-before-multiply",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "lines": [
+        102
+      ],
+      "verdict": "dependency-signal",
+      "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site.",
+      "confidence": "high"
+    },
+    {
+      "index": 5,
+      "check": "divide-before-multiply",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "lines": [
+        102
+      ],
+      "verdict": "dependency-signal",
+      "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site.",
+      "confidence": "high"
+    },
+    {
+      "index": 6,
+      "check": "divide-before-multiply",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "lines": [
+        102
+      ],
+      "verdict": "dependency-signal",
+      "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site.",
+      "confidence": "high"
+    },
+    {
+      "index": 7,
+      "check": "divide-before-multiply",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "lines": [
+        102
+      ],
+      "verdict": "dependency-signal",
+      "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site.",
+      "confidence": "high"
+    },
+    {
+      "index": 8,
+      "check": "divide-before-multiply",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "lines": [
+        105
+      ],
+      "verdict": "dependency-signal",
+      "reason": "Final `result = prod0 * inverse` step of the same audited mulDiv routine; division by `twos` earlier is exact by the algorithm's construction. Unmodified dependency code.",
+      "confidence": "high"
+    },
+    {
+      "index": 9,
+      "check": "shadowing-local",
+      "sourceUnit": "src/StablecoinV2.sol",
+      "lines": [
+        249
+      ],
+      "verdict": "true-positive",
+      "reason": "cancelAuthorization's `bytes32 nonce` parameter genuinely shadows the unrelated `uint256 public nonce` sequence counter inherited from Stablecoin. Confirmed by reading both declarations. Purely a naming collision — the function never references the state variable — so it is a code-quality issue, not a logic bug.",
+      "confidence": "high"
+    },
+    {
+      "index": 10,
+      "check": "shadowing-local",
+      "sourceUnit": "src/Stablecoin.sol",
+      "lines": [
+        242
+      ],
+      "verdict": "true-positive",
+      "reason": "_approve's local `owner` parameter shadows the inherited `owner()` function; standard pattern, no logic error observed (function correctly uses the parameter throughout).",
+      "confidence": "high"
+    },
+    {
+      "index": 11,
+      "check": "shadowing-local",
+      "sourceUnit": "src/StablecoinV2.sol",
+      "lines": [
+        169
+      ],
+      "verdict": "true-positive",
+      "reason": "receiveWithAuthorization(...,bytes) `nonce` parameter shadows Stablecoin.nonce; same benign naming-collision pattern as index 9.",
+      "confidence": "high"
+    },
+    {
+      "index": 12,
+      "check": "shadowing-local",
+      "sourceUnit": "src/StablecoinV2.sol",
+      "lines": [
+        204
+      ],
+      "verdict": "true-positive",
+      "reason": "_transferOrReceiveWithAuthorization's `nonce` parameter shadows Stablecoin.nonce; internal helper correctly uses the parameter for the authorization-nonce mapping, unrelated to the sequence counter.",
+      "confidence": "high"
+    },
+    {
+      "index": 13,
+      "check": "shadowing-local",
+      "sourceUnit": "src/Stablecoin.sol",
+      "lines": [
+        50
+      ],
+      "verdict": "true-positive",
+      "reason": "initialize's `_symbol` parameter shadows ERC20Upgradeable._symbol; standard OZ initializer parameter-naming convention, value is passed into __ERC20_init correctly, no bug.",
+      "confidence": "high"
+    },
+    {
+      "index": 14,
+      "check": "shadowing-local",
+      "sourceUnit": "src/StablecoinV2.sol",
+      "lines": [
+        141
+      ],
+      "verdict": "true-positive",
+      "reason": "receiveWithAuthorization(...,v,r,s) `nonce` parameter shadows Stablecoin.nonce; same benign pattern as index 9.",
+      "confidence": "high"
+    },
+    {
+      "index": 15,
+      "check": "shadowing-local",
+      "sourceUnit": "src/Stablecoin.sol",
+      "lines": [
+        178
+      ],
+      "verdict": "true-positive",
+      "reason": "autoBurn's local `owner` variable (captured from owner()) shadows the owner() function; used correctly as a cached value, no logic error observed.",
+      "confidence": "high"
+    },
+    {
+      "index": 16,
+      "check": "shadowing-local",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+      "lines": [
+        47
+      ],
+      "verdict": "dependency-signal",
+      "reason": "__ERC20Permit_init's `name` parameter shadowing ERC20Upgradeable.name() is unmodified upstream OpenZeppelin code, not first-party.",
+      "confidence": "high"
+    },
+    {
+      "index": 17,
+      "check": "shadowing-local",
+      "sourceUnit": "src/Stablecoin.sol",
+      "lines": [
+        50
+      ],
+      "verdict": "true-positive",
+      "reason": "initialize's `_name` parameter shadows ERC20Upgradeable._name; same benign initializer pattern as index 13.",
+      "confidence": "high"
+    },
+    {
+      "index": 18,
+      "check": "shadowing-local",
+      "sourceUnit": "src/StablecoinV2.sol",
+      "lines": [
+        112
+      ],
+      "verdict": "true-positive",
+      "reason": "transferWithAuthorization(...,v,r,s) `nonce` parameter shadows Stablecoin.nonce; same benign pattern as index 9.",
+      "confidence": "high"
+    },
+    {
+      "index": 19,
+      "check": "shadowing-local",
+      "sourceUnit": "src/StablecoinV2.sol",
+      "lines": [
+        88
+      ],
+      "verdict": "true-positive",
+      "reason": "transferWithAuthorization(...,bytes) `nonce` parameter shadows Stablecoin.nonce; same benign pattern as index 9.",
+      "confidence": "high"
+    },
+    {
+      "index": 20,
+      "check": "shadowing-local",
+      "sourceUnit": "src/StablecoinV2.sol",
+      "lines": [
+        183
+      ],
+      "verdict": "true-positive",
+      "reason": "authorizationState's `nonce` parameter shadows Stablecoin.nonce in a view function; purely cosmetic, no state mutation involved.",
+      "confidence": "high"
+    },
+    {
+      "index": 21,
+      "check": "missing-zero-check",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol",
+      "lines": [
+        42
+      ],
+      "verdict": "dependency-signal",
+      "reason": "Unmodified OZ Ownable2Step code; the two-step design (acceptOwnership must be called by the new pendingOwner) means setting newOwner to address(0) only blocks completion of that particular transfer attempt — the current owner retains ownership until acceptance, so this cannot brick or hijack ownership. Standard, low-impact, long-accepted OZ pattern.",
+      "confidence": "high"
+    },
+    {
+      "index": 22,
+      "check": "timestamp",
+      "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+      "lines": [
+        65
+      ],
+      "verdict": "dependency-signal",
+      "reason": "Standard EIP-2612 permit deadline check using block.timestamp in unmodified OZ code; miner timestamp manipulation tolerance (~seconds) is immaterial to a signature-expiry deadline.",
+      "confidence": "high"
+    },
+    {
+      "index": 23,
+      "check": "timestamp",
+      "sourceUnit": "src/StablecoinV2.sol",
+      "lines": [
+        208
+      ],
+      "verdict": "true-positive",
+      "reason": "First-party validAfter/validBefore window checks in _transferOrReceiveWithAuthorization do use block.timestamp for comparisons; this is the standard, expected ERC-3009-style pattern and the small miner-manipulable drift is not a practically exploitable issue for a payment-authorization time window. Real detection, benign/low severity.",
+      "confidence": "high"
+    }
+  ],
+  "limitations": [
+    "This is an independent AI adjudication, not a human review.",
+    "Static analysis cannot prove deployed governance-key custody or rule out runtime and future-upgrade risk."
+  ]
+}

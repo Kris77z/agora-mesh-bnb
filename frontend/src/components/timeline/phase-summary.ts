@@ -2,7 +2,7 @@ import type { AgentEvent, HunterRunResult } from '@/types/agent';
 import type { LanguageCode } from '@/types/agent';
 import type { PhaseId } from './phase-utils';
 import { asRecord } from './phase-utils';
-import { formatMON } from '@/lib/format';
+import { formatTokenAmount } from '@/lib/format';
 import { translate } from '@/lib/i18n';
 
 /**
@@ -37,7 +37,7 @@ export function summaryForPhase(
         return out.replace(/^0+(?=\d)/, '');
     };
 
-    const readTotalPaymentWei = (): string | undefined => {
+    const readTotalPaymentAmount = (): string | undefined => {
         let total = '0';
         let hasValue = false;
         for (const event of allEvents) {
@@ -82,8 +82,8 @@ export function summaryForPhase(
         const pay = [...phaseEvents].reverse().find((e) => e.type === 'payment_state');
         const amount = typeof asRecord(quote?.data)?.amount === 'string' ? (asRecord(quote?.data)?.amount as string) : '';
         const status = typeof asRecord(pay?.data)?.status === 'string' ? (asRecord(pay?.data)?.status as string) : '';
-        if (amount && status) return translate(locale, 'timeline.summary.payment.quotedStatus', { amount: formatMON(amount), status });
-        if (amount) return translate(locale, 'timeline.summary.payment.quoted', { amount: formatMON(amount) });
+        if (amount && status) return translate(locale, 'timeline.summary.payment.quotedStatus', { amount: formatTokenAmount(amount), status });
+        if (amount) return translate(locale, 'timeline.summary.payment.quoted', { amount: formatTokenAmount(amount) });
         return translate(locale, 'timeline.summary.payment.default');
     }
 
@@ -95,6 +95,14 @@ export function summaryForPhase(
     }
 
     if (phaseId === 'verification') {
+        if (result?.verification) {
+            const summary = result.verification.report.summary;
+            return translate(locale, 'timeline.summary.verification.independent', {
+                confirmed: summary.confirmed,
+                rejected: summary.rejected,
+                missed: summary.missed,
+            });
+        }
         const receipt = [...phaseEvents].reverse().find((e) => e.type === 'receipt_verified');
         const evalEv = [...phaseEvents].reverse().find((e) => e.type === 'evaluation_completed');
         const verified = asRecord(receipt?.data)?.isValid === true;
@@ -116,11 +124,11 @@ export function summaryForPhase(
             : typeof asRecord(fromEvent?.data)?.score === 'number'
                 ? (asRecord(fromEvent?.data)?.score as number)
                 : null;
-        const totalWei = readTotalPaymentWei();
-        if (score !== null || totalWei) {
+        const totalAmount = readTotalPaymentAmount();
+        if (score !== null || totalAmount) {
             return translate(locale, 'timeline.summary.complete.closed', {
                 score: score ?? '--',
-                amount: formatMON(totalWei),
+                amount: formatTokenAmount(totalAmount),
             });
         }
         if (result?.finalMessage) {

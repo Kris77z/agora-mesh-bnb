@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "experimentId": "contract-audit",
+  "benchmarkId": "vulnerable-vault-v1",
+  "agent": {
+    "missionId": "8cb0e517-a843-4568-ac3b-e64e43662392",
+    "source": "recovered-evidence",
+    "durationMs": 539442,
+    "cost": {
+      "symbol": "U",
+      "amount": "750000000000000000",
+      "decimals": 18
+    },
+    "auditorFindings": 3,
+    "criticalHighFindings": 3,
+    "truePositives": 3,
+    "falsePositives": 0,
+    "falseNegatives": 0,
+    "precision": 1,
+    "recall": 1,
+    "evidenceCompleteness": 1,
+    "verifier": {
+      "engine": "slither",
+      "version": "0.11.6",
+      "confirmed": 2,
+      "partial": 1,
+      "missed": 1
+    }
+  },
+  "baseline": {
+    "status": "pending"
+  },
+  "toolReference": {
+    "status": "measured",
+    "kind": "tool-only-static-analysis",
+    "tool": "Slither",
+    "version": "0.11.6",
+    "durationMs": 974.817,
+    "costUsd": 0,
+    "detections": 4,
+    "truePositives": 3,
+    "falsePositives": 1,
+    "falseNegatives": 0,
+    "precision": 0.75,
+    "recall": 1,
+    "evidenceCompleteness": 1,
+    "controlledHumanBaselineStatus": "pending"
+  },
+  "comparison": {
+    "status": "pending",
+    "reason": "No controlled baseline has been executed on the identical input."
+  }
+}

@@ -1,0 +1,28 @@
+pragma solidity ^0.8.20;
+
+contract VulnerableVault {
+    mapping(address => uint256) public balances;
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function deposit() external payable {
+        balances[msg.sender] += msg.value;
+    }
+
+    function withdraw(uint256 amount) external {
+        require(tx.origin == owner, "not owner");
+        require(balances[msg.sender] >= amount, "insufficient");
+        (bool ok, ) = msg.sender.call{value: amount}("");
+        require(ok, "transfer failed");
+        balances[msg.sender] -= amount;
+    }
+
+    function execute(address target, bytes calldata data) external {
+        require(msg.sender == owner, "not owner");
+        (bool ok, ) = target.delegatecall(data);
+        require(ok, "delegatecall failed");
+    }
+}

@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import type { AgentEvent, HunterRunResult } from '@/types/agent';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useMemo, useCallback } from 'react';
+import Link from 'next/link';
 import { asRecord } from '@/lib/type-guards';
 
 import type { PhaseId, PhaseStatus } from './phase-utils';
@@ -192,6 +193,9 @@ export function MissionTimeline({ events, result, isRunning, hasError }: Mission
             transition={{ delay: 0.15 }}
           >
             <ResultView result={result} />
+            <Link href={`/tasks/${encodeURIComponent(result.missionId)}`} className="mt-2 flex items-center justify-center border border-border bg-card px-3 py-2 text-xs font-medium text-primary transition-colors hover:bg-muted/50">
+              Open persistent task evidence →
+            </Link>
           </motion.div>
         )}
       </div>

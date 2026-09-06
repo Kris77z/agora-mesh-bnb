@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "experimentId": "contract-audit",
+  "workflow": "without-agent-ordinary-llm-model-only-candidate",
+  "status": "non-blind-operator-candidate",
+  "input": {
+    "bundle": "baseline-input.json",
+    "bundleHash": "sha256:fd63aa61dd7801c506f4c7a718f33efe136c45b77c86c27aa56b864b209e6bc3",
+    "taskHash": "sha256:27ddb09ccb4f17a6120234052fbc4b089c4f2b21448dc88c37d25225bc003267",
+    "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda"
+  },
+  "rawEvidence": {
+    "artifact": "baseline-model-raw.json",
+    "artifactHash": "sha256:210c3eb8d34158959f13c3036b1c54257f9b53a63036a921a9803508f1d5d27d",
+    "frozenBeforeGroundTruthScoring": true
+  },
+  "timing": {
+    "startedAt": "2026-09-02T00:58:26.192Z",
+    "completedAt": "2026-09-02T01:02:58.203Z",
+    "wallDurationMs": 272005.084,
+    "operatorActiveMinutes": 0,
+    "operatorType": "automated-codex-orchestrator"
+  },
+  "model": {
+    "provider": "kimi",
+    "model": "kimi-k2.6",
+    "sessionCount": 1
+  },
+  "usage": {
+    "promptTokens": 335,
+    "completionTokens": 11764,
+    "totalTokens": 12099
+  },
+  "cost": {
+    "modelUsd": null,
+    "toolUsd": 0,
+    "humanUsd": null,
+    "totalUsd": null,
+    "basis": "Provider token usage is captured, but invoice pricing and independent human labor were not available to this run."
+  },
+  "report": {
+    "vulnerabilities": [
+      {
+        "findingId": "VULN-001",
+        "title": "Reentrancy in Withdraw Function",
+        "severity": "high",
+        "description": "The `withdraw` function sends ETH to `msg.sender` with a low-level `.call` before updating the caller's balance in storage. This violates the checks-effects-interactions pattern and permits a malicious contract to recursively reenter `withdraw`, withdrawing far more than its recorded balance.",
+        "evidence": {
+          "file": "VulnerableVault.sol",
+          "lines": "18-20",
+          "snippet": "        (bool ok, ) = msg.sender.call{value: amount}(\"\");\n        require(ok, \"transfer failed\");\n        balances[msg.sender] -= amount;"
+        },
+        "exploitScenario": "An attacker deposits a small amount of ETH into the vault, then tricks the vault owner into initiating a transaction to an attacker-controlled contract (e.g., via a phishing site). Because `withdraw` authorizes based on `tx.origin`, the malicious contract can call `withdraw` and pass the owner check. During the ETH transfer, the attacker's fallback function reenters `withdraw` before the balance is decremented, repeating until the vault is drained.",
+        "recommendation": "Apply the checks-effects-interactions pattern by deducting `balances[msg.sender] -= amount` before the external ETH transfer. Additionally, use a reentrancy guard (e.g., OpenZeppelin `nonReentrant`) for defense in depth.",
+        "confidence": 0.85
+      },
+      {
+        "findingId": "VULN-002",
+        "title": "Authorization Based on tx.origin",
+        "severity": "high",
+        "description": "The `withdraw` function relies on `tx.origin == owner` for access control. `tx.origin` reflects the transaction's original externally-owned account, not the immediate caller (`msg.sender`). This allows any intermediate contract invoked by the owner to pass the authorization check and trigger sensitive vault operations.",
+        "evidence": {
+          "file": "VulnerableVault.sol",
+          "lines": "16",
+          "snippet": "        require(tx.origin == owner, \"not owner\");"
+        },
+        "exploitScenario": "The vault owner is phished into calling a malicious contract. That contract calls `VulnerableVault.withdraw()`, and because `tx.origin` is still the owner address, the requirement passes. This authorization bypass lets the contract invoke restricted logic, which can be chained with reentrancy to siphon the vault's entire balance.",
+        "recommendation": "Replace `tx.origin == owner` with `msg.sender == owner` so that only the direct caller is authorized to trigger the function.",
+        "confidence": 0.85
+      },
+      {
+        "findingId": "VULN-003",
+        "title": "Arbitrary Delegatecall in Execute Function",
+        "severity": "critical",
+        "description": "The `execute` function allows the owner to issue a `delegatecall` to any address with arbitrary calldata. Because `delegatecall` executes the target code in the context of `VulnerableVault`, the owner can overwrite any storage variable—including `balances` and `owner`—or self-destruct the vault, leading to a complete loss of all user funds.",
+        "evidence": {
+          "file": "VulnerableVault.sol",
+          "lines": "23-27",
+          "snippet": "    function execute(address target, bytes calldata data) external {\n        require(msg.sender == owner, \"not owner\");\n        (bool ok, ) = target.delegatecall(data);\n        require(ok, \"delegatecall failed\");\n    }"
+        },
+        "exploitScenario": "A compromised or malicious owner calls `execute` with an attacker-controlled target contract. The delegatecall runs in the vault's storage context, allowing the owner to arbitrarily credit themselves with all deposited balances or invoke `selfdestruct` to destroy the contract and redirect all held ETH to an attacker address.",
+        "recommendation": "Remove the arbitrary `delegatecall` functionality. If privileged maintenance is required, implement explicit, audited upgrade or administrative functions rather than permitting unconstrained code execution in the contract's context.",
+        "confidence": 0.85
+      }
+    ]
+  },
+  "postFreezeReviewerMapping": [
+    {
+      "findingId": "VULN-001",
+      "groundTruthId": "ground-reentrancy-withdraw",
+      "category": "reentrancy",
+      "reportedSeverity": "high",
+      "expectedSeverity": "critical",
+      "severityMatches": false,
+      "method": "post-freeze deterministic category match; independent human review pending"
+    },
+    {
+      "findingId": "VULN-002",
+      "groundTruthId": "ground-tx-origin-auth",
+      "category": "tx-origin",
+      "reportedSeverity": "high",
+      "expectedSeverity": "high",
+      "severityMatches": true,
+      "method": "post-freeze deterministic category match; independent human review pending"
+    },
+    {
+      "findingId": "VULN-003",
+      "groundTruthId": "ground-arbitrary-delegatecall",
+      "category": "delegatecall",
+      "reportedSeverity": "critical",
+      "expectedSeverity": "high",
+      "severityMatches": false,
+      "method": "post-freeze deterministic category match; independent human review pending"
+    }
+  ],
+  "candidateQuality": {
+    "benchmarkId": "vulnerable-vault-v1",
+    "groundTruthSourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+    "groundTruthFindings": 3,
+    "truePositives": 3,
+    "falsePositives": 0,
+    "falseNegatives": 0,
+    "precision": 1,
+    "recall": 1,
+    "evidenceCompleteness": 1,
+    "matchedGroundTruthIds": [
+      "ground-reentrancy-withdraw",
+      "ground-tx-origin-auth",
+      "ground-arbitrary-delegatecall"
+    ],
+    "missedGroundTruthIds": []
+  },
+  "candidateSeverityAccuracy": {
+    "matched": 1,
+    "total": 3,
+    "accuracy": 0.3333
+  },
+  "comparisonEligibility": {
+    "controlledBaseline": false,
+    "reason": "The LLM context was isolated from Agent and ground-truth outputs, but the orchestrator was not an independent human and had prior project context."
+  },
+  "limitations": [
+    "This is a direct ordinary-model reference candidate, not the plan's independent human plus ordinary-LLM controlled baseline.",
+    "Operator-active human minutes and labor cost are unavailable and must not be inferred as zero.",
+    "Do not use this artifact to mark the controlled comparison complete."
+  ]
+}

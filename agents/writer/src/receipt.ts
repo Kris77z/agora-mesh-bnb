@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { calculateResultHash, nowInSeconds, type Receipt } from "@rebel/shared";
+import { calculateResultHash, nowInSeconds, receiptSigningMessage, type Receipt } from "@rebel/shared";
 import { writerConfig } from "./config.js";
 import { WriterError } from "./errors.js";
 
@@ -20,13 +20,12 @@ export async function createReceipt(input: {
 }): Promise<Receipt> {
   const signer = getReceiptSigner();
   const resultHash = calculateResultHash(input.result);
-  const signature = await signer.signMessage(resultHash);
-
-  return {
+  const unsigned: Omit<Receipt, "signature"> = {
+    signatureScheme: "agora-request-result-v2",
     requestHash: input.requestHash,
     resultHash,
     provider: writerConfig.writerAddress,
-    timestamp: nowInSeconds(),
-    signature
+    timestamp: nowInSeconds()
   };
+  return { ...unsigned, signature: await signer.signMessage(receiptSigningMessage(unsigned)) };
 }

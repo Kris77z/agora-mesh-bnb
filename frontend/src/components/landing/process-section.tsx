@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 /**
  * Process Section — "How it Works"
@@ -11,38 +12,34 @@ import Link from 'next/link';
  * Maps to Discover → Negotiate → Pay → Verify loop from architecture.md
  */
 
-/**
- * Claura service-card images mapped to each step.
- * These are the actual images from Claura's Services section on Framer CDN.
- */
 const STEPS = [
     {
         id: 'discover',
         label: 'Discover',
         title: 'Discover',
         desc: 'Hunter Agent scans the on-chain Service Registry to find providers that match the mission goal. Fully autonomous, zero human search.',
-        image: 'https://framerusercontent.com/images/3jSoIlDJyMfLx6JTWfHwuwwhjSw.png',
+        image: '/landing/discover.png',
     },
     {
         id: 'negotiate',
         label: 'Negotiate',
         title: 'Negotiate',
-        desc: 'The Agent requests a quote via x402 protocol. The service responds with HTTP 402 — a machine-readable payment demand with exact pricing in MON.',
-        image: 'https://framerusercontent.com/images/CDafpAJFtQbOD92OMLiiTjjPVRU.png',
+        desc: 'Hunter requests a quote via x402. The service responds with HTTP 402 and exact resource, recipient, asset, amount, chain, and expiry terms.',
+        image: '/landing/negotiate.png',
     },
     {
         id: 'pay',
         label: 'Pay',
         title: 'Pay',
-        desc: 'Agent signs and sends a native MON transfer on Monad (400ms block time). Atomic, trustless, no intermediary. One hand pays, one hand delivers.',
-        image: 'https://framerusercontent.com/images/LBKnMROG8HBkFthEPXAy7RIQ8.png',
+        desc: 'Hunter checks the quote against its allowlist, spend cap, and expiry, then pays from a scoped Altana session without another user signature.',
+        image: '/landing/pay.png',
     },
     {
         id: 'verify',
         label: 'Verify',
         title: 'Verify',
-        desc: 'Writer signs a cryptographic Receipt. Hunter verifies the signature via ecrecover — mathematical proof of execution, not trust.',
-        image: 'https://framerusercontent.com/images/OX3H8eSRqaFBsMwnXROVH9bRFU.png',
+        desc: 'The service signs a receipt and an independent verifier checks each security finding against deterministic static-analysis evidence.',
+        image: '/landing/verify.png',
     },
 ];
 
@@ -101,7 +98,7 @@ export function ProcessSection() {
                         ))}
                     </div>
 
-                    {/* Right: Detail card with Claura service image */}
+                    {/* Right: Detail card with the original Agora Mesh artwork. */}
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={step.id}
@@ -110,13 +107,13 @@ export function ProcessSection() {
                             exit={{ opacity: 0, x: -20 }}
                             transition={{ duration: 0.3 }}
                         >
-                            {/* Service-card image — fixed aspect for consistency */}
-                            <div className="rounded-2xl overflow-hidden mb-6 aspect-[4/3]">
-                                <img
+                            <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-2xl">
+                                <Image
                                     src={step.image}
                                     alt={`${step.title} — step illustration`}
-                                    className="w-full h-full object-cover"
-                                    loading="lazy"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    className="object-cover"
                                 />
                             </div>
 

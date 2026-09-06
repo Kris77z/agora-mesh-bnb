@@ -2,8 +2,10 @@
 
 import { Badge } from "@/components/ui/badge";
 import { GoalInput } from "@/components/agent/goal-input";
-import { Activity } from "lucide-react";
+import Link from "next/link";
+import { Activity, ShieldCheck } from "lucide-react";
 import type { StreamStatus } from "@/hooks/use-agent-stream";
+import { publicChainConfig } from "@/lib/chain-config";
 
 /**
  * 顶部 Header：Claura 暖色风格
@@ -35,9 +37,13 @@ export function MeshHeader({ status, onRun }: MeshHeaderProps) {
                     </div>
 
                     <div className="flex items-center gap-3">
+                        <Link href="/authority" className="hidden items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground sm:flex">
+                            <ShieldCheck className="h-3.5 w-3.5" /> Authority
+                        </Link>
+                        <div className="hidden h-4 w-px bg-border sm:block" />
                         <Badge variant="secondary" className="gap-1.5 py-0.5 px-2.5 text-xs rounded-full">
                             <div className="w-1.5 h-1.5 rounded-full bg-green-600 animate-pulse" />
-                            Monad Testnet
+                            {publicChainConfig.label}
                         </Badge>
                         <div className="h-4 w-px bg-border" />
                         <div className="flex items-center gap-1.5">

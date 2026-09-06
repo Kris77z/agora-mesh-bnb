@@ -1,0 +1,110 @@
+{
+  "authority": {
+    "authorityId": "browser-cbb87207-05c8-4e4b-b053-e538b849c291",
+    "walletAddress": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+    "sessionPublicKey": "0x04662c183556ff73eabf9bb4ac832e9138da4170590d5b2dc6b02a361639b47f7663087d52ad8c09eefe09a2f21f9dfeef7c173092499acd2c8add12bef79eab67",
+    "chainId": 97,
+    "allowedCalls": [
+      {
+        "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+      },
+      {
+        "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+      },
+      {
+        "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+      }
+    ],
+    "spendLimits": [
+      {
+        "asset": {
+          "chainId": 97,
+          "kind": "erc20",
+          "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+          "symbol": "U",
+          "decimals": 18
+        },
+        "limit": "1150000000000000000",
+        "period": "day"
+      }
+    ],
+    "expiry": 1788686276,
+    "status": "active",
+    "createdAt": 1788682676773,
+    "grantTxHash": "0xc4d06adaa1ac2038387668a20491afe22fb3cf664070d9ae721a9a1b262cf833"
+  },
+  "session": {
+    "walletAddress": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+    "publicKey": "0x04662c183556ff73eabf9bb4ac832e9138da4170590d5b2dc6b02a361639b47f7663087d52ad8c09eefe09a2f21f9dfeef7c173092499acd2c8add12bef79eab67",
+    "expiry": 1788686276,
+    "permissions": {
+      "calls": [
+        {
+          "to": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565"
+        },
+        {
+          "to": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+        },
+        {
+          "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+        },
+        {
+          "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+        },
+        {
+          "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+        }
+      ],
+      "spend": [
+        {
+          "limit": "1150000000000000000",
+          "period": "day",
+          "token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565"
+        }
+      ]
+    }
+  },
+  "spending": [
+    {
+      "asset": {
+        "chainId": 97,
+        "kind": "erc20",
+        "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+        "symbol": "U",
+        "decimals": 18
+      },
+      "period": "day",
+      "limit": "1150000000000000000",
+      "spent": "750000000000000000",
+      "remaining": "400000000000000000",
+      "evidenceSource": "x402-receipt-store",
+      "transactions": [
+        {
+          "txHash": "0xd5f55bdb98d667c83259b2307111c6894a7acc34c4162fab64e0f0d7e97de0cc",
+          "blockNumber": 0,
+          "timestamp": 1788684161,
+          "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+          "amount": "500000000000000000",
+          "serviceId": "auditor-v1"
+        },
+        {
+          "txHash": "0x62d181a134a12f436ddd83ea64c2382c0e29012e5a0268075fda5cee0b03176f",
+          "blockNumber": 0,
+          "timestamp": 1788684210,
+          "recipient": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb",
+          "amount": "250000000000000000",
+          "serviceId": "verifier-v1"
+        }
+      ]
+    }
+  ],
+  "lifecycle": {
+    "operation": "provision",
+    "phase": "complete",
+    "transactions": {
+      "grantSession": "0xc4d06adaa1ac2038387668a20491afe22fb3cf664070d9ae721a9a1b262cf833",
+      "approveChecker": "0xf6bca5bd130e6c20766f8c0c4bcf2009e93dd7a7f97b4fd8d388155b8ed77e31",
+      "approveAllowance": "0x3e0c0c7b570f24a5a5deaaa420be8a4cfea5b34fa2fe69e5d2fcd47a6daf740d"
+    }
+  }
+}

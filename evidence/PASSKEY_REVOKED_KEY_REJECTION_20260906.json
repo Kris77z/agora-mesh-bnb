@@ -1,0 +1,43 @@
+{
+  "authorityId": "browser-cbb87207-05c8-4e4b-b053-e538b849c291",
+  "checkedAt": "2026-09-06T09:17:58.622Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "wallet_prepareCalls",
+    "params": [
+      {
+        "calls": [
+          {
+            "to": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+            "value": "0x0",
+            "data": "0xa9059cbb0000000000000000000000003bd3fd38ecc72378946c790780c8c1216e4c55270000000000000000000000000000000000000000000000000000000000000001"
+          }
+        ],
+        "capabilities": {
+          "authorizeKeys": [],
+          "meta": {
+            "feeToken": "0x0000000000000000000000000000000000000000"
+          },
+          "preCall": false
+        },
+        "chainId": "0x61",
+        "from": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+        "key": {
+          "prehash": false,
+          "publicKey": "0x000000000000000000000000161d1ff4df2a49f994349a0c9c4b80a8028d1f17",
+          "type": "secp256k1"
+        }
+      }
+    ]
+  },
+  "httpStatus": 200,
+  "response": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "error": {
+      "code": -32602,
+      "message": "key hash 0x38a58f0d8607c860802d44101dd8a08f7452710e962dfd70b14893e082e50289 is unknown"
+    }
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "experimentId": "full-due-diligence",
+  "workflow": "without-agent-ordinary-llm-plus-slither-plus-direct-rpc-candidate",
+  "status": "non-blind-operator-candidate",
+  "input": {
+    "bundle": "baseline-input.json",
+    "bundleHash": "sha256:a26d02fb6b0747f6dff082daa8170371cc92b038079741faf23cdb35d34b09a6",
+    "taskHash": "sha256:63fa2a3dd4115e7ba5d22a9de769c36a7b3ca115f63d3715a98c8726fc1f9254",
+    "chainId": 97,
+    "proxy": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "implementation": "0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc",
+    "packageSourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+    "scopedSourceHash": "sha256:eeadc74efc28fa6c3f680f50da61cc14cf1a17c37b59f7e86997127bf7f6e279",
+    "reportBlock": 128449782
+  },
+  "rawEvidence": {
+    "sourceArtifact": "verified-source-input.json",
+    "sourceArtifactHash": "sha256:7980db97f9d11001ca1467bdc093d800e20cbed774549247db1bdebf12c7403f",
+    "slitherArtifact": "baseline-slither-output.json",
+    "slitherArtifactHash": "sha256:300824318dc11373c7f0ee8ef7ede39175f6bca39a84d42da507b803a96cb7e5",
+    "rpcArtifact": "../experiment-2-token-risk/baseline-rpc-raw.json",
+    "rpcArtifactHash": "sha256:6af123da8d877646326d4a09d3b037c0e1d035be07cef8e9cc8ae6b19f4383e3",
+    "modelArtifact": "baseline-model-raw.json",
+    "modelArtifactHash": "sha256:01109c6f7536bc62bc65f8e252465459551960ae8a0075c2d89516d841412849",
+    "frozenBeforeAgentReportComparison": true
+  },
+  "timing": {
+    "slitherDurationMs": 1745.097,
+    "modelDurationMs": 29574.332,
+    "totalWallDurationMs": 31319.429,
+    "operatorActiveMinutes": 0,
+    "operatorType": "automated-codex-orchestrator"
+  },
+  "model": {
+    "provider": "kimi",
+    "model": "kimi-k2.7-code-highspeed",
+    "sessionCount": 1
+  },
+  "usage": {
+    "promptTokens": 7099,
+    "completionTokens": 5143,
+    "totalTokens": 12242
+  },
+  "cost": {
+    "modelUsd": null,
+    "toolUsd": 0,
+    "humanUsd": null,
+    "totalUsd": null,
+    "basis": "Provider token usage is captured; invoice pricing and independent human labor were unavailable."
+  },
+  "report": {
+    "findings": [
+      {
+        "severity": "high",
+        "category": "centralization",
+        "description": "The token owner (0x6a8e2b2134b7b52c24a1448ad6be5c669eaa501a) has unlimited mint, burn, freeze, unfreeze, and pause powers, and there is no on-chain supply cap.",
+        "status": "design-risk"
+      },
+      {
+        "severity": "high",
+        "category": "upgrade-risk",
+        "description": "The contract is an EIP-1967 upgradeable proxy. The proxy admin (0x1e33d209c18f51d97f66ea461c6f819b59e78b30) can replace the implementation at any time, changing token behavior or extracting state.",
+        "status": "design-risk"
+      },
+      {
+        "severity": "medium",
+        "category": "key-custody-unknown",
+        "description": "No evidence is available about how the owner or proxy admin keys are secured (e.g., timelock, multisig, hardware custody).",
+        "status": "unknown"
+      },
+      {
+        "severity": "medium",
+        "category": "ownership-design",
+        "description": "renounceOwnership() is hard-coded to revert, so ownership can only be transferred, never renounced. A compromised or malicious owner cannot be removed by the contract itself.",
+        "status": "design-risk"
+      },
+      {
+        "severity": "medium",
+        "category": "auto-minter-privilege",
+        "description": "The autoOwner can autoMint up to autoMintMaxLimit per transaction. The owner can raise that limit, so the effective mint ceiling is owner-controlled.",
+        "status": "design-risk"
+      },
+      {
+        "severity": "low",
+        "category": "pause-scope",
+        "description": "_approve() is overridden to require whenNotPaused, so pausing the token also blocks approvals and ERC-20 Permit signatures, which is broader than just transfer pausing.",
+        "status": "design-risk"
+      },
+      {
+        "severity": "low",
+        "category": "modifier-inconsistency",
+        "description": "mint(uint256) and burn(uint256) do not apply whenNotPaused/notFrozen checks, while the address-taking mint/autoMint and autoBurn variants do.",
+        "status": "design-risk"
+      },
+      {
+        "severity": "low",
+        "category": "eip7598-toggle",
+        "description": "EIP-7598 gasless transfer/receive authorization can be enabled or disabled at any time by the owner.",
+        "status": "design-risk"
+      },
+      {
+        "severity": "info",
+        "category": "deployment-initialization",
+        "description": "StablecoinV2.initializeV2() is a reinitializer(2) with no access control. If an upgrade to V2 is performed without immediately calling initializeV2, any caller could enable the EIP-7598 flag first.",
+        "status": "not-currently-exploitable-if-already-initialized"
+      },
+      {
+        "severity": "info",
+        "category": "static-analysis",
+        "description": "Local Slither returned empty JSON output (exit status 1), so no detector signals are available to review.",
+        "status": "unavailable"
+      },
+      {
+        "severity": "info",
+        "category": "testnet-state",
+        "description": "Historical state at requiredComparisonBlock 128449782 is pruned; only latest-state RPC readings and proxy bytecode are available.",
+        "status": "evidence-gap"
+      }
+    ],
+    "facts": {
+      "chainId": 97,
+      "network": "BNB Testnet",
+      "proxy": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "implementation": "0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc",
+      "eip1967Admin": "0x1e33d209c18f51d97f66ea461c6f819b59e78b30",
+      "owner": "0x6a8e2b2134b7b52c24a1448ad6be5c669eaa501a",
+      "symbol": "U",
+      "name": "United Stables",
+      "decimals": 18,
+      "totalSupplyAtBlock128588409": "10005250000000000000000000000",
+      "proxyBytecodeByteLength": 2007,
+      "proxyBytecodeHash": "sha256:87408cc62a1419f8a6cf73f03b798825da7eadc412490263201b9f71dffa6390",
+      "sourceUnitsProvided": [
+        "src/libraries/EIP7598Constants.sol",
+        "src/Stablecoin.sol",
+        "src/StablecoinV2.sol"
+      ],
+      "sourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+      "scopeSourceHash": "sha256:eeadc74efc28fa6c3f680f50da61cc14cf1a17c37b59f7e86997127bf7f6e279",
+      "slitherDetections": [],
+      "slitherError": "Slither returned empty JSON output (exit status 1)"
+    },
+    "trustDecision": "do-not-trust",
+    "reasons": [
+      "The token is fully centralized: a single owner can mint unlimited supply, freeze arbitrary accounts, pause transfers/approvals, and change the auto minter.",
+      "The contract is upgradeable via an EIP-1967 proxy, and the proxy admin key can alter the implementation logic without user consent.",
+      "Ownership cannot be renounced, so a malicious or compromised owner is permanently embedded unless ownership is transferred to another controlled address.",
+      "No evidence of a timelock, multisig, or audited key-custody arrangement for either the owner or the proxy admin.",
+      "It is deployed on BNB Testnet, which carries no production-security guarantees and has pruned historical state.",
+      "EIP-7598 gasless transfer support adds signature-based execution paths, but their safety is contingent on the owner not disabling the feature and on correct deployment initialization.",
+      "Source-to-runtime equivalence has not been independently verified; only the EIP-1967 implementation slot matches the supplied implementation address."
+    ],
+    "requiredActions": [
+      "Confirm how the owner (0x6a8e...501a) and proxy admin (0x1e33...8b30) keys are secured (multisig, hardware, timelock, custodian).",
+      "Verify that StablecoinV2.initializeV2() was called atomically during the V2 upgrade and that eip7598EnableFlag is in the intended state.",
+      "Obtain an independent audit of the source code, including storage-layout verification with forge inspect for the upgrade from Stablecoin to StablecoinV2.",
+      "Compare compiled runtime bytecode against the on-chain implementation bytecode; do not rely solely on the supplied source hash.",
+      "If the token is intended to back real value, add a supply cap or mint schedule, freeze/pause timelocks, and renounce or multisig-upgrade critical roles.",
+      "Re-run Slither or equivalent static analysis on a successfully compiled build and review all high/medium findings."
+    ],
+    "coverage": [
+      "Provided first-party source units for Stablecoin and StablecoinV2",
+      "Latest-state on-chain reads: name, symbol, decimals, totalSupply, owner, EIP-1967 implementation/admin",
+      "Proxy bytecode size and content hash at latest block",
+      "EIP-7598 and ERC-3009-like authorization code paths",
+      "OpenZeppelin upgradeable dependencies referenced in the manifest"
+    ],
+    "limitations": [
+      "Historical state at requiredComparisonBlock 128449782 is pruned; runtime behavior at that block could not be verified.",
+      "No on-chain source verification or runtime bytecode match was performed.",
+      "Key custody, timelock, multisig, liquidity, holder concentration, and sellability evidence are unavailable.",
+      "Slither produced no usable detector output.",
+      "Dependency source bodies were not supplied for manual review; only compilation/static-analysis coverage is assumed.",
+      "The assessment is based on read-only RPC evidence and supplied source; it is not a full security audit."
+    ]
+  },
+  "comparisonEligibility": {
+    "controlledBaseline": false,
+    "reason": "The model context excluded Agent conclusions, but the orchestrator was not an independent human and had prior project context."
+  },
+  "limitations": [
+    "The artifact retains the wrapper-normalized detector output, not Slither's process-level stdout/stderr bytes.",
+    "Static detections are unreviewed signals and are not treated as confirmed vulnerabilities.",
+    "The ordinary LLM received first-party src/ source units plus the dependency manifest and full-package Slither detections; dependency source text was omitted for context-size reliability.",
+    "This is a model-plus-local-tool candidate, not the plan's independent human controlled baseline.",
+    "No post-freeze independent quality or false-positive review has been recorded."
+  ]
+}

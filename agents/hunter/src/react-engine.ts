@@ -58,7 +58,8 @@ export async function runReactHunter(
   options: HunterRunOptions = {}
 ): Promise<SingleHunterRunResult> {
   const locale = options.locale ?? DEFAULT_LANGUAGE_CODE;
-  emitTrace(options, "run_started", { mode: "react", goal, locale });
+  const missionId = options.missionId ?? randomUUID();
+  emitTrace(options, "run_started", { missionId, mode: "react", goal, locale });
 
   if (hunterConfig.llm.provider === "none" || !hunterConfig.llm.apiKey) {
     throw new HunterError(
@@ -89,7 +90,7 @@ export async function runReactHunter(
   const systemPrompt = buildHunterSystemPrompt(memoryContext, reputationContext, locale);
   const state: HunterRuntimeState = {
     goal,
-    missionId: randomUUID(),
+    missionId,
     locale,
     services: []
   };
@@ -151,11 +152,17 @@ export async function runReactHunter(
     );
   }
 
-  const receiptCheck = verifyReceiptTool(state.execution.receipt);
+  const receiptCheck = verifyReceiptTool(state.execution.receipt, {
+    result: state.execution.result,
+    provider: state.service.provider
+  });
   const evaluation = state.evaluation ?? evaluateResultTool(state.execution.result);
   if (state.receiptVerified === undefined) {
     emitTrace(options, "receipt_verified", {
       isValid: receiptCheck.isValid,
+      signatureValid: receiptCheck.signatureValid,
+      resultHashMatches: receiptCheck.resultHashMatches,
+      providerMatches: receiptCheck.providerMatches,
       provider: state.execution.receipt.provider,
       requestHash: state.execution.receipt.requestHash
     });
@@ -199,6 +206,7 @@ export async function runReactHunter(
   }
 
   const runResult: HunterRunResult = {
+    missionId: state.missionId,
     goal,
     mode: "react",
     service: state.service,
@@ -227,7 +235,7 @@ export async function runHunter(
     if (requestMode === "commander") {
       return await runCommanderHunter(goal, options);
     }
-    if (hunterConfig.useReact) {
+    if (hunterConfig.useReact && inferTaskTypeFromGoal(goal) !== "smart-contract-audit") {
       return await runReactHunter(goal, options);
     }
     return await runScriptedHunter(goal, options);
@@ -236,7 +244,7 @@ export async function runHunter(
       error instanceof HunterError
         ? localizeHunterError(error, options.locale ?? DEFAULT_LANGUAGE_CODE)
         : localizeHunterError(
-            new HunterError(500, "INTERNAL_ERROR", error instanceof Error ? error.message : String(error)),
+            new HunterError(500, "INTERNAL_ERROR", "Hunter execution failed; inspect server logs"),
             options.locale ?? DEFAULT_LANGUAGE_CODE
           );
     emitTrace(options, "run_failed", {

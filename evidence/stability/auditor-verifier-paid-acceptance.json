@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "artifactKind": "auditor-verifier-paid-acceptance",
+  "status": "completed",
+  "deliveryMode": "settlement-recovered",
+  "authorityId": "agora-v2-sentinel-20260904-01",
+  "missionId": "93c1d134-5c7a-40a8-ad85-e5f783f4939d",
+  "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+  "completedAt": "2026-09-04T02:11:58.080Z",
+  "economics": {
+    "intendedSpendRaw": "750000000000000000",
+    "auditor": {
+      "serviceId": "auditor-v1",
+      "provider": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+      "amountRaw": "500000000000000000",
+      "asset": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "transaction": "0x89b0e476005ec70e116abd7ae31f0d97e2118c5b89ecc6505feb517cfea51522"
+    },
+    "verifier": {
+      "serviceId": "verifier-v1",
+      "provider": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb",
+      "amountRaw": "250000000000000000",
+      "asset": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "transaction": "0x5d7bb2d1407df3e6d1c87b970e3da1bee3e1a198a0ce03d3f9d4059dddcc4b95"
+    }
+  },
+  "receiptsVerified": true,
+  "auditorFindings": 3,
+  "verifier": {
+    "engine": {
+      "method": "static-analysis",
+      "name": "slither",
+      "version": "0.11.6"
+    },
+    "summary": {
+      "confirmed": 2,
+      "rejected": 0,
+      "partial": 1,
+      "inconclusive": 0,
+      "missed": 1
+    }
+  },
+  "recoveryDisclosure": "The Auditor payment settled once; a stalled model request was recovered from the exact mission/request/transaction before the Verifier payment."
+}

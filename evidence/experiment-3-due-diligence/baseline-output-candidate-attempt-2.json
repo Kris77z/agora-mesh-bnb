@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "experimentId": "full-due-diligence",
+  "workflow": "without-agent-ordinary-llm-plus-slither-plus-direct-rpc-candidate",
+  "status": "non-blind-operator-candidate",
+  "input": {
+    "bundle": "baseline-input.json",
+    "bundleHash": "sha256:a26d02fb6b0747f6dff082daa8170371cc92b038079741faf23cdb35d34b09a6",
+    "taskHash": "sha256:63fa2a3dd4115e7ba5d22a9de769c36a7b3ca115f63d3715a98c8726fc1f9254",
+    "chainId": 97,
+    "proxy": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "implementation": "0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc",
+    "packageSourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+    "scopedSourceHash": "sha256:eeadc74efc28fa6c3f680f50da61cc14cf1a17c37b59f7e86997127bf7f6e279",
+    "reportBlock": 128449782
+  },
+  "rawEvidence": {
+    "sourceArtifact": "verified-source-input.json",
+    "sourceArtifactHash": "sha256:7980db97f9d11001ca1467bdc093d800e20cbed774549247db1bdebf12c7403f",
+    "slitherArtifact": "baseline-slither-output-attempt-2.json",
+    "slitherArtifactHash": "sha256:a0a32ede3084549b8450c8ba554beb467596119c7265178d625e27abcf7cc5fe",
+    "rpcArtifact": "../experiment-2-token-risk/baseline-rpc-raw.json",
+    "rpcArtifactHash": "sha256:6af123da8d877646326d4a09d3b037c0e1d035be07cef8e9cc8ae6b19f4383e3",
+    "modelArtifact": "baseline-model-raw-attempt-2.json",
+    "modelArtifactHash": "sha256:1e83a83375efb0bbe5315e4d9534140e28b56b7a23c89393a84debd86baf68e7",
+    "frozenBeforeAgentReportComparison": true
+  },
+  "timing": {
+    "slitherDurationMs": 3152.569,
+    "modelDurationMs": 33107.923,
+    "totalWallDurationMs": 36260.492,
+    "operatorActiveMinutes": 0,
+    "operatorType": "automated-codex-orchestrator"
+  },
+  "model": {
+    "provider": "kimi",
+    "model": "kimi-k2.7-code-highspeed",
+    "sessionCount": 1
+  },
+  "usage": {
+    "promptTokens": 10039,
+    "completionTokens": 6272,
+    "totalTokens": 16311
+  },
+  "cost": {
+    "modelUsd": null,
+    "toolUsd": 0,
+    "humanUsd": null,
+    "totalUsd": null,
+    "basis": "Provider token usage is captured; invoice pricing and independent human labor were unavailable."
+  },
+  "report": {
+    "findings": [
+      {
+        "id": "F1",
+        "title": "Verified implementation matches on-chain EIP-1967 slot",
+        "category": "verification",
+        "severity": "info",
+        "status": "confirmed",
+        "description": "At the latest measured block (128588409), the proxy's EIP-1967 implementation slot resolves to 0x6b5c44cbd4bbddf11723557ba1b77ec5e33225cc, which matches the supplied implementation address. The required comparison block (128449782) state was pruned, so the match is confirmed from latest state."
+      },
+      {
+        "id": "F2",
+        "title": "Highly centralized owner privileges",
+        "category": "centralization",
+        "severity": "high",
+        "status": "design-risk",
+        "description": "The owner can mint arbitrary amounts (no fixed supply cap), burn, freeze/unfreeze any address, pause/unpause all transfers, and transfer the separate autoOwner. renounceOwnership() is overridden to revert, so ownership cannot be renounced through the standard path."
+      },
+      {
+        "id": "F3",
+        "title": "Privileged autoOwner with mint/burn powers",
+        "category": "centralization",
+        "severity": "high",
+        "status": "design-risk",
+        "description": "autoOwner can call autoMint (bounded per call by autoMintMaxLimit and a monotonic nonce) and autoBurn (burns owner()'s balance). The owner can change autoOwner at any time."
+      },
+      {
+        "id": "F4",
+        "title": "Upgradeable proxy with unknown admin custody",
+        "category": "upgrade-risk",
+        "severity": "high",
+        "status": "runtime-unknown",
+        "description": "The proxy admin slot is 0x1e33d209c18f51d97f66ea461c6f819b59e78b30. No timelock, multisig, or governance controls are visible in the verified source or RPC state, so the admin can atomically change the implementation logic."
+      },
+      {
+        "id": "F5",
+        "title": "EIP-7598 authorization flow appears sound",
+        "category": "logic",
+        "severity": "info",
+        "status": "reviewed-no-issue",
+        "description": "transferWithAuthorization and receiveWithAuthorization use _hashTypedDataV4, SignatureCheckerUpgradeable (EOA + EIP-1271), mark bytes32 nonces as used, enforce strict validAfter/validBefore bounds, and require receive caller == payee. cancelAuthorization is restricted to the authorizer."
+      },
+      {
+        "id": "F6",
+        "title": "Slither findings are mostly OZ false positives and low-impact shadowing",
+        "category": "static-analysis",
+        "severity": "low",
+        "status": "unconfirmed",
+        "description": "The high-impact incorrect-exp and divide-before-multiply detections are inside OpenZeppelin MathUpgradeable assembly and are known Slither false positives. Remaining findings are local variable shadowing and timestamp usage with low exploitability."
+      },
+      {
+        "id": "F7",
+        "title": "Testnet deployment with minimal history",
+        "category": "operational",
+        "severity": "medium",
+        "status": "observed",
+        "description": "Contract is on BNB Testnet (chainId 97). Proxy transactionCount is 1. Total supply measured at latest block is 10005250000000000000000000000 (10,005,250 U with 18 decimals). No holder, liquidity, or sellability data was gathered."
+      }
+    ],
+    "facts": {
+      "chainId": 97,
+      "proxy": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "implementation": "0x6b5C44Cbd4bbDDf11723557BA1B77ec5e33225Cc",
+      "latestBlockMeasured": 128588409,
+      "requiredComparisonBlock": 128449782,
+      "name": "United Stables",
+      "symbol": "U",
+      "decimals": 18,
+      "totalSupply": "10005250000000000000000000000",
+      "owner": "0x6a8e2b2134b7b52c24a1448ad6be5c669eaa501a",
+      "proxyAdmin": "0x1e33d209c18f51d97f66ea461c6f819b59e78b30",
+      "eip1967ImplementationMatches": true,
+      "sourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c"
+    },
+    "trustDecision": "do-not-trust",
+    "reasons": [
+      "Source verification and the on-chain EIP-1967 implementation slot match, but code correctness alone is insufficient for a stablecoin to be trusted.",
+      "The owner retains unilateral, uncapped mint/burn/freeze/pause authority and can upgrade the proxy logic at any time.",
+      "A separate autoOwner key can mint and burn under owner-controlled limits, adding another centralization point.",
+      "No timelock, multisig, supply cap, or governance constraints are visible in the source or RPC state.",
+      "Ownership cannot be renounced through the standard renounceOwnership path because it is hardcoded to revert.",
+      "The deployment is on BNB Testnet with minimal on-chain history and no evidence of holder distribution, liquidity, or sellability.",
+      "EIP-7598 authorization logic and Slither review do not offset the above privileged-control risks."
+    ],
+    "requiredActions": [
+      "Disclose and verify custody of both the proxy admin key and the contract owner/autoOwner keys (e.g., multisig, hardware security modules, timelock).",
+      "If long-term trust is intended, remove or time-lock privileged functions, enforce a transparent and immutable mint cap, and transfer proxy admin to a timelock or governance contract.",
+      "Treat the token as testnet-only and avoid using it for mainnet value or production settlement without further independent audit.",
+      "Re-run static analysis and perform a full manual audit focused on EIP-7598 signature validation and upgrade storage-layout safety.",
+      "Monitor Upgrade, OwnershipTransferred, AutoOwnerTransferred, Pause, Freeze, and Mint/Burn events continuously if any reliance is maintained."
+    ],
+    "coverage": [
+      "Explorer-verified first-party source units: src/Stablecoin.sol, src/StablecoinV2.sol, src/libraries/EIP7598Constants.sol",
+      "Dependency manifest for OpenZeppelin upgradeable contracts (analyzed by Slither, not supplied as ordinary LLM source)",
+      "Fresh local Slither 0.11.6 output (normalized wrapper output)",
+      "Direct read-only RPC evidence at requiredComparisonBlock 128449782 and latest block 128588409"
+    ],
+    "limitations": [
+      "Historical state at the required comparison block (#128449783) is pruned; many eth_call/eth_getStorageAt values at that block are unavailable, so verification relies on latest state.",
+      "No holder concentration, DEX liquidity, executed sellability, timelock, key-custody, or off-chain reputation evidence was collected or inferred.",
+      "Slither detections are unreviewed signals; the high-severity findings in OpenZeppelin MathUpgradeable are treated as false-positive assembly parsing.",
+      "This assessment is limited to the supplied artifacts and does not include runtime transaction simulation or full manual dependency-source review."
+    ]
+  },
+  "postFreezeOperatorReview": {
+    "status": "non-independent-corrections-recorded",
+    "reviewer": "automated-codex-orchestrator",
+    "independentHuman": false,
+    "trustDecisionChanged": false,
+    "corrections": [
+      {
+        "location": "report.findings[F7].description",
+        "issue": "The raw model converted 10005250000000000000000000000 base units with 18 decimals to 10,005,250 U.",
+        "correction": "The correct conversion is 10,005,250,000 U (about 10.00525 billion U)."
+      },
+      {
+        "location": "report.findings[F6].description and report.limitations[2]",
+        "issue": "The raw model described some Slither detections as known false positives without an independent finding-by-finding review.",
+        "correction": "All 24 raw Slither detections remain unreviewed signals. The false-positive classification is only a model hypothesis."
+      },
+      {
+        "location": "report.limitations[0]",
+        "issue": "The raw model labels #128449783 as the required comparison block.",
+        "correction": "The required comparison block is 128449782; #128449783 appears only in the RPC provider's pruning error message."
+      }
+    ]
+  },
+  "comparisonEligibility": {
+    "controlledBaseline": false,
+    "reason": "The model context excluded Agent conclusions, but the orchestrator was not an independent human and had prior project context."
+  },
+  "limitations": [
+    "The artifact retains the wrapper-normalized detector output, not Slither's process-level stdout/stderr bytes.",
+    "Static detections are unreviewed signals and are not treated as confirmed vulnerabilities.",
+    "The ordinary LLM received first-party src/ source units plus the dependency manifest and full-package Slither detections; dependency source text was omitted for context-size reliability.",
+    "This is a model-plus-local-tool candidate, not the plan's independent human controlled baseline.",
+    "No post-freeze independent quality or false-positive review has been recorded."
+  ]
+}

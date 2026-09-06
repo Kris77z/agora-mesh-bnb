@@ -17,6 +17,7 @@ import type { AgentEvent } from '@/types/agent';
 import { asRecord } from '@/lib/type-guards';
 import { AlertCircle, History } from 'lucide-react';
 import Link from 'next/link';
+import { publicChainConfig } from '@/lib/chain-config';
 
 /* ─── Helpers ─── */
 
@@ -82,7 +83,7 @@ export default function DashboardPage() {
 
     // Extract metadata from events
     const quote = [...events].reverse().find((e) => e.type === 'quote_received');
-    const spentWei = typeof asRecord(quote?.data)?.amount === 'string'
+    const spentAmount = typeof asRecord(quote?.data)?.amount === 'string'
       ? (asRecord(quote?.data)?.amount as string) : undefined;
     const evalEv = [...events].reverse().find((e) => e.type === 'evaluation_completed');
     const score = typeof asRecord(evalEv?.data)?.score === 'number'
@@ -106,7 +107,9 @@ export default function DashboardPage() {
     addRecord({
       goal,
       status: status === 'COMPLETED' ? 'completed' : 'error',
-      spentWei,
+      spentAmount,
+      assetSymbol: publicChainConfig.token,
+      assetDecimals: 18,
       score,
       serviceName,
       duration,

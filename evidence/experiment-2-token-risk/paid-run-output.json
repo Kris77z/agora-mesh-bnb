@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "experimentId": "token-risk",
+  "workflowStatus": "partial",
+  "mission": {
+    "missionId": "ed7c47dd-3941-4976-b020-283e0104dc11",
+    "goal": "Investigate the onchain token and contract risk of 0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565 on BNB Testnet.",
+    "source": "live-run",
+    "status": "completed",
+    "createdAt": 1788248899541,
+    "completedAt": 1788248959354,
+    "durationMs": 59813,
+    "serviceId": "investigator-v1",
+    "agentId": "97:0x7d6ec1246308502e5ce216c4393e02523ff201a4"
+  },
+  "authority": {
+    "authorityId": "altana-x402-investigator-406ba4f9-41b4-40c3-a5cc-370082a0e700",
+    "allowedRecipient": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+    "dailyLimit": "350000000000000000",
+    "spent": "350000000000000000",
+    "remaining": "0"
+  },
+  "quote": {
+    "scheme": "exact",
+    "network": "eip155:97",
+    "asset": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "payTo": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+    "amount": "350000000000000000",
+    "maxTimeoutSeconds": 60,
+    "extra": {
+      "name": "United Stables",
+      "version": "1",
+      "assetTransferMethod": "permit2-exact",
+      "spenderAddress": "0x5ADe4C7FcdD998B6B7687e398200A995c0F0f70e"
+    }
+  },
+  "payment": {
+    "status": "payment-completed",
+    "rail": "x402",
+    "transaction": "0x28499559f40a390a91e385ec7cc9a61f00fb06e42d6b3f9b3cb2ebf9809f4013",
+    "network": "eip155:97",
+    "payer": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+    "recipient": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+    "amount": {
+      "asset": {
+        "chainId": 97,
+        "kind": "erc20",
+        "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+        "symbol": "U",
+        "decimals": 18
+      },
+      "amount": "350000000000000000"
+    },
+    "transferMethod": "permit2-witness"
+  },
+  "receipt": {
+    "requestHash": "0x2526590b81ea5dd51c6ee02d73ad93a7eeed7bd892b9906e02032364de929189",
+    "resultHash": "0x97145163349c297f1336153855c75bd6660d9f5d0c4e2553ee55f927119e1209",
+    "provider": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+    "timestamp": 1788248907,
+    "signature": "0xe416315261e7b2bfa14f977868ed029b29d6809da3a6dcb47e2922ee46a3baaf0341bd32fd67925f8f6f7a371faf58d17ecc3119d6604f50ee6199ed2c57f19b1b"
+  },
+  "evaluation": {
+    "score": 9,
+    "summary": "Detailed and high-signal output."
+  },
+  "report": {
+    "version": 1,
+    "chainId": 97,
+    "target": {
+      "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "classification": "erc20",
+      "bytecodeSize": 2007,
+      "bytecodeHash": "0xae12b1d61f7ed4febf649ccf319cb49a0e921cca3739dcb01b47d316049d46ff"
+    },
+    "observedAt": "2026-09-01T07:48:25.652Z",
+    "blockNumber": 128449782,
+    "sources": [
+      {
+        "kind": "rpc",
+        "endpoint": "https://bsc-testnet-dataseed.bnbchain.org",
+        "methods": [
+          "eth_blockNumber",
+          "eth_call",
+          "eth_getBalance",
+          "eth_getCode",
+          "eth_getStorageAt",
+          "eth_getTransactionCount"
+        ],
+        "observedAt": "2026-09-01T07:48:25.652Z"
+      }
+    ],
+    "facts": {
+      "nativeBalanceWei": "0",
+      "transactionCount": "1",
+      "token": {
+        "name": "United Stables",
+        "symbol": "U",
+        "decimals": 18,
+        "totalSupply": "10005250000000000000000000000"
+      },
+      "ownership": {
+        "owner": "0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A",
+        "probe": "owner()",
+        "renounced": false
+      },
+      "proxy": {
+        "standard": "eip-1967",
+        "implementation": "0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc",
+        "admin": "0x1e33d209C18f51d97F66eA461c6f819B59E78B30",
+        "implementationBytecodeSize": 12027,
+        "implementationBytecodeHash": "0x72a63adfb9af6944c694e1ecb76b566fd921a10ce98754f2f841a821ff8fb16f"
+      }
+    },
+    "riskSignals": [
+      {
+        "id": "privileged-owner",
+        "severity": "low",
+        "title": "Privileged owner is active",
+        "evidence": "owner() returned 0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A",
+        "confidence": 0.9
+      },
+      {
+        "id": "eip1967-upgradeability",
+        "severity": "medium",
+        "title": "EIP-1967 proxy control detected",
+        "evidence": "implementation=0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc; admin=0x1e33d209C18f51d97F66eA461c6f819B59E78B30",
+        "confidence": 0.9
+      },
+      {
+        "id": "bytecode-capability-mint",
+        "severity": "high",
+        "title": "mint capability selector appears in runtime bytecode",
+        "evidence": "implementation/runtime matched one of: mint(address,uint256), mint(uint256)",
+        "confidence": 0.65
+      },
+      {
+        "id": "bytecode-capability-pause",
+        "severity": "medium",
+        "title": "pause capability selector appears in runtime bytecode",
+        "evidence": "implementation/runtime matched one of: pause(), setPaused(bool)",
+        "confidence": 0.65
+      },
+      {
+        "id": "runtime-delegatecall",
+        "severity": "info",
+        "title": "Runtime bytecode can execute DELEGATECALL",
+        "evidence": "Opcode-aware scan found DELEGATECALL (0xf4) only in the EIP-1967 proxy runtime; treated as expected dispatch plumbing.",
+        "confidence": 0.85
+      }
+    ],
+    "riskScore": 51,
+    "riskLevel": "high",
+    "coverage": {
+      "accountState": "measured",
+      "contractBytecode": "measured",
+      "tokenMetadata": "measured",
+      "ownership": "measured",
+      "proxySlots": "measured",
+      "holderConcentration": "not-measured",
+      "liquidity": "not-measured",
+      "recentTransactions": "not-measured"
+    },
+    "limitations": [
+      "Holder concentration is not measured without a complete indexed holder dataset.",
+      "Liquidity and sellability are not measured without verified DEX pool evidence.",
+      "Transaction count is measured, but recent transaction behavior is not classified in this RPC-only profile.",
+      "Bytecode selector matches indicate capability presence, not proof that every caller can use it."
+    ],
+    "recommendation": "Treat the target as elevated risk until privileged capabilities, proxy control, holders, and liquidity are manually verified."
+  },
+  "revocation": {
+    "status": "revoked",
+    "checkerApprovalRevoked": "0xc54239ea0c5a56cc3dacb10f45f05a941afb6bd6cbdc58042b0ccff9e8989916",
+    "permit2AllowanceRevoked": "0x3b912f0375732ceda353d3c876e124719671120e33294b37e9890a98294a64fa",
+    "sessionRevoked": "0xb136eb4f9db50f154b8eb8e58a2ae8ed59efb5f9b7b62dbceb456f26734d87e3",
+    "permit2AllowanceAfter": "0",
+    "negativeTransferAmount": "1",
+    "negativeTransferRejected": true,
+    "sessionMaterialDeleted": true
+  },
+  "postRunSecurityReview": {
+    "status": "confirmed",
+    "serviceId": "risk-verifier-v1",
+    "evidenceFile": "security-review-output.json",
+    "method": "independent-rpc-replay",
+    "blockNumber": 128449782,
+    "confirmedChecks": 11,
+    "mismatchedChecks": 0,
+    "independentTransport": true,
+    "additionalPayment": false
+  },
+  "pending": [
+    "Reviewed token-risk ground truth",
+    "Controlled human/tool baseline",
+    "Holder concentration",
+    "Liquidity and sellability",
+    "Recent transaction classification"
+  ]
+}

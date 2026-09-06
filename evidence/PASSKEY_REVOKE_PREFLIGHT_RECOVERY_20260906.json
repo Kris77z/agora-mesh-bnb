@@ -1,0 +1,11 @@
+{
+  "authorityId": "browser-cbb87207-05c8-4e4b-b053-e538b849c291",
+  "checkedAt": "2026-09-06T08:52:18.872Z",
+  "pendingStep": "revokeChecker",
+  "reportedFailure": "wallet_getCapabilities failed before prepareCalls/signing",
+  "sdkEvidence": "Porto RelayActions.prepareCalls reads capabilities before preparing the signable request",
+  "checkers": [
+    "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+  ],
+  "action": "Clear only unsent pending step; preserve revoked local access and revoke lifecycle"
+}

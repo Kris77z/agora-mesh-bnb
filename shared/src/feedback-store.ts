@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { AgentFeedback } from "./types.js";
+import { getProcessPostgresStore } from "./storage-backend.js";
 
 interface FeedbackStoreFile {
   feedback: AgentFeedback[];
@@ -36,12 +37,35 @@ async function writeFeedbackStore(payload: FeedbackStoreFile): Promise<void> {
 }
 
 export async function appendFeedbackStoreEntry(feedback: AgentFeedback): Promise<void> {
+  const postgres = await getProcessPostgresStore("agora-agent-feedback");
+  if (postgres) {
+    await postgres.appendAgentFeedback({
+      agentId: feedback.agentId,
+      reviewer: feedback.reviewer,
+      value: feedback.value,
+      tags: feedback.tags,
+      text: feedback.text,
+      createdAt: new Date(feedback.timestamp * 1_000)
+    });
+    return;
+  }
   const store = await readFeedbackStore();
   store.feedback.push(feedback);
   await writeFeedbackStore(store);
 }
 
 export async function listFeedbackStoreEntries(agentId: string): Promise<AgentFeedback[]> {
+  const postgres = await getProcessPostgresStore("agora-agent-feedback");
+  if (postgres) {
+    return (await postgres.listAgentFeedback(agentId)).map((entry) => ({
+      agentId: entry.agentId,
+      reviewer: entry.reviewer,
+      value: entry.value,
+      tags: entry.tags,
+      ...(entry.text ? { text: entry.text } : {}),
+      timestamp: Math.floor(Date.parse(entry.createdAt) / 1_000)
+    }));
+  }
   const store = await readFeedbackStore();
   return store.feedback.filter((item) => item.agentId === agentId);
 }
@@ -62,4 +86,3 @@ export async function getFeedbackStoreReputation(agentId: string): Promise<{
     latest: entries[entries.length - 1]
   };
 }
-

@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "experimentId": "full-due-diligence",
+  "status": "completed",
+  "missionId": "4d3dca34-439f-469d-99f1-4de40849087d",
+  "authorityId": "altana-x402-exp3-supplement-a2b73ae4-800d-45c1-b6f2-7959176cf09c",
+  "target": {
+    "chainId": 97,
+    "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "blockNumber": 128614705
+  },
+  "payments": [
+    {
+      "serviceId": "investigator-v1",
+      "amountRaw": "350000000000000000",
+      "recipient": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+      "transaction": "0x935fd6c8627a07f7f84bec0382924237fdcbcc4302ef842c0691a8904bb72cb2",
+      "blockNumber": 128614704,
+      "receiptVerified": true
+    },
+    {
+      "serviceId": "risk-verifier-v1",
+      "amountRaw": "250000000000000000",
+      "recipient": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb",
+      "transaction": "0xccb746aa1c086ee6d6bdb0e0a271dfd07148919419632763efbc411edec91972",
+      "blockNumber": 128614798,
+      "receiptVerified": true
+    }
+  ],
+  "investigation": {
+    "reportHash": "sha256:37df8c5652af30d73fa9a80767b1c687c1c9098f45adb1ac600b65be732627e8",
+    "riskScore": 51,
+    "riskLevel": "high",
+    "riskSignals": 5,
+    "proxyImplementation": "0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc",
+    "proxyAdmin": "0x1e33d209C18f51d97F66eA461c6f819B59E78B30",
+    "owner": "0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A"
+  },
+  "independentRiskVerification": {
+    "status": "confirmed",
+    "confirmed": 11,
+    "mismatched": 0,
+    "unavailable": 0,
+    "total": 11,
+    "originalRiskScore": 51,
+    "replayedRiskScore": 51,
+    "originalRiskLevel": "high",
+    "replayedRiskLevel": "high"
+  },
+  "authoritySpendBeforeRevoke": {
+    "limitRaw": "600000000000000000",
+    "spentRaw": "600000000000000000",
+    "remainingRaw": "0",
+    "evidenceSource": "erc20-transfer-logs"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "risk-verifier-v1",
+  "name": "Independent Token Risk Verifier",
+  "description": "Replay an Investigator report at its exact historical block using an independent read-only BNB RPC transport",
+  "taskTypes": ["token-risk-verification", "verify-token-risk"],
+  "skills": ["token-risk-verification", "rpc-replay", "evidence-validation", "bnb", "evm"],
+  "priceWei": "10000000000000000",
+  "output": {
+    "type": "json",
+    "schemaName": "token-risk-verification-v1"
+  },
+  "llm": {
+    "temperature": 0
+  },
+  "fallback": {
+    "summary": "Historical RPC replay is required; never confirm an Investigator report from its narrative alone."
+  }
+}

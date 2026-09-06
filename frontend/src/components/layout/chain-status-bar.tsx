@@ -2,11 +2,9 @@
 
 import { useI18n } from '@/components/i18n/locale-provider';
 import { formatLocaleNumber } from '@/lib/i18n';
+import { publicChainConfig } from '@/lib/chain-config';
 import { Blocks, Clock, Fuel, Wifi, WifiOff } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
-
-/** Monad testnet RPC endpoint */
-const MONAD_RPC = 'https://testnet-rpc.monad.xyz';
 
 interface ChainData {
     blockNumber: number | null;
@@ -14,33 +12,16 @@ interface ChainData {
     connected: boolean;
 }
 
-/** Fetch chain data via local API proxy (avoids CORS) */
+/** Fetch chain data via the server-side API proxy (avoids RPC CORS and URL leaks). */
 async function fetchChainStatus(): Promise<{ blockNumber: number | null; gasGwei: string | null }> {
-    // Try local proxy first, fallback to direct RPC
-    try {
-        const res = await fetch('/api/chain-status');
-        if (res.ok) return await res.json();
-    } catch { /* fallback below */ }
-
-    // Direct RPC fallback
-    const call = async (method: string) => {
-        const res = await fetch(MONAD_RPC, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ jsonrpc: '2.0', method, params: [], id: 1 }),
-        });
-        return (await res.json()).result;
-    };
-    const [blockHex, gasPriceHex] = await Promise.all([call('eth_blockNumber'), call('eth_gasPrice')]);
-    return {
-        blockNumber: typeof blockHex === 'string' ? parseInt(blockHex, 16) : null,
-        gasGwei: typeof gasPriceHex === 'string' ? (parseInt(gasPriceHex, 16) / 1e9).toFixed(2) : null,
-    };
+    const res = await fetch('/api/chain-status');
+    if (!res.ok) throw new Error(`Chain status request failed (${res.status})`);
+    return await res.json();
 }
 
 /**
  * Terminal-style chain status footer.
- * Polls Monad testnet RPC for real block number & gas price.
+ * Polls the configured chain for real block number and gas price.
  */
 export function ChainStatusBar() {
     const { locale, t } = useI18n();
@@ -71,7 +52,7 @@ export function ChainStatusBar() {
 
     return (
         <footer className="border-t border-border bg-card px-4 py-1.5 relative overflow-hidden">
-            {/* Monad pulse sweep */}
+            {/* Network pulse sweep */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute inset-y-0 w-24 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-monad-pulse" />
             </div>
@@ -88,7 +69,7 @@ export function ChainStatusBar() {
                     </div>
                     <div className="flex items-center gap-1.5">
                         <Clock className="w-3 h-3" />
-                        <span>~400ms</span>
+                        <span>{publicChainConfig.averageBlockTimeLabel}</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                         <Fuel className="w-3 h-3" />

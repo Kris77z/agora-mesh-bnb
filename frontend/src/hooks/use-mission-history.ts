@@ -8,7 +8,9 @@ export interface MissionRecord {
     status: 'completed' | 'error';
     timestamp: number;
     duration?: number; // seconds
-    spentWei?: string;
+    spentAmount?: string;
+    assetSymbol?: string;
+    assetDecimals?: number;
     serviceName?: string;
     score?: number;
 }
@@ -21,7 +23,12 @@ function loadHistory(): MissionRecord[] {
     if (typeof window === 'undefined') return [];
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? (JSON.parse(raw) as MissionRecord[]) : [];
+        if (!raw) return [];
+        const parsed = JSON.parse(raw) as Array<MissionRecord & { spentWei?: string }>;
+        return parsed.map(({ spentWei, ...record }) => ({
+            ...record,
+            spentAmount: record.spentAmount ?? spentWei,
+        }));
     } catch {
         return [];
     }

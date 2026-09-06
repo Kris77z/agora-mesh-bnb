@@ -2,7 +2,7 @@
   "id": "auditor-v1",
   "name": "Smart Contract Auditor",
   "taskTypes": ["smart-contract-audit", "audit"],
-  "skills": ["solidity", "vulnerability", "monad", "evm"],
+  "skills": ["solidity", "vulnerability", "bnb", "evm"],
   "priceWei": "20000000000000000",
   "output": {
     "type": "json",

@@ -1,5 +1,12 @@
 import { readFile } from "node:fs/promises";
-import { listDynamicServices as listDynamicServicesFromStore, type ServiceInfo, type ServiceRegistry } from "@rebel/shared";
+import {
+  buildCaip2Network,
+  filterServicesByPaymentMode,
+  fetchAdvertisedServices,
+  listDynamicServices as listDynamicServicesFromStore,
+  type ServiceInfo,
+  type ServiceRegistry
+} from "@rebel/shared";
 import { hunterConfig } from "../config.js";
 import { HunterError } from "../errors.js";
 
@@ -29,28 +36,7 @@ function mergeServices(primary: ServiceInfo[], secondary: ServiceInfo[]): Servic
   return [...byId.values()];
 }
 
-async function fetchAdvertisedService(endpoint: string): Promise<ServiceInfo | undefined> {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 1500);
-  try {
-    const response = await fetch(`${normalizeEndpoint(endpoint)}/identity`, {
-      signal: controller.signal
-    });
-    if (!response.ok) {
-      return undefined;
-    }
-    const payload = (await response.json()) as { service?: ServiceInfo } | undefined;
-    const service = payload?.service;
-    if (!service || typeof service !== "object") {
-      return undefined;
-    }
-    return service;
-  } catch {
-    return undefined;
-  } finally {
-    clearTimeout(timeout);
-  }
-}
+export { isX402CompatibleService, filterServicesByPaymentMode } from "@rebel/shared";
 
 async function discoverAdvertisedServices(staticServices: ServiceInfo[]): Promise<ServiceInfo[]> {
   let dynamicStoreServices: ServiceInfo[] = [];
@@ -62,7 +48,7 @@ async function discoverAdvertisedServices(staticServices: ServiceInfo[]): Promis
 
   let registryServiceServices: ServiceInfo[] = [];
   try {
-    const response = await fetch(`${normalizeEndpoint(hunterConfig.registryServiceUrl)}/services`);
+    const response = await fetch(`${normalizeEndpoint(hunterConfig.registryServiceUrl)}/services`, { signal: AbortSignal.timeout(1500), redirect: "error" });
     if (response.ok) {
       const payload = (await response.json()) as { services?: ServiceInfo[] } | undefined;
       if (Array.isArray(payload?.services)) {
@@ -88,8 +74,12 @@ async function discoverAdvertisedServices(staticServices: ServiceInfo[]): Promis
     return mergeServices(registryServiceServices, dynamicStoreServices);
   }
 
-  const advertised = await Promise.all(endpointCandidates.map((endpoint) => fetchAdvertisedService(endpoint)));
-  const remoteServices = advertised.filter((item): item is ServiceInfo => Boolean(item));
+  const advertised = await Promise.all(endpointCandidates.map((endpoint) => fetchAdvertisedServices(endpoint, {
+    allowLocal: hunterConfig.discoverySecurity.allowLocalEndpoints,
+    allowedHosts: hunterConfig.discoverySecurity.allowedHosts
+  })));
+  const remoteServices = advertised.flat();
+  if (hunterConfig.x402.enabled) return remoteServices;
   return mergeServices(remoteServices, mergeServices(registryServiceServices, dynamicStoreServices));
 }
 
@@ -118,5 +108,15 @@ export async function discoverServices(): Promise<ServiceInfo[]> {
   }
 
   const advertised = await discoverAdvertisedServices(parsed.services);
-  return mergeServices(advertised, parsed.services);
+  const activeNetwork = buildCaip2Network(hunterConfig.chainId);
+  const liveIds = new Set(advertised.map((service) => service.id));
+  const networkServices = mergeServices(advertised, parsed.services).filter(
+    (service) => !hunterConfig.x402.enabled || liveIds.has(service.id)
+  ).filter(
+    (service) => service.network === activeNetwork
+  );
+  return filterServicesByPaymentMode(networkServices, {
+    x402Enabled: hunterConfig.x402.enabled,
+    chainId: hunterConfig.chainId
+  });
 }

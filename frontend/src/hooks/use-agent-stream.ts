@@ -18,6 +18,7 @@ export type StreamState = {
  * which buffers SSE responses instead of streaming them).
  */
 const HUNTER_SSE_URL = apiBase.hunter;
+const DEMO_API_TOKEN = process.env.NEXT_PUBLIC_DEMO_API_TOKEN;
 
 function toErrorMessage(value: unknown, fallback: string): string {
     if (!value || typeof value !== 'object') {
@@ -43,6 +44,7 @@ export function useAgentStream() {
     });
 
     const esRef = useRef<EventSource | null>(null);
+    const missionIdRef = useRef<string | null>(null);
 
     const startRun = (
         goal: string,
@@ -63,13 +65,16 @@ export function useAgentStream() {
             // Connect directly to Hunter Agent for real-time SSE streaming
             // (Next.js rewrites proxy buffers the response, breaking real-time)
             const resolvedLocale = normalizeLocale(locale);
-            const url = `${HUNTER_SSE_URL}/run/stream?goal=${encodeURIComponent(goal)}&mode=${mode}&locale=${encodeURIComponent(resolvedLocale)}`;
+            const demoToken = DEMO_API_TOKEN ? `&demoToken=${encodeURIComponent(DEMO_API_TOKEN)}` : '';
+            const idempotencyKey = `web:${crypto.randomUUID()}`;
+            const url = `${HUNTER_SSE_URL}/run/stream?goal=${encodeURIComponent(goal)}&mode=${mode}&locale=${encodeURIComponent(resolvedLocale)}&idempotencyKey=${encodeURIComponent(idempotencyKey)}${demoToken}`;
             const es = new EventSource(url);
             esRef.current = es;
 
             es.addEventListener('ready', (e) => {
                 try {
                     const payload = JSON.parse((e as MessageEvent).data);
+                    missionIdRef.current = typeof payload.missionId === 'string' ? payload.missionId : null;
                     console.log('[SSE] ready:', payload);
                 } catch (err) {
                     console.error('[SSE] parse error on ready:', err);
@@ -107,6 +112,7 @@ export function useAgentStream() {
                         result
                     }));
                     es.close();
+                    missionIdRef.current = null;
                 } catch (err) {
                     console.error('[SSE] parse error on done:', err);
                     setState(prev => ({
@@ -118,13 +124,15 @@ export function useAgentStream() {
             });
 
             es.addEventListener('error', (e) => {
-                console.error('[SSE] error event:', e);
-                setState(prev => ({
-                    ...prev,
-                    status: 'ERROR',
-                    error: t('stream.connectionInterrupted')
-                }));
+                // A server-sent terminal error is a MessageEvent. A plain Event is
+                // EventSource's transient network signal; leave it open so the
+                // browser reconnects with Last-Event-ID to the same durable run.
+                if (!(e instanceof MessageEvent)) return;
+                let message = t('stream.runFailed');
+                try { message = toErrorMessage(JSON.parse(e.data), message); } catch { /* terminal fallback */ }
+                setState(prev => ({ ...prev, status: 'ERROR', error: message }));
                 es.close();
+                missionIdRef.current = null;
             });
 
         } catch (err: unknown) {
@@ -144,9 +152,22 @@ export function useAgentStream() {
         }
     };
 
+    const cancelRun = async () => {
+        const missionId = missionIdRef.current;
+        stopRun();
+        if (!missionId) return;
+        const headers: HeadersInit = {};
+        if (DEMO_API_TOKEN) headers['X-Agora-Token'] = DEMO_API_TOKEN;
+        await fetch(`${HUNTER_SSE_URL}/runs/${encodeURIComponent(missionId)}/cancel`, {
+            method: 'POST',
+            headers,
+        });
+        missionIdRef.current = null;
+    };
+
     useEffect(() => {
         return () => stopRun();
     }, []);
 
-    return { ...state, startRun, stopRun };
+    return { ...state, startRun, stopRun, cancelRun };
 }

@@ -36,6 +36,17 @@ export function sameAddress(a: string, b: string): boolean {
 }
 
 export function verifyReceiptSignature(receipt: Receipt): boolean {
-  const recovered = ethers.verifyMessage(receipt.resultHash, receipt.signature);
+  const recovered = ethers.verifyMessage(receiptSigningMessage(receipt), receipt.signature);
   return sameAddress(recovered, receipt.provider);
+}
+
+export function receiptSigningMessage(receipt: Omit<Receipt, "signature">): string {
+  // Historical receipts remain verifiable, but new receipts bind the request as well as the result.
+  if (receipt.signatureScheme === undefined) return receipt.resultHash;
+  if (receipt.signatureScheme !== "agora-request-result-v2") throw new Error("Unsupported receipt signature scheme");
+  if (!Number.isSafeInteger(receipt.timestamp) || receipt.timestamp <= 0) throw new Error("Invalid receipt timestamp");
+  return ethers.solidityPackedKeccak256(
+    ["string", "bytes32", "bytes32", "address", "uint256"],
+    ["agora-mesh:receipt:v2", receipt.requestHash, receipt.resultHash, receipt.provider, receipt.timestamp]
+  );
 }

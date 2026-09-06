@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "experimentId": "contract-audit",
+  "workflow": "without-agent-human-plus-ordinary-llm",
+  "status": "ready-for-blind-execution",
+  "task": "Audit this benchmark Solidity contract for loss-of-funds vulnerabilities and validate every finding independently.",
+  "taskHash": "sha256:27ddb09ccb4f17a6120234052fbc4b089c4f2b21448dc88c37d25225bc003267",
+  "bindings": {
+    "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+    "benchmarkId": "vulnerable-vault-v1"
+  },
+  "materials": [
+    {
+      "path": "evidence/experiment-1-contract-audit/VulnerableVault.sol",
+      "contentHash": "sha256:55f086ff440bb557c4a1af5b9e5c7332937fd4852193a16c4a95d190f55eda69"
+    },
+    {
+      "path": "evidence/experiment-1-contract-audit/input.md",
+      "contentHash": "sha256:029b2b30d155beea6cecdb19799f62eba041fe9401ccf221ca3ec5f5a142ceb6"
+    },
+    {
+      "path": "evidence/experiment-1-contract-audit/baseline-protocol.md",
+      "contentHash": "sha256:593d3467a72b6226b673a542bf8814486e8222d5df45bd8912630a9089b2fee9"
+    }
+  ],
+  "allowedWorkflow": [
+    "one ordinary general-purpose LLM chat",
+    "local Slither",
+    "manual source review"
+  ],
+  "forbiddenInputsUntilOutputFrozen": [
+    "evidence/experiment-1-contract-audit/ground-truth.json",
+    "evidence/experiment-1-contract-audit/agent-output.md",
+    "evidence/experiment-1-contract-audit/metrics.json",
+    "evidence/experiment-1-contract-audit/tool-baseline-output.json"
+  ],
+  "captureRequirements": {
+    "blindRun": {
+      "groundTruthHiddenUntilOutputFrozen": true,
+      "agentOutputsHiddenUntilOutputFrozen": true,
+      "contemporaneousTimingRequired": true
+    },
+    "timing": [
+      "startedAt",
+      "completedAt",
+      "wallDurationMs",
+      "operatorActiveMinutes"
+    ],
+    "model": [
+      "provider",
+      "model",
+      "sessionCount",
+      "rawPromptArtifact",
+      "rawOutputArtifact"
+    ],
+    "tools": [
+      "name",
+      "version",
+      "commands",
+      "rawOutputArtifacts"
+    ],
+    "cost": [
+      "modelUsd",
+      "toolUsd",
+      "humanUsd",
+      "totalUsd",
+      "basis"
+    ],
+    "review": [
+      "reviewer",
+      "reviewedAt",
+      "groundTruthOrRubric",
+      "scoreArtifact"
+    ]
+  },
+  "expectedOutput": {
+    "artifact": "evidence/experiment-1-contract-audit/baseline-output.json",
+    "findingsRequire": [
+      "findingId",
+      "title",
+      "severity",
+      "description",
+      "evidence",
+      "recommendation"
+    ],
+    "comparisonStatusBeforeReview": "pending"
+  }
+}

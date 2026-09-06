@@ -1,0 +1,26 @@
+{
+  "event": "orphaned_auditor_payment_refunded",
+  "chainId": 97,
+  "token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "admin": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+  "auditor": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+  "sourcePaymentTxHash": "0x0f55a8d790a6567218d667f1d0408826f60ae2697021598ebc2e5ac16d666a82",
+  "refundAmountRaw": "500000000000000000",
+  "refundAmountU": "0.5",
+  "gas": {
+    "estimatedRefundGas": "48695",
+    "refundGas": "58434",
+    "gasPriceWei": "100000000",
+    "topUpAmountWei": "5843400000000",
+    "topUpAmountTBNB": "0.0000058434",
+    "topUpTxHash": "0x02352bea764e3430de65df4394a4c188e8c4daf28053edfb368de5d76f4d1810",
+    "auditorNativeAfterWei": "1012600000000"
+  },
+  "refundTxHash": "0xba0da166b32dfcb5a4072c67ab2f3d69fd050d12940783417688223f42ef017a",
+  "balances": {
+    "adminBeforeRaw": "6800000000000000000",
+    "adminAfterRaw": "7300000000000000000",
+    "auditorBeforeRaw": "2000000000000000000",
+    "auditorAfterRaw": "1500000000000000000"
+  }
+}

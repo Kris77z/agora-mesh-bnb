@@ -1,0 +1,597 @@
+{
+  "version": 1,
+  "records": {
+    "altana-x402-30c0de11-256b-47c2-86e6-db6d8a303a0e": {
+      "authority": {
+        "authorityId": "altana-x402-30c0de11-256b-47c2-86e6-db6d8a303a0e",
+        "walletAddress": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+        "sessionPublicKey": "0x04b18bc9c34d42b4999af60c6e5ca9aa6bcdce59b6f1cc34b95b46ecbaa66b884210cbd1c8defb0c865ee9a8f36d1a45473442c155d62bd93d09e4dc7e976ab467",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "2000000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788320062,
+        "status": "revoked",
+        "grantTxHash": "0x37d695eaf8cb79789253e75bf9c1a6901296160959e3b6b9017f4b53e6029f65",
+        "createdAt": 1788233691090,
+        "revokeTxHash": "0x9a05f49ecd61d169653b13d0096c4b6a29a05d268495a99c85fd9c0d40c88e1b"
+      },
+      "revocation": {
+        "checkerApprovalTxHash": "0xb933a21a18e6e9ed44b05d0d4788028e3a30b73fdece6ef57b3d102826c8a839",
+        "permit2AllowanceTxHash": "0x0f657becff2e5843696be849fbf397ba27f31b1eca3621793b53aeeda45064f5",
+        "sessionRevokeTxHash": "0x9a05f49ecd61d169653b13d0096c4b6a29a05d268495a99c85fd9c0d40c88e1b",
+        "sessionMaterialDeleted": true,
+        "negativeTest": {
+          "kind": "erc20-transfer",
+          "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+          "amount": "1",
+          "testedAt": 1788243062,
+          "rejected": true,
+          "rejection": "Invalid parameters were provided to the RPC method.\nDouble check you have provided the correct parameters.\n\nURL: https://testnet-relay.altana.network\nRequest body: {\"method\":\"wallet_prepareCalls\",\"params\":[{\"calls\":[{\"data\":\"0xa9059cbb0000000000000000000000003bd3fd38ecc72378946c790780c8c1216e4c55270000000000000000000000000000000000000000000000000000000000000001\",\"to\":\"0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565\",\"value\":\"0x0\"}],\"capabilities\":{\"authorizeKeys\":[],\"meta\":{\"feeToken\":\"0x0000000000000000000000000000000000000000\"},\"preCall\":false},\"chainId\":\"0x61\",\"from\":\"0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d\",\"key\":{\"prehash\":false,\"publicKey\":\"0x00000000000000000000000031aa08623558b476423a6e569ee44b6e34ad1761\",\"type\":\"secp256k1\"}}]}\n\nDetails: key hash 0x3af3ba2b4c34d28ebff5f6894f64cc4820ae2bb5a2594614c4ead34fabd431e0 is unknown\nVersion: viem@2.56.0"
+        }
+      },
+      "updatedAt": 1788243063
+    },
+    "altana-x402-investigator-406ba4f9-41b4-40c3-a5cc-370082a0e700": {
+      "authority": {
+        "authorityId": "altana-x402-investigator-406ba4f9-41b4-40c3-a5cc-370082a0e700",
+        "walletAddress": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+        "sessionPublicKey": "0x045fd19617588dafe290b9904500c49e3d2ad4883c8bcbeb9fcf9dd7eb4228e44859be3e4267ef49bcea1589b6c233f33dab6925b8693427819141baf1d793a893",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "350000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788335125,
+        "status": "revoked",
+        "grantTxHash": "0x5507558133c45d7f221e3e01c83f1caa015b849cde42aef4268a4d0b5b15f52a",
+        "createdAt": 1788248757866,
+        "revokeTxHash": "0xb136eb4f9db50f154b8eb8e58a2ae8ed59efb5f9b7b62dbceb456f26734d87e3"
+      },
+      "revocation": {
+        "checkerApprovalTxHash": "0xc54239ea0c5a56cc3dacb10f45f05a941afb6bd6cbdc58042b0ccff9e8989916",
+        "permit2AllowanceTxHash": "0x3b912f0375732ceda353d3c876e124719671120e33294b37e9890a98294a64fa",
+        "sessionRevokeTxHash": "0xb136eb4f9db50f154b8eb8e58a2ae8ed59efb5f9b7b62dbceb456f26734d87e3",
+        "sessionMaterialDeleted": true,
+        "negativeTest": {
+          "kind": "erc20-transfer",
+          "recipient": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+          "amount": "1",
+          "testedAt": 1788249636,
+          "rejected": true,
+          "rejection": "Invalid parameters were provided to the RPC method.\nDouble check you have provided the correct parameters.\n\nURL: https://testnet-relay.altana.network\nRequest body: {\"method\":\"wallet_prepareCalls\",\"params\":[{\"calls\":[{\"data\":\"0xa9059cbb0000000000000000000000007d6ec1246308502e5ce216c4393e02523ff201a40000000000000000000000000000000000000000000000000000000000000001\",\"to\":\"0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565\",\"value\":\"0x0\"}],\"capabilities\":{\"authorizeKeys\":[],\"meta\":{\"feeToken\":\"0x0000000000000000000000000000000000000000\"},\"preCall\":false},\"chainId\":\"0x61\",\"from\":\"0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d\",\"key\":{\"prehash\":false,\"publicKey\":\"0x00000000000000000000000061d4f1f7e9aa2281e04944dc478384554f2e9c2a\",\"type\":\"secp256k1\"}}]}\n\nDetails: key hash 0x49e3f45045e4e420cdd497e9e3a8da369c498b61b78e34630f74e13abe719d92 is unknown\nVersion: viem@2.56.0"
+        }
+      },
+      "updatedAt": 1788249637
+    },
+    "altana-x402-exp3-2dd94bd1-b32a-457b-badd-0fdd9e669399": {
+      "authority": {
+        "authorityId": "altana-x402-exp3-2dd94bd1-b32a-457b-badd-0fdd9e669399",
+        "walletAddress": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+        "sessionPublicKey": "0x04e4f2f72e3671f3367a8f0c28512dbfef48bae1ee3de8cbcdc7b92f509889a03e12b293a0f9933d15f449b2b78adc31e53ef207d00d0ae10dcad8be24d798a362",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+          },
+          {
+            "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "1350000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788407271,
+        "status": "revoked",
+        "grantTxHash": "0x179a662ff98b57f737117760b122ce3d9e59b2aed20e2269d194881a5b077874",
+        "createdAt": 1788320940140,
+        "revokeTxHash": "0x34e8d37172308bc0ea3247276d654e67e15055e68ae08dba19c2e4fc858b32dc"
+      },
+      "revocation": {
+        "checkerApprovalTxHash": "0x3e5bb2102e9cc0249f6c71ded09a3c3ea9af91ba4d8bf259f11a7d41d5a81d2c",
+        "permit2AllowanceTxHash": "0xafe28fe2fc6116ac73d5a22888f646dc0a4ab115759e50c47f56d405c59540fb",
+        "sessionRevokeTxHash": "0x34e8d37172308bc0ea3247276d654e67e15055e68ae08dba19c2e4fc858b32dc",
+        "sessionMaterialDeleted": true,
+        "negativeTest": {
+          "kind": "erc20-transfer",
+          "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+          "amount": "1",
+          "testedAt": 1788322048,
+          "rejected": true,
+          "rejection": "Invalid parameters were provided to the RPC method.\nDouble check you have provided the correct parameters.\n\nURL: https://testnet-relay.altana.network\nRequest body: {\"method\":\"wallet_prepareCalls\",\"params\":[{\"calls\":[{\"data\":\"0xa9059cbb0000000000000000000000003bd3fd38ecc72378946c790780c8c1216e4c55270000000000000000000000000000000000000000000000000000000000000001\",\"to\":\"0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565\",\"value\":\"0x0\"}],\"capabilities\":{\"authorizeKeys\":[],\"meta\":{\"feeToken\":\"0x0000000000000000000000000000000000000000\"},\"preCall\":false},\"chainId\":\"0x61\",\"from\":\"0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d\",\"key\":{\"prehash\":false,\"publicKey\":\"0x000000000000000000000000506d4187372dabb337d454021c999f6eb7634d94\",\"type\":\"secp256k1\"}}]}\n\nDetails: key hash 0x3f633cbc38b04b419b6d9a27dec8ffe61cb9069aa07d0077f2de6d9a34906888 is unknown\nVersion: viem@2.56.0"
+        }
+      },
+      "updatedAt": 1788322050
+    },
+    "altana-x402-exp3-supplement-a2b73ae4-800d-45c1-b6f2-7959176cf09c": {
+      "authority": {
+        "authorityId": "altana-x402-exp3-supplement-a2b73ae4-800d-45c1-b6f2-7959176cf09c",
+        "walletAddress": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+        "sessionPublicKey": "0x0489f265793217a584e09800429b5c3641b3bf8e2f3fa1151e425dbfb18cf8e38a21982b642f8b1205349d315154e70e239d07bc8b185c514685c54b7d2383bd0d",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "600000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788409245,
+        "status": "revoked",
+        "grantTxHash": "0x6b27d73108d5d66d7d807ae3f4b9ac908a9252cccf9ca9374e61d5b8edc5646c",
+        "createdAt": 1788322924738,
+        "revokeTxHash": "0x8ab3fb9b538e6106b3d5a5fda194b591ca6148aaf662df31dd49c8583ae25def"
+      },
+      "revocation": {
+        "checkerApprovalTxHash": "0xc770e7dddcbbf6e4dd4e32a4d4635b2c74ae1562134608e9c1307ad6d4b0d0d1",
+        "permit2AllowanceTxHash": "0x84fd5c3f11acc8bde422707b4e0be60205c7391b3ae998f18a1124a632f445f1",
+        "sessionRevokeTxHash": "0x8ab3fb9b538e6106b3d5a5fda194b591ca6148aaf662df31dd49c8583ae25def",
+        "sessionMaterialDeleted": true,
+        "negativeTest": {
+          "kind": "erc20-transfer",
+          "recipient": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+          "amount": "1",
+          "testedAt": 1788323234,
+          "rejected": true,
+          "rejection": "Invalid parameters were provided to the RPC method.\nDouble check you have provided the correct parameters.\n\nURL: http://127.0.0.1:18546\nRequest body: {\"method\":\"wallet_prepareCalls\",\"params\":[{\"calls\":[{\"data\":\"0xa9059cbb0000000000000000000000007d6ec1246308502e5ce216c4393e02523ff201a40000000000000000000000000000000000000000000000000000000000000001\",\"to\":\"0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565\",\"value\":\"0x0\"}],\"capabilities\":{\"authorizeKeys\":[],\"meta\":{\"feeToken\":\"0x0000000000000000000000000000000000000000\"},\"preCall\":false},\"chainId\":\"0x61\",\"from\":\"0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d\",\"key\":{\"prehash\":false,\"publicKey\":\"0x000000000000000000000000265d508980fdc567b194fd9f75fbfcf1021bb063\",\"type\":\"secp256k1\"}}]}\n\nDetails: key hash 0x0d4988f6e09a8c3bdf67e62c27707c74fe438be1e0ef33444ae192f0a047752d is unknown\nVersion: viem@2.56.0"
+        }
+      },
+      "updatedAt": 1788323236
+    },
+    "agora-termix-stability-20260902": {
+      "authority": {
+        "authorityId": "agora-termix-stability-20260902",
+        "walletAddress": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+        "sessionPublicKey": "0x04c7e465ab585557e390790e9e2b38ad3fbd233d4aa548df8c40b665c4ba378181160ca3601ee5b18e3d7b431bfcefba325ce34c7cb7dbc6e857e7499c3929eeed",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "2250000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788447328,
+        "status": "revoked",
+        "grantTxHash": "0x52e19ca97d58d82f492869f43b8c11d1406134c86a7e37d5732932c825aff602",
+        "createdAt": 1788360988765,
+        "revokeTxHash": "0xef88f75fbf3701e05c836bf2f5a5bec23c9c05af9a23ad804d8221ae0d5673e2"
+      },
+      "revocation": {
+        "checkerApprovalTxHash": "0xe517e1ba19056db1f8aff01f98f97241255b7ef33ca95f8fa9dc2d7f42e5be4a",
+        "permit2AllowanceTxHash": "0xbffd28346ddb0712fb34f99893f4159905a84f2ee37537e039bec3b7ee9feac4",
+        "sessionRevokeTxHash": "0xef88f75fbf3701e05c836bf2f5a5bec23c9c05af9a23ad804d8221ae0d5673e2",
+        "sessionMaterialDeleted": true,
+        "negativeTest": {
+          "kind": "erc20-transfer",
+          "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+          "amount": "1",
+          "testedAt": 1788363110,
+          "rejected": true,
+          "rejection": "Invalid parameters were provided to the RPC method.\nDouble check you have provided the correct parameters.\n\nURL: http://127.0.0.1:8765\nRequest body: {\"method\":\"wallet_prepareCalls\",\"params\":[{\"calls\":[{\"data\":\"0xa9059cbb0000000000000000000000003bd3fd38ecc72378946c790780c8c1216e4c55270000000000000000000000000000000000000000000000000000000000000001\",\"to\":\"0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565\",\"value\":\"0x0\"}],\"capabilities\":{\"authorizeKeys\":[],\"meta\":{\"feeToken\":\"0x0000000000000000000000000000000000000000\"},\"preCall\":false},\"chainId\":\"0x61\",\"from\":\"0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d\",\"key\":{\"prehash\":false,\"publicKey\":\"0x00000000000000000000000053a8fa7463e9be02417b2b4216696188af5d6130\",\"type\":\"secp256k1\"}}]}\n\nDetails: key hash 0x12e2ed5905245a6aa6d8a90a4286738e424c5198513affb363df0067c4c513f3 is unknown\nVersion: viem@2.56.0"
+        }
+      },
+      "updatedAt": 1788363114
+    },
+    "agora-v2-sentinel-20260904-01": {
+      "authority": {
+        "authorityId": "agora-v2-sentinel-20260904-01",
+        "walletAddress": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+        "sessionPublicKey": "0x04df022eb87dcd92f0fb459b5080aad3d07328b421ee91da8c0101035e9dbf2361dde7e88e881a6538669b37d8a56ce957ba877342ca0589025de360a1fa735755",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          },
+          {
+            "to": "0x1Ef8eEb640e60d5d3Bc3eFe1A4b2fFCd64132c2C"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "1150000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788572904,
+        "status": "revoked",
+        "createdAt": 1788486504683,
+        "grantTxHash": "0xe9b000daf7afbfb4dea9466ad8d4c30a2af4641b3978058219b054e10c047f57",
+        "revokeTxHash": "0x0de3450a346b1719bd2d4b27f346bc818be59ef5fa380c7a005e45d3e57334fe"
+      },
+      "lifecycle": {
+        "operation": "revoke",
+        "phase": "complete",
+        "transactions": {
+          "revokeChecker": "0x825e2731b2d426037553cdeff4f225f1c238c42f3d519e4597dced6b39e53492",
+          "revokeAllowance": "0x4b6ed35b9583282f1739018a6cbff45d17fa44f52cee9c6cb4a8aeea24ad7625",
+          "revokeSession": "0x0de3450a346b1719bd2d4b27f346bc818be59ef5fa380c7a005e45d3e57334fe"
+        }
+      },
+      "updatedAt": 1788488488,
+      "revocation": {
+        "checkerApprovalTxHash": "0x825e2731b2d426037553cdeff4f225f1c238c42f3d519e4597dced6b39e53492",
+        "permit2AllowanceTxHash": "0x4b6ed35b9583282f1739018a6cbff45d17fa44f52cee9c6cb4a8aeea24ad7625",
+        "sessionRevokeTxHash": "0x0de3450a346b1719bd2d4b27f346bc818be59ef5fa380c7a005e45d3e57334fe",
+        "negativeTest": {
+          "kind": "erc20-transfer",
+          "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+          "amount": "1",
+          "testedAt": 1788488487,
+          "rejected": true,
+          "outcome": "rejected",
+          "rejection": "Relay explicitly rejected the revoked session key"
+        },
+        "sessionMaterialDeleted": true
+      }
+    },
+    "browser-cbb87207-05c8-4e4b-b053-e538b849c291": {
+      "authority": {
+        "authorityId": "browser-cbb87207-05c8-4e4b-b053-e538b849c291",
+        "walletAddress": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+        "sessionPublicKey": "0x04662c183556ff73eabf9bb4ac832e9138da4170590d5b2dc6b02a361639b47f7663087d52ad8c09eefe09a2f21f9dfeef7c173092499acd2c8add12bef79eab67",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          },
+          {
+            "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "1150000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788686276,
+        "status": "revoked",
+        "createdAt": 1788682676773,
+        "grantTxHash": "0xc4d06adaa1ac2038387668a20491afe22fb3cf664070d9ae721a9a1b262cf833",
+        "revokeTxHash": "0xea6cd2415c96c1860ed56fd1da7106e83243c7fe4aa17c957172af04f92f4269"
+      },
+      "lifecycle": {
+        "operation": "revoke",
+        "phase": "complete",
+        "transactions": {
+          "revokeChecker": "0x202e584aacc1e2a19673a6affa5614e63fe2c28541d808ababd267d4b9492f69",
+          "revokeAllowance": "0x2233b3f107f1eadb5d1366e4a6183f70da3513a09ebca939731df8c9510124dd",
+          "revokeSession": "0xea6cd2415c96c1860ed56fd1da7106e83243c7fe4aa17c957172af04f92f4269"
+        }
+      },
+      "updatedAt": 1788686381,
+      "revocation": {
+        "checkerApprovalTxHash": "0x202e584aacc1e2a19673a6affa5614e63fe2c28541d808ababd267d4b9492f69",
+        "permit2AllowanceTxHash": "0x2233b3f107f1eadb5d1366e4a6183f70da3513a09ebca939731df8c9510124dd",
+        "sessionRevokeTxHash": "0xea6cd2415c96c1860ed56fd1da7106e83243c7fe4aa17c957172af04f92f4269",
+        "negativeTest": {
+          "kind": "erc20-transfer",
+          "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+          "amount": "1",
+          "testedAt": 1788686379,
+          "rejected": true,
+          "outcome": "rejected",
+          "rejection": "Relay explicitly rejected the revoked session key"
+        },
+        "sessionMaterialDeleted": true
+      }
+    },
+    "browser-12a5ffc7-e0fb-4556-98b5-0bb1e84b976b": {
+      "authority": {
+        "authorityId": "browser-12a5ffc7-e0fb-4556-98b5-0bb1e84b976b",
+        "walletAddress": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+        "sessionPublicKey": "0x04d1c33ca2ae7c3fd662a3e629408d7cdfb1c4ded57c092f91ec13e195533d55cc4e3550195785e6ba8e75cabe8a30c8d771e50badc72c59f97971388fe0efdd17",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          },
+          {
+            "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+          },
+          {
+            "to": "0x1Ef8eEb640e60d5d3Bc3eFe1A4b2fFCd64132c2C"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "1150000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788696048,
+        "status": "invalid",
+        "createdAt": 1788688848875
+      },
+      "lifecycle": {
+        "operation": "revoke",
+        "phase": "in-progress",
+        "transactions": {},
+        "pendingStep": "revokeChecker"
+      },
+      "updatedAt": 1788688848
+    },
+    "browser-a664cf35-dcfb-4739-8cce-e49315946ded": {
+      "authority": {
+        "authorityId": "browser-a664cf35-dcfb-4739-8cce-e49315946ded",
+        "walletAddress": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+        "sessionPublicKey": "0x04f547c61257f125ab6d607f61ca26959bd6e1a831ea792dbbba5aabdd4d576b7f796db55cf8fe92f5a98c9d752c7e12d99649fe9cba05890293664799033cc832",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          },
+          {
+            "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+          },
+          {
+            "to": "0x1Ef8eEb640e60d5d3Bc3eFe1A4b2fFCd64132c2C"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "1150000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788696505,
+        "status": "invalid",
+        "createdAt": 1788689305330
+      },
+      "lifecycle": {
+        "operation": "provision",
+        "phase": "in-progress",
+        "transactions": {}
+      },
+      "updatedAt": 1788689305
+    },
+    "browser-1283cde7-fe28-4878-814a-c68cd3cd903a": {
+      "authority": {
+        "authorityId": "browser-1283cde7-fe28-4878-814a-c68cd3cd903a",
+        "walletAddress": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+        "sessionPublicKey": "0x04af45133ec8d5e0e3ef1d600b7f3db432369a084d6395c7a9f6a542e4ecaab9e5210f3a3de4e2f50de5e1f131027b591620a26cbfa96194fb2d74be649fe77f95",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          },
+          {
+            "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+          },
+          {
+            "to": "0x1Ef8eEb640e60d5d3Bc3eFe1A4b2fFCd64132c2C"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "1150000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788696521,
+        "status": "invalid",
+        "createdAt": 1788689321505
+      },
+      "lifecycle": {
+        "operation": "provision",
+        "phase": "in-progress",
+        "transactions": {}
+      },
+      "updatedAt": 1788689321
+    },
+    "browser-50b9555a-c20c-437f-9200-cff0727dec53": {
+      "authority": {
+        "authorityId": "browser-50b9555a-c20c-437f-9200-cff0727dec53",
+        "walletAddress": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+        "sessionPublicKey": "0x04f685243ef5ee75dc59e5f45a7f257844d85a9f6276a6d0f4a11f1514c5343dc0877552899ca56a411f4ed738e92def9e463165c2c9bc821745850e59f404b4e9",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          },
+          {
+            "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+          },
+          {
+            "to": "0x1Ef8eEb640e60d5d3Bc3eFe1A4b2fFCd64132c2C"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "1150000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788696538,
+        "status": "invalid",
+        "createdAt": 1788689338633
+      },
+      "lifecycle": {
+        "operation": "provision",
+        "phase": "in-progress",
+        "transactions": {}
+      },
+      "updatedAt": 1788689338
+    },
+    "browser-7520cb8f-e0ba-4c21-a84c-3a91dec43722": {
+      "authority": {
+        "authorityId": "browser-7520cb8f-e0ba-4c21-a84c-3a91dec43722",
+        "walletAddress": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+        "sessionPublicKey": "0x04ca533549c154732738b43a3586ade1c23b76352e3aafd36a2bd722d99f9b1d20a5421f6971da6c9cf5919a4d8019487bb629d2251ab80c4bdf27fdbe413c7b9e",
+        "chainId": 97,
+        "allowedCalls": [
+          {
+            "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+          },
+          {
+            "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+          },
+          {
+            "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+          },
+          {
+            "to": "0x1Ef8eEb640e60d5d3Bc3eFe1A4b2fFCd64132c2C"
+          }
+        ],
+        "spendLimits": [
+          {
+            "asset": {
+              "chainId": 97,
+              "kind": "erc20",
+              "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+              "symbol": "U",
+              "decimals": 18
+            },
+            "limit": "1150000000000000000",
+            "period": "day"
+          }
+        ],
+        "expiry": 1788696736,
+        "status": "invalid",
+        "createdAt": 1788689536174,
+        "grantTxHash": "0x04c0fd3a6f5ad8628fe37f72cbec3856b394e92a848dd0abae0e746a8e4bbb61"
+      },
+      "lifecycle": {
+        "operation": "revoke",
+        "phase": "in-progress",
+        "transactions": {},
+        "pendingStep": "revokeChecker"
+      },
+      "updatedAt": 1788689536
+    }
+  }
+}

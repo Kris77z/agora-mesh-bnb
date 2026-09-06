@@ -5,6 +5,7 @@ import {
   DEFAULT_LANGUAGE_CODE,
   buildOutputLanguageInstruction,
   localizeByLocale,
+  sameAsset,
   type LanguageCode
 } from "@rebel/shared";
 import type {
@@ -17,14 +18,14 @@ import { hunterConfig } from "./config.js";
 import {
   applyCommanderPhaseSpend,
   buildCommanderBudget,
-  formatCommanderMon,
+  formatCommanderMoney,
   getCommanderBudgetBlockReason
 } from "./commander-budget.js";
 import { HunterError } from "./errors.js";
 import { runKimiReactLoop } from "./kimi-loop.js";
 import type { ReactToolSpec } from "./react-tools.js";
 import type { CommanderHunterRunResult, HunterRunResult, SingleHunterRunResult } from "./run-types.js";
-import { executePhase, runScriptedHunter } from "./scripted-flow.js";
+import { executePhase, inferTaskTypeFromGoal, runScriptedHunter } from "./scripted-flow.js";
 import { emitTrace, type HunterRunOptions } from "./trace-emitter.js";
 import { hunterLog, hunterWarn, hunterError } from "./logger.js";
 
@@ -35,6 +36,7 @@ type CommanderBudgetSnapshot = ReturnType<typeof buildCommanderBudget>;
 const SERVICE_TYPES: HunterServiceTaskType[] = [
   "content-generation",
   "smart-contract-audit",
+  "onchain-investigation",
   "defi-analysis",
   "gas-optimization",
   "token-scan",
@@ -275,12 +277,55 @@ function summarizeToolContent(content: string): string {
   return compact.length > 300 ? `${compact.slice(0, 300)}...` : compact;
 }
 
-function readPhaseSpentWei(result: SingleHunterRunResult): string {
-  const accept = result.quote.accepts.find((item) => item.scheme === "native-transfer");
-  if (accept && /^\d+$/.test(accept.amount)) {
-    return accept.amount;
+function readPhaseSpend(
+  result: SingleHunterRunResult,
+  budget: CommanderBudgetSnapshot
+): CommanderBudgetSnapshot["spent"] {
+  const purchases = [
+    { quote: result.quote, service: result.service },
+    ...(result.verification
+      ? [{ quote: result.verification.quote, service: result.verification.service }]
+      : [])
+  ];
+  let total = 0n;
+  let asset = budget.maxTotal.asset;
+  for (const purchase of purchases) {
+    const accept = purchase.quote.accepts.find(
+      (item) => item.scheme === "native-transfer" || item.scheme === "exact"
+    );
+    if (!accept || !/^\d+$/.test(accept.amount)) {
+      continue;
+    }
+    const purchaseAsset = purchase.service.asset ?? budget.maxTotal.asset;
+    if (!sameAsset(purchaseAsset, asset)) {
+      throw new HunterError(
+        422,
+        "COMMANDER_BUDGET_ASSET_MISMATCH",
+        "A phase cannot aggregate Auditor and Verifier payments in different assets"
+      );
+    }
+    asset = purchaseAsset;
+    total += BigInt(accept.amount);
   }
-  return "0";
+  return { asset, amount: total.toString() };
+}
+
+function readAvailablePhaseBudget(
+  budget: CommanderBudgetSnapshot
+): CommanderBudgetSnapshot["maxPerPhase"] {
+  const remainingTotal = BigInt(budget.maxTotal.amount) - BigInt(budget.spent.amount);
+  const perPhase = BigInt(budget.maxPerPhase.amount);
+  return {
+    asset: budget.maxPerPhase.asset,
+    amount: (remainingTotal < perPhase ? remainingTotal : perPhase).toString()
+  };
+}
+
+function readRunTaskType(result: SingleHunterRunResult): HunterServiceTaskType | undefined {
+  if ("paymentContext" in result.quote) {
+    return normalizeTaskType(result.quote.paymentContext.taskType);
+  }
+  return normalizeTaskType(result.service.taskType);
 }
 
 function getBudgetBlockReason(state: CommanderRuntimeState): string | null {
@@ -291,10 +336,14 @@ function getBudgetBlockReason(state: CommanderRuntimeState): string | null {
   });
 }
 
-function updateBudgetAfterPhase(state: CommanderRuntimeState, phaseSpentWei: string, locale: LanguageCode): void {
+function updateBudgetAfterPhase(
+  state: CommanderRuntimeState,
+  phaseSpent: CommanderBudgetSnapshot["spent"],
+  locale: LanguageCode
+): void {
   const updated = applyCommanderPhaseSpend({
     budget: state.budget,
-    phaseSpentWei,
+    phaseSpent,
     stopReason: state.budgetStopReason,
     locale
   });
@@ -316,9 +365,9 @@ Operating rules:
 2) Call hire_agent with a concrete sub-goal each time.
 3) Stop once the mission has enough evidence/results. Do not call unnecessary tools.
 4) If tool output has blocked=true, stop immediately and produce final summary.
-5) Max phases: ${budget.maxPhases}. Total budget cap: ${formatCommanderMon(budget.maxTotalWei)} MON. Per-phase cap: ${formatCommanderMon(
-    budget.maxPerPhaseWei
-  )} MON.
+5) Max phases: ${budget.maxPhases}. Total budget cap: ${formatCommanderMoney(budget.maxTotal)}. Per-phase cap: ${formatCommanderMoney(
+    budget.maxPerPhase
+  )}.
 6) Preferred task types (optional): ${SERVICE_TYPES.join(", ")}.
 7) A single phase may timeout after ${phaseTimeoutMs} ms; timeout means the phase failed and you may retry with a narrower goal.
 8) All sub-goals passed to hire_agent must be written in the user's requested language when possible.
@@ -352,12 +401,12 @@ function toCommanderResult(
       finalMessage.trim().length > 0
         ? finalMessage
         : localizeByLocale(locale, {
-            en: `Commander flow completed (${successCount}/${phases.length} phases succeeded, spent ${formatCommanderMon(
-              budget.spentWei
-            )} MON).`,
-            zh: `指挥模式已完成（共成功 ${successCount}/${phases.length} 个阶段，花费 ${formatCommanderMon(
-              budget.spentWei
-            )} MON）。`
+            en: `Commander flow completed (${successCount}/${phases.length} phases succeeded, spent ${formatCommanderMoney(
+              budget.spent
+            )}).`,
+            zh: `指挥模式已完成（共成功 ${successCount}/${phases.length} 个阶段，花费 ${formatCommanderMoney(
+              budget.spent
+            )}）。`
           })
   };
 }
@@ -386,7 +435,7 @@ export async function runCommanderHunter(
 
   const budget = deps.buildBudget();
   const state: CommanderRuntimeState = {
-    missionId: deps.createMissionId(),
+    missionId: options.missionId ?? deps.createMissionId(),
     goal,
     locale,
     budget,
@@ -396,12 +445,13 @@ export async function runCommanderHunter(
   };
 
   emitTrace(options, "run_started", {
+    missionId: state.missionId,
     mode: "commander",
     goal,
     locale,
     maxPhases: budget.maxPhases,
-    maxTotalWei: budget.maxTotalWei,
-    maxPerPhaseWei: budget.maxPerPhaseWei,
+    maxTotal: budget.maxTotal,
+    maxPerPhase: budget.maxPerPhase,
     phaseTimeoutMs: deps.phaseTimeoutMs
   });
   emitTrace(options, "mission_decomposed", {
@@ -413,7 +463,7 @@ export async function runCommanderHunter(
 
   hunterLog(`=== COMMANDER START === mission=${state.missionId}`);
   hunterLog(`goal: "${goal.slice(0, 150)}${goal.length > 150 ? '...' : ''}"`);
-  hunterLog(`budget: maxPhases=${budget.maxPhases}, maxTotal=${formatCommanderMon(budget.maxTotalWei)} MON, perPhase=${formatCommanderMon(budget.maxPerPhaseWei)} MON, timeout=${deps.phaseTimeoutMs}ms`);
+  hunterLog(`budget: maxPhases=${budget.maxPhases}, maxTotal=${formatCommanderMoney(budget.maxTotal)}, perPhase=${formatCommanderMoney(budget.maxPerPhase)}, timeout=${deps.phaseTimeoutMs}ms`);
 
   const hireAgentSchema = z.object({
     goal: z.string().min(1),
@@ -468,7 +518,13 @@ export async function runCommanderHunter(
               zh: `阶段 ${index + 1}`
             });
       const taskTypeHint = normalizeTaskType(parsed.preferredType);
-      const phaseGoal = buildPhaseGoal(rawGoal, state.contextParts.join("\n"), locale);
+      const isSecurityPhase =
+        taskTypeHint === "smart-contract-audit" ||
+        inferTaskTypeFromGoal(rawGoal) === "smart-contract-audit";
+      const phaseGoal =
+        isSecurityPhase && inferTaskTypeFromGoal(state.goal) === "smart-contract-audit"
+          ? state.goal
+          : buildPhaseGoal(rawGoal, state.contextParts.join("\n"), locale);
 
       const placeholderTaskType = taskTypeHint ?? "content-generation";
       emitTrace(options, "phase_started", {
@@ -498,7 +554,8 @@ export async function runCommanderHunter(
             deps.executePhase(phaseGoal, options, {
               preferredTaskType: taskTypeHint,
               missionId: state.missionId,
-              emitLifecycleEvents: false
+              emitLifecycleEvents: false,
+              maxSpend: readAvailablePhaseBudget(state.budget)
             }),
           options,
           phaseName,
@@ -545,15 +602,12 @@ export async function runCommanderHunter(
       }
 
       state.latestSuccessfulRun = runResult;
-      const resolvedTaskType =
-        normalizeTaskType(runResult.quote.paymentContext.taskType) ??
-        taskTypeHint ??
-        "content-generation";
+      const resolvedTaskType = readRunTaskType(runResult) ?? taskTypeHint ?? "content-generation";
       phase.taskType = resolvedTaskType;
 
       const content = runResult.execution.result;
-      const phaseSpentWei = readPhaseSpentWei(runResult);
-      updateBudgetAfterPhase(state, phaseSpentWei, locale);
+      const phaseSpent = readPhaseSpend(runResult, state.budget);
+      updateBudgetAfterPhase(state, phaseSpent, locale);
 
       const successPhase: CommanderPhaseResult = {
         index,
@@ -569,7 +623,7 @@ export async function runCommanderHunter(
         taskType: phase.taskType,
         content
       });
-      hunterLog(`commander: phase ${index} "${phaseName}" DONE — spent=${formatCommanderMon(phaseSpentWei)} MON, total=${formatCommanderMon(state.budget.spentWei)} MON`);
+      hunterLog(`commander: phase ${index} "${phaseName}" DONE — spent=${formatCommanderMoney(phaseSpent)}, total=${formatCommanderMoney(state.budget.spent)}`);
 
       return {
         ok: true,
@@ -579,7 +633,7 @@ export async function runCommanderHunter(
           index,
           name: phaseName,
           taskType: phase.taskType,
-          spentWei: phaseSpentWei,
+          spent: phaseSpent,
           summary: summarizeToolContent(content),
           success: true
         },
@@ -619,15 +673,15 @@ export async function runCommanderHunter(
       run: () =>
         deps.executePhase(goal, options, {
           missionId: state.missionId,
-          emitLifecycleEvents: false
+          emitLifecycleEvents: false,
+          maxSpend: readAvailablePhaseBudget(state.budget)
         }),
       options,
       phaseName: fallbackPhaseName,
       timeoutMs: deps.phaseTimeoutMs
     });
     state.latestSuccessfulRun = runResult;
-    const resolvedTaskType =
-      normalizeTaskType(runResult.quote.paymentContext.taskType) ?? "content-generation";
+    const resolvedTaskType = readRunTaskType(runResult) ?? "content-generation";
     const fallbackPhase: CommanderPhaseResult = {
       index: 0,
       phase: {
@@ -639,8 +693,8 @@ export async function runCommanderHunter(
       content: runResult.execution.result
     };
     state.phaseResults.push(fallbackPhase);
-    const phaseSpentWei = readPhaseSpentWei(runResult);
-    updateBudgetAfterPhase(state, phaseSpentWei, locale);
+    const phaseSpent = readPhaseSpend(runResult, state.budget);
+    updateBudgetAfterPhase(state, phaseSpent, locale);
     emitTrace(options, "phase_completed", {
       index: 0,
       name: fallbackPhase.phase.name,
@@ -697,9 +751,9 @@ export async function runCommanderHunter(
     succeededPhases: state.phaseResults.filter((item) => item.success).length,
     receiptVerified: result.receiptVerified,
     score: result.evaluation.score,
-    spentWei: state.budget.spentWei
+    spent: state.budget.spent
   });
   const successCount = state.phaseResults.filter((item) => item.success).length;
-  hunterLog(`=== COMMANDER DONE === ${successCount}/${state.phaseResults.length} phases succeeded, spent=${formatCommanderMon(state.budget.spentWei)} MON`);
+  hunterLog(`=== COMMANDER DONE === ${successCount}/${state.phaseResults.length} phases succeeded, spent=${formatCommanderMoney(state.budget.spent)}`);
   return result;
 }

@@ -14,7 +14,7 @@ import { useMemo } from 'react';
 import { Bot } from 'lucide-react';
 import {
   STATUS_DISPLAY,
-  readTotalPaymentWei,
+  readTotalPaymentAmount,
   readElapsedSeconds,
   collectCommanderPhases,
   readCommanderBudget,
@@ -54,7 +54,7 @@ export function MyAgentPanel({
     () => readCommanderStatus(commanderPhases, events, cfg, status),
     [commanderPhases, events, cfg, status],
   );
-  const spendWei = readTotalPaymentWei(events) ?? '0';
+  const spendAmount = readTotalPaymentAmount(events) ?? '0';
   const commanderBudget = useMemo(() => readCommanderBudget(events, result), [events, result]);
   const txCount = events.filter(
     (e) => e.type === 'payment_state' && asRecord(e.data)?.status === 'payment-completed',
@@ -100,10 +100,12 @@ export function MyAgentPanel({
           {/* Live run stats — always visible */}
           <LiveRunStats
             status={commanderAwareStatus}
-            spendWei={spendWei}
-            budgetWei={commanderBudget.maxTotalWei}
-            budgetSpentWei={commanderBudget.spentWei}
-            hasBudget={commanderPhases.length > 0 && !!commanderBudget.maxTotalWei}
+            spendAmount={spendAmount}
+            budgetAmount={commanderBudget.maxTotal?.amount}
+            budgetSpentAmount={commanderBudget.spent?.amount}
+            assetDecimals={commanderBudget.maxTotal?.asset.decimals ?? 18}
+            assetSymbol={commanderBudget.maxTotal?.asset.symbol ?? 'tBNB'}
+            hasBudget={commanderPhases.length > 0 && !!commanderBudget.maxTotal}
             txCount={txCount}
             elapsed={elapsed}
             mission={mission}

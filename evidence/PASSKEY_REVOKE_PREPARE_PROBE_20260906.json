@@ -1,0 +1,9 @@
+{
+  "checkedAt": "2026-09-06T09:00:48.422Z",
+  "method": "wallet_prepareCalls",
+  "wallet": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+  "success": true,
+  "operation": "revokeChecker",
+  "signed": false,
+  "submitted": false
+}

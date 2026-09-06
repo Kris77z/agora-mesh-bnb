@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash, randomUUID } from "node:crypto";
 import path from "node:path";
-import type { LanguageCode } from "@rebel/shared";
+import { getProcessPostgresStore, type LanguageCode } from "@rebel/shared";
 
 export interface LessonTranslations {
   "en-US"?: string;
@@ -120,11 +121,15 @@ export function toLessonTranslations(
 }
 
 export async function readExperiences(): Promise<Experience[]> {
-  const store = await readJsonFile<ExperienceStore>(experiencePath(), { experiences: [] });
-  if (!Array.isArray(store.experiences)) {
-    return [];
-  }
-  return store.experiences
+  const postgres = await getProcessPostgresStore("agora-hunter-memory");
+  const experiences = postgres
+    ? await postgres.pool.query<{ experience: Experience }>(`
+        SELECT experience FROM hunter_experiences
+        ORDER BY occurred_at, experience_id
+      `).then((result) => result.rows.map((row) => row.experience))
+    : (await readJsonFile<ExperienceStore>(experiencePath(), { experiences: [] })).experiences;
+  if (!Array.isArray(experiences)) return [];
+  return experiences
     .filter((item) => item && typeof item === "object")
     .map((item) => ({
       missionId: String(item.missionId),
@@ -202,6 +207,8 @@ async function writeInsights(insights: Insight[]): Promise<void> {
 }
 
 async function readInsights(): Promise<Insight[]> {
+  const postgres = await getProcessPostgresStore("agora-hunter-memory");
+  if (postgres) return buildInsights(await readExperiences());
   const store = await readJsonFile<InsightStore>(insightsPath(), { insights: [] });
   if (!Array.isArray(store.insights)) {
     return [];
@@ -221,6 +228,39 @@ async function readInsights(): Promise<Insight[]> {
 }
 
 export async function appendExperience(experience: Experience): Promise<Experience> {
+  const postgres = await getProcessPostgresStore("agora-hunter-memory");
+  if (postgres) {
+    const contentHash = createHash("sha256").update(JSON.stringify(experience)).digest("hex");
+    const client = await postgres.pool.connect();
+    try {
+      await client.query("BEGIN");
+      await client.query("SELECT pg_advisory_xact_lock(hashtext('agora_hunter_memory'))");
+      await client.query(`
+        INSERT INTO hunter_experiences (
+          experience_id, content_hash, mission_id, experience, occurred_at
+        ) VALUES ($1, $2, $3, $4::jsonb, $5)
+        ON CONFLICT (content_hash) DO NOTHING
+      `, [
+        randomUUID(), contentHash, experience.missionId, JSON.stringify(experience),
+        new Date(experience.timestamp * 1_000)
+      ]);
+      await client.query(`
+        DELETE FROM hunter_experiences
+        WHERE experience_id NOT IN (
+          SELECT experience_id FROM hunter_experiences
+          ORDER BY occurred_at DESC, experience_id DESC
+          LIMIT 200
+        )
+      `);
+      await client.query("COMMIT");
+    } catch (error) {
+      await client.query("ROLLBACK").catch(() => undefined);
+      throw error;
+    } finally {
+      client.release();
+    }
+    return experience;
+  }
   const all = await readExperiences();
   const next = [...all, experience]
     .sort((a, b) => a.timestamp - b.timestamp)

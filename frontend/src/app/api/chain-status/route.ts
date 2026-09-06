@@ -1,20 +1,21 @@
 import { NextResponse } from 'next/server';
+import { publicChainConfig } from '@/lib/chain-config';
 
-const MONAD_RPC = 'https://testnet-rpc.monad.xyz';
+const rpcUrl = process.env.RPC_URL?.trim() || publicChainConfig.rpcUrl;
 
 /**
- * Proxy endpoint for Monad RPC calls.
+ * Proxy endpoint for configured-chain RPC calls.
  * Avoids browser CORS issues when calling the RPC directly.
  */
 export async function GET() {
     try {
         const [blockRes, gasRes] = await Promise.all([
-            fetch(MONAD_RPC, {
+            fetch(rpcUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ jsonrpc: '2.0', method: 'eth_blockNumber', params: [], id: 1 }),
             }),
-            fetch(MONAD_RPC, {
+            fetch(rpcUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ jsonrpc: '2.0', method: 'eth_gasPrice', params: [], id: 2 }),
@@ -36,8 +37,8 @@ export async function GET() {
             gasGwei: gasWei !== null ? (gasWei / 1e9).toFixed(2) : null,
         });
     } catch {
-        // Monad Testnet RPC is often unstable/rate-limited. 
-        // Returning 200 with null values prevents the frontend terminal from spamming 502 errors.
+        // Returning 200 with null values keeps the status footer resilient to
+        // public RPC throttling without exposing server details to the client.
         return NextResponse.json({ blockNumber: null, gasGwei: null });
     }
 }

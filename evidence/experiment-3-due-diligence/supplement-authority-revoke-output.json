@@ -1,0 +1,30 @@
+{
+  "event": "altana_x402_authority_revoked",
+  "authorityId": "altana-x402-exp3-supplement-a2b73ae4-800d-45c1-b6f2-7959176cf09c",
+  "walletAddress": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+  "transactions": {
+    "checkerApprovalRevoked": "0xc770e7dddcbbf6e4dd4e32a4d4635b2c74ae1562134608e9c1307ad6d4b0d0d1",
+    "permit2AllowanceRevoked": "0x84fd5c3f11acc8bde422707b4e0be60205c7391b3ae998f18a1124a632f445f1",
+    "sessionRevoked": "0x8ab3fb9b538e6106b3d5a5fda194b591ca6148aaf662df31dd49c8583ae25def"
+  },
+  "negativeTest": {
+    "kind": "erc20-transfer",
+    "recipient": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+    "amount": "1",
+    "testedAt": 1788323234,
+    "rejected": true,
+    "rejectionClass": "unknown-key-after-session-revoke"
+  },
+  "sessionMaterialDeleted": true,
+  "postRevokeVerification": {
+    "token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "erc20AllowanceRaw": "0",
+    "walletBalanceRaw": "6700000000000000000",
+    "receiptStatuses": {
+      "0xc770e7dddcbbf6e4dd4e32a4d4635b2c74ae1562134608e9c1307ad6d4b0d0d1": "success",
+      "0x84fd5c3f11acc8bde422707b4e0be60205c7391b3ae998f18a1124a632f445f1": "success",
+      "0x8ab3fb9b538e6106b3d5a5fda194b591ca6148aaf662df31dd49c8583ae25def": "success"
+    }
+  }
+}

@@ -10,7 +10,7 @@ import {
   type PaymentRequiredResponse
 } from "@rebel/shared";
 import { writerConfig } from "./config.js";
-import { executeTask } from "./executor.js";
+import { assertSkillRuntimeAvailable, executeTask } from "./executor.js";
 import { localizeWriterError } from "./error-messages.js";
 import { asWriterError } from "./errors.js";
 import { commitPaymentTx, rollbackPaymentTx, verifyNativeTransfer } from "./payment.js";
@@ -46,6 +46,7 @@ export async function executeHandler(req: Request, res: Response): Promise<void>
     const body = requestBody;
     const requestedTaskType = body.taskType?.trim() || undefined;
     const skill = resolveSkillForTaskType(requestedTaskType);
+    assertSkillRuntimeAvailable(skill);
     const taskType = skill.canonicalTaskType;
     const taskInput = body.taskInput ?? "";
     const locale = requestLocale;

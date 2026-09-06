@@ -130,7 +130,7 @@ function useElapsedTimer(events: AgentEvent[], isRunning: boolean): number | nul
     return elapsed;
 }
 
-/* ─── Spent MON total (for completion message) ─── */
+/* ─── Native-token spend total (for completion message) ─── */
 
 function sumSpentWei(events: AgentEvent[]): string | undefined {
     const amounts = events

@@ -1,0 +1,2610 @@
+{
+  "version": 1,
+  "experimentId": "token-risk",
+  "evidenceKind": "complete-holder-snapshot",
+  "status": "measured",
+  "source": {
+    "missionId": "ed7c47dd-3941-4976-b020-283e0104dc11",
+    "evidenceFile": "paid-run-output.json",
+    "evidenceFileHash": "sha256:9248d41486993afab3544b0ff377028d341a865942d5622aed9b0e2369370faf",
+    "reportHash": "sha256:9353ac941c96561edb1093b9439c1a5157284c3e181df75727d3154b2fd87c0c",
+    "holderIndex": {
+      "provider": "BscScan Testnet",
+      "url": "https://testnet.bscscan.com/token/generic-tokenholders2?a=0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565&ps=100",
+      "observedAt": "2026-09-02T06:52:09.556Z",
+      "indexedHolderCount": 422,
+      "pageSize": 100,
+      "pagesRead": 5,
+      "inputHash": "sha256:c4632e8d3262f10246e03bba6e4c2061672c4eb76d18681f715866afc50821b9"
+    }
+  },
+  "target": {
+    "chainId": 97,
+    "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "snapshotBlock": 128634278,
+    "snapshotBlockHash": "0xd6a2972b62abf7d15534f25afb216cad791b56cefa468a7284201a934b6d26be",
+    "snapshotTimestamp": "2026-09-02T06:52:10.000Z",
+    "contractCreationBlock": 95074349
+  },
+  "engine": {
+    "name": "agora-indexed-holder-snapshot",
+    "version": "1",
+    "method": "complete-indexed-holder-set-plus-block-locked-balance-reconciliation",
+    "indexProvider": "BscScan Testnet",
+    "stateEndpoint": "https://bsc-testnet-rpc.publicnode.com",
+    "discoveryEndpoint": "https://bnb-testnet.api.onfinality.io/public",
+    "creationBlockMethod": "configured-archive-code-boundary",
+    "concurrency": 1
+  },
+  "snapshot": {
+    "totalSupplyRaw": "10005250000000000000000000000",
+    "indexedAddressCount": 422,
+    "holderCount": 422,
+    "zeroBalanceIndexedAddresses": 0,
+    "holders": [
+      {
+        "rank": 1,
+        "address": "0x86e9197CC0F76E4e4aaa7082180945196bBAb5D3",
+        "balanceRaw": "9999991400000000000000000000",
+        "sharePartsPerMillion": 999474
+      },
+      {
+        "rank": 2,
+        "address": "0xaa25Aa7a19f9c426E07dee59b12f944f4d9f1DD3",
+        "balanceRaw": "4999730000000000000000000",
+        "sharePartsPerMillion": 499
+      },
+      {
+        "rank": 3,
+        "address": "0xe336Fc418212820d2Ebd2B6f6BB585e8a844e602",
+        "balanceRaw": "218025000000000000000000",
+        "sharePartsPerMillion": 21
+      },
+      {
+        "rank": 4,
+        "address": "0xeEC43148C7F876D6b96eF34e745Be88A26a3C8d1",
+        "balanceRaw": "10900000000000000000000",
+        "sharePartsPerMillion": 1
+      },
+      {
+        "rank": 5,
+        "address": "0x4a32C8Ad106b31327a91FBe93C571568cB0EbD97",
+        "balanceRaw": "10238000000000000000000",
+        "sharePartsPerMillion": 1
+      },
+      {
+        "rank": 6,
+        "address": "0x1001b2C085345f388778A975648aA50bcfd0D134",
+        "balanceRaw": "6000000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 7,
+        "address": "0xbEe646D6435C5Ebb0a5f2992c0E77648C9C6f56b",
+        "balanceRaw": "5866405333361169487146",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 8,
+        "address": "0xD8c45dA4e4036f4946132B18fc7568096CB7535f",
+        "balanceRaw": "1330860000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 9,
+        "address": "0xe3F508f409D3652FdDB885F90e50e3cD06b3F3BE",
+        "balanceRaw": "500000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 10,
+        "address": "0x5f4976ACBCD2968D08273bA9f4a67FA43C4A3af3",
+        "balanceRaw": "497600000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 11,
+        "address": "0xda2278CB5a4dE8C00D5c9f23f229C2dB83C79DB0",
+        "balanceRaw": "363850000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 12,
+        "address": "0x32725EDa7418ce4440ccA6107FEADBf047954A20",
+        "balanceRaw": "297670000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 13,
+        "address": "0x4C86C5d6972bBDDeF7aCf153899B40c6e572D066",
+        "balanceRaw": "229000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 14,
+        "address": "0xe376F3E7Fb15B526152F0db6805F1002564cbC2B",
+        "balanceRaw": "177250000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 15,
+        "address": "0x55ed32b1808d4Bb9aD8DF8201494b74B982915F8",
+        "balanceRaw": "164447031564484240639",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 16,
+        "address": "0x0dE95B95492F612C7dDC81A88F64b2a5BF180a11",
+        "balanceRaw": "152990000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 17,
+        "address": "0x8b121FEf5e1688B976D814003f05d9366F3Fa8A3",
+        "balanceRaw": "130000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 18,
+        "address": "0xd80E4F01Ed46D77C8e9d824D68b1Be4A5ea13Bec",
+        "balanceRaw": "121300000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 19,
+        "address": "0xff1D4ebAbf48B17f5905866515b88b4dA4cFAbd1",
+        "balanceRaw": "120000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 20,
+        "address": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+        "balanceRaw": "113626100000000500000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 21,
+        "address": "0x283d858244932664bd69eb7FE3b1587b84B14be8",
+        "balanceRaw": "108150000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 22,
+        "address": "0x3484Cc21AcDae7B430389EBc071b3ED6Fd94ccd9",
+        "balanceRaw": "104357572766340103740",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 23,
+        "address": "0xcED140BD6f27b9a2987D80FBB6EC9D0ab36A4125",
+        "balanceRaw": "100000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 24,
+        "address": "0xd36f1064B9ee41742380df7bcb144Fa1E23d92E1",
+        "balanceRaw": "100000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 25,
+        "address": "0x5503B1DA55196585112072ca88c6ccE1Eb9A955A",
+        "balanceRaw": "98170000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 26,
+        "address": "0x099466FABD11AFf7409971b2A163Ec40a699c25F",
+        "balanceRaw": "91600000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 27,
+        "address": "0x1FF095E1C5Cf4bC72a3DC54be17B6cf85043Fb67",
+        "balanceRaw": "90000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 28,
+        "address": "0x3F121d6D8D3ECBdCCA4dede83E8d8d6671b71564",
+        "balanceRaw": "87950000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 29,
+        "address": "0xf5008Fdc3F434B3B26Ba7Ae8075E68f6B7AFC494",
+        "balanceRaw": "60000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 30,
+        "address": "0x47575C31c8146022FaB38dFF5ce883b5e55F6785",
+        "balanceRaw": "57558659545775743367",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 31,
+        "address": "0x79fe604654329bA7eCf3A7DA2e6E3dc51e49F851",
+        "balanceRaw": "50000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 32,
+        "address": "0xE25cf716772e3c7F2099a7cE914cc322A6d53f6D",
+        "balanceRaw": "44658982039791236341",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 33,
+        "address": "0xC677Fc1CAe4DBaA15fE2b5C196aeeBF3B546481f",
+        "balanceRaw": "40000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 34,
+        "address": "0xE349aEA3905f3eC071bB5aDDed160943d8f2082a",
+        "balanceRaw": "40000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 35,
+        "address": "0xF503f62F663d76fCcCb9589C3F33Aa8A1A56ABCD",
+        "balanceRaw": "40000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 36,
+        "address": "0x60eF148485C2a5119fa52CA13c52E9fd98F28e87",
+        "balanceRaw": "39600000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 37,
+        "address": "0x970bC175D781b739Ec3F2423dc429AA3692CE97B",
+        "balanceRaw": "35000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 38,
+        "address": "0x3464e64dD53bC093c53050cE5114062765e9F1b6",
+        "balanceRaw": "33000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 39,
+        "address": "0xbec95301cb84468f0a738851F48571e21708179e",
+        "balanceRaw": "30000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 40,
+        "address": "0x99c8162b90bbA2Ac9BCef8A3553fF911d09DCAc6",
+        "balanceRaw": "29998000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 41,
+        "address": "0xCE6f9c8360c522985DA487E303C3692A7362df48",
+        "balanceRaw": "29600000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 42,
+        "address": "0x85d32d525E1812FeE7001f34DD6dd86154619090",
+        "balanceRaw": "29000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 43,
+        "address": "0xd3E71EBb3cd610d5610dABd9E2F4bE87b67D9333",
+        "balanceRaw": "27000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 44,
+        "address": "0x82505e62A61E8Fa37d9F4d80E4f9821A5da05035",
+        "balanceRaw": "20900300000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 45,
+        "address": "0x000aeaE2E933F75838011e8f9ceF126C39492379",
+        "balanceRaw": "20500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 46,
+        "address": "0x0760635eE48D744199198d4c0b1Da7D14C1F386b",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 47,
+        "address": "0x08570d7ec3f46e5B21b5D4EA2D6606F125250E7E",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 48,
+        "address": "0x14a901f726EC3CdAC9e6A40bB0A576a07A9e1B04",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 49,
+        "address": "0x1c4C1eccD90021911C3F86ACb9e58B4f24D35427",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 50,
+        "address": "0x203344EE52000Ff7969F518597289b4ec50FCC37",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 51,
+        "address": "0x2A01ADf638cad34aD02E50a480F988eb8f00b2D5",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 52,
+        "address": "0x31C04780e0E22132D571435302Feb12C420fc89B",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 53,
+        "address": "0x34c5F596CD490F5BCe999793c4E933fa744b1121",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 54,
+        "address": "0x4C91F5D348FCbba413FF18d84c3dC59ea1C68DE9",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 55,
+        "address": "0x515cE4C674e390a51E03A996c0c53299A6C91014",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 56,
+        "address": "0x5CC7dE93909a134F111d52fcA6eF332286E36965",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 57,
+        "address": "0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 58,
+        "address": "0x83f1FB1Bff140F7c0a108Ace2B1cc27e2Ab1961b",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 59,
+        "address": "0x854D53E2906CCA45551f0Fcc7aa38a90041A54bB",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 60,
+        "address": "0x8d147CFFBb304d57C744b4f8DB7Eb266c8e0Aa25",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 61,
+        "address": "0x902199fa73f6347DE2BD078758Fcb0D98d4414a0",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 62,
+        "address": "0xa2f873757Bbae4c06b4F202b9b3D602f6f9A01d7",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 63,
+        "address": "0xA8F58D2835ab745a6080f2ed2D2a841d76af9725",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 64,
+        "address": "0xA97649D73927a922743D5b76E1C79903D6B2752c",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 65,
+        "address": "0xaf174307B6133e19998A849b957a97955D5398C6",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 66,
+        "address": "0xAf66A6da478FaBBFEc2721c9Bcb850F6742B5733",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 67,
+        "address": "0xbdE2DA5a3616ab76905E7A2754C404058E7Ea8fE",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 68,
+        "address": "0xD36a9a466f4c47613A28a730c3CFB2F1b988E0B0",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 69,
+        "address": "0xe8f022fc7eDEbd53f7233d9cD99e2e5C9a580D85",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 70,
+        "address": "0xF1a116AF29cfff212e496b6356f8F22ABd7c0298",
+        "balanceRaw": "20000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 71,
+        "address": "0x14342bE6726f1f5AaFa30b673c787D696e3F09eB",
+        "balanceRaw": "19995000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 72,
+        "address": "0x688Fe953e20225e0542ED11a11C708437e71d40e",
+        "balanceRaw": "19950000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 73,
+        "address": "0x46cBFBdDfeDDDc783D1f58976F91a488710695dc",
+        "balanceRaw": "19940000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 74,
+        "address": "0x3D3DCD9326b1FA69eadedc3E68746cDF38080958",
+        "balanceRaw": "19900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 75,
+        "address": "0x405b8b8bDfe24762Fc89c95C53eF20C546A55558",
+        "balanceRaw": "19900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 76,
+        "address": "0xDbB5Cc0D32c3A1f73dD3cCA64729ef6A84625774",
+        "balanceRaw": "19900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 77,
+        "address": "0xf0d7c071d65D8713D4630C8DD1B80F39f832A71E",
+        "balanceRaw": "19900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 78,
+        "address": "0xfFf2fb6a3D9e9b636904166ff6BCe0b5ee6F1616",
+        "balanceRaw": "19404000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 79,
+        "address": "0x0D5fc8904322FBFDa2Ea5D5B739891de9e75dDe4",
+        "balanceRaw": "19000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 80,
+        "address": "0x0aFEf5748837ef7961E85db65daf97A4f92A00A8",
+        "balanceRaw": "18000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 81,
+        "address": "0x8468FBF9ec2BbC762CD7cc7bC3d85d7565C7208a",
+        "balanceRaw": "17700000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 82,
+        "address": "0xb46E0BD3123F440033ada818498bB6af7766aB25",
+        "balanceRaw": "16900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 83,
+        "address": "0x14707D2C83ec9243cA82E5dD5f7A7cf088d360b0",
+        "balanceRaw": "16000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 84,
+        "address": "0x755095BFCD25D8958dfA89d94Ac4F0aC90726D66",
+        "balanceRaw": "15000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 85,
+        "address": "0x8888d0A88ef8302dfa4BA53c41c2fE3c4E486f42",
+        "balanceRaw": "15000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 86,
+        "address": "0xcbb613c6Da950EF270c99c0A70E81336e119E380",
+        "balanceRaw": "14502000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 87,
+        "address": "0x3887ffe44FFE7cF5993A01572DD1eC903DB7781b",
+        "balanceRaw": "13000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 88,
+        "address": "0xA6650ca7AD452FD78f55Bb08B0d875FdE1286b64",
+        "balanceRaw": "13000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 89,
+        "address": "0x1baDc90358c688b02409890531BD15E8fB7183D5",
+        "balanceRaw": "11000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 90,
+        "address": "0x6d662707910440FBe94F13bfC103e61018b77808",
+        "balanceRaw": "11000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 91,
+        "address": "0x3AA17f05F7693771594c8664EB3b4D0C7d0DbCC1",
+        "balanceRaw": "10930000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 92,
+        "address": "0x19B6c48E6226Cb5803ce87e8D12372598c6e2f9d",
+        "balanceRaw": "10900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 93,
+        "address": "0x8a85be0115a6F39c607FEd8EbAA650e5cF2f5695",
+        "balanceRaw": "10030000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 94,
+        "address": "0xC665033E9355C93D5d64D09D9C041aeE8eF7bbC0",
+        "balanceRaw": "10004345060000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 95,
+        "address": "0x07Da63103da19F6fA72C3BA38CdE6c610147D813",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 96,
+        "address": "0x0Ec1DdE4Ea5d90f9f7687ccb709fdc907c7c6320",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 97,
+        "address": "0x18b24D30494aB9895598a62cb9792C294EcF3BbA",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 98,
+        "address": "0x1AF30bA35de3339CB05d4fc069d14A1bCD1ba431",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 99,
+        "address": "0x1bF2E8aaF390C50312D8934fF7198178023ee3EA",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 100,
+        "address": "0x241dFa8bb25E954365ea268592BD8F1B826031cc",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 101,
+        "address": "0x2462b44fc6A5e96BF836FaaB7e4AD56b4b695898",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 102,
+        "address": "0x29FE7e6fD1C643C3ab5Dae0bC1597F0225f56263",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 103,
+        "address": "0x2AdA94E1141B268394b093CDB3ed3eCF17DAb30d",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 104,
+        "address": "0x318A19d41De4eD4365765A542a9FAe5fBD78D4Ae",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 105,
+        "address": "0x377D4729CE7672bB6bb66548B30DeCAE11ecdbAD",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 106,
+        "address": "0x398E08E456d3F10Bf30e4586be0C60216C502980",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 107,
+        "address": "0x428A9b5ccf1b1366befCC4F5dAD664b2b50e2D20",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 108,
+        "address": "0x504D861FDc4935Eb070B54cD271158164b3cc6B8",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 109,
+        "address": "0x533DFA36388fFE32612103556983819D781fE8C9",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 110,
+        "address": "0x538DE7677E6a45185ABCa4510eB33678E9c0387A",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 111,
+        "address": "0x5828e1C532b897bCE6A0E45315a2C751789c447A",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 112,
+        "address": "0x5C1028C12b621Eb70188ca324c65E3C0ac7b70BD",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 113,
+        "address": "0x61CE53891C35f3261388eA2910D9d63D6D918390",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 114,
+        "address": "0x6cBdc5433A32C78d87aCE81B8722c94bC478Be84",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 115,
+        "address": "0x79526d186882EC1cc9e02291b22AD6b626bF4A2a",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 116,
+        "address": "0x886B9cFa0c36dc0fd05F45B03f89fEF56Ed17866",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 117,
+        "address": "0x89C4bBaDf068B70ba6899e8D42041Aae499fddFf",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 118,
+        "address": "0x8a2E1F6538Bfe516f79AeF1528Ce88e425A2eE2E",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 119,
+        "address": "0x8AD5758b2cC8b53efE753EF6a4C94D0CBb302042",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 120,
+        "address": "0x9032C0109E11e1343ea8F4bd8Ac4Cf6267679fD9",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 121,
+        "address": "0x9298036c6945272B659f4a8eB2fA4e5D9c4Ad884",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 122,
+        "address": "0x9acCCD2A9370B0cD7bA25a5E08a01d7a3d151cB6",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 123,
+        "address": "0x9D4B68a0C481AD21BC76E1aa1ceddEe61f2Dd56a",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 124,
+        "address": "0x9f6Df737DdACD8b52C62dA69500c593E9B9C3B48",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 125,
+        "address": "0xa17E5B37b8987DF7aACd00Fe37A64Ce9dccD0133",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 126,
+        "address": "0xa1d5AA149f819d6656608527B939a9615aBb65c3",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 127,
+        "address": "0xa447E6AB6d1726749DB96E3d823B7fc72383D0c2",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 128,
+        "address": "0xa847F3BBF69e8A888b59BC8729ce787E0dB5be97",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 129,
+        "address": "0xadbe71A6e119FDE9aF89dEe08f8D40b5B3C04D5E",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 130,
+        "address": "0xBF7BB21062ffF3D1aA89316b4356FF4c08d5543E",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 131,
+        "address": "0xC06F59E8F20978718D474af884be896e8CFA6Bb0",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 132,
+        "address": "0xC28D4c61A922DbD1963333B59362A5c3115e2005",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 133,
+        "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 134,
+        "address": "0xCc67779F8eDb2C80DC665775C5597657C512FE1A",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 135,
+        "address": "0xd16faAa91F77397Bb84c69FBb89D11011bE11212",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 136,
+        "address": "0xD3eed2f7dcED5fbc96Fb1a0FC058C540D50b4f80",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 137,
+        "address": "0xD663cb0b91DD7ec25D37701997635560e01096C8",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 138,
+        "address": "0xDB8040c64d24840BD1D6BcAC7112D2A143CC2EEa",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 139,
+        "address": "0xDdAd3a7A3c946A3D6D3E906C7E9343295bcF9F16",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 140,
+        "address": "0xdE04503A476b4EcD785881377C1cBfB44776fe41",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 141,
+        "address": "0xdFc1761378205BA1a149382d402bCD3BA8f0710e",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 142,
+        "address": "0xe09e6c33b444d246F1005BdCd404ff33Cb709EcA",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 143,
+        "address": "0xE5998c0e93163a0d5f03f82421Cd36650A61cA34",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 144,
+        "address": "0xEc6816734AD21Fc90e32d8cd35C5a1EF665F7c8C",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 145,
+        "address": "0xf118AF312c8D4BB37a1ab3f67A86D1C3Ab6F86bb",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 146,
+        "address": "0xf136fF5cd2A41a796F8CE7cC38C94FdC3e112197",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 147,
+        "address": "0xFA2c8f9326d7B1DA7FcE6F6C9fA7fD60BEfcb414",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 148,
+        "address": "0xFAf0ffd121947B9EE3920Fa0CfbF9EEEB0AcBF7f",
+        "balanceRaw": "10000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 149,
+        "address": "0x5ee75a1B1648C023e885E58bD3735Ae273f2cc52",
+        "balanceRaw": "9999999999999999999",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 150,
+        "address": "0x8bdC9Bc2a2de68715e181b72603Bb9A61eff7ddB",
+        "balanceRaw": "9999999999999999999",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 151,
+        "address": "0x54cbEee497333D44120ADBCcEAB00B6225337a25",
+        "balanceRaw": "9999999999977500000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 152,
+        "address": "0xfAD5596cC4C5f83De326e1CABcC557De4d8cdaE0",
+        "balanceRaw": "9995654940000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 153,
+        "address": "0x163b433b853eBf21b3e759562e8E1f45eFbf001e",
+        "balanceRaw": "9990000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 154,
+        "address": "0x6D71E3375291ed644b191FD8A48E038dF46515F0",
+        "balanceRaw": "9987000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 155,
+        "address": "0x0571235134DC15a00f02916987C2c16b5fC52E2A",
+        "balanceRaw": "9985000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 156,
+        "address": "0x16ec3C811bC03eb57B1519263803e4a22Caae154",
+        "balanceRaw": "9981001000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 157,
+        "address": "0x568eD7f47965A66cD15B06296242dFF5b59F5a02",
+        "balanceRaw": "9930000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 158,
+        "address": "0x0c0f19e129b518fAF847b62C02695DcF326f10f3",
+        "balanceRaw": "9900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 159,
+        "address": "0x19bb835d2D05aD8870d5bA6339B3142670d7BB71",
+        "balanceRaw": "9900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 160,
+        "address": "0x643c724b3F60b7973cffcE4FB4635Bb206111d47",
+        "balanceRaw": "9900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 161,
+        "address": "0x89583dc5Dd25F5326b6FF7544b696d57f9725e14",
+        "balanceRaw": "9900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 162,
+        "address": "0x8857f79F2DE6888641c3DB9d903345475B51f353",
+        "balanceRaw": "9860000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 163,
+        "address": "0x4Cda2a93054F2Ab639b4A95C261874a77A0Af6FA",
+        "balanceRaw": "9800000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 164,
+        "address": "0xB0088d6Eb46c3C15D878b54900ce1d5AEad54bD7",
+        "balanceRaw": "9800000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 165,
+        "address": "0xE144264e2B71EC885cb10A10c6881b45fDf54F5F",
+        "balanceRaw": "9800000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 166,
+        "address": "0xE728A6eE2CBf57c3C7B070de0398b7DC0389129b",
+        "balanceRaw": "9790000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 167,
+        "address": "0xD30BbB80c863c9B94622EF92337AaD65148D2EC3",
+        "balanceRaw": "9700000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 168,
+        "address": "0x76d3f86fC1F375F1dA02a509620d2d6039573EE0",
+        "balanceRaw": "9500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 169,
+        "address": "0x1b16692598DA27d9880fBfDb56AeBa1dcc959855",
+        "balanceRaw": "9400000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 170,
+        "address": "0x939F689A1Aeef6FB2eEFe9Ba7386B6653bcbc6b3",
+        "balanceRaw": "9400000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 171,
+        "address": "0x28F8C3E66F6a18D97d4a0d02ceB655380eb76cc8",
+        "balanceRaw": "9300000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 172,
+        "address": "0x35Cd9c90E85e82163273CB60F965f98c56f8403d",
+        "balanceRaw": "9001000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 173,
+        "address": "0x54664fa9B64D1A5CDa0de8D7CB1c87d8aF624c8e",
+        "balanceRaw": "9000000000000000010",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 174,
+        "address": "0x2D342e2937DD762713ac73e7035E51c02BC96250",
+        "balanceRaw": "9000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 175,
+        "address": "0x44dE95815fE19e3ddDD54cA8f2A67971b7F23a11",
+        "balanceRaw": "9000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 176,
+        "address": "0x6436DF0408b413b1Cb6f7ABf8245EA8959C578A5",
+        "balanceRaw": "9000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 177,
+        "address": "0xb6f9fD8b1E33613bdc00ff21F22dd43DD46593d0",
+        "balanceRaw": "9000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 178,
+        "address": "0xbB26257253168FF37f8BeCbE0ae2A856BdE14429",
+        "balanceRaw": "9000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 179,
+        "address": "0xE0E640b5EccDF3a8c7f1343a3f17Aa4De7529CD6",
+        "balanceRaw": "9000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 180,
+        "address": "0xf1D2537dc368b3f90D2632c241926483ec155cF4",
+        "balanceRaw": "9000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 181,
+        "address": "0xfBF16a9B097E3644582Ca39EF6A93fc82Ac9B47E",
+        "balanceRaw": "9000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 182,
+        "address": "0x931817cf638d506EBBC34e1566dfAE9a1a88e929",
+        "balanceRaw": "8989898989898989899",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 183,
+        "address": "0xFbB9295b7Cc91219c67cd2F6f2dec98919497699",
+        "balanceRaw": "8800000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 184,
+        "address": "0xf88b362bFA5B651707685c5CdFB5597cb9552Ee9",
+        "balanceRaw": "8505050505050505051",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 185,
+        "address": "0xaDF61BA531F10f8D72Ec8B5F216B2117fad61956",
+        "balanceRaw": "8414141414141414140",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 186,
+        "address": "0xf365860A415c51c1f83890A5470C5592ECfFC47E",
+        "balanceRaw": "8200000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 187,
+        "address": "0x5943F556aA1cEcfad19Cc7bd6F843e7D0a9dCd37",
+        "balanceRaw": "8000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 188,
+        "address": "0x6b7256d992491105F6a0E3AFd41721b4fe2b057A",
+        "balanceRaw": "8000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 189,
+        "address": "0xD53992f06cD908193EC317CA6Ba3D9cEBd0f8830",
+        "balanceRaw": "8000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 190,
+        "address": "0xFC32b10396b6fe6033D8E69861fe81b99FE291bd",
+        "balanceRaw": "8000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 191,
+        "address": "0x8c5b73e8Fe2eE98A67F9E9343dCbA8F5096b6706",
+        "balanceRaw": "7868686868686868687",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 192,
+        "address": "0x20f1cA5d1e5A3Ee94C29DbF95e6BF6ceA6a8d64b",
+        "balanceRaw": "7800000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 193,
+        "address": "0x2AF7A6e81BC9460e123B35174A04333628095534",
+        "balanceRaw": "7699000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 194,
+        "address": "0x021Fed3a7d7367B3d4Da7812B38355014AFc808F",
+        "balanceRaw": "7000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 195,
+        "address": "0x12ffE2D78747f30e76F5168815eA3824046d790D",
+        "balanceRaw": "7000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 196,
+        "address": "0x347E37ba026C0252927073E1f87DC69B9249DD8D",
+        "balanceRaw": "7000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 197,
+        "address": "0x9C8c1263061Ef135983Ab1f0046aBb2D7e58eEa5",
+        "balanceRaw": "7000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 198,
+        "address": "0xC27B72d3a776437f960c94D5923eE94FEa9F03Bc",
+        "balanceRaw": "7000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 199,
+        "address": "0xd10BdDC20E4DC42A1a19a9653e994991e25b8153",
+        "balanceRaw": "7000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 200,
+        "address": "0xfd3495Db0fdB7B60fc7915768488d2bafE5aa383",
+        "balanceRaw": "7000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 201,
+        "address": "0xd4bfA87D71f0D696F164a5511c45A50670507cF7",
+        "balanceRaw": "6900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 202,
+        "address": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+        "balanceRaw": "6700000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 203,
+        "address": "0xe8136f32bcca39564006F8B4A5Adce6A17b31BA3",
+        "balanceRaw": "6222222222222222223",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 204,
+        "address": "0xFc5bb3e475cc9264760Cf33b1e9ea7B87942C709",
+        "balanceRaw": "6100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 205,
+        "address": "0x6207D10d8435C5d771FC24F7260d3b394D4CDefe",
+        "balanceRaw": "6000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 206,
+        "address": "0xbC61324650a9090e5a18Ca373a28c8387fab4639",
+        "balanceRaw": "6000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 207,
+        "address": "0xc842e355Fc93C43e39e0856572bB04cD1ae92eC4",
+        "balanceRaw": "6000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 208,
+        "address": "0xD92f9F7b9EEffF37ABB297241f387aa9adBdaA2A",
+        "balanceRaw": "6000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 209,
+        "address": "0x2c85F1E9F6fa6Ce8eAa4E2D8a9F18277Cf6A55FB",
+        "balanceRaw": "5690000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 210,
+        "address": "0x7ED244b8CE64505C59d4483e34159bD6E9f41aFf",
+        "balanceRaw": "5600000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 211,
+        "address": "0x20012E2888F6e4a06c029b78B1D37e0c300Ed6ad",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 212,
+        "address": "0x22626Af7470a84c489445a9049e37F39d9Bc5B95",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 213,
+        "address": "0x27b985651C3ED135641557aF496109E8628DcE9A",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 214,
+        "address": "0x38Fe9bEF0F457d0A3F58614fC7e5F8033e8b3B2B",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 215,
+        "address": "0x647826fF741E85beB36c04Ea75596420d4Ad368d",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 216,
+        "address": "0x670F9ECAfd03215cE3094097d8172bC3B212Fc6c",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 217,
+        "address": "0x6a7755edF9d31522DBD053f051cb27ef42Aa3421",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 218,
+        "address": "0x7f3FA089a0D2F0c48d7EcacF843a03D69793C878",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 219,
+        "address": "0x805254D4520dD6ed2AE975740F55e068Ae3Cbdc2",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 220,
+        "address": "0x88a96f82b6c792246A7bB9E888bAe1ebd1F0f949",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 221,
+        "address": "0xa2C7D6f4AC35fF434b326def12a3Ca2676186c62",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 222,
+        "address": "0xdE822373A2b9cA80cF202502E22D39280eB63276",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 223,
+        "address": "0xDF977e03657B96C43663c28430274031266072b4",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 224,
+        "address": "0xfA48D62764eAA9446c38135780475AB91b7fb48b",
+        "balanceRaw": "5000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 225,
+        "address": "0xffEE01EC35c963EcC340A0E8610C3892E06d5964",
+        "balanceRaw": "4999999999999999400",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 226,
+        "address": "0xdf9E01c193BC72f96C7d09F3E30F251b946c691C",
+        "balanceRaw": "4999999999999000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 227,
+        "address": "0xA3532eddA11AdB0C341543003F59a41Ac3Aba9c7",
+        "balanceRaw": "4900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 228,
+        "address": "0xB4E7De3592E237ceE295499f2D3d876A378698C6",
+        "balanceRaw": "4900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 229,
+        "address": "0xaD383B4CC175B5725d35aCF43F357cDdB46a3065",
+        "balanceRaw": "4850000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 230,
+        "address": "0xe01DC32b7ddcB50435D2071a35100e417F26A239",
+        "balanceRaw": "4700000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 231,
+        "address": "0xe77f00727206af7Dd9BcEf1834921121fc674834",
+        "balanceRaw": "4700000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 232,
+        "address": "0x48e76A924a669D415C4f48C7C2aB374fbdeA6527",
+        "balanceRaw": "4500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 233,
+        "address": "0x6126f0486D0f1ab91c2adC56Ad9584483f1Ca091",
+        "balanceRaw": "4500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 234,
+        "address": "0xe7B2D9854Bd613d6795Bc374118b5A6cc53b61C9",
+        "balanceRaw": "4500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 235,
+        "address": "0x72075569498aCe07223C106936EbEf9a59c76Ee5",
+        "balanceRaw": "3667965411439818620",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 236,
+        "address": "0x6E94090e6fF3675D8962941A64D2b4265d667BBF",
+        "balanceRaw": "3000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 237,
+        "address": "0xF8dF4ab778924AcEC0b4B6397d4F4F230322d099",
+        "balanceRaw": "3000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 238,
+        "address": "0x299Ce4113abF88F4997737184aa8A7a3D58AC15C",
+        "balanceRaw": "2999000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 239,
+        "address": "0x6c1E1335bDD08db4eb3867ecBd6eC622D21dAaf7",
+        "balanceRaw": "2900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 240,
+        "address": "0x7ba10B523eddb251E4D00cE69bB956a646Ac8c4C",
+        "balanceRaw": "2900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 241,
+        "address": "0xB7F34D95E0d0f504e95e22c8cdf1A490c3A5156c",
+        "balanceRaw": "2400000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 242,
+        "address": "0x7eDE30C23572D6B9bD3703f3Fa85F24EaF8341D3",
+        "balanceRaw": "2100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 243,
+        "address": "0xA338989eBfef46BA798eB027346d3574b9b45085",
+        "balanceRaw": "2100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 244,
+        "address": "0x08050B4321beD66d6d43B4C6b6E5F9295a896Fbc",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 245,
+        "address": "0x1614f31E3DC2FC334C4C9742DE233265591f7674",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 246,
+        "address": "0x361Ab4dc6eDAE20d04B53e959d9f4a92aDE06445",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 247,
+        "address": "0x3b5Da0208c45FF88C01F590C01BaA9Fa4001659C",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 248,
+        "address": "0x67338f732DA02E31baa8203Dc6d19571DacDefB6",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 249,
+        "address": "0x73a825299953Da41Fd212C0b1fa660eFB3bCA87E",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 250,
+        "address": "0x799159710972d03557081b45797DbB0C57B5F833",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 251,
+        "address": "0x8F5d1Bb3D7E53d96Ce2aB039E8FF96308BE89D5B",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 252,
+        "address": "0x9060ED774A0a1B938f3D2C3DDb86bDE65860B2b4",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 253,
+        "address": "0x93765f3F1578deF4Ac116505Ed329F57C7edcA92",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 254,
+        "address": "0xc4eB049896B0d522E592370AD0A099e0953a9188",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 255,
+        "address": "0xd1F2757e67502052264fA80Ba99a1e33B4ad14Fe",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 256,
+        "address": "0xF2D8f6d1350638182c2531057611950FC2fF09ba",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 257,
+        "address": "0xF44c43594004A2FA2f50D11C7B9dB1126c22882D",
+        "balanceRaw": "2000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 258,
+        "address": "0x720Fb305bD1dDE9e9F8286BC468b749EBd22cd89",
+        "balanceRaw": "1900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 259,
+        "address": "0xf16ba25320BF1484716753b8e06EfcffFF963f15",
+        "balanceRaw": "1900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 260,
+        "address": "0xFdFb55E455e4F56772847d5D586C0Fc41244d326",
+        "balanceRaw": "1720328767123287671",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 261,
+        "address": "0xdd06e2bb256cdCEb29f8695484680E9296429201",
+        "balanceRaw": "1700000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 262,
+        "address": "0xf1bcdC1Ab65D63D886c94C661D73f3907A556E7D",
+        "balanceRaw": "1600000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 263,
+        "address": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+        "balanceRaw": "1500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 264,
+        "address": "0xbe0fE2cd8964b87AB5bA46d71295b767EF7ca78d",
+        "balanceRaw": "1500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 265,
+        "address": "0x2d08979475468c4042f5Ab10b69a8295F971b9CB",
+        "balanceRaw": "1200000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 266,
+        "address": "0x9F0E4EAaD654333A35cdCb42A1F6B65AF601D20f",
+        "balanceRaw": "1200000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 267,
+        "address": "0xb0Dac7297eFD2fE9Ea6F35acc7F8eaE5032060C3",
+        "balanceRaw": "1200000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 268,
+        "address": "0xD99fA45bdaE838E5DB97C7e362B32E43f0Bd004F",
+        "balanceRaw": "1200000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 269,
+        "address": "0x92D52EC283B2eeaE297738C924E66a97d615Fcab",
+        "balanceRaw": "1150000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 270,
+        "address": "0x000000000000000000000000000000000000dEaD",
+        "balanceRaw": "1100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 271,
+        "address": "0x1f940bF463Aa1AfB97113dFCeC13B3ad1c9e75c4",
+        "balanceRaw": "1100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 272,
+        "address": "0x6df14Cbc0EE7D90B3Cd576Abe643b63901Ff71Ec",
+        "balanceRaw": "1100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 273,
+        "address": "0xa9c50974541a2c3Fc0d91454C5D3C3Be8ACe11AF",
+        "balanceRaw": "1100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 274,
+        "address": "0xe77722794b7F205D65B0A9619cD722E3542eAc30",
+        "balanceRaw": "1100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 275,
+        "address": "0xf75cFe97506a39017Ca68425A713037202442769",
+        "balanceRaw": "1100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 276,
+        "address": "0x9dB2b8f6790a6B2C95Da86DaFD36C1249CE51C1F",
+        "balanceRaw": "1020000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 277,
+        "address": "0x00F42B5654E19c27446Ddf23F7715a1250CCF4b8",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 278,
+        "address": "0x01b04e105ed757B8d785faf31f8B99796ED8C1c6",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 279,
+        "address": "0x021b0c8616cAfB98652aA908FA829C9ff1E9f225",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 280,
+        "address": "0x0475C8Fa8ac94888eAB9B4329b93C263708A9A07",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 281,
+        "address": "0x087A5265611c6c8c9c2B6b7CAF053D7B181ce6a3",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 282,
+        "address": "0x110D3d60dC2914006E43f5aE733C6Dc7dd01482e",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 283,
+        "address": "0x1B0ffD941a88011a01Cf19F5C5a2F422199F2c3f",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 284,
+        "address": "0x20b5BE88f1c298241a338d20E2CEf3FDB888D5BC",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 285,
+        "address": "0x216C2efd58714A3e3E61A234ef6FdeC9D1b411A8",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 286,
+        "address": "0x26874Dd742465ceba77ba1A886581D4A44046283",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 287,
+        "address": "0x28F22Ea62fA16A6e765D55f59E96537EA05630d4",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 288,
+        "address": "0x2a7FaD3C21A2ECa2D251096603290eD7c94c4417",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 289,
+        "address": "0x2aD0E3B9476D3F31400B19Dd3177F13edDAd7241",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 290,
+        "address": "0x305D5517647d3Ee05012D1422F7628F835996713",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 291,
+        "address": "0x30D87D1Debee466E775cd262e49056CeC5c419c5",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 292,
+        "address": "0x31C6a9Fa3c288f9b569145928e5B409E83957115",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 293,
+        "address": "0x3303dF3a1F27f3f73a0A04499693f44DE28Af491",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 294,
+        "address": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 295,
+        "address": "0x38d463955F2a25F055659fD54b588234D84A5425",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 296,
+        "address": "0x3A351ac7DBB6694DC87A557402Ecca4A75C7641c",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 297,
+        "address": "0x3B66F1a482595A4A651654d4324a88DE8a241743",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 298,
+        "address": "0x4585500Df5cbFDdcD5C29A9384E9dF58687Dd97D",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 299,
+        "address": "0x52d96e40460F769Ad3a56917C72389879bcA331f",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 300,
+        "address": "0x54e500D504Cc554568BE8aaf198F10641512bD9b",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 301,
+        "address": "0x57c1Eda83AC5f2839F1d336C6a06105E85B31214",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 302,
+        "address": "0x5C8a4CdE1cF61a5DF14113e471AeC9a5b61CF2aC",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 303,
+        "address": "0x5d06285663e141BFfBe8cfDcEE53613360B0b62A",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 304,
+        "address": "0x5F159CfE2e9Fc216b2F32EeF114ea1e64A45179F",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 305,
+        "address": "0x6336aa306Ae50DbA81aD1B04A1c5C5Ef2e0539De",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 306,
+        "address": "0x6Dd2eD4755C3029d68781cdFc753aF8C53a01220",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 307,
+        "address": "0x78f7bCd4B7585155D7943A992c403d549b0bA385",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 308,
+        "address": "0x7b24Cf80897f8E146a5FE16005eB40c6f338F337",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 309,
+        "address": "0x7B4F04f5350FB98aA9c3c81Ed33a38B2dd32ad5f",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 310,
+        "address": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 311,
+        "address": "0x83f1F26484b7e6Bd02e1fAe91830546A5Fb2fDa9",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 312,
+        "address": "0x8432E19FCa2De2DFD0C3C34779AFB6D2Cc2aEeb8",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 313,
+        "address": "0x84B8380C22f8471b9D10e382a45418B2b1966aD2",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 314,
+        "address": "0x8b85846b32cE60853B5C6Bf2E1eCC1ec202806EB",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 315,
+        "address": "0x8fE69bF17a59dB06c7B66EB0228DC2a3299c7a00",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 316,
+        "address": "0x902E66FC985590DaA81758fa12Bd861886f844f4",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 317,
+        "address": "0x9429BE71274b9E5fB56EE7C57C58298FFF720f11",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 318,
+        "address": "0x945Dcf924fCC5c31460aADfbFa7ce55FdFd50325",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 319,
+        "address": "0x964694e83527f2aD24101499dC83e335D2B353C7",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 320,
+        "address": "0x97c448f3e803453554E59F1a48eD87D0185738Cb",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 321,
+        "address": "0x9bE9D9304699068103CAcB76E002e8d0e556dd7d",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 322,
+        "address": "0xa6638eD201cF697FD0dec82b5Be43eF7f3431cD8",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 323,
+        "address": "0xADCa884235b3ac765708f9e94D67C7B71b2EC726",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 324,
+        "address": "0xaFB2b70114Bd05bd6dBf7DA350d71E23d669bd8F",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 325,
+        "address": "0xafc343b0E0CEf2efba780cB0A6AC91d9d361290E",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 326,
+        "address": "0xB0f7681668f916eEd97dA066D31aA295D34727c0",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 327,
+        "address": "0xB1A3448Fcf60f63c44067Ac0776D186Ef160B26B",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 328,
+        "address": "0xb1F90B697e65707F41A5F9Def9eBee6Eb84E763B",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 329,
+        "address": "0xbB3268D9220fd1c10E6bF1964Fbb385C6ca35C47",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 330,
+        "address": "0xBFC99A9801aAf93bfd88A33D9e9671Ed52D3Ab82",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 331,
+        "address": "0xc139f1b292c31c983fd290BFe95C8D074b3D9292",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 332,
+        "address": "0xc361DB61BF41d3A018f2c07fAB80896a8152273D",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 333,
+        "address": "0xc7A970A282C949C939594662e9267e259871b0BB",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 334,
+        "address": "0xCD9F95B21129fD64886626cdD3F144ce419f3718",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 335,
+        "address": "0xd2124ECb90cC13Bd9Bc90b1B924B3107e1071124",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 336,
+        "address": "0xd810F82ACcee6E5454b81965A8c815E1b1074dd6",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 337,
+        "address": "0xE17732aE59F527CA5224360910bBb695Ce7292b0",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 338,
+        "address": "0xe41980d16fCf1d55f7C5308D5217DFFac97C9c19",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 339,
+        "address": "0xe5692fB8538E5E11fc9B06C249A977b5f335a650",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 340,
+        "address": "0xEeF0C8f3f7089FCE7f51869F9Ce7227596E4c8A3",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 341,
+        "address": "0xf55d68EdbE3bAb77bd26bA6dE748089B3642E5cc",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 342,
+        "address": "0xf60bA0d7d00cDa13AC6192f74f71e585D68BE159",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 343,
+        "address": "0xfeE0b8e4c6542d8aEfc54A7D5347d6705dEf0744",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 344,
+        "address": "0xFF8Bd1CACf9f3578d855dE288A1e3a72757E289b",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 345,
+        "address": "0xFfBFC4B840323A229e7B7865DACA18Bebe99cf8f",
+        "balanceRaw": "1000000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 346,
+        "address": "0xb8c12A3c867D55C68A695b50a09917b5FecCD772",
+        "balanceRaw": "999999999999999990",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 347,
+        "address": "0xf8dEDAFAa368CA50c73c101F8706f08c8A041702",
+        "balanceRaw": "997000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 348,
+        "address": "0x4DA6401E5e14b076AC615e8C528856EBb1B1ba08",
+        "balanceRaw": "996035207469351354",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 349,
+        "address": "0xBa74df96C50f4db851D51f0A2971844470Fd4c4C",
+        "balanceRaw": "996035206499203626",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 350,
+        "address": "0x2175dd0A97C451603179A6Ab63391b3498b94c21",
+        "balanceRaw": "996028072518077230",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 351,
+        "address": "0x27347a6A7Ed935d197ce785b3BE2D8733Fd3Ac37",
+        "balanceRaw": "996028057389450266",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 352,
+        "address": "0xFe73ce2cf5e4691a1e9df0e4057E21c6e20dFE8f",
+        "balanceRaw": "994000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 353,
+        "address": "0x625668f6C9A09CD386A66dfD1F53B11E83d6Abc1",
+        "balanceRaw": "960000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 354,
+        "address": "0x12DA753C75F953dA6A6Eb3B45868594F11425dda",
+        "balanceRaw": "900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 355,
+        "address": "0x3D64F4582e266Bdd4863F225897b610B3fc9f9A0",
+        "balanceRaw": "900000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 356,
+        "address": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+        "balanceRaw": "700000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 357,
+        "address": "0x1E9f0c639D3284D3DB4B9c68f96C39693c2B5FDF",
+        "balanceRaw": "600000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 358,
+        "address": "0x50da554F1bF6A86469DB201C56bfe967d2E7c43d",
+        "balanceRaw": "600000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 359,
+        "address": "0x15261D31B817A144f5963A63f16d840ec98fEFEB",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 360,
+        "address": "0x1De9a5f3dBC319d4a1962F3af6a6045c56201147",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 361,
+        "address": "0x2b114b7F2aA393326982AFa3F684b7C63Ae1ee36",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 362,
+        "address": "0x4A54D9DedfD780C1d05f875Ad9e1adEb26c8D550",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 363,
+        "address": "0x5291dA344A40A27ac4E32264A064631132606353",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 364,
+        "address": "0x73A3E7D494942bE78B59580c11dFc6A26aAfFB73",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 365,
+        "address": "0xa29A9BFb84bb47D87b850B09A809305fAFcaA872",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 366,
+        "address": "0xa8d894998178aF49DE015376d96fE41b6d23827d",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 367,
+        "address": "0xb7aD085c9474B7A3f65F064570dB3204fAe09EA5",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 368,
+        "address": "0xBDd1717d036419EE43D477fBb09669640571ea9b",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 369,
+        "address": "0xc4786232D3040E8DE06C7e544000e3657D16F6de",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 370,
+        "address": "0xcCff10410B0Cf53d400c396c7Fc45D640B53FE38",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 371,
+        "address": "0xDbECf5b6CC1542B5e58e5b50DC958FAA7e757A85",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 372,
+        "address": "0xE553dEd71F68596F8Cb391f38D7a7fe237d53dEa",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 373,
+        "address": "0xe732db64f2B632cd4A4808eCf79fD67548C939F5",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 374,
+        "address": "0xeA5434E9b076E46A3D921735517922b5a9a239dF",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 375,
+        "address": "0xED33D338ab7cAF095fE3b7A3D6469c755c23286C",
+        "balanceRaw": "500000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 376,
+        "address": "0x85a57A2dD14da98Bb594d292a033edd9c059fC77",
+        "balanceRaw": "450000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 377,
+        "address": "0x31c3758E85B4C38aF563c8D83316B46064c6f63F",
+        "balanceRaw": "400000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 378,
+        "address": "0x3567C92BAFf774397C1fB4EA192ba09fCcF2B1Cc",
+        "balanceRaw": "400000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 379,
+        "address": "0xC9aa78947157D7f1D6d11864e5997AbBDC01Ff23",
+        "balanceRaw": "400000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 380,
+        "address": "0xdA61DfA428Bb0B04AE6BfC6D3E5F65360592fD7E",
+        "balanceRaw": "400000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 381,
+        "address": "0x34ABe1790E6d67E25c7616799C2C6B7336932c7e",
+        "balanceRaw": "300000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 382,
+        "address": "0xee97Ba6C7830642385610a126146df0dD8C8DBe6",
+        "balanceRaw": "300000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 383,
+        "address": "0xC0cd169686ec540e3917F65dba9c36809e95Df47",
+        "balanceRaw": "210000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 384,
+        "address": "0x7ca564102be3C107EdA9075F490a9bB1bb74daED",
+        "balanceRaw": "200000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 385,
+        "address": "0xeb237fb12588eaff8b907B8b9C1f5349969bb98d",
+        "balanceRaw": "200000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 386,
+        "address": "0x6773B3B242B4295bfa555854DF56d024B867C4C8",
+        "balanceRaw": "140000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 387,
+        "address": "0x39Ae19721EdfF950Fa2d3E7327e20304Ad3c7966",
+        "balanceRaw": "100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 388,
+        "address": "0x3db4B8fa90eAE94c074368C6a5671E943F4ef0CA",
+        "balanceRaw": "100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 389,
+        "address": "0x549cB8Bee93794B104c78d025aa5B24832A94984",
+        "balanceRaw": "100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 390,
+        "address": "0x55994d3A7b33A8cCc1A260acC5F62e2B358220D4",
+        "balanceRaw": "100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 391,
+        "address": "0xB685e6B57c8A01e68832338D093E136FaD4c5fc8",
+        "balanceRaw": "100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 392,
+        "address": "0xBcd3a0f71A27D9A503822A9E00B8ca7959B6d90c",
+        "balanceRaw": "100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 393,
+        "address": "0xCb86809a55440C9d6475e6E1b3CB04bA07CC2b54",
+        "balanceRaw": "100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 394,
+        "address": "0xcF20Ccb337bDda8586A94a4456e9c3485f0dc70f",
+        "balanceRaw": "100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 395,
+        "address": "0xe935925e5d29fE37959C57A775Db3825E2F4E370",
+        "balanceRaw": "100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 396,
+        "address": "0xEFB42562D295588ccF3BD10e6f17929e501a3138",
+        "balanceRaw": "100000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 397,
+        "address": "0xD9f6904c564754a105637A5DaC1E13C9f830c04a",
+        "balanceRaw": "70000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 398,
+        "address": "0x2Fb9E5CfebadbC77a9c1a42D96655F46d09D493d",
+        "balanceRaw": "50000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 399,
+        "address": "0xd53aFf148A61802b68dd993bf3946BAF181E8d52",
+        "balanceRaw": "50000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 400,
+        "address": "0xD443aAfBA34b0E2c98b1F99c88103A96B323B9ef",
+        "balanceRaw": "20000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 401,
+        "address": "0x149aFC7A88fc3BBcf2c7078F1c95F37BD754eE2d",
+        "balanceRaw": "10000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 402,
+        "address": "0xc516961eDa76622150006211fF9Ea793Ea4A879E",
+        "balanceRaw": "10000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 403,
+        "address": "0x185BF63291A90eaf9D1b119Cc2c4b70df058BBa0",
+        "balanceRaw": "9900000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 404,
+        "address": "0x9Bf9Ab20666e04f750475aA79Bbafe0BC9883A9b",
+        "balanceRaw": "8999000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 405,
+        "address": "0x54b291874e41EfFC8b74768258a11785b476cc2A",
+        "balanceRaw": "5000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 406,
+        "address": "0x221132e6af2f54767b25fbFa9eDD74A59CdbEc99",
+        "balanceRaw": "2000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 407,
+        "address": "0x61164afe5ba650883c5C1094A21e3B9a0017AE03",
+        "balanceRaw": "2000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 408,
+        "address": "0xA457Dd1a8D9E243f229EB919d7a08b43802aeD8b",
+        "balanceRaw": "2000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 409,
+        "address": "0xA928DEBa3aD929A915eE26fD3394126364928460",
+        "balanceRaw": "2000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 410,
+        "address": "0xE5f769c0976f08200776EeB8B036f6Eebc62810C",
+        "balanceRaw": "2000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 411,
+        "address": "0x5eb87fc935C1a9392ed9d629f8B4b8961122b3dd",
+        "balanceRaw": "1700000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 412,
+        "address": "0x0eAc2F4d215A416f891C43BFFa83329Ec249AD5a",
+        "balanceRaw": "1000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 413,
+        "address": "0x11B293E4217af70bf2b9B822b412C0b777a9c183",
+        "balanceRaw": "1000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 414,
+        "address": "0x6d8C41CfA9Ca402965C575b02E71275B2E6F39DD",
+        "balanceRaw": "1000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 415,
+        "address": "0x99E5Fee06CF247F522119314980c58B8501d5684",
+        "balanceRaw": "1000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 416,
+        "address": "0xD885bd3eEa76c3bDE6B49D7A16D5BAa35ce2F1D7",
+        "balanceRaw": "1000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 417,
+        "address": "0xF8B6921fea71DfCA3482A4A69576198d2072D188",
+        "balanceRaw": "1000000000000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 418,
+        "address": "0x126Ed5D408CB680E2a290f39b532E3b20CF98304",
+        "balanceRaw": "22000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 419,
+        "address": "0x891F733f129b8F0A65F546f1B4453787f83D3576",
+        "balanceRaw": "1000000",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 420,
+        "address": "0x9650552F1DDe39b16D23b64e3D9AFB01C5D61be0",
+        "balanceRaw": "600",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 421,
+        "address": "0xa0166a1c586f85Db39798ee311BAA7831C4Dc65b",
+        "balanceRaw": "1",
+        "sharePartsPerMillion": 0
+      },
+      {
+        "rank": 422,
+        "address": "0xA2a2012e52Fd075c0F3146e37E833E7294ee52B5",
+        "balanceRaw": "1",
+        "sharePartsPerMillion": 0
+      }
+    ],
+    "concentration": {
+      "top1PartsPerMillion": 999474,
+      "top5PartsPerMillion": 999998,
+      "top10PartsPerMillion": 999999
+    }
+  },
+  "validation": {
+    "method": "indexed-set-balance-sum-equals-total-supply",
+    "complete": true,
+    "candidateAddressCount": 422,
+    "positiveBalanceCount": 422,
+    "blockBalanceSumRaw": "10005250000000000000000000000",
+    "totalSupplyRaw": "10005250000000000000000000000",
+    "sourceReportTotalSupplyRaw": "10005250000000000000000000000",
+    "balanceReadFailures": 0,
+    "missingSupplyRaw": "0",
+    "checks": [
+      "Every address from all BscScan holder-index pages was read with balanceOf at one locked block.",
+      "The sum of all positive indexed balances equals onchain totalSupply exactly.",
+      "The onchain totalSupply is unchanged from the paid source report."
+    ]
+  },
+  "timing": {
+    "startedAt": "2026-09-02T06:52:09.556Z",
+    "completedAt": "2026-09-02T06:52:16.374Z",
+    "durationMs": 6828.129
+  },
+  "limitations": [
+    "Completeness relies on the BscScan holder index as the candidate set, then independently reconciles every candidate balance to onchain totalSupply at the locked block.",
+    "The snapshot is exact for the locked snapshot block and does not claim that holder balances are unchanged afterward.",
+    "Contract and exchange-controlled addresses are not de-duplicated by beneficial owner."
+  ]
+}

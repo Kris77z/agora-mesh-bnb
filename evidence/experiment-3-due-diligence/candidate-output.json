@@ -1,0 +1,574 @@
+{
+  "version": 1,
+  "experimentId": "full-due-diligence",
+  "synthesisKind": "same-target-candidate",
+  "status": "partial",
+  "settlement": {
+    "noNewPayment": true,
+    "status": "existing-paid-investigation-plus-local-unpaid-components",
+    "existingPaidComponent": {
+      "missionId": "ed7c47dd-3941-4976-b020-283e0104dc11",
+      "transactionHash": "0x28499559f40a390a91e385ec7cc9a61f00fb06e42d6b3f9b3cb2ebf9809f4013",
+      "amount": "350000000000000000",
+      "currency": "U"
+    },
+    "reason": "The source audit and finding verification were local candidate runs; no new Authority or x402 payment was authorized."
+  },
+  "timing": {
+    "startedAt": "2026-09-01T15:28:53.075Z",
+    "completedAt": "2026-09-01T15:28:54.785Z",
+    "durationMs": 1709.309,
+    "sourceResolutionMs": 0.939,
+    "audit": {
+      "startedAt": "2026-09-01T15:12:46.193Z",
+      "completedAt": "2026-09-01T15:15:18.172Z",
+      "durationMs": 151977.852,
+      "evidenceReused": true,
+      "reusedAt": "2026-09-01T15:28:53.086Z",
+      "reuseValidationMs": 8.822
+    },
+    "verification": {
+      "startedAt": "2026-09-01T15:28:53.086Z",
+      "completedAt": "2026-09-01T15:28:54.783Z",
+      "durationMs": 1697.366
+    }
+  },
+  "engines": {
+    "auditor": {
+      "serviceId": "auditor-v1",
+      "agentId": "97:0x3bd3fd38ecc72378946c790780c8c1216e4c5527",
+      "provider": "kimi",
+      "model": "kimi-k2.7-code-highspeed",
+      "status": "measured",
+      "evidenceReused": true,
+      "scope": {
+        "kind": "verified-first-party-source-units",
+        "packageSourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+        "scopeSourceHash": "sha256:eeadc74efc28fa6c3f680f50da61cc14cf1a17c37b59f7e86997127bf7f6e279",
+        "includedSourceUnits": [
+          "src/Stablecoin.sol",
+          "src/StablecoinV2.sol",
+          "src/libraries/EIP7598Constants.sol"
+        ],
+        "omittedDependencySourceUnits": [
+          "lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/access/OwnableUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/interfaces/IERC1271Upgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/security/PausableUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/ERC20Upgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/IERC20Upgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/IERC20MetadataUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-IERC20PermitUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/CountersUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/ECDSAUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/EIP712Upgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/SignatureCheckerUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol"
+        ],
+        "sourceBytes": 19110,
+        "limitation": "The LLM review is scoped to explorer-verified first-party src/ units. Omitted dependency units remain in the package and must be covered by compiler-backed analysis and dependency provenance review."
+      }
+    },
+    "verifier": {
+      "serviceId": "verifier-v1",
+      "agentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb",
+      "engine": {
+        "method": "static-analysis",
+        "name": "slither",
+        "version": "0.11.6"
+      }
+    },
+    "investigator": {
+      "serviceId": "investigator-v1",
+      "missionId": "ed7c47dd-3941-4976-b020-283e0104dc11"
+    },
+    "tokenRiskReviewer": {
+      "serviceId": "risk-verifier-v1",
+      "engine": {
+        "method": "independent-rpc-replay",
+        "name": "agora-token-risk-verifier",
+        "version": "1",
+        "endpoint": "https://bsc-testnet-rpc.publicnode.com",
+        "independentTransport": true
+      }
+    },
+    "dexEnrichment": {
+      "name": "agora-token-risk-dex-enrichment",
+      "version": "1",
+      "method": "historical-eth-call",
+      "endpoint": "https://bsc-testnet-rpc.publicnode.com"
+    }
+  },
+  "artifacts": {
+    "verifiedSource": "verified-source-input.json",
+    "auditorOutput": "auditor-output.json",
+    "verifierOutput": "verifier-output.json",
+    "onchainInvestigation": "../experiment-2-token-risk/paid-run-output.json",
+    "tokenRiskReview": "../experiment-2-token-risk/security-review-output.json",
+    "enrichment": "../experiment-2-token-risk/indexed-enrichment-output.json",
+    "runtimeTriage": "runtime-triage-output.json"
+  },
+  "report": {
+    "version": 1,
+    "experimentId": "full-due-diligence",
+    "status": "partial",
+    "generatedAt": "2026-09-01T15:28:54.785Z",
+    "target": {
+      "chainId": 97,
+      "proxy": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "implementation": "0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc",
+      "sourceName": "src/StablecoinV2.sol",
+      "sourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+      "sourceMode": "verified-source",
+      "reportBlock": 128449782
+    },
+    "bindings": {
+      "sourceHashVerified": true,
+      "sourceAddressMatchesImplementation": true,
+      "findingVerificationMatchesSource": true,
+      "tokenReviewMatchesInvestigation": true,
+      "enrichmentMatchesInvestigation": true
+    },
+    "provenance": {
+      "audit": "local-unpaid-scoped",
+      "findingVerification": "local-unpaid",
+      "onchainInvestigation": "paid-mission",
+      "tokenRiskReview": "local-unpaid",
+      "enrichment": "local-unpaid"
+    },
+    "security": {
+      "auditStatus": "measured-partial",
+      "auditScope": {
+        "kind": "verified-first-party-source-units",
+        "packageSourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+        "scopeSourceHash": "sha256:eeadc74efc28fa6c3f680f50da61cc14cf1a17c37b59f7e86997127bf7f6e279",
+        "includedSourceUnits": [
+          "src/Stablecoin.sol",
+          "src/StablecoinV2.sol",
+          "src/libraries/EIP7598Constants.sol"
+        ],
+        "omittedDependencySourceUnits": [
+          "lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/access/OwnableUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/interfaces/IERC1271Upgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/security/PausableUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/ERC20Upgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/IERC20Upgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/IERC20MetadataUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-IERC20PermitUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/CountersUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/ECDSAUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/EIP712Upgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/SignatureCheckerUpgradeable.sol",
+          "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol"
+        ],
+        "sourceBytes": 19110,
+        "limitation": "The LLM review is scoped to explorer-verified first-party src/ units. Omitted dependency units remain in the package and must be covered by compiler-backed analysis and dependency provenance review."
+      },
+      "auditorFindings": 4,
+      "criticalHighFindings": 2,
+      "verificationSummary": {
+        "confirmed": 0,
+        "rejected": 0,
+        "partial": 4,
+        "inconclusive": 0,
+        "missed": 17
+      },
+      "confirmedCriticalHighFindings": 0,
+      "partiallyConfirmedCriticalHighFindings": 2,
+      "uncoveredDetections": [
+        {
+          "findingId": "missed-917fca272d4294c3",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "incorrect-exp",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+          "lines": "L117",
+          "snippet": "}",
+          "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) has bitwise-xor operator ^ instead of the exponentiation operator **: - inverse = (3 * denominator) ^ 2 (MathUpgradeable.sol#117) Impact: High; Slither confidence: Medium. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-e218ba6ff64dbb9c",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "divide-before-multiply",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+          "lines": "L102",
+          "snippet": "*/",
+          "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - denominator = denominator / twos (MathUpgradeable.sol#102) - inverse *= 2 - denominator * inverse (MathUpgradeable.sol#126) Impact: Medium; Slither confidence: Medium. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-b8d9ea78ea820eef",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "divide-before-multiply",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+          "lines": "L105",
+          "snippet": "}",
+          "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - prod0 = prod0 / twos (MathUpgradeable.sol#105) - result = prod0 * inverse (MathUpgradeable.sol#132) Impact: Medium; Slither confidence: Medium. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-d960d4a24a412ed9",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L249",
+          "snippet": "abstract contract Initializable {",
+          "note": "StablecoinV2.cancelAuthorization(address,bytes32).nonce (StablecoinV2.sol#249) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-fc67dac7ade986de",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/Stablecoin.sol",
+          "lines": "L242",
+          "snippet": "* /// @custom:oz-upgrades-unsafe-allow constructor",
+          "note": "Stablecoin._approve(address,address,uint256).owner (Stablecoin.sol#242) shadows: - OwnableUpgradeable.owner() (OwnableUpgradeable.sol#48-50) (function) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-c9757d6e36a3e655",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L169",
+          "snippet": "}",
+          "note": "StablecoinV2.receiveWithAuthorization(address,address,uint256,uint256,uint256,bytes32,bytes).nonce (StablecoinV2.sol#169) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-429b679644bd121c",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L204",
+          "snippet": "* function so it can only be called once. The {initializer} modifier provided by this contract will have this effect.",
+          "note": "StablecoinV2._transferOrReceiveWithAuthorization(bytes32,address,address,uint256,uint256,uint256,bytes32,bytes).nonce (StablecoinV2.sol#204) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-651e903ee48aa032",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/Stablecoin.sol",
+          "lines": "L50",
+          "snippet": "* Internal function without access restriction.",
+          "note": "Stablecoin.initialize(string,string)._symbol (Stablecoin.sol#50) shadows: - ERC20Upgradeable._symbol (ERC20Upgradeable.sol#44) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-ac42eddd8fcde381",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L141",
+          "snippet": "_transferOwnership(address(0));",
+          "note": "StablecoinV2.receiveWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32).nonce (StablecoinV2.sol#141) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-6d8f985b487ca56a",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/Stablecoin.sol",
+          "lines": "L178",
+          "snippet": "* @dev Interface of the ERC1271 standard signature validation method for",
+          "note": "Stablecoin.autoBurn(uint256,uint256,uint256).owner (Stablecoin.sol#178) shadows: - OwnableUpgradeable.owner() (OwnableUpgradeable.sol#48-50) (function) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-665adecfc548bf4b",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+          "lines": "L47",
+          "snippet": "",
+          "note": "ERC20PermitUpgradeable.__ERC20Permit_init(string).name (draft-ERC20PermitUpgradeable.sol#47) shadows: - ERC20Upgradeable.name() (ERC20Upgradeable.sol#67-69) (function) - IERC20MetadataUpgradeable.name() (IERC20MetadataUpgradeable.sol#17) (function) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-ac9b961e01df9900",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L112",
+          "snippet": "* @dev Throws if called by any account other than the owner.",
+          "note": "StablecoinV2.transferWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32).nonce (StablecoinV2.sol#112) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-22a093b1bfed35ec",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L88",
+          "snippet": "* By default, the owner account will be the one that deploys the contract. This",
+          "note": "StablecoinV2.transferWithAuthorization(address,address,uint256,uint256,uint256,bytes32,bytes).nonce (StablecoinV2.sol#88) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-a4a2580e6980fdea",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L183",
+          "snippet": "interface IERC1271Upgradeable {",
+          "note": "StablecoinV2.authorizationState(address,bytes32).nonce (StablecoinV2.sol#183) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-a45f8feff7a016b5",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "missing-zero-check",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol",
+          "lines": "L42",
+          "snippet": "*/",
+          "note": "Ownable2StepUpgradeable.transferOwnership(address).newOwner (Ownable2StepUpgradeable.sol#42) lacks a zero-check on : - _pendingOwner = newOwner (Ownable2StepUpgradeable.sol#43) Impact: Low; Slither confidence: Medium. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-c1f312a39444612d",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "timestamp",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L208",
+          "snippet": "* case an upgrade adds a module that needs to be initialized.",
+          "note": "StablecoinV2._transferOrReceiveWithAuthorization(bytes32,address,address,uint256,uint256,uint256,bytes32,bytes) (StablecoinV2.sol#197-242) uses timestamp for comparisons Dangerous comparisons: - require(bool,string)(block.timestamp > validAfter,Authorization not yet valid) (StablecoinV2.sol#208) - r... Impact: Low; Slither confidence: Medium. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "findingId": "missed-c479ac4f040a0e68",
+          "method": "static-analysis",
+          "confidence": 0.9,
+          "tool": "slither@0.11.6",
+          "detector": "timestamp",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+          "lines": "L65",
+          "snippet": "",
+          "note": "ERC20PermitUpgradeable.permit(address,address,uint256,uint256,uint8,bytes32,bytes32) (draft-ERC20PermitUpgradeable.sol#56-75) uses timestamp for comparisons Dangerous comparisons: - require(bool,string)(block.timestamp <= deadline,ERC20Permit: expired deadline) (draft-ERC20PermitUpgradeable.sol#65) Impact: Low; Slither confidence: Medium. No supplied auditor finding matched this detector.",
+          "reviewStatus": "unreviewed"
+        }
+      ],
+      "findings": [
+        {
+          "findingId": "unbounded-auto-mint-limit-bypass",
+          "title": "Auto-mint max limit is per-transaction, allowing unbounded total minting",
+          "severity": "high",
+          "description": "autoMint enforces `autoMintMaxLimit >= amount` but does not track cumulative auto-minted supply. Because `nonce` simply increments each call and there is no aggregate cap or per-window accumulator, the autoOwner can call `autoMint` repeatedly up to the limit. This renders `autoMintMaxLimit` ineffective as a total issuance cap and allows arbitrary inflation of the token supply.",
+          "evidence": {
+            "file": "src/Stablecoin.sol",
+            "lines": "101-104, 140-150",
+            "snippet": "function setAutoMintMaxLimit(uint256 limit) external onlyOwner {\n    emit SetAutoMintMaxLimit(autoMintMaxLimit, limit);\n    autoMintMaxLimit = limit;\n}\n\nfunction autoMint(address to, uint256 amount, uint256 seq, uint256 chain) external whenNotPaused notFrozen(to) onlyAutoOwner returns (bool) {\n    require(seq == nonce, InvalidNonce(seq));\n    require(chain == chainId, InvalidChainId(chain));\n    require(amount > 0, InvalidAmount(amount));  \n    require(autoMintMaxLimit >= amount, MintLimitExceeded(amount, autoMintMaxLimit));\n    nonce++;\n    _mint(to, amount);\n    ..."
+          },
+          "exploitScenario": "The owner sets `autoMintMaxLimit` to 1,000,000 tokens to constrain the hot autoOwner wallet. The autoOwner (or a compromised autoOwner key) calls `autoMint(to, 1_000_000, nonce, chainId)` repeatedly. Each call mints another 1,000,000 tokens and increments `nonce`. After 100 iterations, 100,000,000 tokens have been minted, diluting all holders and breaking the stablecoin peg.",
+          "recommendation": "Introduce a cumulative auto-mint accumulator (e.g., per-day or total minted) and enforce `autoMintMaxLimit` against that total. If the limit is intended only as a per-transaction cap, rename the variable and error to avoid ambiguity and add explicit documentation.",
+          "confidence": 0.85,
+          "verificationStatus": "partial"
+        },
+        {
+          "findingId": "auto-burns-owner-balance",
+          "title": "autoBurn can destroy the contract owner's balance without allowance",
+          "severity": "medium",
+          "description": "autoBurn is callable only by the autoOwner role, yet it burns tokens from `owner()` rather than from the caller or a specified `from` account. There is no allowance check or signature from the owner. If the autoOwner is a distinct hot wallet or service, this grants it unilateral power to destroy owner-held funds.",
+          "evidence": {
+            "file": "src/Stablecoin.sol",
+            "lines": "172-182",
+            "snippet": "function autoBurn(uint256 amount, uint256 seq, uint256 chain) external whenNotPaused onlyAutoOwner returns (bool) {\n   require(seq == nonce, InvalidNonce(seq));\n    require(chain == chainId, InvalidChainId(chain));\n    require(amount > 0, InvalidAmount(amount));  \n    nonce++;\n    address owner = owner();\n    _burn(owner, amount);\n    emit Burn(autoOwner, owner, amount);\n    emit AutoBurn(autoOwner,owner, seq, amount);\n    return true;\n}"
+          },
+          "exploitScenario": "The owner (treasury) holds a large token balance. The autoOwner key is compromised or the autoOwner service is malicious. It calls `autoBurn(treasuryBalance, nonce, chainId)`, which passes `owner()` to `_burn` and permanently destroys all tokens held by the owner.",
+          "recommendation": "Change `autoBurn` to burn from `msg.sender`, or add a `from` parameter and require an allowance/signature from that account. Align the burn semantics with `autoMint`, where the autoOwner already chooses the destination.",
+          "confidence": 0.65,
+          "verificationStatus": "partial"
+        },
+        {
+          "findingId": "v2-initializer-unprotected",
+          "title": "V2 initializer can be called by anyone, force-enabling EIP-7598",
+          "severity": "medium",
+          "description": "StablecoinV2.initializeV2 uses `reinitializer(2)` but has no access-control modifier. After a proxy is upgraded to V2, any account can call `initializeV2()` once and set `eip7598EnableFlag = true`, enabling signature-based transfers before the owner intends to activate them.",
+          "evidence": {
+            "file": "src/StablecoinV2.sol",
+            "lines": "47-52",
+            "snippet": "/**\n * @dev Initialize the contract for V2 upgrade\n */   \nfunction initializeV2() public reinitializer(2) {  \n    eip7598EnableFlag = true;\n}"
+          },
+          "exploitScenario": "The owner upgrades the proxy to the StablecoinV2 implementation but plans to keep EIP-7598 disabled until off-chain integrations are audited. An attacker monitors the upgrade transaction and calls `initializeV2()` first, enabling EIP-7598. Any pre-signed authorizations that signers expected to be unusable while disabled can now be executed, potentially moving user funds unexpectedly.",
+          "recommendation": "Add `onlyOwner` to `initializeV2`, or invoke it atomically as part of the upgrade transaction by the proxy admin.",
+          "confidence": 0.75,
+          "verificationStatus": "partial"
+        },
+        {
+          "findingId": "front-runnable-v1-initializer",
+          "title": "V1 initializer can be front-run, granting attacker full ownership",
+          "severity": "high",
+          "description": "Stablecoin.initialize is unprotected and sets `msg.sender` as both the `owner` and `autoOwner`. If the proxy is deployed without being initialized in the same transaction, a malicious actor can call `initialize` first and obtain all privileged roles.",
+          "evidence": {
+            "file": "src/Stablecoin.sol",
+            "lines": "50-59",
+            "snippet": "function initialize(string memory _name, string memory _symbol) public initializer {\n    __Context_init();\n    __ERC20_init(_name, _symbol);\n    __ERC20Permit_init(_name);\n    __Ownable2Step_init();\n    __Pausable_init();\n    __AutoOwnerInit(msg.sender);\n\n    chainId = block.chainid;\n}"
+          },
+          "exploitScenario": "The team deploys the implementation and an upgradeable proxy pointing to it, but initialization is submitted separately. An attacker front-runs the initialize call with `initialize(\"Stablecoin\",\"STB\")`, becoming both `owner` and `autoOwner`. The attacker then mints arbitrary tokens, freezes legitimate addresses, and takes full control of the contract and its funds.",
+          "recommendation": "Initialize the proxy atomically in the deployment transaction, or use a factory/deployment script that ensures only the deployer can call `initialize`. Alternatively, protect `initialize` so that it can only be called by the intended deployer address.",
+          "confidence": 0.8,
+          "verificationStatus": "partial"
+        }
+      ]
+    },
+    "onchain": {
+      "riskScore": 51,
+      "riskLevel": "high",
+      "signals": [
+        {
+          "id": "privileged-owner",
+          "severity": "low",
+          "title": "Privileged owner is active",
+          "evidence": "owner() returned 0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A",
+          "confidence": 0.9
+        },
+        {
+          "id": "eip1967-upgradeability",
+          "severity": "medium",
+          "title": "EIP-1967 proxy control detected",
+          "evidence": "implementation=0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc; admin=0x1e33d209C18f51d97F66eA461c6f819B59E78B30",
+          "confidence": 0.9
+        },
+        {
+          "id": "bytecode-capability-mint",
+          "severity": "high",
+          "title": "mint capability selector appears in runtime bytecode",
+          "evidence": "implementation/runtime matched one of: mint(address,uint256), mint(uint256)",
+          "confidence": 0.65
+        },
+        {
+          "id": "bytecode-capability-pause",
+          "severity": "medium",
+          "title": "pause capability selector appears in runtime bytecode",
+          "evidence": "implementation/runtime matched one of: pause(), setPaused(bool)",
+          "confidence": 0.65
+        },
+        {
+          "id": "runtime-delegatecall",
+          "severity": "info",
+          "title": "Runtime bytecode can execute DELEGATECALL",
+          "evidence": "Opcode-aware scan found DELEGATECALL (0xf4) only in the EIP-1967 proxy runtime; treated as expected dispatch plumbing.",
+          "confidence": 0.85
+        }
+      ],
+      "independentReview": {
+        "status": "confirmed",
+        "originalRiskScore": 51,
+        "replayedRiskScore": 51,
+        "originalRiskLevel": "high",
+        "replayedRiskLevel": "high"
+      },
+      "reviewSummary": {
+        "confirmed": 11,
+        "mismatched": 0,
+        "unavailable": 0,
+        "total": 11
+      }
+    },
+    "market": {
+      "coverage": {
+        "originalMeasured": 5,
+        "postRunMeasured": 7,
+        "total": 8,
+        "added": [
+          "liquidity",
+          "recentTransactions"
+        ],
+        "partial": [
+          "sellability-quote"
+        ],
+        "unavailable": [
+          "holderConcentration"
+        ]
+      },
+      "liquidity": {
+        "venue": "PancakeSwap",
+        "pair": "0x55ed32b1808d4Bb9aD8DF8201494b74B982915F8",
+        "pairExists": true,
+        "reserveTokenRaw": "164239087694391768135",
+        "reserveWrappedNativeRaw": "60343567796047093",
+        "activeV3Pools": 0
+      },
+      "quoteStatus": "quote-only",
+      "recentTransactionsStatus": "measured",
+      "holderConcentrationStatus": "unavailable"
+    },
+    "decision": {
+      "status": "high-caution",
+      "reasons": [
+        "The LLM Auditor completed a first-party source review; dependency source units were covered only by compiler-backed analysis.",
+        "4 scoped LLM finding(s) have source structures partially confirmed; current exploitability remains unresolved.",
+        "17 compiler-backed static detection(s) remain unreviewed; they are not confirmed vulnerabilities.",
+        "2 critical/high source finding(s) were only partially confirmed.",
+        "The independently replayed onchain report is high risk at score 51/100.",
+        "Complete holder concentration remains unavailable.",
+        "A read-only DEX quote exists, but no executable sell was proven."
+      ],
+      "requiredActions": [
+        "Introduce a cumulative auto-mint accumulator (e.g., per-day or total minted) and enforce `autoMintMaxLimit` against that total. If the limit is intended only as a per-transaction cap, rename the variable and error to avoid ambiguity and add explicit documentation.",
+        "Change `autoBurn` to burn from `msg.sender`, or add a `from` parameter and require an allowance/signature from that account. Align the burn semantics with `autoMint`, where the autoOwner already chooses the destination.",
+        "Add `onlyOwner` to `initializeV2`, or invoke it atomically as part of the upgrade transaction by the proxy admin.",
+        "Initialize the proxy atomically in the deployment transaction, or use a factory/deployment script that ensures only the deployer can call `initialize`. Alternatively, protect `initialize` so that it can only be called by the intended deployer address.",
+        "Manually triage every uncovered static detection against the exact source unit before classifying it as a vulnerability or false positive.",
+        "Verify proxy admin and owner controls against a documented multisig/timelock policy.",
+        "Obtain a complete indexed holder snapshot before relying on concentration claims.",
+        "Run an explicitly authorized fork simulation or test swap before claiming sellability."
+      ]
+    },
+    "limitations": [
+      "This candidate reuses a previously paid onchain investigation; it is not a new end-to-end paid Experiment 3 mission.",
+      "The LLM audit was executed locally without a new service payment or signed x402 receipt.",
+      "The LLM review is scoped to explorer-verified first-party src/ units. Omitted dependency units remain in the package and must be covered by compiler-backed analysis and dependency provenance review.",
+      "Finding verification was executed locally without a new service payment or signed x402 receipt.",
+      "The report remains partial until controlled baseline evidence and independent human review are recorded.",
+      "Liquidity coverage is scoped to PancakeSwap V2/V3 U/WBNB pools and is not an all-DEX market survey.",
+      "A router quote is not an executed transfer or swap and cannot prove sellability.",
+      "Historical eth_call proves pool state at the report block but does not prove that present-day liquidity is unchanged.",
+      "Holder concentration remains unavailable until a complete indexed snapshot can be obtained and validated against total supply."
+    ]
+  }
+}

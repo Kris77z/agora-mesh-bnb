@@ -1,0 +1,156 @@
+{
+  "missionId": "909455c9-3225-4b69-8d1b-3745557f5967",
+  "goal": "{\"source\":\"pragma solidity ^0.8.20;\\n\\ncontract VulnerableVault {\\n    mapping(address => uint256) public balances;\\n    address public owner;\\n\\n    constructor() {\\n        owner = msg.sender;\\n    }\\n\\n    function deposit() external payable {\\n        balances[msg.sender] += msg.value;\\n    }\\n\\n    function withdraw(uint256 amount) external {\\n        require(tx.origin == owner, \\\"not owner\\\");\\n        require(balances[msg.sender] >= amount, \\\"insufficient\\\");\\n        (bool ok, ) = msg.sender.call{value: amount}(\\\"\\\");\\n        require(ok, \\\"transfer failed\\\");\\n        balances[msg.sender] -= amount;\\n    }\\n\\n    function execute(address target, bytes calldata data) external {\\n        require(msg.sender == owner, \\\"not owner\\\");\\n        (bool ok, ) = target.delegatecall(data);\\n        require(ok, \\\"delegatecall failed\\\");\\n    }\\n}\\n\",\"sourceName\":\"VulnerableVault.sol\"}",
+  "requestMode": "single",
+  "locale": "en-US",
+  "status": "failed",
+  "events": [
+    {
+      "type": "run_started",
+      "at": "2026-09-06T08:30:22.558Z",
+      "data": {
+        "missionId": "909455c9-3225-4b69-8d1b-3745557f5967",
+        "mode": "scripted",
+        "goal": "{\"source\":\"pragma solidity ^0.8.20;\\n\\ncontract VulnerableVault {\\n    mapping(address => uint256) public balances;\\n    address public owner;\\n\\n    constructor() {\\n        owner = msg.sender;\\n    }\\n\\n    function deposit() external payable {\\n        balances[msg.sender] += msg.value;\\n    }\\n\\n    function withdraw(uint256 amount) external {\\n        require(tx.origin == owner, \\\"not owner\\\");\\n        require(balances[msg.sender] >= amount, \\\"insufficient\\\");\\n        (bool ok, ) = msg.sender.call{value: amount}(\\\"\\\");\\n        require(ok, \\\"transfer failed\\\");\\n        balances[msg.sender] -= amount;\\n    }\\n\\n    function execute(address target, bytes calldata data) external {\\n        require(msg.sender == owner, \\\"not owner\\\");\\n        (bool ok, ) = target.delegatecall(data);\\n        require(ok, \\\"delegatecall failed\\\");\\n    }\\n}\\n\",\"sourceName\":\"VulnerableVault.sol\"}",
+        "locale": "en-US"
+      }
+    },
+    {
+      "type": "services_discovered",
+      "at": "2026-09-06T08:30:22.635Z",
+      "data": {
+        "count": 3,
+        "serviceIds": [
+          "auditor-v1",
+          "verifier-v1",
+          "risk-verifier-v1"
+        ],
+        "inferredTaskType": "smart-contract-audit",
+        "eligibleServiceIds": [
+          "auditor-v1"
+        ],
+        "services": [
+          {
+            "id": "auditor-v1",
+            "name": "Smart Contract Auditor",
+            "taskType": "smart-contract-audit",
+            "price": "500000000000000000"
+          },
+          {
+            "id": "verifier-v1",
+            "name": "Independent Finding Verifier",
+            "taskType": "finding-verification",
+            "price": "250000000000000000"
+          },
+          {
+            "id": "risk-verifier-v1",
+            "name": "Independent Token Risk Verifier",
+            "taskType": "token-risk-verification",
+            "price": "250000000000000000"
+          }
+        ]
+      }
+    },
+    {
+      "type": "service_ranked",
+      "at": "2026-09-06T08:30:22.642Z",
+      "data": {
+        "taskType": "smart-contract-audit",
+        "weights": {
+          "capability": 0.35000000000000003,
+          "reputation": 0.30000000000000004,
+          "price": 0.20000000000000004,
+          "latency": 0.15000000000000002
+        },
+        "candidates": [
+          {
+            "rank": 1,
+            "serviceId": "auditor-v1",
+            "score": 0.94,
+            "scores": {
+              "capability": 1,
+              "reputation": 0.8,
+              "price": 1,
+              "latency": 1
+            },
+            "reason": "Selected by capability match 100% and price 100%",
+            "price": "500000000000000000",
+            "averageLatencyMs": 105000
+          }
+        ]
+      }
+    },
+    {
+      "type": "service_selected",
+      "at": "2026-09-06T08:30:22.645Z",
+      "data": {
+        "id": "auditor-v1",
+        "price": "500000000000000000",
+        "endpoint": "http://localhost:3001",
+        "taskType": "smart-contract-audit",
+        "reason": "Selected by capability match 100% and price 100%",
+        "reputationPct": 80,
+        "priceRank": 1,
+        "totalCandidates": 1
+      }
+    },
+    {
+      "type": "security_input_resolved",
+      "at": "2026-09-06T08:30:22.646Z",
+      "data": {
+        "mode": "inline-source",
+        "chainId": 97,
+        "sourceName": "VulnerableVault.sol",
+        "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda"
+      }
+    },
+    {
+      "type": "x402_requirement_received",
+      "at": "2026-09-06T08:30:22.731Z",
+      "data": {
+        "requestHash": "0x163ad772be9a9b31a86bd46b18e762890c387b0439c5b6711b6c91b6446259db",
+        "resource": "http://localhost:3001/execute/x402?requestHash=0x163ad772be9a9b31a86bd46b18e762890c387b0439c5b6711b6c91b6446259db",
+        "accepts": 1
+      }
+    },
+    {
+      "type": "payment_policy_checked",
+      "at": "2026-09-06T08:30:22.732Z",
+      "data": {
+        "approved": true,
+        "requestHash": "0x163ad772be9a9b31a86bd46b18e762890c387b0439c5b6711b6c91b6446259db",
+        "amount": "500000000000000000",
+        "asset": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+        "payTo": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+        "network": "eip155:97",
+        "transferMethod": "permit2-exact"
+      }
+    },
+    {
+      "type": "execution_started",
+      "at": "2026-09-06T08:30:22.732Z",
+      "data": {
+        "serviceId": "auditor-v1",
+        "taskType": "smart-contract-audit",
+        "goal": "{\"source\":\"pragma solidity ^0.8.20;\\n\\ncontract VulnerableVault {\\n    mapping(address => uint256) public balances;\\n    address public owner;\\n\\n    constructor() {\\n        owner = msg.sender;\\n    }\\n\\n    function deposit() external payable {\\n        balances[msg.sender] += msg.value;\\n    }\\n\\n    function withdraw(uint256 amount) external {\\n        require(tx.origin == owner, \\\"not owner\\\");\\n        require(balances[msg.sender] >= amount, \\\"insufficient\\\");\\n        (bool ok, ) = msg.sender.call{value: amount}(\\\"\\\");\\n        require(ok, \\\"transfer failed\\\");\\n        balances[msg.sender] -= amount;\\n    }\\n\\n    function execute(address target, bytes calldata data) external {\\n        require(msg.sender == owner, \\\"not owner\\\");\\n        (bool ok, ) = target.delegatecall(data);\\n        require(ok, \\\"delegatecall failed\\\");\\n    }\\n}\\n\",\"sourceName\":\"VulnerableVault.sol\"}",
+        "rail": "x402"
+      }
+    },
+    {
+      "type": "run_failed",
+      "at": "2026-09-06T08:30:23.510Z",
+      "data": {
+        "message": "Failed to verify the active Authority remaining spend before signing",
+        "locale": "en-US"
+      }
+    }
+  ],
+  "cancelRequested": false,
+  "createdAt": 1788683422552,
+  "updatedAt": 1788683423512,
+  "error": {
+    "code": "AUTHORITY_SPENDING_UNAVAILABLE",
+    "message": "Failed to verify the active Authority remaining spend before signing"
+  },
+  "recoveryRequired": false
+}

@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
 **/node_modules/
+.venv-slither/
 
 # Build outputs
 .next/
@@ -34,3 +35,11 @@ reference_code/**/.git/
 
 # Local-only docs
 docs/
+
+# Runtime stores (may contain encrypted session material or local state)
+registry/altana-sessions.json*
+registry/x402-*-receipts.json*
+registry/x402-purchases/
+registry/runs.json*
+
+.local-demo/

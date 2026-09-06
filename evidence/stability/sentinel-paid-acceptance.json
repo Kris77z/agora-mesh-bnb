@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "artifactKind": "sentinel-paid-acceptance",
+  "status": "completed",
+  "authorityId": "agora-v2-sentinel-20260904-01",
+  "missionId": "sentinel-acceptance-32166e1b-6910-4d78-8090-273c2cdc214f",
+  "completedAt": "2026-09-04T02:18:04.801Z",
+  "service": {
+    "id": "sentinel-audit-v1",
+    "agentId": "97:0x1ef8eeb640e60d5d3bc3efe1a4b2ffcd64132c2c",
+    "provider": "0x1Ef8eEb640e60d5d3Bc3eFe1A4b2fFCd64132c2C",
+    "endpoint": "http://127.0.0.1:3006"
+  },
+  "economics": {
+    "chainId": 97,
+    "asset": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "amountRaw": "400000000000000000",
+    "transaction": "0xbca135b7bf3d8a65d5bd1670817ca6bfea8eb3766213ee08c4c47d539f485bf1"
+  },
+  "requestHash": "0x356eb62a68b6a01c0c523b3338560f7bbb24e7832a56e7adb61a81d97186466e",
+  "idempotencyKey": "0xf207e52f58e01590d219f3902327e52f63cadf08ecf1516590c226879c55a646",
+  "receipt": {
+    "signatureScheme": "agora-request-result-v2",
+    "requestHash": "0x356eb62a68b6a01c0c523b3338560f7bbb24e7832a56e7adb61a81d97186466e",
+    "resultHash": "0x8cc7fd80a5d66fdcb91267cc125d26097f32d6d9e3e40a7453d6357bb67fc86e",
+    "provider": "0x1Ef8eEb640e60d5d3Bc3eFe1A4b2fFCd64132c2C",
+    "timestamp": 1788488284,
+    "signature": "0xf61538d794a91f76c1526510f63b690b02da78b0a4d68ab647f6830c8d3bcdf750c87fe6f971702e17a77da83429791bb5adeaeefbcd3be375cd4bfc53f137bf1c"
+  },
+  "receiptVerified": true,
+  "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+  "reportSummary": {
+    "vulnerabilityCount": 4,
+    "vulnerabilities": [
+      {
+        "findingId": "withdraw-relies-on-tx-origin",
+        "title": "Withdrawal authorization relies on tx.origin instead of msg.sender",
+        "severity": "high"
+      },
+      {
+        "findingId": "non-owner-deposits-locked",
+        "title": "Non-owner deposits are permanently locked",
+        "severity": "high"
+      },
+      {
+        "findingId": "reentrancy-in-withdraw",
+        "title": "Reentrancy risk due to external call before balance update",
+        "severity": "medium"
+      },
+      {
+        "findingId": "arbitrary-delegatecall-in-execute",
+        "title": "Owner can execute arbitrary delegatecall",
+        "severity": "high"
+      }
+    ]
+  }
+}

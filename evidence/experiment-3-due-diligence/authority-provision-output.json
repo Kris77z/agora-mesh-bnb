@@ -1,0 +1,21 @@
+{
+  "event": "altana_x402_authority_provisioned",
+  "authorityId": "altana-x402-exp3-2dd94bd1-b32a-457b-badd-0fdd9e669399",
+  "chainId": 97,
+  "walletAddress": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+  "token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "tokenBalance": "8050000000000000000",
+  "dailyLimit": "1350000000000000000",
+  "recipients": [
+    "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+    "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+    "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+  ],
+  "expiry": 1788407271,
+  "transactions": {
+    "grant": "0x179a662ff98b57f737117760b122ce3d9e59b2aed20e2269d194881a5b077874",
+    "checkerApproval": "0xfb8033aa817162b21fcbdfa3e41dcf3f12c683533a643a04377260b0561738f8",
+    "tokenApproval": "0xe0a4845114c075c67184e6de3ff7719a1e06db983d1cc08a4ab0307a0e93d9ee"
+  },
+  "encryptedStore": "/Users/jungle/Desktop/dev/bnb-hackathon/registry/altana-sessions.json"
+}

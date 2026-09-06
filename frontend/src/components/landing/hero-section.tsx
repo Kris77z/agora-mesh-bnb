@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Play } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -19,7 +20,7 @@ export function HeroSection() {
                 className="mb-8"
             >
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border text-xs text-muted-foreground">
-                    ✦ Built on Monad · Powered by x402
+                    ✦ Built on BNB · Powered by Altana + x402
                 </span>
             </motion.div>
 
@@ -45,7 +46,7 @@ export function HeroSection() {
                 className="mt-8 text-lg text-muted-foreground max-w-xl text-center leading-relaxed"
             >
                 AI Agents discover services, negotiate prices, make payments,
-                and verify results — all on-chain, with zero human intervention.
+                and verify results on-chain — inside limits set by their users.
             </motion.p>
 
             {/* CTA Buttons — 8px rounded rectangle, compact padding */}
@@ -56,11 +57,17 @@ export function HeroSection() {
                 className="mt-10 flex items-center gap-4"
             >
                 <Link
-                    href="/onboarding"
+                    href="/dashboard"
                     className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
                 >
-                    Launch App
+                    Give Hunter a Goal
                     <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                    href="/marketplace"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium border border-border hover:bg-warm-200/50 transition-colors"
+                >
+                    Explore Marketplace
                 </Link>
                 <button className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium border border-border hover:bg-warm-200/50 transition-colors">
                     <Play className="w-3 h-3" />
@@ -68,25 +75,25 @@ export function HeroSection() {
                 </button>
             </motion.div>
 
-            {/* Hero Banner — Warm abstract floral image with grain texture */}
+            {/* Hero Banner — original Agora Mesh artwork, served locally. */}
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.7 }}
                 className="mt-16 w-full max-w-4xl"
             >
-                <div className="relative rounded-3xl overflow-hidden aspect-[2/1]">
-                    {/* Base: Purple floral image — same as How It Works Discover step */}
-                    <img
-                        src="https://framerusercontent.com/images/gb6dqmVVpchoV18EyxBIX5c2yrU.png"
+                <div className="relative aspect-[2/1] overflow-hidden rounded-3xl">
+                    <Image
+                        src="/landing/hero-floral.png"
                         alt="Agent economy visualization — abstract floral"
-                        className="absolute inset-0 w-full h-full object-cover"
-                        loading="eager"
+                        fill
+                        priority
+                        sizes="(max-width: 1024px) 100vw, 896px"
+                        className="object-cover"
                     />
 
-                    {/* Subtle grain texture overlay */}
                     <div
-                        className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none"
+                        className="pointer-events-none absolute inset-0 opacity-20 mix-blend-overlay"
                         style={{
                             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
                         }}

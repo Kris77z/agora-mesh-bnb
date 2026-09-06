@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "experimentId": "token-risk",
+  "workflow": "direct-read-only-rpc-baseline-candidate",
+  "settlement": {
+    "status": "not-paid",
+    "reason": "Only allowlisted read-only JSON-RPC methods were used."
+  },
+  "inputBundle": "baseline-input.json",
+  "inputBundleHash": "sha256:ded1f96420272dc73fd2721eb3e0ba00f3317e4b0aaa03e3c559fa4232c65a74",
+  "taskHash": "sha256:9d47ed28ce37ae4bed7c9490641d0e798f508f1a7920f13981f9f9543afb7623",
+  "chainId": 97,
+  "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "reportBlock": 128449782,
+  "latestBlock": 128588409,
+  "endpoint": "https://bsc-testnet-rpc.publicnode.com",
+  "timing": {
+    "startedAt": "2026-09-02T01:08:03.580Z",
+    "completedAt": "2026-09-02T01:08:24.361Z",
+    "durationMs": 20781.089
+  },
+  "observations": [
+    {
+      "label": "nativeBalanceWei",
+      "blockNumber": 128449782,
+      "status": "measured",
+      "value": "0"
+    },
+    {
+      "label": "transactionCount",
+      "blockNumber": 128449782,
+      "status": "unavailable",
+      "reason": "RPC eth_getTransactionCount failed: state at block #128449783 is pruned"
+    },
+    {
+      "label": "bytecode",
+      "blockNumber": 128449782,
+      "status": "measured",
+      "value": {
+        "byteLength": 2007,
+        "contentHash": "sha256:87408cc62a1419f8a6cf73f03b798825da7eadc412490263201b9f71dffa6390",
+        "capabilitySelectors": {
+          "mint": false,
+          "pause": false,
+          "upgrade": true
+        }
+      }
+    },
+    {
+      "label": "name",
+      "blockNumber": 128449782,
+      "status": "unavailable",
+      "reason": "RPC eth_call failed: state at block #128449783 is pruned"
+    },
+    {
+      "label": "symbol",
+      "blockNumber": 128449782,
+      "status": "measured",
+      "value": "U"
+    },
+    {
+      "label": "decimals",
+      "blockNumber": 128449782,
+      "status": "unavailable",
+      "reason": "RPC eth_call failed: state at block #128449783 is pruned"
+    },
+    {
+      "label": "totalSupply",
+      "blockNumber": 128449782,
+      "status": "unavailable",
+      "reason": "RPC eth_call failed: state at block #128449783 is pruned"
+    },
+    {
+      "label": "owner",
+      "blockNumber": 128449782,
+      "status": "unavailable",
+      "reason": "RPC eth_call failed: state at block #128449783 is pruned"
+    },
+    {
+      "label": "getOwner",
+      "blockNumber": 128449782,
+      "status": "unavailable",
+      "reason": "RPC eth_call failed: execution reverted"
+    },
+    {
+      "label": "eip1967Implementation",
+      "blockNumber": 128449782,
+      "status": "unavailable",
+      "reason": "RPC eth_getStorageAt failed: state at block #128449783 is pruned"
+    },
+    {
+      "label": "eip1967Admin",
+      "blockNumber": 128449782,
+      "status": "unavailable",
+      "reason": "RPC eth_getStorageAt failed: state at block #128449783 is pruned"
+    },
+    {
+      "label": "nativeBalanceWei",
+      "blockNumber": 128588409,
+      "status": "measured",
+      "value": "0"
+    },
+    {
+      "label": "transactionCount",
+      "blockNumber": 128588409,
+      "status": "measured",
+      "value": "1"
+    },
+    {
+      "label": "bytecode",
+      "blockNumber": 128588409,
+      "status": "measured",
+      "value": {
+        "byteLength": 2007,
+        "contentHash": "sha256:87408cc62a1419f8a6cf73f03b798825da7eadc412490263201b9f71dffa6390",
+        "capabilitySelectors": {
+          "mint": false,
+          "pause": false,
+          "upgrade": true
+        }
+      }
+    },
+    {
+      "label": "name",
+      "blockNumber": 128588409,
+      "status": "measured",
+      "value": "United Stables"
+    },
+    {
+      "label": "symbol",
+      "blockNumber": 128588409,
+      "status": "measured",
+      "value": "U"
+    },
+    {
+      "label": "decimals",
+      "blockNumber": 128588409,
+      "status": "measured",
+      "value": "18"
+    },
+    {
+      "label": "totalSupply",
+      "blockNumber": 128588409,
+      "status": "measured",
+      "value": "10005250000000000000000000000"
+    },
+    {
+      "label": "owner",
+      "blockNumber": 128588409,
+      "status": "measured",
+      "value": "0x6a8e2b2134b7b52c24a1448ad6be5c669eaa501a"
+    },
+    {
+      "label": "getOwner",
+      "blockNumber": 128588409,
+      "status": "unavailable",
+      "reason": "RPC eth_call failed: execution reverted"
+    },
+    {
+      "label": "eip1967Implementation",
+      "blockNumber": 128588409,
+      "status": "measured",
+      "value": "0x6b5c44cbd4bbddf11723557ba1b77ec5e33225cc"
+    },
+    {
+      "label": "eip1967Admin",
+      "blockNumber": 128588409,
+      "status": "measured",
+      "value": "0x1e33d209c18f51d97f66ea461c6f819b59e78b30"
+    }
+  ],
+  "limitations": [
+    "Historical state failures are retained as unavailable and are not replaced by latest-state claims.",
+    "This direct RPC capture does not provide complete holder concentration, all-DEX liquidity, or executed sellability evidence."
+  ]
+}

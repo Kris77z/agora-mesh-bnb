@@ -1,0 +1,284 @@
+{
+  "version": 1,
+  "artifactKind": "without-marketplace-agent-baseline",
+  "experimentId": "token-risk",
+  "status": "measured",
+  "workflow": "ordinary-llm-plus-direct-rpc",
+  "reviewerDeclaration": {
+    "operatorType": "automated-codex-orchestrator",
+    "independentHuman": false,
+    "officialTermixWithoutAgentEligible": true,
+    "eligibilityBasis": "The official TermiX requirement asks for the same real task without an agent hired through the marketplace; it does not require a human reviewer. The reviewer type remains explicitly disclosed.",
+    "modelBlindToAgentOutputs": true,
+    "modelBlindToGroundTruth": true
+  },
+  "input": {
+    "bundle": "baseline-input.json",
+    "bundleHash": "sha256:ded1f96420272dc73fd2721eb3e0ba00f3317e4b0aaa03e3c559fa4232c65a74",
+    "taskHash": "sha256:9d47ed28ce37ae4bed7c9490641d0e798f508f1a7920f13981f9f9543afb7623",
+    "chainId": 97,
+    "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "reportBlock": 128449782
+  },
+  "model": {
+    "provider": "kimi",
+    "model": "kimi-k2.7-code-highspeed",
+    "sessionCount": 1
+  },
+  "usage": {
+    "promptTokens": 1287,
+    "completionTokens": 4451,
+    "totalTokens": 5738
+  },
+  "timing": {
+    "rpcDurationMs": 20781.089,
+    "modelDurationMs": 19085.914,
+    "totalWallDurationMs": 39867.003,
+    "operatorActiveMinutes": 0,
+    "operatorType": "automated-codex-orchestrator"
+  },
+  "cost": {
+    "currency": "USD",
+    "modelUsdEstimated": 0.038053,
+    "toolUsd": 0,
+    "humanUsd": null,
+    "totalUsdEstimated": 0.038053,
+    "basis": "Estimated from recorded uncached input/output tokens at the Kimi K2.7 Code HighSpeed list price ($1.90/$8.00 per 1M tokens); tax and subscription allocation excluded."
+  },
+  "quality": {
+    "score": 85,
+    "scale": 100,
+    "rubric": "60% fact accuracy + 40% eight-dimension evidence coverage",
+    "metrics": {
+      "confirmedFacts": 11,
+      "mismatchedFacts": 0,
+      "totalFacts": 11,
+      "measuredCoverage": 5,
+      "totalCoverage": 8
+    }
+  },
+  "report": {
+    "facts": [
+      {
+        "claim": "Contract native balance is 0 BNB",
+        "status": "measured",
+        "source": "eth_getBalance direct RPC observation",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "Contract transaction count",
+        "status": "unavailable",
+        "source": "eth_getTransactionCount direct RPC observation (state at block #128449783 is pruned)",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "Deployed bytecode length is 2007 bytes with sha256:87408cc62a1419f8a6cf73f03b798825da7eadc412490263201b9f71dffa6390; capability selectors: mint=false, pause=false, upgrade=true",
+        "status": "measured",
+        "source": "eth_getCode direct RPC observation with selector analysis",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "ERC20 name()",
+        "status": "unavailable",
+        "source": "eth_call direct RPC observation (state at block #128449783 is pruned)",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "ERC20 symbol is U",
+        "status": "measured",
+        "source": "eth_call direct RPC observation",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "ERC20 decimals()",
+        "status": "unavailable",
+        "source": "eth_call direct RPC observation (state at block #128449783 is pruned)",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "ERC20 totalSupply()",
+        "status": "unavailable",
+        "source": "eth_call direct RPC observation (state at block #128449783 is pruned)",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "owner() address",
+        "status": "unavailable",
+        "source": "eth_call direct RPC observation (state at block #128449783 is pruned)",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "getOwner() address",
+        "status": "unavailable",
+        "source": "eth_call direct RPC observation (execution reverted)",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "EIP-1967 implementation slot",
+        "status": "unavailable",
+        "source": "eth_getStorageAt direct RPC observation (state at block #128449783 is pruned)",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "EIP-1967 admin slot",
+        "status": "unavailable",
+        "source": "eth_getStorageAt direct RPC observation (state at block #128449783 is pruned)",
+        "observationBlock": 128449782
+      },
+      {
+        "claim": "Contract native balance is 0 BNB",
+        "status": "measured",
+        "source": "eth_getBalance direct RPC observation",
+        "observationBlock": 128588409
+      },
+      {
+        "claim": "Contract transaction count is 1",
+        "status": "measured",
+        "source": "eth_getTransactionCount direct RPC observation",
+        "observationBlock": 128588409
+      },
+      {
+        "claim": "Deployed bytecode length is 2007 bytes with sha256:87408cc62a1419f8a6cf73f03b798825da7eadc412490263201b9f71dffa6390; capability selectors: mint=false, pause=false, upgrade=true",
+        "status": "measured",
+        "source": "eth_getCode direct RPC observation with selector analysis",
+        "observationBlock": 128588409
+      },
+      {
+        "claim": "ERC20 name is United Stables",
+        "status": "measured",
+        "source": "eth_call direct RPC observation",
+        "observationBlock": 128588409
+      },
+      {
+        "claim": "ERC20 symbol is U",
+        "status": "measured",
+        "source": "eth_call direct RPC observation",
+        "observationBlock": 128588409
+      },
+      {
+        "claim": "ERC20 decimals is 18",
+        "status": "measured",
+        "source": "eth_call direct RPC observation",
+        "observationBlock": 128588409
+      },
+      {
+        "claim": "ERC20 totalSupply is 10005250000000000000000000000 (≈10.00525 billion U)",
+        "status": "measured",
+        "source": "eth_call direct RPC observation",
+        "observationBlock": 128588409
+      },
+      {
+        "claim": "owner() is 0x6a8e2b2134b7b52c24a1448ad6be5c669eaa501a",
+        "status": "measured",
+        "source": "eth_call direct RPC observation",
+        "observationBlock": 128588409
+      },
+      {
+        "claim": "getOwner() address",
+        "status": "unavailable",
+        "source": "eth_call direct RPC observation (execution reverted)",
+        "observationBlock": 128588409
+      },
+      {
+        "claim": "EIP-1967 implementation slot is 0x6b5c44cbd4bbddf11723557ba1b77ec5e33225cc",
+        "status": "measured",
+        "source": "eth_getStorageAt direct RPC observation",
+        "observationBlock": 128588409
+      },
+      {
+        "claim": "EIP-1967 admin slot is 0x1e33d209c18f51d97f66ea461c6f819b59e78b30",
+        "status": "measured",
+        "source": "eth_getStorageAt direct RPC observation",
+        "observationBlock": 128588409
+      }
+    ],
+    "riskSignals": [
+      {
+        "severity": "high",
+        "category": "upgradeability",
+        "claim": "Contract follows an EIP-1967 proxy pattern with a separate implementation and admin; logic can be changed by the admin",
+        "evidence": {
+          "eip1967Implementation": "0x6b5c44cbd4bbddf11723557ba1b77ec5e33225cc",
+          "eip1967Admin": "0x1e33d209c18f51d97f66ea461c6f819b59e78b30",
+          "upgradeSelectorDetected": true,
+          "observationBlock": 128588409
+        }
+      },
+      {
+        "severity": "medium",
+        "category": "centralized control",
+        "claim": "Token has an owner address (0x6a8e2b2134b7b52c24a1448ad6be5c669eaa501a) and a proxy admin (0x1e33d209c18f51d97f66ea461c6f819b59e78b30) whose privileges and key custody are unknown",
+        "evidence": {
+          "owner": "0x6a8e2b2134b7b52c24a1448ad6be5c669eaa501a",
+          "proxyAdmin": "0x1e33d209c18f51d97f66ea461c6f819b59e78b30",
+          "observationBlock": 128588409
+        }
+      },
+      {
+        "severity": "medium",
+        "category": "mutable supply/permissions",
+        "claim": "Current proxy bytecode does not expose mint/pause selectors, but because the implementation is upgradeable these protections can be removed or altered without user consent",
+        "evidence": {
+          "mintSelector": false,
+          "pauseSelector": false,
+          "upgradeSelector": true,
+          "observationBlock": 128588409
+        }
+      },
+      {
+        "severity": "info",
+        "category": "network/activity",
+        "claim": "Contract is on BNB Testnet and has only 1 on-chain transaction as of the latest observed block",
+        "evidence": {
+          "transactionCount": 1,
+          "nativeBalanceWei": 0,
+          "observationBlock": 128588409
+        }
+      },
+      {
+        "severity": "info",
+        "category": "supply",
+        "claim": "Reported total supply is large (≈10.00525 billion U with 18 decimals)",
+        "evidence": {
+          "totalSupply": "10005250000000000000000000000",
+          "decimals": 18,
+          "observationBlock": 128588409
+        }
+      }
+    ],
+    "coverage": {
+      "covered": [
+        "Contract existence and bytecode at required comparison block and latest block",
+        "Upgradeability pattern (EIP-1967 slots and upgrade selector) at latest block",
+        "Basic ERC20 metadata (name, symbol, decimals, totalSupply, owner) at latest block",
+        "Native balance at both observed blocks",
+        "Transaction count at latest block"
+      ],
+      "notCovered": [
+        "Historical ERC20 state, ownership, and storage slots at block 128449782 due to pruned archive",
+        "Implementation contract source code or verified ABI",
+        "Holder distribution and whale concentration",
+        "DEX liquidity, pool depth, or trading pairs",
+        "Sellability, transfer taxes, honeypot behavior, or slippage",
+        "Owner/admin reputation, key custody, or timelock configuration"
+      ]
+    },
+    "recommendation": "Treat this contract as high-risk, especially for any real value. The EIP-1967 proxy structure means the logic and token controls can be changed by the proxy admin/owner without notice. Do not rely on the current absence of mint/pause selectors as a guarantee. This is a BNB Testnet contract with minimal on-chain activity and no native balance; use it for testing only, and perform additional due diligence on the implementation contract and admin key custody before any interaction.",
+    "limitations": [
+      "Historical state at the required comparison block (128449782) is largely unavailable because the RPC node has pruned state prior to block 128449783.",
+      "Latest-state measurements are not substituted for the unavailable historical state; they are reported separately.",
+      "This analysis is based solely on direct read-only RPC observations and does not include holder, liquidity, sellability, or source-code verification data.",
+      "No off-chain intelligence, reputation scoring, or manual contract review was performed."
+    ]
+  },
+  "source": {
+    "candidateArtifact": "evidence/experiment-2-token-risk/baseline-output-candidate.json",
+    "candidateArtifactHash": "sha256:107ccfcadf7c64e0abba2f649413e2de49516fe1b229ba396a0d40c808124d51",
+    "rawRpcArtifact": "evidence/experiment-2-token-risk/baseline-rpc-raw.json"
+  },
+  "limitations": [
+    "The operator was automated and is not represented as an independent human.",
+    "The baseline did not measure holder concentration, PancakeSwap liquidity, recent transfers, or executed sellability.",
+    "USD cost is a token-list-price estimate because the provider response did not expose invoice-level cost."
+  ]
+}

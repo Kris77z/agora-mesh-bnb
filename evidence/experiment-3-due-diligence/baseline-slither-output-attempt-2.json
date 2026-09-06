@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "experimentId": "full-due-diligence",
+  "workflow": "ordinary-local-slither-baseline-candidate",
+  "status": "measured",
+  "settlement": {
+    "status": "not-paid",
+    "reason": "Local static analysis only."
+  },
+  "inputBundleHash": "sha256:a26d02fb6b0747f6dff082daa8170371cc92b038079741faf23cdb35d34b09a6",
+  "sourceArtifact": "verified-source-input.json",
+  "sourceArtifactHash": "sha256:7980db97f9d11001ca1467bdc093d800e20cbed774549247db1bdebf12c7403f",
+  "packageSourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+  "command": "slither <verified package entry> --json - --disable-color --solc-disable-warnings --exclude-informational --exclude-optimization --solc-remaps <verified remappings>",
+  "tool": {
+    "name": "slither",
+    "version": "0.11.6",
+    "resultKind": "normalized-wrapper-output"
+  },
+  "timing": {
+    "startedAt": "2026-09-02T01:15:27.849Z",
+    "completedAt": "2026-09-02T01:15:31.003Z",
+    "wallDurationMs": 3152.569
+  },
+  "ok": true,
+  "available": true,
+  "detections": [
+    {
+      "id": "incorrect-exp",
+      "title": "incorrect-exp",
+      "line": 117,
+      "lines": [
+        117
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "snippet": "}",
+      "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) has bitwise-xor operator ^ instead of the exponentiation operator **: - inverse = (3 * denominator) ^ 2 (MathUpgradeable.sol#117) Impact: High; Slither confidence: Medium.",
+      "keywords": [
+        "incorrect-exp",
+        "incorrect exp"
+      ]
+    },
+    {
+      "id": "divide-before-multiply",
+      "title": "divide-before-multiply",
+      "line": 102,
+      "lines": [
+        102
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "snippet": "*/",
+      "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - denominator = denominator / twos (MathUpgradeable.sol#102) - inverse = (3 * denominator) ^ 2 (MathUpgradeable.sol#117) Impact: Medium; Slither confidence: Medium.",
+      "keywords": [
+        "divide-before-multiply",
+        "divide before multiply"
+      ]
+    },
+    {
+      "id": "divide-before-multiply",
+      "title": "divide-before-multiply",
+      "line": 102,
+      "lines": [
+        102
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "snippet": "*/",
+      "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - denominator = denominator / twos (MathUpgradeable.sol#102) - inverse *= 2 - denominator * inverse (MathUpgradeable.sol#125) Impact: Medium; Slither confidence: Medium.",
+      "keywords": [
+        "divide-before-multiply",
+        "divide before multiply"
+      ]
+    },
+    {
+      "id": "divide-before-multiply",
+      "title": "divide-before-multiply",
+      "line": 102,
+      "lines": [
+        102
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "snippet": "*/",
+      "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - denominator = denominator / twos (MathUpgradeable.sol#102) - inverse *= 2 - denominator * inverse (MathUpgradeable.sol#126) Impact: Medium; Slither confidence: Medium.",
+      "keywords": [
+        "divide-before-multiply",
+        "divide before multiply"
+      ]
+    },
+    {
+      "id": "divide-before-multiply",
+      "title": "divide-before-multiply",
+      "line": 102,
+      "lines": [
+        102
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "snippet": "*/",
+      "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - denominator = denominator / twos (MathUpgradeable.sol#102) - inverse *= 2 - denominator * inverse (MathUpgradeable.sol#123) Impact: Medium; Slither confidence: Medium.",
+      "keywords": [
+        "divide-before-multiply",
+        "divide before multiply"
+      ]
+    },
+    {
+      "id": "divide-before-multiply",
+      "title": "divide-before-multiply",
+      "line": 102,
+      "lines": [
+        102
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "snippet": "*/",
+      "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - denominator = denominator / twos (MathUpgradeable.sol#102) - inverse *= 2 - denominator * inverse (MathUpgradeable.sol#124) Impact: Medium; Slither confidence: Medium.",
+      "keywords": [
+        "divide-before-multiply",
+        "divide before multiply"
+      ]
+    },
+    {
+      "id": "divide-before-multiply",
+      "title": "divide-before-multiply",
+      "line": 102,
+      "lines": [
+        102
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "snippet": "*/",
+      "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - denominator = denominator / twos (MathUpgradeable.sol#102) - inverse *= 2 - denominator * inverse (MathUpgradeable.sol#122) Impact: Medium; Slither confidence: Medium.",
+      "keywords": [
+        "divide-before-multiply",
+        "divide before multiply"
+      ]
+    },
+    {
+      "id": "divide-before-multiply",
+      "title": "divide-before-multiply",
+      "line": 102,
+      "lines": [
+        102
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "snippet": "*/",
+      "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - denominator = denominator / twos (MathUpgradeable.sol#102) - inverse *= 2 - denominator * inverse (MathUpgradeable.sol#121) Impact: Medium; Slither confidence: Medium.",
+      "keywords": [
+        "divide-before-multiply",
+        "divide before multiply"
+      ]
+    },
+    {
+      "id": "divide-before-multiply",
+      "title": "divide-before-multiply",
+      "line": 105,
+      "lines": [
+        105
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+      "snippet": "}",
+      "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - prod0 = prod0 / twos (MathUpgradeable.sol#105) - result = prod0 * inverse (MathUpgradeable.sol#132) Impact: Medium; Slither confidence: Medium.",
+      "keywords": [
+        "divide-before-multiply",
+        "divide before multiply"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 249,
+      "lines": [
+        249
+      ],
+      "file": "src/StablecoinV2.sol",
+      "snippet": "abstract contract Initializable {",
+      "note": "StablecoinV2.cancelAuthorization(address,bytes32).nonce (StablecoinV2.sol#249) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 242,
+      "lines": [
+        242
+      ],
+      "file": "src/Stablecoin.sol",
+      "snippet": "* /// @custom:oz-upgrades-unsafe-allow constructor",
+      "note": "Stablecoin._approve(address,address,uint256).owner (Stablecoin.sol#242) shadows: - OwnableUpgradeable.owner() (OwnableUpgradeable.sol#48-50) (function) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 169,
+      "lines": [
+        169
+      ],
+      "file": "src/StablecoinV2.sol",
+      "snippet": "}",
+      "note": "StablecoinV2.receiveWithAuthorization(address,address,uint256,uint256,uint256,bytes32,bytes).nonce (StablecoinV2.sol#169) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 204,
+      "lines": [
+        204
+      ],
+      "file": "src/StablecoinV2.sol",
+      "snippet": "* function so it can only be called once. The {initializer} modifier provided by this contract will have this effect.",
+      "note": "StablecoinV2._transferOrReceiveWithAuthorization(bytes32,address,address,uint256,uint256,uint256,bytes32,bytes).nonce (StablecoinV2.sol#204) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 50,
+      "lines": [
+        50
+      ],
+      "file": "src/Stablecoin.sol",
+      "snippet": "* Internal function without access restriction.",
+      "note": "Stablecoin.initialize(string,string)._symbol (Stablecoin.sol#50) shadows: - ERC20Upgradeable._symbol (ERC20Upgradeable.sol#44) (state variable) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 141,
+      "lines": [
+        141
+      ],
+      "file": "src/StablecoinV2.sol",
+      "snippet": "_transferOwnership(address(0));",
+      "note": "StablecoinV2.receiveWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32).nonce (StablecoinV2.sol#141) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 178,
+      "lines": [
+        178
+      ],
+      "file": "src/Stablecoin.sol",
+      "snippet": "* @dev Interface of the ERC1271 standard signature validation method for",
+      "note": "Stablecoin.autoBurn(uint256,uint256,uint256).owner (Stablecoin.sol#178) shadows: - OwnableUpgradeable.owner() (OwnableUpgradeable.sol#48-50) (function) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 47,
+      "lines": [
+        47
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+      "snippet": "",
+      "note": "ERC20PermitUpgradeable.__ERC20Permit_init(string).name (draft-ERC20PermitUpgradeable.sol#47) shadows: - ERC20Upgradeable.name() (ERC20Upgradeable.sol#67-69) (function) - IERC20MetadataUpgradeable.name() (IERC20MetadataUpgradeable.sol#17) (function) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 50,
+      "lines": [
+        50
+      ],
+      "file": "src/Stablecoin.sol",
+      "snippet": "* Internal function without access restriction.",
+      "note": "Stablecoin.initialize(string,string)._name (Stablecoin.sol#50) shadows: - ERC20Upgradeable._name (ERC20Upgradeable.sol#43) (state variable) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 112,
+      "lines": [
+        112
+      ],
+      "file": "src/StablecoinV2.sol",
+      "snippet": "* @dev Throws if called by any account other than the owner.",
+      "note": "StablecoinV2.transferWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32).nonce (StablecoinV2.sol#112) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 88,
+      "lines": [
+        88
+      ],
+      "file": "src/StablecoinV2.sol",
+      "snippet": "* By default, the owner account will be the one that deploys the contract. This",
+      "note": "StablecoinV2.transferWithAuthorization(address,address,uint256,uint256,uint256,bytes32,bytes).nonce (StablecoinV2.sol#88) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "shadowing-local",
+      "title": "shadowing-local",
+      "line": 183,
+      "lines": [
+        183
+      ],
+      "file": "src/StablecoinV2.sol",
+      "snippet": "interface IERC1271Upgradeable {",
+      "note": "StablecoinV2.authorizationState(address,bytes32).nonce (StablecoinV2.sol#183) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High.",
+      "keywords": [
+        "shadowing-local",
+        "shadowing local"
+      ]
+    },
+    {
+      "id": "missing-zero-check",
+      "title": "missing-zero-check",
+      "line": 42,
+      "lines": [
+        42
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol",
+      "snippet": "*/",
+      "note": "Ownable2StepUpgradeable.transferOwnership(address).newOwner (Ownable2StepUpgradeable.sol#42) lacks a zero-check on : - _pendingOwner = newOwner (Ownable2StepUpgradeable.sol#43) Impact: Low; Slither confidence: Medium.",
+      "keywords": [
+        "missing-zero-check",
+        "missing zero check"
+      ]
+    },
+    {
+      "id": "timestamp",
+      "title": "timestamp",
+      "line": 65,
+      "lines": [
+        65
+      ],
+      "file": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+      "snippet": "",
+      "note": "ERC20PermitUpgradeable.permit(address,address,uint256,uint256,uint8,bytes32,bytes32) (draft-ERC20PermitUpgradeable.sol#56-75) uses timestamp for comparisons Dangerous comparisons: - require(bool,string)(block.timestamp <= deadline,ERC20Permit: expired deadline) (draft-ERC20PermitUpgradeable.sol#65) Impact: Low; Slither confidence: Medium.",
+      "keywords": [
+        "timestamp"
+      ]
+    },
+    {
+      "id": "timestamp",
+      "title": "timestamp",
+      "line": 208,
+      "lines": [
+        208
+      ],
+      "file": "src/StablecoinV2.sol",
+      "snippet": "* case an upgrade adds a module that needs to be initialized.",
+      "note": "StablecoinV2._transferOrReceiveWithAuthorization(bytes32,address,address,uint256,uint256,uint256,bytes32,bytes) (StablecoinV2.sol#197-242) uses timestamp for comparisons Dangerous comparisons: - require(bool,string)(block.timestamp > validAfter,Authorization not yet valid) (StablecoinV2.sol#208) - r... Impact: Low; Slither confidence: Medium.",
+      "keywords": [
+        "timestamp"
+      ]
+    }
+  ],
+  "limitations": [
+    "The artifact retains the wrapper-normalized detector output, not Slither's process-level stdout/stderr bytes.",
+    "Static detections are unreviewed signals and are not treated as confirmed vulnerabilities."
+  ]
+}

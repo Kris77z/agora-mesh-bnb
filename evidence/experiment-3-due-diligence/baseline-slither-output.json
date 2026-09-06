@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "experimentId": "full-due-diligence",
+  "workflow": "ordinary-local-slither-baseline-candidate",
+  "status": "unavailable",
+  "settlement": {
+    "status": "not-paid",
+    "reason": "Local static analysis only."
+  },
+  "inputBundleHash": "sha256:a26d02fb6b0747f6dff082daa8170371cc92b038079741faf23cdb35d34b09a6",
+  "sourceArtifact": "verified-source-input.json",
+  "sourceArtifactHash": "sha256:7980db97f9d11001ca1467bdc093d800e20cbed774549247db1bdebf12c7403f",
+  "packageSourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+  "command": "slither <verified package entry> --json - --disable-color --solc-disable-warnings --exclude-informational --exclude-optimization --solc-remaps <verified remappings>",
+  "tool": {
+    "name": "slither",
+    "version": "0.11.6",
+    "resultKind": "normalized-wrapper-output"
+  },
+  "timing": {
+    "startedAt": "2026-09-02T01:13:07.538Z",
+    "completedAt": "2026-09-02T01:13:09.284Z",
+    "wallDurationMs": 1745.097
+  },
+  "ok": false,
+  "available": true,
+  "detections": [],
+  "error": "Slither returned empty JSON output (exit status 1)",
+  "limitations": [
+    "The artifact retains the wrapper-normalized detector output, not Slither's process-level stdout/stderr bytes.",
+    "Static detections are unreviewed signals and are not treated as confirmed vulnerabilities."
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "createdAt": "2026-09-06T10:29:22.950413+00:00",
+  "status": "local-review-only-not-published",
+  "browserAcceptance": "paused-0-of-3",
+  "files": [
+    {
+      "path": "evidence/SUBMISSION_DRAFT.md",
+      "bytes": 9102,
+      "sha256": "f05f4d91d146382fd2c89e97acf0b5f3cefb596b2cc8c04a06e05509914cb73f"
+    },
+    {
+      "path": "evidence/SUBMISSION_REVIEW.md",
+      "bytes": 3172,
+      "sha256": "2fd18ca517e3ac3180ad172863d08defb435ae9deb7affed0550c4b1841d0cc5"
+    },
+    {
+      "path": "evidence/DEMO_NARRATION_EN.md",
+      "bytes": 2929,
+      "sha256": "7c6bdb2a5f870b4958feeac005a85263d8ea5a050f1d641e48f800ca7e8746d8"
+    },
+    {
+      "path": "evidence/AGENT_ADVANTAGE_REPORT.md",
+      "bytes": 3166,
+      "sha256": "b9dde02dc4b2afd72274bc820ee7478326d6082e12671924a522c550f4751e3f"
+    },
+    {
+      "path": "evidence/agent-advantage-report.json",
+      "bytes": 9553,
+      "sha256": "72ed99963671e607332185fc2db58aab4fb974b41a7f501a2c6d891113e4cea7"
+    },
+    {
+      "path": "evidence/PASSKEY_SECOND_RUN_20260906.json",
+      "bytes": 43453,
+      "sha256": "edee77e8f4bde989f503c248638f479ce0ff2418db6c7540be37f90788d7e0ae"
+    },
+    {
+      "path": "evidence/PASSKEY_FINAL_REVOCATION_20260906.json",
+      "bytes": 2303,
+      "sha256": "cda8611b6841cb14f83dcf0f920c3aa8a2e9c98310c7329a9553b74f79392171"
+    },
+    {
+      "path": "evidence/LIVE_AUDITOR_SELECTION_20260906.json",
+      "bytes": 12923,
+      "sha256": "7866af0682707614a101286902d1816ad2c04afcab1613a6749ada2765ade1db"
+    },
+    {
+      "path": "evidence/stability/sentinel-paid-acceptance.json",
+      "bytes": 2249,
+      "sha256": "66d2ead30603fcecc827590ce48d813bff367f481c21443ac09535528fb41f85"
+    },
+    {
+      "path": "evidence/experiment-1-contract-audit/input.md",
+      "bytes": 711,
+      "sha256": "029b2b30d155beea6cecdb19799f62eba041fe9401ccf221ca3ec5f5a142ceb6"
+    },
+    {
+      "path": "evidence/experiment-1-contract-audit/agent-output.md",
+      "bytes": 967,
+      "sha256": "e361631fb97422bfdfa7004b0ee062d52c4beac58e42ae371209f184e72f1c06"
+    },
+    {
+      "path": "evidence/experiment-1-contract-audit/baseline-output.json",
+      "bytes": 7334,
+      "sha256": "63967b306657099d41a53bbe6dce15c0916055b9a35417fa9dcfea9faed37c2f"
+    },
+    {
+      "path": "evidence/experiment-1-contract-audit/ground-truth.json",
+      "bytes": 1621,
+      "sha256": "07d485077cee54597a7346c469b13bf6eb5865ed6427580b3dfeb9057f85aa22"
+    },
+    {
+      "path": "evidence/experiment-1-contract-audit/tool-baseline-output.json",
+      "bytes": 3759,
+      "sha256": "7aca30beb485f966ecab0e0631deef3bee6a8ead0ae8002d3773c81953c2da0d"
+    },
+    {
+      "path": "evidence/experiment-2-token-risk/input.md",
+      "bytes": 599,
+      "sha256": "65a121fe5720816426d774aa8b7f4dd0a121dded557e30ff419af19155597f81"
+    },
+    {
+      "path": "evidence/experiment-2-token-risk/paid-run-output.json",
+      "bytes": 7250,
+      "sha256": "9248d41486993afab3544b0ff377028d341a865942d5622aed9b0e2369370faf"
+    },
+    {
+      "path": "evidence/experiment-2-token-risk/baseline-output.json",
+      "bytes": 11693,
+      "sha256": "cd29bf8398f53bc36b02cfcd718c545fd1a421e811b974910f52e3bb4c4bfca2"
+    },
+    {
+      "path": "evidence/experiment-2-token-risk/security-review-output.json",
+      "bytes": 9726,
+      "sha256": "dbcc511c255230cbe1cf84a06d5fc56fae14547d6a6cf42610b46c63951405e0"
+    },
+    {
+      "path": "evidence/experiment-2-token-risk/holder-snapshot-output.json",
+      "bytes": 79886,
+      "sha256": "27b07b727afdc0ddff0b4b7410cd43dcab16529a255668715d57c1c6e565dd6d"
+    },
+    {
+      "path": "evidence/experiment-2-token-risk/sellability-execution-output.json",
+      "bytes": 2323,
+      "sha256": "bc6633e4620d974ad44b670a89afa78e03a114c8d3a3004865503d7bcf6ae8a7"
+    },
+    {
+      "path": "evidence/experiment-3-due-diligence/input.md",
+      "bytes": 1006,
+      "sha256": "7a86a58fbcf621739e53808990b1be2647ca023e4d1cc42e6b32fa9561bac16e"
+    },
+    {
+      "path": "evidence/experiment-3-due-diligence/paid-run-final-output.json",
+      "bytes": 1846,
+      "sha256": "fbd9406d691a4603de5c99e4afcbcd1b1811450f58a323d3a607f9fab1eeda2c"
+    },
+    {
+      "path": "evidence/experiment-3-due-diligence/baseline-output.json",
+      "bytes": 28637,
+      "sha256": "f28c77f9b8845eb43d4461a841d2e1a06d8edeedb1465bac390cd6d7d0127c64"
+    },
+    {
+      "path": "evidence/experiment-3-due-diligence/slither-adjudication.json",
+      "bytes": 11752,
+      "sha256": "c99309e8fe7b53481a5e66edf93aeb28d6d6c6dd8dd943a7133796542645a464"
+    },
+    {
+      "path": "evidence/experiment-3-due-diligence/orphan-payment-refund-output.json",
+      "bytes": 1016,
+      "sha256": "61863d8a1a1cae8cc54c2110c36ea43a5cb69010e1c4a50240eddfaa4f1120b6"
+    },
+    {
+      "path": "evidence/experiment-3-due-diligence/authority-revoke-output.json",
+      "bytes": 1257,
+      "sha256": "825ba197368d08641af597281e539312a4d7bdc5fe647b97aa58787d189feff4"
+    }
+  ]
+}

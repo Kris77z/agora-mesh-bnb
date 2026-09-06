@@ -27,9 +27,9 @@ const COLUMNS = [
     {
         title: 'Ecosystem',
         links: [
-            { label: 'Monad', href: 'https://monad.xyz' },
-            { label: 'Monadscan', href: 'https://testnet.monadscan.com' },
-            { label: 'Faucet', href: 'https://faucet.monad.xyz' },
+            { label: 'BNB Chain', href: 'https://www.bnbchain.org/' },
+            { label: 'BscScan Testnet', href: 'https://testnet.bscscan.com' },
+            { label: 'Altana', href: 'https://docs.altana.network/' },
         ],
     },
     {
@@ -77,7 +77,7 @@ export function LandingFooter() {
                         © 2026 Agora Mesh. All rights reserved.
                     </p>
                     <p className="text-xs text-muted-foreground">
-                        Built on Monad
+                        Built on BNB
                     </p>
                 </div>
             </div>

@@ -1,0 +1,25 @@
+[Unit]
+Description=Agora Mesh %i
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=agora-mesh
+Group=agora-mesh
+WorkingDirectory=/srv/agora-mesh/current
+Environment=NODE_ENV=production
+Environment=INIT_CWD=/srv/agora-mesh/current
+EnvironmentFile=/srv/agora-mesh/config/common.env
+EnvironmentFile=/srv/agora-mesh/config/%i.env
+ExecStart=/usr/bin/npm run ${AGORA_SCRIPT} --workspace ${AGORA_WORKSPACE}
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/agora-mesh/state
+
+[Install]
+WantedBy=multi-user.target

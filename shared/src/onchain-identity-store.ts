@@ -1,5 +1,8 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
 import path from "node:path";
+import { withLocalFileLock } from "./file-lock.js";
+import { getProcessPostgresStore } from "./storage-backend.js";
 
 export interface OnchainIdentityRecord {
   key: string;
@@ -46,17 +49,50 @@ async function readStore(): Promise<OnchainIdentityStore> {
 
 async function writeStore(store: OnchainIdentityStore): Promise<void> {
   await mkdir(path.dirname(onchainIdentityStorePath), { recursive: true });
-  await writeFile(onchainIdentityStorePath, JSON.stringify(store, null, 2), "utf8");
+  const tempPath = `${onchainIdentityStorePath}.${process.pid}.${randomUUID()}.tmp`;
+  await writeFile(tempPath, JSON.stringify(store, null, 2), { encoding: "utf8", mode: 0o600 });
+  await rename(tempPath, onchainIdentityStorePath);
 }
 
 export async function getOnchainIdentityRecord(key: string): Promise<OnchainIdentityRecord | undefined> {
+  const postgres = await getProcessPostgresStore("agora-onchain-identity");
+  if (postgres) {
+    const result = await postgres.pool.query<{ record: OnchainIdentityRecord }>(
+      "SELECT record FROM onchain_identities WHERE identity_key = $1",
+      [key]
+    );
+    return result.rows[0]?.record;
+  }
   const store = await readStore();
   return store.records.find((item) => item.key === key);
 }
 
 export async function upsertOnchainIdentityRecord(record: OnchainIdentityRecord): Promise<void> {
-  const store = await readStore();
-  const filtered = store.records.filter((item) => item.key !== record.key);
-  filtered.push(record);
-  await writeStore({ records: filtered });
+  const postgres = await getProcessPostgresStore("agora-onchain-identity");
+  if (postgres) {
+    await postgres.pool.query(`
+      INSERT INTO onchain_identities (
+        identity_key, role, registry_address, chain_id, wallet_address,
+        record, registered_at
+      ) VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7)
+      ON CONFLICT (identity_key) DO UPDATE SET
+        role = EXCLUDED.role,
+        registry_address = EXCLUDED.registry_address,
+        chain_id = EXCLUDED.chain_id,
+        wallet_address = EXCLUDED.wallet_address,
+        record = EXCLUDED.record,
+        registered_at = EXCLUDED.registered_at,
+        updated_at = clock_timestamp()
+    `, [
+      record.key, record.role, record.registryAddress, record.chainId,
+      record.walletAddress, JSON.stringify(record), new Date(record.registeredAt * 1_000)
+    ]);
+    return;
+  }
+  await withLocalFileLock(onchainIdentityStorePath, async () => {
+    const store = await readStore();
+    const filtered = store.records.filter((item) => item.key !== record.key);
+    filtered.push(record);
+    await writeStore({ records: filtered });
+  });
 }

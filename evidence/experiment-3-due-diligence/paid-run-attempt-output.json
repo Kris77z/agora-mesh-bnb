@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "experimentId": "full-due-diligence",
+  "status": "partial-payment-anomaly",
+  "missionId": "c311466f-85e4-469c-bbd7-e1ced0a3fe57",
+  "authorityId": "altana-x402-exp3-2dd94bd1-b32a-457b-badd-0fdd9e669399",
+  "target": {
+    "chainId": 97,
+    "proxy": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565"
+  },
+  "authority": {
+    "dailyLimitRaw": "1350000000000000000",
+    "receiptStoreSpentRaw": "750000000000000000",
+    "onchainTokenAllowanceRemainingRaw": "100000000000000000",
+    "walletTokenBalanceRaw": "6800000000000000000"
+  },
+  "completedServices": [
+    {
+      "serviceId": "auditor-v1",
+      "amountRaw": "500000000000000000",
+      "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+      "transaction": "0x026e68b9c8d70d286729f5226924c7649a5d6e810c06b3ecb57974bfeddf6fa5",
+      "blockNumber": 128610273,
+      "receiptStored": true
+    },
+    {
+      "serviceId": "verifier-v1",
+      "amountRaw": "250000000000000000",
+      "recipient": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb",
+      "transaction": "0xa4bf1462a1915eeb634ee18ed3f92ae24806e2d6e1d5c26154a4127a5c99d837",
+      "blockNumber": 128610309,
+      "receiptStored": true
+    }
+  ],
+  "orphanedSettlement": {
+    "serviceId": "auditor-v1",
+    "amountRaw": "500000000000000000",
+    "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+    "transaction": "0x0f55a8d790a6567218d667f1d0408826f60ae2697021598ebc2e5ac16d666a82",
+    "blockNumber": 128610232,
+    "receiptStored": false,
+    "clientOutcome": "x402 paid request returned 402",
+    "evidence": "A U Transfer log confirms the 0.5 U transfer, while no matching service receipt was persisted. The retry then settled a second 0.5 U Auditor payment."
+  },
+  "pendingServices": [
+    {
+      "serviceId": "investigator-v1",
+      "amountRaw": "350000000000000000"
+    },
+    {
+      "serviceId": "risk-verifier-v1",
+      "amountRaw": "250000000000000000"
+    }
+  ],
+  "investigatorFailure": {
+    "paid": false,
+    "error": "settlement failed: Execution reverted with reason: TRANSFER_FROM_FAILED",
+    "causeBoundByReadback": "The ERC-20 allowance from the Authority wallet to Permit2 is 0.1 U after 1.25 U of onchain transfers, below the requested 0.35 U."
+  },
+  "interpretation": "The intended Auditor and Finding Verifier phase completed, but an orphaned first Auditor settlement consumed 0.5 U without a stored receipt. Continuing under the same Authority would exceed its actual remaining onchain allowance even though receipt-only accounting reports 0.6 U remaining.",
+  "correctiveActionStatus": "completed",
+  "correctiveActionEvidence": {
+    "refund": "orphan-payment-refund-output.json",
+    "supplementAuthority": "supplement-authority-provision-output.json",
+    "supplementMission": "supplement-paid-run-output.json",
+    "supplementRevoke": "supplement-authority-revoke-output.json",
+    "final": "paid-run-final-output.json"
+  }
+}

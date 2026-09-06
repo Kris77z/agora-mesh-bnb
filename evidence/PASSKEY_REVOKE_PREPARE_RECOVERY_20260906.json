@@ -1,0 +1,7 @@
+{
+  "authorityId": "browser-cbb87207-05c8-4e4b-b053-e538b849c291",
+  "checkedAt": "2026-09-06T09:01:07.868Z",
+  "reportedFailure": "wallet_prepareCalls HTTP 502",
+  "sdkOrder": "await prepareCalls, then signCalls, then sendPreparedCalls",
+  "action": "Clear failed unsigned prepare intent; preserve invalid Authority and revoke lifecycle"
+}

@@ -10,9 +10,9 @@ import { motion } from 'motion/react';
 
 const STATS = [
     {
-        value: '400ms',
-        label: 'Settlement Time',
-        detail: 'Ultra-low latency on Monad — agent micro-payments settle instantly.',
+        value: 'Scoped',
+        label: 'Agent Authority',
+        detail: 'Allowlist, spend cap, expiry, and revoke are enforced at the wallet layer.',
     },
     {
         value: '100%',

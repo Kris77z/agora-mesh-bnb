@@ -16,6 +16,24 @@ export function NavHeader() {
             <nav className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
                 {/* Left: Nav Links */}
                 <div className="flex items-center gap-8">
+                    <Link
+                        href="/marketplace"
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                        Marketplace
+                    </Link>
+                    <Link
+                        href="/authority"
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                        Authority
+                    </Link>
+                    <Link
+                        href="/advantage"
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                        Advantage
+                    </Link>
                     <button
                         onClick={() => scrollTo('vision')}
                         className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -45,10 +63,10 @@ export function NavHeader() {
 
                 {/* Right: CTA */}
                 <Link
-                    href="/onboarding"
+                    href="/dashboard"
                     className="bg-foreground text-background px-5 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
                 >
-                    Launch App
+                    Give Hunter a Goal
                 </Link>
             </nav>
         </header>

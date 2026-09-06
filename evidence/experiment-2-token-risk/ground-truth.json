@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "artifactKind": "token-risk-ground-truth",
+  "status": "reviewed-by-deterministic-operator",
+  "experimentId": "token-risk",
+  "benchmarkId": "u-token-risk-chain97-block128449782",
+  "sourceHash": "sha256:9353ac941c96561edb1093b9439c1a5157284c3e181df75727d3154b2fd87c0c",
+  "reviewer": {
+    "type": "deterministic-operator",
+    "independentHuman": false
+  },
+  "reviewMethod": [
+    "independent RPC replay: 11/11 facts confirmed",
+    "422-address locked-block balance reconciliation equals totalSupply",
+    "PancakeSwap V2/V3 report-block reads",
+    "executed 0.1 U sell with final router allowance zero"
+  ],
+  "coverage": {
+    "originalMeasured": 5,
+    "postRunMeasured": 8,
+    "total": 8,
+    "added": [
+      "liquidity",
+      "sellabilityExecution",
+      "recentTransactions",
+      "holderConcentration"
+    ],
+    "partial": [],
+    "unavailable": []
+  },
+  "review": {
+    "version": 1,
+    "chainId": 97,
+    "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "sourceReportHash": "sha256:9353ac941c96561edb1093b9439c1a5157284c3e181df75727d3154b2fd87c0c",
+    "sourceObservedAt": "2026-09-01T07:48:25.652Z",
+    "verifiedAt": "2026-09-01T08:56:51.139Z",
+    "blockNumber": 128449782,
+    "engine": {
+      "method": "independent-rpc-replay",
+      "name": "agora-token-risk-verifier",
+      "version": "1",
+      "endpoint": "https://bsc-testnet-rpc.publicnode.com",
+      "independentTransport": true
+    },
+    "checks": [
+      {
+        "id": "target-runtime",
+        "status": "confirmed",
+        "expected": "{\"address\":\"0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565\",\"bytecodeHash\":\"0xae12b1d61f7ed4febf649ccf319cb49a0e921cca3739dcb01b47d316049d46ff\",\"bytecodeSize\":2007,\"classification\":\"erc20\"}",
+        "actual": "{\"address\":\"0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565\",\"bytecodeHash\":\"0xae12b1d61f7ed4febf649ccf319cb49a0e921cca3739dcb01b47d316049d46ff\",\"bytecodeSize\":2007,\"classification\":\"erc20\"}",
+        "evidence": "Replayed eth_getCode at block 128449782."
+      },
+      {
+        "id": "account-state",
+        "status": "confirmed",
+        "expected": "{\"nativeBalanceWei\":\"0\",\"transactionCount\":\"1\"}",
+        "actual": "{\"nativeBalanceWei\":\"0\",\"transactionCount\":\"1\"}",
+        "evidence": "Replayed eth_getBalance and eth_getTransactionCount at block 128449782."
+      },
+      {
+        "id": "token-metadata",
+        "status": "confirmed",
+        "expected": "{\"decimals\":18,\"name\":\"United Stables\",\"symbol\":\"U\",\"totalSupply\":\"10005250000000000000000000000\"}",
+        "actual": "{\"decimals\":18,\"name\":\"United Stables\",\"symbol\":\"U\",\"totalSupply\":\"10005250000000000000000000000\"}",
+        "evidence": "Replayed ERC-20 metadata calls at block 128449782."
+      },
+      {
+        "id": "ownership",
+        "status": "confirmed",
+        "expected": "{\"owner\":\"0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A\",\"probe\":\"owner()\",\"renounced\":false}",
+        "actual": "{\"owner\":\"0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A\",\"probe\":\"owner()\",\"renounced\":false}",
+        "evidence": "Replayed owner()/getOwner() probes at block 128449782."
+      },
+      {
+        "id": "proxy-control",
+        "status": "confirmed",
+        "expected": "{\"admin\":\"0x1e33d209C18f51d97F66eA461c6f819B59E78B30\",\"implementation\":\"0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc\",\"implementationBytecodeHash\":\"0x72a63adfb9af6944c694e1ecb76b566fd921a10ce98754f2f841a821ff8fb16f\",\"implementationBytecodeSize\":12027,\"standard\":\"eip-1967\"}",
+        "actual": "{\"admin\":\"0x1e33d209C18f51d97F66eA461c6f819B59E78B30\",\"implementation\":\"0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc\",\"implementationBytecodeHash\":\"0x72a63adfb9af6944c694e1ecb76b566fd921a10ce98754f2f841a821ff8fb16f\",\"implementationBytecodeSize\":12027,\"standard\":\"eip-1967\"}",
+        "evidence": "Replayed EIP-1967 slots and implementation bytecode at block 128449782."
+      },
+      {
+        "id": "risk-signals",
+        "status": "confirmed",
+        "expected": "[{\"confidence\":0.9,\"evidence\":\"owner() returned 0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A\",\"id\":\"privileged-owner\",\"severity\":\"low\",\"title\":\"Privileged owner is active\"},{\"confidence\":0.9,\"evidence\":\"implementation=0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc; admin=0x1e33d209C18f51d97F66eA461c6f819B59E78B30\",\"id\":\"eip1967-upgradeability\",\"severity\":\"medium\",\"title\":\"EIP-1967 proxy control detected\"},{\"confidence\":0.65,\"evidence\":\"implementation/runtime matched one of: mint(address,uint256), mint(uint256)\",\"id\":\"bytecode-capability-mint\",\"severity\":\"high\",\"title\":\"mint capability selector appears in runtime bytecode\"},{\"confidence\":0.65,\"evidence\":\"implementation/runtime matched one of: pause(), setPaused(bool)\",\"id\":\"bytecode-capability-pause\",\"severity\":\"medium\",\"title\":\"pause capability selector appears in runtime bytecode\"},{\"confidence\":0.85,\"evidence\":\"Opcode-aware scan found DELEGATECALL (0xf4) only in the EIP-1967 proxy runtime; treated as expected dispatch plumbing.\",\"id\":\"runtime-delegatecall\",\"severity\":\"info\",\"title\":\"Runtime bytecode can execute DELEGATECALL\"}]",
+        "actual": "[{\"confidence\":0.9,\"evidence\":\"owner() returned 0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A\",\"id\":\"privileged-owner\",\"severity\":\"low\",\"title\":\"Privileged owner is active\"},{\"confidence\":0.9,\"evidence\":\"implementation=0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc; admin=0x1e33d209C18f51d97F66eA461c6f819B59E78B30\",\"id\":\"eip1967-upgradeability\",\"severity\":\"medium\",\"title\":\"EIP-1967 proxy control detected\"},{\"confidence\":0.65,\"evidence\":\"implementation/runtime matched one of: mint(address,uint256), mint(uint256)\",\"id\":\"bytecode-capability-mint\",\"severity\":\"high\",\"title\":\"mint capability selector appears in runtime bytecode\"},{\"confidence\":0.65,\"evidence\":\"implementation/runtime matched one of: pause(), setPaused(bool)\",\"id\":\"bytecode-capability-pause\",\"severity\":\"medium\",\"title\":\"pause capability selector appears in runtime bytecode\"},{\"confidence\":0.85,\"evidence\":\"Opcode-aware scan found DELEGATECALL (0xf4) only in the EIP-1967 proxy runtime; treated as expected dispatch plumbing.\",\"id\":\"runtime-delegatecall\",\"severity\":\"info\",\"title\":\"Runtime bytecode can execute DELEGATECALL\"}]",
+        "evidence": "Recomputed selector and opcode signals from independently fetched runtime bytecode."
+      },
+      {
+        "id": "risk-score",
+        "status": "confirmed",
+        "expected": "51",
+        "actual": "51",
+        "evidence": "Recomputed the deterministic weighted risk score."
+      },
+      {
+        "id": "risk-level",
+        "status": "confirmed",
+        "expected": "\"high\"",
+        "actual": "\"high\"",
+        "evidence": "Recomputed the score-to-level threshold classification."
+      },
+      {
+        "id": "coverage",
+        "status": "confirmed",
+        "expected": "{\"accountState\":\"measured\",\"contractBytecode\":\"measured\",\"holderConcentration\":\"not-measured\",\"liquidity\":\"not-measured\",\"ownership\":\"measured\",\"proxySlots\":\"measured\",\"recentTransactions\":\"not-measured\",\"tokenMetadata\":\"measured\"}",
+        "actual": "{\"accountState\":\"measured\",\"contractBytecode\":\"measured\",\"holderConcentration\":\"not-measured\",\"liquidity\":\"not-measured\",\"ownership\":\"measured\",\"proxySlots\":\"measured\",\"recentTransactions\":\"not-measured\",\"tokenMetadata\":\"measured\"}",
+        "evidence": "Checked that measured and explicitly unmeasured dimensions were preserved."
+      },
+      {
+        "id": "limitations",
+        "status": "confirmed",
+        "expected": "[\"Holder concentration is not measured without a complete indexed holder dataset.\",\"Liquidity and sellability are not measured without verified DEX pool evidence.\",\"Transaction count is measured, but recent transaction behavior is not classified in this RPC-only profile.\",\"Bytecode selector matches indicate capability presence, not proof that every caller can use it.\"]",
+        "actual": "[\"Holder concentration is not measured without a complete indexed holder dataset.\",\"Liquidity and sellability are not measured without verified DEX pool evidence.\",\"Transaction count is measured, but recent transaction behavior is not classified in this RPC-only profile.\",\"Bytecode selector matches indicate capability presence, not proof that every caller can use it.\"]",
+        "evidence": "Checked that unsupported dimensions were not silently promoted to measured facts."
+      },
+      {
+        "id": "recommendation",
+        "status": "confirmed",
+        "expected": "\"Treat the target as elevated risk until privileged capabilities, proxy control, holders, and liquidity are manually verified.\"",
+        "actual": "\"Treat the target as elevated risk until privileged capabilities, proxy control, holders, and liquidity are manually verified.\"",
+        "evidence": "Recomputed the deterministic recommendation threshold."
+      }
+    ],
+    "summary": {
+      "confirmed": 11,
+      "mismatched": 0,
+      "unavailable": 0,
+      "total": 11
+    },
+    "conclusion": {
+      "status": "confirmed",
+      "originalRiskScore": 51,
+      "replayedRiskScore": 51,
+      "originalRiskLevel": "high",
+      "replayedRiskLevel": "high"
+    },
+    "limitations": [
+      "The verifier replays deterministic RPC facts and scoring only; it does not convert unmeasured holder, liquidity, sellability, or transaction dimensions into facts."
+    ]
+  },
+  "holderConcentration": {
+    "status": "measured",
+    "evidenceFile": "holder-snapshot-output.json",
+    "snapshotBlock": 128634278,
+    "holderCount": 422,
+    "totalSupplyRaw": "10005250000000000000000000000",
+    "top1PartsPerMillion": 999474,
+    "top5PartsPerMillion": 999998,
+    "top10PartsPerMillion": 999999,
+    "validation": {
+      "method": "indexed-set-balance-sum-equals-total-supply",
+      "complete": true,
+      "candidateAddressCount": 422,
+      "positiveBalanceCount": 422,
+      "blockBalanceSumRaw": "10005250000000000000000000000",
+      "totalSupplyRaw": "10005250000000000000000000000",
+      "sourceReportTotalSupplyRaw": "10005250000000000000000000000",
+      "balanceReadFailures": 0,
+      "missingSupplyRaw": "0",
+      "checks": [
+        "Every address from all BscScan holder-index pages was read with balanceOf at one locked block.",
+        "The sum of all positive indexed balances equals onchain totalSupply exactly.",
+        "The onchain totalSupply is unchanged from the paid source report."
+      ]
+    }
+  },
+  "sellabilityExecution": {
+    "status": "confirmed",
+    "evidenceFile": "sellability-execution-output.json",
+    "observedAt": "2026-09-02T03:45:54.129Z",
+    "blockNumber": 128609428,
+    "venue": "PancakeSwap V2",
+    "inputAmountRaw": "100000000000000000",
+    "outputAmountRaw": "36600134870660",
+    "slippageBps": 500,
+    "minimumOutRaw": "34770128127127",
+    "approvalTransaction": "0x84dd00669c5dbae51d370ee6f3472512a92ecbaa08d16a435241755ef75a393f",
+    "swapTransaction": "0x42899ccd795f4d4b0584eb1c29456c398a7a199180b2c381cf0f585cfc86980e",
+    "routerAllowanceAfterSwapRaw": "0"
+  },
+  "limitations": [
+    "Liquidity coverage is scoped to PancakeSwap V2/V3 U/WBNB pools and is not an all-DEX market survey.",
+    "Historical eth_call proves pool state at the report block but does not prove that present-day liquidity is unchanged.",
+    "Completeness relies on the BscScan holder index as the candidate set, then independently reconciles every candidate balance to onchain totalSupply at the locked block.",
+    "The snapshot is exact for the locked snapshot block and does not claim that holder balances are unchanged afterward.",
+    "Contract and exchange-controlled addresses are not de-duplicated by beneficial owner.",
+    "The executed sellability test proves the recorded 0.1 U route at its transaction block, not unlimited sellability or future liquidity.",
+    "The report-block DEX and recent-transaction evidence is immutable, hash-bound evidence reused after public RPC pruning; the new holder snapshot was independently read at its own locked block."
+  ]
+}

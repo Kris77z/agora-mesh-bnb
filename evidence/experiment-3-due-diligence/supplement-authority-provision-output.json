@@ -1,0 +1,19 @@
+{
+  "event": "altana_x402_authority_provisioned",
+  "authorityId": "altana-x402-exp3-supplement-a2b73ae4-800d-45c1-b6f2-7959176cf09c",
+  "chainId": 97,
+  "walletAddress": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+  "token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "tokenBalance": "7300000000000000000",
+  "dailyLimit": "600000000000000000",
+  "recipients": [
+    "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+    "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+  ],
+  "expiry": 1788409245,
+  "transactions": {
+    "grant": "0x6b27d73108d5d66d7d807ae3f4b9ac908a9252cccf9ca9374e61d5b8edc5646c",
+    "checkerApproval": "0xa3b7b4b1ff01bd20055526e0d9c874e2e1f3bbaca9f01fc3e8961d4a9dbedc2b",
+    "tokenApproval": "0x376e51e0a327f98be0440c080a931ada87724f18e3edde62fc370b9e41c56e49"
+  }
+}

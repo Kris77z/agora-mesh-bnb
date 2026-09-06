@@ -37,6 +37,42 @@ export function localizeHunterError(error: HunterError, locale: LanguageCode = D
           en: "Receipt signature verification failed",
           zh: "回执签名验证失败"
         });
+      case "SECURITY_SOURCE_REQUIRED":
+        return localizeByLocale(locale, {
+          en: "A smart-contract audit requires Solidity source, source JSON, or a BSC contract address",
+          zh: "智能合约审计需要 Solidity 源码、源码 JSON 或 BSC 合约地址"
+        });
+      case "SECURITY_SOURCE_API_KEY_MISSING":
+        return localizeByLocale(locale, {
+          en: "An Etherscan API key is required to resolve verified source from an address",
+          zh: "通过地址解析验证源码需要 Etherscan API Key"
+        });
+      case "SECURITY_SOURCE_UNVERIFIED":
+        return localizeByLocale(locale, {
+          en: "The contract has no usable verified Solidity source on the configured explorer",
+          zh: "该合约在配置的浏览器上没有可用的验证源码"
+        });
+      case "VERIFIER_UNAVAILABLE":
+        return localizeByLocale(locale, {
+          en: "No independent finding verifier is available",
+          zh: "没有可用的独立发现项验证服务"
+        });
+      case "AUDIT_REPORT_INVALID":
+        return localizeByLocale(locale, {
+          en: "The Auditor returned an invalid structured security report",
+          zh: "审计方返回的结构化安全报告无效"
+        });
+      case "VERIFICATION_REPORT_INVALID":
+      case "VERIFICATION_SOURCE_MISMATCH":
+        return localizeByLocale(locale, {
+          en: "The independent verification report is invalid or bound to different source",
+          zh: "独立验证报告无效，或绑定的源码不一致"
+        });
+      case "VERIFIER_RECEIPT_INVALID":
+        return localizeByLocale(locale, {
+          en: "Verifier receipt signature verification failed",
+          zh: "验证方回执签名验证失败"
+        });
       case "REACT_INCOMPLETE":
         return localizeByLocale(locale, {
           en: "The ReAct flow ended before payment and execution completed",
@@ -61,6 +97,16 @@ export function localizeHunterError(error: HunterError, locale: LanguageCode = D
         return error.message;
       case "COMMANDER_PHASE_TIMEOUT":
         return error.message;
+      case "COMMANDER_PHASE_BUDGET_EXCEEDED":
+        return localizeByLocale(locale, {
+          en: "Auditor and Verifier quotes exceed the remaining phase budget",
+          zh: "审计方与验证方报价合计超过当前阶段剩余预算"
+        });
+      case "COMMANDER_BUDGET_ASSET_MISMATCH":
+        return localizeByLocale(locale, {
+          en: "Service quote asset does not match the active Commander budget",
+          zh: "服务报价资产与当前 Commander 预算资产不一致"
+        });
       case "REGISTRY_READ_FAILED":
         return localizeByLocale(locale, {
           en: "Failed to read the service registry",
@@ -78,8 +124,8 @@ export function localizeHunterError(error: HunterError, locale: LanguageCode = D
         });
       case "INSUFFICIENT_BALANCE":
         return localizeByLocale(locale, {
-          en: "Hunter wallet has insufficient MON balance",
-          zh: "Hunter 钱包的 MON 余额不足"
+          en: "Hunter wallet has insufficient native-token balance",
+          zh: "Hunter 钱包的原生代币余额不足"
         });
       case "MISSING_SERVICES":
         return localizeByLocale(locale, {

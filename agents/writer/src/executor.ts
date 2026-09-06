@@ -7,8 +7,15 @@ import {
   type LanguageCode
 } from "@rebel/shared";
 import { WriterError } from "./errors.js";
+import { getWriterAgentId } from "./identity.js";
 import { writerConfig } from "./config.js";
 import { resolveSkillForTaskType, type LoadedSkill } from "./skill-loader.js";
+import { validateStructuredSkillOutput } from "./structured-output.js";
+import { runProductionOnchainInvestigation } from "./investigation/onchain-investigator.js";
+import { runProductionTokenRiskVerification } from "./investigation/token-risk-verifier.js";
+import { runDeterministicVerification } from "./verification/deterministic-verifier.js";
+import { getSkillRuntimeAvailability } from "./runtime-availability.js";
+import { withHardTimeout } from "./hard-timeout.js";
 
 function stripMarkdownFence(value: string): string {
   const trimmed = value.trim();
@@ -32,7 +39,16 @@ function normalizeSkillOutput(skill: LoadedSkill, output: string): string {
   } catch {
     throw new WriterError(502, "INVALID_SKILL_OUTPUT", `Skill ${skill.config.id} must return valid JSON`);
   }
-  return JSON.stringify(parsed, null, 2);
+  try {
+    return JSON.stringify(validateStructuredSkillOutput(skill.config.output.schemaName, parsed), null, 2);
+  } catch (error) {
+    throw new WriterError(
+      502,
+      "INVALID_SKILL_OUTPUT",
+      `Skill ${skill.config.id} returned JSON that does not match ${skill.config.output.schemaName ?? "its schema"}`,
+      error instanceof Error ? error.message : String(error)
+    );
+  }
 }
 
 function buildFallbackResult(
@@ -100,6 +116,17 @@ function buildWriterSystemPrompt(skill: LoadedSkill, locale: LanguageCode): stri
   ].join("\n");
 }
 
+export function assertSkillRuntimeAvailable(skill: LoadedSkill): void {
+  const availability = getSkillRuntimeAvailability(skill);
+  if (!availability.available) {
+    throw new WriterError(
+      503,
+      "AUDITOR_MODEL_UNAVAILABLE",
+      availability.reason ?? "Skill runtime is unavailable"
+    );
+  }
+}
+
 export async function executeTask(input: {
   taskType: string;
   taskInput: string;
@@ -112,6 +139,62 @@ export async function executeTask(input: {
   }
   const skill = resolveSkillForTaskType(input.taskType);
   const normalizedTaskType = skill.canonicalTaskType;
+  assertSkillRuntimeAvailable(skill);
+
+  if (skill.config.id === "verifier-v1") {
+    try {
+      return JSON.stringify(
+        runDeterministicVerification(
+          normalizedTask,
+          getWriterAgentId()
+        ),
+        null,
+        2
+      );
+    } catch (error) {
+      throw new WriterError(
+        400,
+        "INVALID_VERIFICATION_INPUT",
+        error instanceof Error ? error.message : "Verifier input must be valid source + findings JSON"
+      );
+    }
+  }
+
+  if (skill.config.id === "investigator-v1") {
+    try {
+      const report = await runProductionOnchainInvestigation(normalizedTask);
+      return JSON.stringify(
+        validateStructuredSkillOutput(skill.config.output.schemaName, report),
+        null,
+        2
+      );
+    } catch (error) {
+      if (error instanceof WriterError) throw error;
+      throw new WriterError(
+        502,
+        "INVESTIGATION_RPC_FAILED",
+        error instanceof Error ? error.message : "Onchain RPC investigation failed"
+      );
+    }
+  }
+
+  if (skill.config.id === "risk-verifier-v1") {
+    try {
+      const report = await runProductionTokenRiskVerification(normalizedTask);
+      return JSON.stringify(
+        validateStructuredSkillOutput(skill.config.output.schemaName, report),
+        null,
+        2
+      );
+    } catch (error) {
+      if (error instanceof WriterError) throw error;
+      throw new WriterError(
+        502,
+        "TOKEN_RISK_VERIFICATION_FAILED",
+        error instanceof Error ? error.message : "Historical token-risk replay failed"
+      );
+    }
+  }
 
   if (writerConfig.llm.provider === "none" || !writerConfig.llm.apiKey) {
     return buildFallbackResult(
@@ -133,20 +216,32 @@ export async function executeTask(input: {
       compatibility: "compatible"
     });
 
-    const { text } = await generateText({
-      model: provider.chat(writerConfig.llm.model),
-      system: buildWriterSystemPrompt(skill, locale),
-      prompt: [
-        `Task type: ${normalizedTaskType}`,
-        `Requested locale: ${locale}`,
-        `Task input: ${normalizedTask}`
-      ].join("\n"),
-      // Kimi models only accept temperature=1; override any skill-level config
-      temperature:
-        writerConfig.llm.provider === "kimi" ? 1 : (skill.config.llm?.temperature ?? undefined)
-    });
+    const { text } = await withHardTimeout(
+      writerConfig.llm.timeoutMs,
+      (abortSignal) => generateText({
+        model: provider.chat(writerConfig.llm.model),
+        system: buildWriterSystemPrompt(skill, locale),
+        prompt: [
+          `Task type: ${normalizedTaskType}`,
+          `Requested locale: ${locale}`,
+          `Task input: ${normalizedTask}`
+        ].join("\n"),
+        abortSignal,
+        // Kimi models only accept temperature=1; override any skill-level config
+        temperature:
+          writerConfig.llm.provider === "kimi" ? 1 : (skill.config.llm?.temperature ?? undefined)
+      }),
+      `${skill.config.id} model request`
+    );
     return normalizeSkillOutput(skill, text);
   } catch (error) {
+    if (skill.config.output.schemaName === "audit-vulnerabilities-v1") {
+      throw new WriterError(
+        502,
+        "AUDITOR_EXECUTION_FAILED",
+        error instanceof Error ? error.message : "Auditor model execution failed"
+      );
+    }
     // Keep local MVP flow unblocked when model call fails (e.g., invalid key / rate limits).
     return buildFallbackResult(
       {

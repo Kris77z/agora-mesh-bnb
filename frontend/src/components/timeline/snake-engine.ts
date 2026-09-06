@@ -3,6 +3,7 @@
  * No React dependency. Used by pipeline-snake.tsx.
  */
 import { formatMON } from '@/lib/format';
+import { publicChainConfig } from '@/lib/chain-config';
 
 /* ─── Types ─── */
 
@@ -156,7 +157,7 @@ export function syncFoodsFromNodes(
 
 export function formatEatLabel(food: SnakeFood): string {
     if (food.status === 'selected') {
-        const price = food.price ? `${formatMON(food.price)} MON` : 'selected';
+        const price = food.price ? `${formatMON(food.price)} ${publicChainConfig.token}` : 'selected';
         return `✓ ${food.id} (${food.taskType ?? 'agent'}) → ${price}`;
     }
     return `✗ ${food.id} (${food.taskType ?? 'agent'}) → skip`;

@@ -1,0 +1,18 @@
+{
+  "id": "investigator-v1",
+  "name": "BNB Onchain Investigator",
+  "description": "Produce source-timestamped contract, token, wallet, ownership, proxy, and bytecode risk facts from BNB RPC",
+  "taskTypes": ["onchain-investigation", "token-risk", "contract-risk", "wallet-risk"],
+  "skills": ["onchain", "erc20", "ownership", "proxy", "bytecode", "risk", "bnb", "evm"],
+  "priceWei": "15000000000000000",
+  "output": {
+    "type": "json",
+    "schemaName": "onchain-risk-report-v1"
+  },
+  "llm": {
+    "temperature": 0
+  },
+  "fallback": {
+    "summary": "RPC evidence is required; never fabricate token, holder, liquidity, or transaction facts."
+  }
+}

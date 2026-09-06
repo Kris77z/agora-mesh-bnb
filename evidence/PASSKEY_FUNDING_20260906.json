@@ -1,0 +1,28 @@
+{
+  "chainId": 97,
+  "destination": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+  "source": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+  "token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "createdAt": "2026-09-06T07:21:12.080Z",
+  "transactions": [
+    {
+      "asset": "tBNB",
+      "amountWei": "3000000000000000",
+      "beforeWei": "0",
+      "hash": "0x4fa89e1a67730c0eda4ae5c2fcdc280eff91ce8487cc9c218140018e4234d963",
+      "status": "confirmed"
+    },
+    {
+      "asset": "U",
+      "amountWei": "1150000000000000000",
+      "beforeWei": "0",
+      "hash": "0x148bcb5dbfb36d2cf2cd298e78bfed15dea270cba47e23d91dba60de79b2e89c",
+      "status": "confirmed"
+    }
+  ],
+  "finalBalances": {
+    "nativeWei": "3000000000000000",
+    "tokenWei": "1150000000000000000",
+    "checkedAt": "2026-09-06T07:21:35.459Z"
+  }
+}

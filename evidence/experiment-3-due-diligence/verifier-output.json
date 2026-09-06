@@ -1,0 +1,355 @@
+{
+  "version": 1,
+  "settlement": {
+    "status": "not-paid",
+    "reason": "Local Experiment 3 candidate run"
+  },
+  "sourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+  "timing": {
+    "startedAt": "2026-09-01T15:28:53.086Z",
+    "completedAt": "2026-09-01T15:28:54.783Z",
+    "durationMs": 1697.366
+  },
+  "engine": {
+    "serviceId": "verifier-v1",
+    "agentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb",
+    "engine": {
+      "method": "static-analysis",
+      "name": "slither",
+      "version": "0.11.6"
+    }
+  },
+  "report": {
+    "sourceName": "src/StablecoinV2.sol",
+    "sourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+    "engine": {
+      "method": "static-analysis",
+      "name": "slither",
+      "version": "0.11.6"
+    },
+    "verifications": [
+      {
+        "findingId": "unbounded-auto-mint-limit-bypass",
+        "status": "partial",
+        "method": "static-analysis",
+        "confidence": 0.78,
+        "evidence": {
+          "tool": "agora-solidity-rules@2",
+          "detector": "per-call-mint-limit",
+          "file": "src/Stablecoin.sol",
+          "lines": "L141",
+          "snippet": "function autoMint(address to, uint256 amount, uint256 seq, uint256 chain) external whenNotPaused notFrozen(to) onlyAutoOwner returns (bool) {",
+          "note": "The privileged mint path compares one amount to a limit but does not consume or accumulate the limit in the same function. This confirms per-call semantics; whether that violates policy requires documentation and runtime configuration review."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "auto-burns-owner-balance",
+        "status": "partial",
+        "method": "static-analysis",
+        "confidence": 0.78,
+        "evidence": {
+          "tool": "agora-solidity-rules@2",
+          "detector": "cross-role-owner-burn",
+          "file": "src/Stablecoin.sol",
+          "lines": "L173",
+          "snippet": "function autoBurn(uint256 amount, uint256 seq, uint256 chain) external whenNotPaused onlyAutoOwner returns (bool) {",
+          "note": "A function restricted to autoOwner resolves owner() and burns that address's balance without an allowance check. This confirms the role interaction; its security classification depends on the intended role policy and current role addresses."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "v2-initializer-unprotected",
+        "status": "partial",
+        "method": "static-analysis",
+        "confidence": 0.78,
+        "evidence": {
+          "tool": "agora-solidity-rules@2",
+          "detector": "unprotected-initializer",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L50",
+          "snippet": "function initializeV2() public reinitializer(2) {",
+          "note": "The initializer/reinitializer is externally callable without an explicit authorization modifier. This confirms the source structure only; exploitability depends on atomic deployment/upgrade execution and current initialization state."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "front-runnable-v1-initializer",
+        "status": "partial",
+        "method": "static-analysis",
+        "confidence": 0.78,
+        "evidence": {
+          "tool": "agora-solidity-rules@2",
+          "detector": "unprotected-initializer",
+          "file": "src/Stablecoin.sol",
+          "lines": "L50",
+          "snippet": "function initialize(string memory _name, string memory _symbol) public initializer {",
+          "note": "The initializer/reinitializer is externally callable without an explicit authorization modifier. This confirms the source structure only; exploitability depends on atomic deployment/upgrade execution and current initialization state."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-917fca272d4294c3",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "incorrect-exp",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+          "lines": "L117",
+          "snippet": "}",
+          "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) has bitwise-xor operator ^ instead of the exponentiation operator **: - inverse = (3 * denominator) ^ 2 (MathUpgradeable.sol#117) Impact: High; Slither confidence: Medium. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-e218ba6ff64dbb9c",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "divide-before-multiply",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+          "lines": "L102",
+          "snippet": "*/",
+          "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - denominator = denominator / twos (MathUpgradeable.sol#102) - inverse *= 2 - denominator * inverse (MathUpgradeable.sol#126) Impact: Medium; Slither confidence: Medium. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-b8d9ea78ea820eef",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "divide-before-multiply",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+          "lines": "L105",
+          "snippet": "}",
+          "note": "MathUpgradeable.mulDiv(uint256,uint256,uint256) (MathUpgradeable.sol#55-135) performs a multiplication on the result of a division: - prod0 = prod0 / twos (MathUpgradeable.sol#105) - result = prod0 * inverse (MathUpgradeable.sol#132) Impact: Medium; Slither confidence: Medium. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-d960d4a24a412ed9",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L249",
+          "snippet": "abstract contract Initializable {",
+          "note": "StablecoinV2.cancelAuthorization(address,bytes32).nonce (StablecoinV2.sol#249) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-fc67dac7ade986de",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/Stablecoin.sol",
+          "lines": "L242",
+          "snippet": "* /// @custom:oz-upgrades-unsafe-allow constructor",
+          "note": "Stablecoin._approve(address,address,uint256).owner (Stablecoin.sol#242) shadows: - OwnableUpgradeable.owner() (OwnableUpgradeable.sol#48-50) (function) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-c9757d6e36a3e655",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L169",
+          "snippet": "}",
+          "note": "StablecoinV2.receiveWithAuthorization(address,address,uint256,uint256,uint256,bytes32,bytes).nonce (StablecoinV2.sol#169) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-429b679644bd121c",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L204",
+          "snippet": "* function so it can only be called once. The {initializer} modifier provided by this contract will have this effect.",
+          "note": "StablecoinV2._transferOrReceiveWithAuthorization(bytes32,address,address,uint256,uint256,uint256,bytes32,bytes).nonce (StablecoinV2.sol#204) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-651e903ee48aa032",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/Stablecoin.sol",
+          "lines": "L50",
+          "snippet": "* Internal function without access restriction.",
+          "note": "Stablecoin.initialize(string,string)._symbol (Stablecoin.sol#50) shadows: - ERC20Upgradeable._symbol (ERC20Upgradeable.sol#44) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-ac42eddd8fcde381",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L141",
+          "snippet": "_transferOwnership(address(0));",
+          "note": "StablecoinV2.receiveWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32).nonce (StablecoinV2.sol#141) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-6d8f985b487ca56a",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/Stablecoin.sol",
+          "lines": "L178",
+          "snippet": "* @dev Interface of the ERC1271 standard signature validation method for",
+          "note": "Stablecoin.autoBurn(uint256,uint256,uint256).owner (Stablecoin.sol#178) shadows: - OwnableUpgradeable.owner() (OwnableUpgradeable.sol#48-50) (function) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-665adecfc548bf4b",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+          "lines": "L47",
+          "snippet": "",
+          "note": "ERC20PermitUpgradeable.__ERC20Permit_init(string).name (draft-ERC20PermitUpgradeable.sol#47) shadows: - ERC20Upgradeable.name() (ERC20Upgradeable.sol#67-69) (function) - IERC20MetadataUpgradeable.name() (IERC20MetadataUpgradeable.sol#17) (function) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-ac9b961e01df9900",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L112",
+          "snippet": "* @dev Throws if called by any account other than the owner.",
+          "note": "StablecoinV2.transferWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32).nonce (StablecoinV2.sol#112) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-22a093b1bfed35ec",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L88",
+          "snippet": "* By default, the owner account will be the one that deploys the contract. This",
+          "note": "StablecoinV2.transferWithAuthorization(address,address,uint256,uint256,uint256,bytes32,bytes).nonce (StablecoinV2.sol#88) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-a4a2580e6980fdea",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "shadowing-local",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L183",
+          "snippet": "interface IERC1271Upgradeable {",
+          "note": "StablecoinV2.authorizationState(address,bytes32).nonce (StablecoinV2.sol#183) shadows: - Stablecoin.nonce (Stablecoin.sol#30) (state variable) Impact: Low; Slither confidence: High. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-a45f8feff7a016b5",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "missing-zero-check",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol",
+          "lines": "L42",
+          "snippet": "*/",
+          "note": "Ownable2StepUpgradeable.transferOwnership(address).newOwner (Ownable2StepUpgradeable.sol#42) lacks a zero-check on : - _pendingOwner = newOwner (Ownable2StepUpgradeable.sol#43) Impact: Low; Slither confidence: Medium. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-c1f312a39444612d",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "timestamp",
+          "file": "src/StablecoinV2.sol",
+          "lines": "L208",
+          "snippet": "* case an upgrade adds a module that needs to be initialized.",
+          "note": "StablecoinV2._transferOrReceiveWithAuthorization(bytes32,address,address,uint256,uint256,uint256,bytes32,bytes) (StablecoinV2.sol#197-242) uses timestamp for comparisons Dangerous comparisons: - require(bool,string)(block.timestamp > validAfter,Authorization not yet valid) (StablecoinV2.sol#208) - r... Impact: Low; Slither confidence: Medium. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      },
+      {
+        "findingId": "missed-c479ac4f040a0e68",
+        "status": "missed",
+        "method": "static-analysis",
+        "confidence": 0.9,
+        "evidence": {
+          "tool": "slither@0.11.6",
+          "detector": "timestamp",
+          "file": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+          "lines": "L65",
+          "snippet": "",
+          "note": "ERC20PermitUpgradeable.permit(address,address,uint256,uint256,uint8,bytes32,bytes32) (draft-ERC20PermitUpgradeable.sol#56-75) uses timestamp for comparisons Dangerous comparisons: - require(bool,string)(block.timestamp <= deadline,ERC20Permit: expired deadline) (draft-ERC20PermitUpgradeable.sol#65) Impact: Low; Slither confidence: Medium. No supplied auditor finding matched this detector."
+        },
+        "verifierAgentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb"
+      }
+    ],
+    "summary": {
+      "confirmed": 0,
+      "rejected": 0,
+      "partial": 4,
+      "inconclusive": 0,
+      "missed": 17
+    }
+  }
+}

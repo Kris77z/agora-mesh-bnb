@@ -9,10 +9,10 @@ import {
 import { hunterConfig } from "./config.js";
 
 function getOnchainRegistrationKey(): string | undefined {
-  if (!hunterConfig.identity.onchain.registryAddress || !hunterConfig.privateKey) {
+  if (!hunterConfig.identity.onchain.registryAddress || !hunterConfig.identity.onchain.ownerAddress) {
     return undefined;
   }
-  const walletAddress = new ethers.Wallet(hunterConfig.privateKey).address.toLowerCase();
+  const walletAddress = hunterConfig.identity.onchain.ownerAddress.toLowerCase();
   return [
     "hunter",
     hunterConfig.chainId.toString(10),

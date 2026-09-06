@@ -1,5 +1,5 @@
 import { asRecord } from '@/lib/type-guards';
-import type { AgentEvent, HunterRunResult } from '@/types/agent';
+import type { AgentEvent, HunterRunResult, Money } from '@/types/agent';
 
 /* ─── Types ─── */
 
@@ -13,10 +13,10 @@ export interface CommanderPhaseView {
 }
 
 export interface CommanderBudget {
-    maxTotalWei?: string;
-    maxPerPhaseWei?: string;
+    maxTotal?: Money;
+    maxPerPhase?: Money;
     maxPhases?: number;
-    spentWei?: string;
+    spent?: Money;
 }
 
 /* ─── Status display markers ─── */
@@ -54,7 +54,7 @@ export function addUnsignedIntegerStrings(a: string, b: string): string {
 
 /* ─── Event data extractors ─── */
 
-export function readTotalPaymentWei(events: AgentEvent[]): string | undefined {
+export function readTotalPaymentAmount(events: AgentEvent[]): string | undefined {
     let total = '0';
     let hasValue = false;
     for (const event of events) {
@@ -133,11 +133,14 @@ export function readCommanderBudget(
         .find((ev) => ev.type === 'mission_decomposed' && typeof ev.data === 'object');
     const budgetRecord = asRecord(asRecord(latestMission?.data)?.budget);
     if (budgetRecord) {
+        const maxTotal = readMoney(budgetRecord.maxTotal);
+        const maxPerPhase = readMoney(budgetRecord.maxPerPhase);
+        const spent = readMoney(budgetRecord.spent);
         return {
-            maxTotalWei: typeof budgetRecord.maxTotalWei === 'string' ? budgetRecord.maxTotalWei : undefined,
-            maxPerPhaseWei: typeof budgetRecord.maxPerPhaseWei === 'string' ? budgetRecord.maxPerPhaseWei : undefined,
+            maxTotal,
+            maxPerPhase,
             maxPhases: typeof budgetRecord.maxPhases === 'number' ? budgetRecord.maxPhases : undefined,
-            spentWei: typeof budgetRecord.spentWei === 'string' ? budgetRecord.spentWei : undefined,
+            spent,
         };
     }
 
@@ -146,9 +149,36 @@ export function readCommanderBudget(
         .find((ev) => ev.type === 'run_started' && typeof ev.data === 'object');
     const runData = asRecord(latestRun?.data);
     return {
-        maxTotalWei: typeof runData?.maxTotalWei === 'string' ? runData.maxTotalWei : undefined,
-        maxPerPhaseWei: typeof runData?.maxPerPhaseWei === 'string' ? runData.maxPerPhaseWei : undefined,
+        maxTotal: readMoney(runData?.maxTotal),
+        maxPerPhase: readMoney(runData?.maxPerPhase),
         maxPhases: typeof runData?.maxPhases === 'number' ? runData.maxPhases : undefined,
+    };
+}
+
+function readMoney(value: unknown): Money | undefined {
+    const record = asRecord(value);
+    const asset = asRecord(record?.asset);
+    if (
+        typeof record?.amount !== 'string' ||
+        !/^\d+$/.test(record.amount) ||
+        typeof asset?.chainId !== 'number' ||
+        (asset.kind !== 'native' && asset.kind !== 'erc20') ||
+        typeof asset.symbol !== 'string' ||
+        typeof asset.decimals !== 'number'
+    ) {
+        return undefined;
+    }
+    return {
+        amount: record.amount,
+        asset: {
+            chainId: asset.chainId,
+            kind: asset.kind,
+            address: typeof asset.address === 'string' && asset.address.startsWith('0x')
+                ? asset.address as `0x${string}`
+                : undefined,
+            symbol: asset.symbol,
+            decimals: asset.decimals,
+        },
     };
 }
 

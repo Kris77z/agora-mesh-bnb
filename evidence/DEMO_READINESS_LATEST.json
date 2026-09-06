@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-09-06T10:07:16.083Z",
+  "origin": "http://localhost:3000",
+  "allPassed": true,
+  "checks": [
+    {
+      "name": "/advantage",
+      "ok": true,
+      "detail": "HTTP 200",
+      "elapsedMs": 244
+    },
+    {
+      "name": "/authority/manage",
+      "ok": true,
+      "detail": "HTTP 200",
+      "elapsedMs": 100
+    },
+    {
+      "name": "/compare",
+      "ok": true,
+      "detail": "HTTP 200",
+      "elapsedMs": 99
+    },
+    {
+      "name": "/marketplace",
+      "ok": true,
+      "detail": "HTTP 200",
+      "elapsedMs": 134
+    },
+    {
+      "name": "/tasks/f95f0637-cbd2-4c03-b72c-cf7498a453f3",
+      "ok": true,
+      "detail": "HTTP 200",
+      "elapsedMs": 229
+    },
+    {
+      "name": "Altana Relay",
+      "ok": true,
+      "detail": "Chain 97 capabilities available",
+      "elapsedMs": 813
+    },
+    {
+      "name": "Auditor",
+      "ok": true,
+      "detail": "Healthy on BNB testnet",
+      "elapsedMs": 120
+    },
+    {
+      "name": "BNB RPC",
+      "ok": true,
+      "detail": "Chain 97 confirmed",
+      "elapsedMs": 672
+    },
+    {
+      "name": "Hunter",
+      "ok": true,
+      "detail": "Healthy on BNB testnet",
+      "elapsedMs": 201
+    },
+    {
+      "name": "Independent Verifier",
+      "ok": true,
+      "detail": "Slither 0.11.6 available on chain 97",
+      "elapsedMs": 513
+    },
+    {
+      "name": "Live audit competition",
+      "ok": true,
+      "detail": "2 independent audit providers",
+      "elapsedMs": 513
+    }
+  ],
+  "notCovered": [
+    "Device signing and three fresh browser runs",
+    "Model response latency/quality",
+    "Actual Altana Explorer indexed display",
+    "Public deployment and submission links"
+  ]
+}

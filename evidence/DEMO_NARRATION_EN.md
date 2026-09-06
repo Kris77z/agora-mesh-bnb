@@ -1,0 +1,14 @@
+# Evidence-based demo narration
+
+Working cut: approximately 3 minutes. Recording and upload are not yet complete. Confirm any final event video limit before export.
+
+| Time | Visual | Spoken English |
+|---|---|---|
+| 0:00–0:25 | Marketplace; one bounded goal | Agora Mesh makes Hunter the buyer in a security-focused agent marketplace on BNB. A user sets a goal, an allowed budget and a time limit. Hunter discovers specialist services, compares offers, pays for delivery and obtains independent verification. |
+| 0:25–0:50 | Saved live-offer comparison; label “Recorded offer snapshot” | Auditor and Sentinel have separate provider wallets. Offers expose capability, price, reputation and declared latency. In our recorded comparison, Sentinel ranked first. This is a transparent selection result; we have not yet demonstrated a change of provider when requirements change. |
+| 0:50–1:25 | Historical mission f95f0637…; label “Recorded testnet run — operator-assisted recovery” | Here is a recorded Passkey-wallet task. The Auditor received half a testnet U, and the independent Verifier received a quarter. Delivery stalled, so the original paid order was recovered without a second Auditor payment. The report and transaction evidence are preserved. This was an assisted run, not an uninterrupted browser acceptance test. |
+| 1:25–1:55 | Recorded Authority policy and three revoke receipts; label “Historical evidence” | Altana separates the owner’s device approval from Hunter’s session key. The policy restricts recipients, spending and expiry. In this recorded lifecycle, the user revoked permissions and the session material was deleted. The final rejection check happened after expiry, so that check alone does not isolate revocation as its cause. |
+| 1:55–2:30 | Three-row comparison table with both units visible | We recorded three comparisons: contract audit, token risk and due diligence. The rubric scores favored the agent workflows, with automated and AI review disclosed. All three workflows took longer than their baselines. Testnet U is not comparable to dollar API cost. Our supported value is broader evidence coverage, independent checking and traceable payments—not a demonstrated speed or cost saving. |
+| 2:30–3:00 | Evidence index and delivery status | This is a working local prototype with real BNB Testnet transactions. Browser acceptance is currently paused because local execution has been unstable. A stable public demo and visual verification of Altana Explorer indexing remain to be completed. The attached evidence shows what worked, how it was measured and where the limits remain. |
+
+Do not film raw SDK request bodies, management capabilities or environment files. Use the frozen report and receipt views, not a staged successful wallet interaction. Use readable cuts rather than accelerated failed transactions. No video has been created by this document.

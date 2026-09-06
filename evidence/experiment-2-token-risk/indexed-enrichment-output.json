@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "experimentId": "token-risk",
+  "enrichmentKind": "post-run-index-and-dex-enrichment",
+  "settlement": {
+    "status": "not-paid",
+    "reason": "Read-only post-run enrichment; payment-required indexers were not called with payment credentials."
+  },
+  "source": {
+    "missionId": "ed7c47dd-3941-4976-b020-283e0104dc11",
+    "evidenceFile": "paid-run-output.json",
+    "reportHash": "sha256:9353ac941c96561edb1093b9439c1a5157284c3e181df75727d3154b2fd87c0c",
+    "blockNumber": 128449782,
+    "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565"
+  },
+  "timing": {
+    "startedAt": "2026-09-02T06:53:20.127Z",
+    "completedAt": "2026-09-02T06:53:22.225Z",
+    "durationMs": 2097.89
+  },
+  "dex": {
+    "version": 1,
+    "chainId": 97,
+    "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "blockNumber": 128449782,
+    "observedAt": "2026-09-01T14:13:15.028Z",
+    "engine": {
+      "name": "agora-token-risk-dex-enrichment",
+      "version": "1",
+      "method": "historical-eth-call",
+      "endpoint": "https://bsc-testnet-rpc.publicnode.com"
+    },
+    "scope": {
+      "venue": "PancakeSwap",
+      "versions": [
+        "v2",
+        "v3"
+      ],
+      "quoteAsset": "WBNB"
+    },
+    "wrappedNative": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+    "v2": {
+      "factory": "0x6725F303b657a9451d8BA641348b6761A6CC7a17",
+      "router": "0xD99D1c33F9fC3444f8101754aBC46c52416550D1",
+      "pair": "0x55ed32b1808d4Bb9aD8DF8201494b74B982915F8",
+      "pairExists": true,
+      "token0": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "token1": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "reserveTokenRaw": "164239087694391768135",
+      "reserveWrappedNativeRaw": "60343567796047093",
+      "lpTotalSupplyRaw": "2813000659018221377",
+      "tokenReservePartsPerBillionOfSupply": "16"
+    },
+    "v3": {
+      "factory": "0x0BFbCF9fa4f9C56B0F40a671Ad40E0805A091865",
+      "pools": [
+        {
+          "fee": 100,
+          "pool": "0x0000000000000000000000000000000000000000",
+          "exists": false
+        },
+        {
+          "fee": 500,
+          "pool": "0x8f612EDcc2bf23a6a48C9344cF952158c63De990",
+          "exists": true,
+          "liquidityRaw": "0",
+          "sqrtPriceX96": "2019929733431671255394833839091",
+          "tick": 64772,
+          "unlocked": true
+        },
+        {
+          "fee": 2500,
+          "pool": "0x0000000000000000000000000000000000000000",
+          "exists": false
+        },
+        {
+          "fee": 10000,
+          "pool": "0x0000000000000000000000000000000000000000",
+          "exists": false
+        }
+      ]
+    },
+    "quote": {
+      "status": "quote-only",
+      "inputTokenRaw": "1000000000000000000",
+      "path": [
+        "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+        "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+      ],
+      "limitation": "A router quote is not an executed transfer or swap and cannot prove sellability.",
+      "outputWrappedNativeRaw": "364463459752074"
+    },
+    "coverage": {
+      "liquidity": "measured",
+      "sellability": "measured"
+    },
+    "interpretation": "A nonzero PancakeSwap V2 U/WBNB pool exists; 0 of 1 discovered V3 pools had active liquidity at the bound block.",
+    "limitations": [
+      "Liquidity coverage is scoped to PancakeSwap V2/V3 U/WBNB pools and is not an all-DEX market survey.",
+      "Historical eth_call proves pool state at the report block but does not prove that present-day liquidity is unchanged."
+    ]
+  },
+  "indexedData": {
+    "holderConcentration": {
+      "status": "measured",
+      "evidenceFile": "holder-snapshot-output.json",
+      "snapshotBlock": 128634278,
+      "holderCount": 422,
+      "totalSupplyRaw": "10005250000000000000000000000",
+      "top1PartsPerMillion": 999474,
+      "top5PartsPerMillion": 999998,
+      "top10PartsPerMillion": 999999,
+      "validation": {
+        "method": "indexed-set-balance-sum-equals-total-supply",
+        "complete": true,
+        "candidateAddressCount": 422,
+        "positiveBalanceCount": 422,
+        "blockBalanceSumRaw": "10005250000000000000000000000",
+        "totalSupplyRaw": "10005250000000000000000000000",
+        "sourceReportTotalSupplyRaw": "10005250000000000000000000000",
+        "balanceReadFailures": 0,
+        "missingSupplyRaw": "0",
+        "checks": [
+          "Every address from all BscScan holder-index pages was read with balanceOf at one locked block.",
+          "The sum of all positive indexed balances equals onchain totalSupply exactly.",
+          "The onchain totalSupply is unchanged from the paid source report."
+        ]
+      }
+    },
+    "recentTransactions": {
+      "status": "measured",
+      "observedTransfers": 3,
+      "blockRange": {
+        "from": 128439782,
+        "to": 128449782
+      },
+      "activity": {
+        "transfers": 3,
+        "uniqueTransactions": 3,
+        "mints": 0,
+        "burns": 0,
+        "uniqueSenders": 3,
+        "uniqueRecipients": 3,
+        "transferredRaw": "21350000000000000000",
+        "firstBlock": 128439842,
+        "lastBlock": 128449774
+      }
+    },
+    "attempts": [
+      {
+        "source": "bscscan-holder-index",
+        "dimension": "holder-concentration",
+        "endpoint": "https://testnet.bscscan.com/token/generic-tokenholders2?a=0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565&ps=100",
+        "status": "available",
+        "detail": "422 indexed balances were read at block 128634278 and reconciled exactly to totalSupply.",
+        "observedRecords": 422,
+        "blockRange": {
+          "from": 128449782,
+          "to": 128449782
+        }
+      },
+      {
+        "source": "rpc-transfer-logs",
+        "dimension": "recent-transactions",
+        "endpoint": "https://bsc-testnet-rpc.publicnode.com",
+        "status": "available",
+        "detail": "A bounded 10,000-block Transfer log window was returned.",
+        "observedRecords": 3,
+        "blockRange": {
+          "from": 128439782,
+          "to": 128449782
+        },
+        "activity": {
+          "transfers": 3,
+          "uniqueTransactions": 3,
+          "mints": 0,
+          "burns": 0,
+          "uniqueSenders": 3,
+          "uniqueRecipients": 3,
+          "transferredRaw": "21350000000000000000",
+          "firstBlock": 128439842,
+          "lastBlock": 128449774
+        }
+      },
+      {
+        "source": "etherscan-v2",
+        "dimension": "holder-concentration",
+        "endpoint": "https://api.etherscan.io",
+        "status": "unavailable",
+        "detail": "BSC testnet access is not included in the configured free API tier."
+      },
+      {
+        "source": "etherscan-v2",
+        "dimension": "recent-transactions",
+        "endpoint": "https://api.etherscan.io",
+        "status": "unavailable",
+        "detail": "BSC testnet access is not included in the configured free API tier."
+      },
+      {
+        "source": "blockscout",
+        "dimension": "holder-concentration",
+        "endpoint": "https://api.blockscout.com",
+        "status": "payment-required",
+        "detail": "The chain-97 index requires an API key or a new x402 payment; neither was authorized for this post-run enrichment."
+      },
+      {
+        "source": "blockscout",
+        "dimension": "recent-transactions",
+        "endpoint": "https://api.blockscout.com",
+        "status": "payment-required",
+        "detail": "The chain-97 index requires an API key or a new x402 payment; neither was authorized for this post-run enrichment."
+      }
+    ]
+  },
+  "sellabilityExecution": {
+    "status": "confirmed",
+    "evidenceFile": "sellability-execution-output.json",
+    "observedAt": "2026-09-02T03:45:54.129Z",
+    "blockNumber": 128609428,
+    "venue": "PancakeSwap V2",
+    "inputAmountRaw": "100000000000000000",
+    "outputAmountRaw": "36600134870660",
+    "slippageBps": 500,
+    "minimumOutRaw": "34770128127127",
+    "approvalTransaction": "0x84dd00669c5dbae51d370ee6f3472512a92ecbaa08d16a435241755ef75a393f",
+    "swapTransaction": "0x42899ccd795f4d4b0584eb1c29456c398a7a199180b2c381cf0f585cfc86980e",
+    "routerAllowanceAfterSwapRaw": "0"
+  },
+  "coverage": {
+    "originalMeasured": 5,
+    "postRunMeasured": 8,
+    "total": 8,
+    "added": [
+      "liquidity",
+      "sellabilityExecution",
+      "recentTransactions",
+      "holderConcentration"
+    ],
+    "partial": [],
+    "unavailable": []
+  },
+  "limitations": [
+    "Liquidity coverage is scoped to PancakeSwap V2/V3 U/WBNB pools and is not an all-DEX market survey.",
+    "Historical eth_call proves pool state at the report block but does not prove that present-day liquidity is unchanged.",
+    "Completeness relies on the BscScan holder index as the candidate set, then independently reconciles every candidate balance to onchain totalSupply at the locked block.",
+    "The snapshot is exact for the locked snapshot block and does not claim that holder balances are unchanged afterward.",
+    "Contract and exchange-controlled addresses are not de-duplicated by beneficial owner.",
+    "The executed sellability test proves the recorded 0.1 U route at its transaction block, not unlimited sellability or future liquidity.",
+    "The report-block DEX and recent-transaction evidence is immutable, hash-bound evidence reused after public RPC pruning; the new holder snapshot was independently read at its own locked block."
+  ]
+}

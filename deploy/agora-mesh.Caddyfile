@@ -1,0 +1,35 @@
+agora-mesh.112-74-165-78.nip.io {
+	encode zstd gzip
+
+	handle_path /api/hunter/* {
+		reverse_proxy 127.0.0.1:3102
+	}
+
+	handle_path /api/registry/* {
+		reverse_proxy 127.0.0.1:3103
+	}
+
+	handle_path /api/auditor/* {
+		reverse_proxy 127.0.0.1:3101
+	}
+
+	handle_path /api/verifier/* {
+		reverse_proxy 127.0.0.1:3104
+	}
+
+	handle_path /api/investigator/* {
+		reverse_proxy 127.0.0.1:3105
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:3100
+	}
+
+	header {
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Content-Type-Options nosniff
+		X-Frame-Options SAMEORIGIN
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		-Server
+	}
+}

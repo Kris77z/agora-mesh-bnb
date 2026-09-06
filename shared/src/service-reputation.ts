@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { ServiceInfo, ServiceReputation, ServiceReputationTrend } from "./types.js";
+import { getProcessPostgresStore } from "./storage-backend.js";
 
 export interface ServiceFeedbackEntry {
   serviceId: string;
@@ -58,6 +59,30 @@ async function writeStore(payload: ServiceFeedbackStore): Promise<void> {
   await writeFile(defaultStorePath, JSON.stringify(payload, null, 2), "utf8");
 }
 
+async function readFeedbackEntries(serviceId?: string): Promise<ServiceFeedbackEntry[]> {
+  const postgres = await getProcessPostgresStore("agora-service-reputation");
+  if (!postgres) {
+    const entries = (await readStore()).feedback;
+    return serviceId === undefined
+      ? entries
+      : entries.filter((item) => item.serviceId === serviceId.trim());
+  }
+  return (await postgres.listServiceFeedback(serviceId?.trim())).map((row) => {
+    const evidence = row.evidence && typeof row.evidence === "object"
+      ? row.evidence as { taskType?: unknown; comment?: unknown }
+      : {};
+    return {
+      serviceId: row.serviceId,
+      hunterId: row.agentId,
+      missionId: row.missionId,
+      score: row.value,
+      taskType: typeof evidence.taskType === "string" ? evidence.taskType : "unknown",
+      ...(typeof evidence.comment === "string" ? { comment: evidence.comment } : {}),
+      timestamp: Math.floor(Date.parse(row.createdAt) / 1_000)
+    };
+  });
+}
+
 export async function appendServiceFeedbackEntry(input: {
   serviceId: string;
   hunterId: string;
@@ -67,7 +92,6 @@ export async function appendServiceFeedbackEntry(input: {
   comment?: string;
   timestamp?: number;
 }): Promise<ServiceFeedbackEntry> {
-  const store = await readStore();
   const entry: ServiceFeedbackEntry = {
     serviceId: input.serviceId.trim(),
     hunterId: input.hunterId.trim(),
@@ -80,15 +104,26 @@ export async function appendServiceFeedbackEntry(input: {
         ? Math.floor(input.timestamp)
         : Math.floor(Date.now() / 1000)
   };
+  const postgres = await getProcessPostgresStore("agora-service-reputation");
+  if (postgres) {
+    await postgres.appendServiceFeedback({
+      serviceId: entry.serviceId,
+      agentId: entry.hunterId,
+      missionId: entry.missionId,
+      value: entry.score,
+      evidence: { taskType: entry.taskType, ...(entry.comment ? { comment: entry.comment } : {}) },
+      createdAt: new Date(entry.timestamp * 1_000)
+    });
+    return entry;
+  }
+  const store = await readStore();
   store.feedback.push(entry);
   await writeStore(store);
   return entry;
 }
 
 export async function listServiceFeedbackEntries(serviceId: string): Promise<ServiceFeedbackEntry[]> {
-  const store = await readStore();
-  const normalized = serviceId.trim();
-  return store.feedback.filter((item) => item.serviceId === normalized);
+  return readFeedbackEntries(serviceId);
 }
 
 function computeTrend(values: number[]): ServiceReputationTrend {
@@ -170,11 +205,11 @@ export async function getServiceReputationMap(input: {
   now?: number;
   minimumSamples?: number;
 } = {}): Promise<Map<string, ServiceReputation>> {
-  const store = await readStore();
+  const entries = await readFeedbackEntries();
   const now = input.now ?? Math.floor(Date.now() / 1000);
   const minimumSamples = input.minimumSamples ?? 3;
   const grouped = new Map<string, ServiceFeedbackEntry[]>();
-  for (const item of store.feedback) {
+  for (const item of entries) {
     const key = item.serviceId.trim();
     if (!key) {
       continue;

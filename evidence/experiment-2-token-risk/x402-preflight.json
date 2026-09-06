@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "observedAt": "2026-09-01T07:39:30Z",
+  "chainId": 97,
+  "asset": {
+    "symbol": "U",
+    "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "decimals": 18
+  },
+  "wallets": {
+    "authorityAdmin": {
+      "address": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+      "nativeBalance": "0.044144755437852904",
+      "tokenBalance": "8.5"
+    },
+    "investigatorSeller": {
+      "address": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+      "nativeBalance": "0",
+      "tokenBalance": "0"
+    },
+    "investigatorFacilitator": {
+      "address": "0x5ADe4C7FcdD998B6B7687e398200A995c0F0f70e",
+      "nativeBalance": "0",
+      "tokenBalance": "0",
+      "targetNativeBalance": "0.0002"
+    }
+  },
+  "previousAuthority": {
+    "authorityId": "altana-x402-30c0de11-256b-47c2-86e6-db6d8a303a0e",
+    "status": "revoked",
+    "permit2TokenAllowance": "0"
+  },
+  "proposedAuthority": {
+    "authorityId": "altana-x402-investigator-406ba4f9-41b4-40c3-a5cc-370082a0e700",
+    "allowedRecipient": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4",
+    "dailyLimit": "0.35",
+    "expirySeconds": 86400,
+    "paymentRail": "permit2-exact"
+  },
+  "proposedMission": {
+    "price": "0.35",
+    "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565"
+  },
+  "broadcastAuthorized": true,
+  "transactions": {
+    "facilitatorFunding": "0x20280750bdd21caf3d9ab5a8eb9ac0418758af0c979e9b42218b7bb06a8e5a94",
+    "authorityGrant": "0x5507558133c45d7f221e3e01c83f1caa015b849cde42aef4268a4d0b5b15f52a",
+    "checkerApproval": "0xf665d6a0568b70b1aafd1d4dab55702a58346cffc8a9c7c13d3d54ebf2786b65",
+    "tokenApproval": "0xe0d96ad221884c7988e4005ed88a6f08af863c138d11f9bb4662930f175459cc"
+  }
+}

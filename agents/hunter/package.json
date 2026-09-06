@@ -5,16 +5,30 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "start": "node --import tsx src/index.ts",
+    "spike:altana": "tsx src/spikes/altana-session.ts",
+    "provision:altana-x402": "tsx src/spikes/altana-x402-provision.ts",
+    "resume:altana-x402-provision": "tsx src/spikes/altana-x402-resume-provision.ts",
+    "revoke:altana-x402": "tsx src/spikes/altana-x402-revoke.ts",
+    "register:erc8004": "tsx src/spikes/register-hunter-erc8004.ts",
+    "preview:erc8004": "tsx src/spikes/register-hunter-erc8004.ts",
+    "test:sellability": "tsx src/spikes/pancake-sellability.ts",
+    "refund:orphaned-auditor-payment": "tsx src/spikes/refund-orphaned-auditor-payment.ts",
+    "resume:paid-audit": "tsx src/spikes/resume-paid-audit.ts",
+    "accept:sentinel-paid": "tsx src/spikes/run-sentinel-paid-acceptance.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "node --import tsx --test $(find src -name '*.test.ts')"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.3.24",
+    "@altananetwork/sdk": "^0.8.0",
+    "@altananetwork/x402-server": "^0.2.0",
     "@rebel/shared": "0.1.0",
     "ai": "^4.3.16",
     "dotenv": "^16.4.7",
     "ethers": "^6.13.5",
     "express": "^4.21.2",
+    "viem": "^2.56.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {

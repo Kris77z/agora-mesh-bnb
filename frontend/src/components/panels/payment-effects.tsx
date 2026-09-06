@@ -3,20 +3,30 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { asRecord } from '@/lib/type-guards';
-import { formatMON } from '@/lib/format';
+import { formatTokenAmount } from '@/lib/format';
+import { publicChainConfig } from '@/lib/chain-config';
 import type { AgentEvent } from '@/types/agent';
 
 /* ─── Budget Bar (血条) ─── */
 
 interface BudgetBarProps {
-    spentWei?: string;
-    maxWei?: string;
+    spentAmount?: string;
+    maxAmount?: string;
+    assetDecimals?: number;
+    assetSymbol?: string;
 }
 
-export function BudgetBar({ spentWei, maxWei }: BudgetBarProps) {
-    const spent = Number(BigInt(spentWei ?? '0'));
-    const max = Number(BigInt(maxWei ?? '0'));
-    const pct = max > 0 ? Math.min(100, Math.round((spent / max) * 100)) : 0;
+export function BudgetBar({
+    spentAmount,
+    maxAmount,
+    assetDecimals = 18,
+    assetSymbol = publicChainConfig.token,
+}: BudgetBarProps) {
+    const spent = BigInt(spentAmount ?? '0');
+    const max = BigInt(maxAmount ?? '0');
+    const pct = max > BigInt(0)
+        ? Math.min(100, Number((spent * BigInt(10_000)) / max) / 100)
+        : 0;
 
     /* Shake when budget decreases */
     const [shake, setShake] = useState(false);
@@ -30,7 +40,7 @@ export function BudgetBar({ spentWei, maxWei }: BudgetBarProps) {
         prevPct.current = pct;
     }, [pct]);
 
-    if (!maxWei) return null;
+    if (!maxAmount) return null;
 
     /* Color based on how much budget is consumed */
     const barColor = pct < 50 ? 'bg-green-500' : pct < 80 ? 'bg-amber-500' : 'bg-red-500';
@@ -39,7 +49,7 @@ export function BudgetBar({ spentWei, maxWei }: BudgetBarProps) {
         <div className={shake ? 'animate-shake' : ''}>
             <div className="flex justify-between text-[10px] text-muted-foreground mb-0.5">
                 <span>SPENT</span>
-                <span>{formatMON(spentWei)} / {formatMON(maxWei)} MON</span>
+                <span>{formatTokenAmount(spentAmount, assetDecimals)} / {formatTokenAmount(maxAmount, assetDecimals)} {assetSymbol}</span>
             </div>
             <div className="h-1.5 bg-border rounded-full overflow-hidden">
                 <motion.div
@@ -80,7 +90,9 @@ export function PaymentStrike({ events }: PaymentStrikeProps) {
     useEffect(() => {
         if (!latestPayment || latestPayment.id === lastPaymentId.current) return;
         lastPaymentId.current = latestPayment.id;
-        setAmountText(latestPayment.amount ? `-${formatMON(latestPayment.amount)} MON` : 'PAID');
+        setAmountText(latestPayment.amount
+            ? `-${formatTokenAmount(latestPayment.amount)} ${publicChainConfig.token}`
+            : 'PAID');
         setVisible(true);
         const t = setTimeout(() => setVisible(false), 2000);
         return () => clearTimeout(t);

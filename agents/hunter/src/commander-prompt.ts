@@ -12,6 +12,7 @@ import { hunterConfig } from "./config.js";
 const SERVICE_TYPES: HunterServiceTaskType[] = [
   "content-generation",
   "smart-contract-audit",
+  "onchain-investigation",
   "defi-analysis",
   "gas-optimization",
   "token-scan",
@@ -32,6 +33,7 @@ Each sub-task will be handled by a specialized AI service agent.
 Available service types:
 - content-generation: Writing articles, reports, analyses
 - smart-contract-audit: Solidity security auditing
+- onchain-investigation: Read-only BNB contract, token, or wallet risk investigation
 - defi-analysis: DeFi protocol and token analysis
 - gas-optimization: Solidity gas usage optimization
 - token-scan: Token contract risk scanning

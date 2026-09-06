@@ -1,13 +1,38 @@
-import { verifyReceiptSignature, type Receipt } from "@rebel/shared";
+import {
+  calculateResultHash,
+  sameAddress,
+  verifyReceiptSignature,
+  type Receipt
+} from "@rebel/shared";
 
-export function verifyReceiptTool(receipt: Receipt): {
+export function verifyReceiptTool(
+  receipt: Receipt,
+  expected?: { result?: string; provider?: string }
+): {
   isValid: boolean;
   provider: string;
+  signatureValid: boolean;
+  resultHashMatches: boolean;
+  providerMatches: boolean;
 } {
-  const isValid = verifyReceiptSignature(receipt);
+  let signatureValid = false;
+  let providerMatches = expected?.provider === undefined;
+  try {
+    signatureValid = verifyReceiptSignature(receipt);
+    providerMatches =
+      expected?.provider === undefined || sameAddress(receipt.provider, expected.provider);
+  } catch {
+    signatureValid = false;
+    providerMatches = false;
+  }
+  const resultHashMatches =
+    expected?.result === undefined || calculateResultHash(expected.result) === receipt.resultHash;
   return {
-    isValid,
-    provider: receipt.provider
+    isValid: signatureValid && resultHashMatches && providerMatches,
+    provider: receipt.provider,
+    signatureValid,
+    resultHashMatches,
+    providerMatches
   };
 }
 

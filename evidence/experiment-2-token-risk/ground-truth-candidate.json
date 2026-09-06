@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "experimentId": "token-risk",
+  "benchmarkId": "bnb-testnet-u-block-128449782",
+  "reviewStatus": "candidate",
+  "sourceReportHash": "sha256:9353ac941c96561edb1093b9439c1a5157284c3e181df75727d3154b2fd87c0c",
+  "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "chainId": 97,
+  "blockNumber": 128449782,
+  "candidateMethod": [
+    "source Investigator RPC snapshot",
+    "independent historical-block RPC replay",
+    "deterministic bytecode selector and opcode scoring",
+    "historical PancakeSwap V2/V3 eth_call enrichment",
+    "bounded 10,000-block ERC-20 Transfer log replay"
+  ],
+  "confirmedCheckIds": [
+    "target-runtime",
+    "account-state",
+    "token-metadata",
+    "ownership",
+    "proxy-control",
+    "risk-signals",
+    "risk-score",
+    "risk-level",
+    "coverage",
+    "limitations",
+    "recommendation"
+  ],
+  "mismatchedCheckIds": [],
+  "independentTransport": true,
+  "postRunEnrichment": {
+    "evidenceFile": "indexed-enrichment-output.json",
+    "sourceReportHash": "sha256:9353ac941c96561edb1093b9439c1a5157284c3e181df75727d3154b2fd87c0c",
+    "coverage": {
+      "originalMeasured": 5,
+      "postRunMeasured": 7,
+      "total": 8,
+      "added": [
+        "liquidity",
+        "recentTransactions"
+      ]
+    },
+    "liquidityScope": "PancakeSwap V2/V3 U/WBNB",
+    "recentTransferWindow": {
+      "fromBlock": 128439782,
+      "toBlock": 128449782,
+      "transfers": 3,
+      "uniqueTransactions": 3,
+      "mints": 0,
+      "burns": 0
+    }
+  },
+  "humanReviewRequired": true,
+  "limitations": [
+    "Candidate ground truth is objective replay evidence, but it is not marked reviewed until an independent human signs off.",
+    "Holder concentration remains unavailable without a complete indexed snapshot.",
+    "Liquidity coverage is limited to PancakeSwap V2/V3 U/WBNB, and the route quote is not proof of an executable sell."
+  ]
+}

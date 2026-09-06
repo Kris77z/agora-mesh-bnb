@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "experimentId": "full-due-diligence",
+  "workflow": "without-agent-human-plus-ordinary-llm",
+  "status": "ready-for-blind-execution",
+  "task": "Should the United Stables (U) contract used by Apex on BNB Testnet be trusted?",
+  "taskHash": "sha256:63fa2a3dd4115e7ba5d22a9de769c36a7b3ca115f63d3715a98c8726fc1f9254",
+  "bindings": {
+    "chainId": 97,
+    "proxy": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "implementation": "0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc",
+    "sourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+    "reportBlock": 128449782,
+    "onchainReportHashForPostFreezeScoringOnly": "sha256:9353ac941c96561edb1093b9439c1a5157284c3e181df75727d3154b2fd87c0c"
+  },
+  "materials": [
+    {
+      "path": "evidence/experiment-3-due-diligence/input.md",
+      "contentHash": "sha256:7a86a58fbcf621739e53808990b1be2647ca023e4d1cc42e6b32fa9561bac16e"
+    },
+    {
+      "path": "evidence/experiment-3-due-diligence/baseline-protocol.md",
+      "contentHash": "sha256:95e3315a7035adb248fef599d30a270412808cd7052872d513e61a5664bd3103"
+    },
+    {
+      "path": "evidence/experiment-3-due-diligence/verified-source-input.json",
+      "contentHash": "sha256:7980db97f9d11001ca1467bdc093d800e20cbed774549247db1bdebf12c7403f"
+    }
+  ],
+  "allowedWorkflow": [
+    "one ordinary general-purpose LLM chat",
+    "BSC explorer",
+    "local Slither",
+    "direct read-only JSON-RPC",
+    "manual DEX inspection"
+  ],
+  "forbiddenInputsUntilOutputFrozen": [
+    "evidence/experiment-3-due-diligence/auditor-output.json",
+    "evidence/experiment-3-due-diligence/verifier-output.json",
+    "evidence/experiment-3-due-diligence/candidate-output.json",
+    "evidence/experiment-3-due-diligence/runtime-triage-output.json",
+    "evidence/experiment-3-due-diligence/model-finding-triage-candidate.md",
+    "evidence/experiment-3-due-diligence/static-triage-candidate.md",
+    "evidence/experiment-2-token-risk/paid-run-output.json",
+    "evidence/experiment-2-token-risk/security-review-output.json",
+    "evidence/experiment-2-token-risk/indexed-enrichment-output.json"
+  ],
+  "captureRequirements": {
+    "blindRun": {
+      "groundTruthHiddenUntilOutputFrozen": true,
+      "agentOutputsHiddenUntilOutputFrozen": true,
+      "contemporaneousTimingRequired": true
+    },
+    "timing": [
+      "startedAt",
+      "completedAt",
+      "wallDurationMs",
+      "operatorActiveMinutes"
+    ],
+    "model": [
+      "provider",
+      "model",
+      "sessionCount",
+      "rawPromptArtifact",
+      "rawOutputArtifact"
+    ],
+    "tools": [
+      "name",
+      "version",
+      "commands",
+      "rawOutputArtifacts"
+    ],
+    "cost": [
+      "modelUsd",
+      "toolUsd",
+      "humanUsd",
+      "totalUsd",
+      "basis"
+    ],
+    "review": [
+      "reviewer",
+      "reviewedAt",
+      "groundTruthOrRubric",
+      "scoreArtifact"
+    ]
+  },
+  "expectedOutput": {
+    "artifact": "evidence/experiment-3-due-diligence/baseline-output.json",
+    "findingsRequire": [
+      "findingId",
+      "severity",
+      "evidence",
+      "assessment"
+    ],
+    "factsRequire": [
+      "claim",
+      "source",
+      "observationBlock",
+      "status"
+    ],
+    "reportRequire": [
+      "trustDecision",
+      "reasons",
+      "requiredActions",
+      "limitations"
+    ],
+    "comparisonStatusBeforeReview": "pending"
+  }
+}

@@ -1,14 +1,21 @@
 import {
+  addMoney,
+  compareMoney,
   DEFAULT_LANGUAGE_CODE,
+  formatMoney,
   localizeByLocale,
+  resolveChainConfig,
+  type AssetRef,
   type CommanderBudget,
   type LanguageCode
 } from "@rebel/shared";
-import { HunterError } from "./errors.js";
+import { U_TOKEN } from "@altananetwork/x402-server";
 
 const DEFAULT_MAX_PHASES = 6;
-const DEFAULT_MAX_TOTAL_WEI = "60000000000000000";
-const DEFAULT_MAX_PER_PHASE_WEI = "20000000000000000";
+const DEFAULT_MAX_TOTAL_AMOUNT = "60000000000000000";
+const DEFAULT_MAX_PER_PHASE_AMOUNT = "20000000000000000";
+const DEFAULT_X402_MAX_TOTAL_AMOUNT = "3000000000000000000";
+const DEFAULT_X402_MAX_PER_PHASE_AMOUNT = "1000000000000000000";
 
 function parsePositiveInt(raw: string | undefined, fallback: number): number {
   if (!raw || raw.trim().length === 0) {
@@ -21,7 +28,7 @@ function parsePositiveInt(raw: string | undefined, fallback: number): number {
   return parsed;
 }
 
-function parseWei(raw: string | undefined, fallback: string): string {
+function parseAmount(raw: string | undefined, fallback: string): string {
   if (!raw || raw.trim().length === 0) {
     return fallback;
   }
@@ -29,35 +36,45 @@ function parseWei(raw: string | undefined, fallback: string): string {
   return /^\d+$/.test(trimmed) ? trimmed : fallback;
 }
 
-export function asWei(value: string): bigint {
-  if (!/^\d+$/.test(value)) {
-    throw new HunterError(500, "COMMANDER_INVALID_WEI", `Invalid wei amount: ${value}`);
-  }
-  return BigInt(value);
+export function formatCommanderMoney(money: CommanderBudget["spent"]): string {
+  return `${formatMoney(money, { maxFractionDigits: 4 })} ${money.asset.symbol}`;
 }
 
-export function addWei(a: string, b: string): string {
-  return (asWei(a) + asWei(b)).toString();
-}
-
-export function formatCommanderMon(wei: string): string {
-  const amount = asWei(wei);
-  const base = 10n ** 18n;
-  const whole = amount / base;
-  const frac = amount % base;
-  if (frac === 0n) {
-    return whole.toString();
-  }
-  const fracText = frac.toString().padStart(18, "0").replace(/0+$/, "");
-  return `${whole.toString()}.${fracText.slice(0, 4)}`;
-}
-
-export function buildCommanderBudget(env: NodeJS.ProcessEnv = process.env): CommanderBudget {
+export function buildCommanderBudget(
+  env: NodeJS.ProcessEnv = process.env,
+  assetOverride?: AssetRef
+): CommanderBudget {
+  const chain = resolveChainConfig({ preset: env.CHAIN_PRESET, chainId: env.CHAIN_ID });
+  const useX402 = env.X402_ENABLED === "true" && chain.chainId === 97;
+  const x402Token = U_TOKEN[97];
+  const asset =
+    assetOverride ??
+    (useX402
+      ? {
+          chainId: 97,
+          kind: "erc20" as const,
+          address: x402Token.address,
+          symbol: x402Token.symbol,
+          decimals: x402Token.decimals
+        }
+      : chain.nativeAsset);
+  const maxTotalAmount = parseAmount(
+    useX402
+      ? env.COMMANDER_X402_MAX_TOTAL_AMOUNT
+      : env.COMMANDER_MAX_TOTAL_AMOUNT ?? env.COMMANDER_MAX_TOTAL_WEI,
+    useX402 ? DEFAULT_X402_MAX_TOTAL_AMOUNT : DEFAULT_MAX_TOTAL_AMOUNT
+  );
+  const maxPerPhaseAmount = parseAmount(
+    useX402
+      ? env.COMMANDER_X402_MAX_PER_PHASE_AMOUNT
+      : env.COMMANDER_MAX_PER_PHASE_AMOUNT ?? env.COMMANDER_MAX_PER_PHASE_WEI,
+    useX402 ? DEFAULT_X402_MAX_PER_PHASE_AMOUNT : DEFAULT_MAX_PER_PHASE_AMOUNT
+  );
   return {
-    maxTotalWei: parseWei(env.COMMANDER_MAX_TOTAL_WEI, DEFAULT_MAX_TOTAL_WEI),
-    maxPerPhaseWei: parseWei(env.COMMANDER_MAX_PER_PHASE_WEI, DEFAULT_MAX_PER_PHASE_WEI),
+    maxTotal: { asset, amount: maxTotalAmount },
+    maxPerPhase: { asset, amount: maxPerPhaseAmount },
     maxPhases: parsePositiveInt(env.COMMANDER_MAX_PHASES, DEFAULT_MAX_PHASES),
-    spentWei: "0",
+    spent: { asset, amount: "0" },
     phaseCount: 0
   };
 }
@@ -77,10 +94,10 @@ export function getCommanderBudgetBlockReason(input: {
       zh: `已达到阶段上限（${budget.maxPhases}）。`
     });
   }
-  if (asWei(budget.spentWei) >= asWei(budget.maxTotalWei)) {
+  if (compareMoney(budget.spent, budget.maxTotal) >= 0) {
     return localizeByLocale(locale, {
-      en: `Total budget exhausted (${formatCommanderMon(budget.maxTotalWei)} MON).`,
-      zh: `总预算已耗尽（${formatCommanderMon(budget.maxTotalWei)} MON）。`
+      en: `Total budget exhausted (${formatCommanderMoney(budget.maxTotal)}).`,
+      zh: `总预算已耗尽（${formatCommanderMoney(budget.maxTotal)}）。`
     });
   }
   return null;
@@ -88,43 +105,43 @@ export function getCommanderBudgetBlockReason(input: {
 
 export function applyCommanderPhaseSpend(input: {
   budget: CommanderBudget;
-  phaseSpentWei: string;
+  phaseSpent: CommanderBudget["spent"];
   stopReason?: string;
   locale?: LanguageCode;
 }): { budget: CommanderBudget; stopReason?: string } {
-  const { budget, phaseSpentWei, stopReason, locale = DEFAULT_LANGUAGE_CODE } = input;
+  const { budget, phaseSpent, stopReason, locale = DEFAULT_LANGUAGE_CODE } = input;
   const nextBudget: CommanderBudget = {
     ...budget,
     phaseCount: budget.phaseCount + 1,
-    spentWei: addWei(budget.spentWei, phaseSpentWei)
+    spent: addMoney(budget.spent, phaseSpent)
   };
 
   if (stopReason) {
     return { budget: nextBudget, stopReason };
   }
-  if (asWei(phaseSpentWei) > asWei(nextBudget.maxPerPhaseWei)) {
+  if (compareMoney(phaseSpent, nextBudget.maxPerPhase) > 0) {
     return {
       budget: nextBudget,
       stopReason: localizeByLocale(locale, {
-        en: `Phase spend ${formatCommanderMon(phaseSpentWei)} MON exceeds per-phase limit ${formatCommanderMon(
-          nextBudget.maxPerPhaseWei
-        )} MON.`,
-        zh: `单阶段花费 ${formatCommanderMon(phaseSpentWei)} MON 超过单阶段上限 ${formatCommanderMon(
-          nextBudget.maxPerPhaseWei
-        )} MON。`
+        en: `Phase spend ${formatCommanderMoney(phaseSpent)} exceeds per-phase limit ${formatCommanderMoney(
+          nextBudget.maxPerPhase
+        )}.`,
+        zh: `单阶段花费 ${formatCommanderMoney(phaseSpent)} 超过单阶段上限 ${formatCommanderMoney(
+          nextBudget.maxPerPhase
+        )}。`
       })
     };
   }
-  if (asWei(nextBudget.spentWei) >= asWei(nextBudget.maxTotalWei)) {
+  if (compareMoney(nextBudget.spent, nextBudget.maxTotal) >= 0) {
     return {
       budget: nextBudget,
       stopReason: localizeByLocale(locale, {
-        en: `Total spend reached ${formatCommanderMon(nextBudget.spentWei)} MON (limit ${formatCommanderMon(
-          nextBudget.maxTotalWei
-        )} MON).`,
-        zh: `总花费已达到 ${formatCommanderMon(nextBudget.spentWei)} MON（上限 ${formatCommanderMon(
-          nextBudget.maxTotalWei
-        )} MON）。`
+        en: `Total spend reached ${formatCommanderMoney(nextBudget.spent)} (limit ${formatCommanderMoney(
+          nextBudget.maxTotal
+        )}).`,
+        zh: `总花费已达到 ${formatCommanderMoney(nextBudget.spent)}（上限 ${formatCommanderMoney(
+          nextBudget.maxTotal
+        )}）。`
       })
     };
   }

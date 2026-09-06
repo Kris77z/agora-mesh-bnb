@@ -3,7 +3,7 @@
 import { motion } from 'motion/react';
 
 /**
- * Tech Pillars Section — x402 + ERC-8004 + Monad
+ * Tech Pillars Section — Altana + x402 + BNB
  * Dark vs warm comparison cards + three pillar detail cards
  * Content derived from agent-economy-vision.md
  */
@@ -13,19 +13,19 @@ const PILLARS = [
         tag: 'Payment Layer',
         title: 'x402 Protocol',
         subtitle: '"How do agents pay?"',
-        desc: 'HTTP 402 status code + native-transfer scheme. Agents pay with MON tokens via atomic on-chain transfers. Machine-readable pricing, zero friction.',
+        desc: 'HTTP 402 payment requirements let agents understand a quote, check policy, pay, and retry the request with machine-readable proof.',
     },
     {
         tag: 'Identity Layer',
-        title: 'ERC-8004',
-        subtitle: '"Who are you? Can I trust you?"',
-        desc: 'On-chain agent registry and reputation system. Trustless identity verification through smart contracts — no KYC, no middlemen, pure math.',
+        title: 'Altana Sessions',
+        subtitle: '"What is this agent allowed to do?"',
+        desc: 'On-chain call allowlists, spend caps, expiries, and revocation give each Hunter useful authority without exposing an unrestricted admin key.',
     },
     {
         tag: 'Infrastructure',
-        title: 'Monad',
-        subtitle: '"The 400ms blockchain"',
-        desc: '10,000+ TPS with sub-second finality. The only chain fast enough to support high-frequency agent micro-payments at scale.',
+        title: 'BNB Chain',
+        subtitle: '"Where agents become economic actors"',
+        desc: 'BNB Smart Chain provides the EVM settlement layer for agent wallets, machine payments, receipts, and auditable service histories.',
     },
 ];
 

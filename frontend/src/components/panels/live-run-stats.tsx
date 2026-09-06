@@ -1,7 +1,7 @@
 'use client';
 
 import { useI18n } from '@/components/i18n/locale-provider';
-import { formatMON } from '@/lib/format';
+import { formatTokenAmount } from '@/lib/format';
 import { formatDuration } from '@/lib/i18n';
 import { useTypewriter } from '@/hooks/use-typewriter';
 import { BudgetBar } from './payment-effects';
@@ -14,9 +14,11 @@ interface StatusDisplay {
 
 interface LiveRunStatsProps {
     status: StatusDisplay;
-    spendWei: string;
-    budgetWei?: string;
-    budgetSpentWei?: string;
+    spendAmount: string;
+    budgetAmount?: string;
+    budgetSpentAmount?: string;
+    assetDecimals: number;
+    assetSymbol: string;
     hasBudget: boolean;
     txCount: number;
     elapsed: number | null;
@@ -29,7 +31,7 @@ interface LiveRunStatsProps {
  * the mission goal as a small text at the bottom.
  */
 export function LiveRunStats({
-    status, spendWei, budgetWei, budgetSpentWei,
+    status, spendAmount, budgetAmount, budgetSpentAmount, assetDecimals, assetSymbol,
     hasBudget, txCount, elapsed, mission,
 }: LiveRunStatsProps) {
     const { locale, t } = useI18n();
@@ -48,12 +50,17 @@ export function LiveRunStats({
             </div>
 
             {/* Spent + Budget merged */}
-            {hasBudget && budgetWei ? (
-                <BudgetBar spentWei={budgetSpentWei ?? spendWei} maxWei={budgetWei} />
+            {hasBudget && budgetAmount ? (
+                <BudgetBar
+                    spentAmount={budgetSpentAmount ?? spendAmount}
+                    maxAmount={budgetAmount}
+                    assetDecimals={assetDecimals}
+                    assetSymbol={assetSymbol}
+                />
             ) : (
                 <div className="flex justify-between">
                     <span className="text-muted-foreground">{t('live.spent')}</span>
-                    <span>{formatMON(spendWei)} MON</span>
+                    <span>{formatTokenAmount(spendAmount, assetDecimals)} {assetSymbol}</span>
                 </div>
             )}
 

@@ -6,11 +6,16 @@
       "description": "Generate articles, tweets, and analysis using AI",
       "endpoint": "http://localhost:3001",
       "taskType": "content-generation",
-      "skills": ["article", "tweet", "analysis", "monad"],
+      "skills": ["article", "tweet", "analysis", "bnb"],
       "price": "10000000000000000",
-      "currency": "MON",
-      "network": "eip155:10143",
-      "provider": "0x0000000000000000000000000000000000000000"
+      "currency": "tBNB",
+      "asset": { "chainId": 97, "kind": "native", "symbol": "tBNB", "decimals": 18 },
+      "agentId": "97:0x0000000000000000000000000000000000000001",
+      "paymentRails": ["legacy-native"],
+      "averageLatencyMs": 45000,
+      "offerVersion": "1",
+      "network": "eip155:97",
+      "provider": "0x0000000000000000000000000000000000000001"
     },
     {
       "id": "auditor-v1",
@@ -18,11 +23,97 @@
       "description": "Audit Solidity contracts for loss-of-funds vulnerabilities",
       "endpoint": "http://localhost:3001",
       "taskType": "smart-contract-audit",
-      "skills": ["solidity", "vulnerability", "monad", "evm"],
+      "skills": ["solidity", "vulnerability", "bnb", "evm"],
       "price": "20000000000000000",
-      "currency": "MON",
-      "network": "eip155:10143",
-      "provider": "0x0000000000000000000000000000000000000000"
+      "currency": "tBNB",
+      "asset": { "chainId": 97, "kind": "native", "symbol": "tBNB", "decimals": 18 },
+      "agentId": "97:0x0000000000000000000000000000000000000002",
+      "paymentRails": ["legacy-native"],
+      "averageLatencyMs": 105000,
+      "offerVersion": "1",
+      "network": "eip155:97",
+      "provider": "0x0000000000000000000000000000000000000002"
+    },
+    {
+      "id": "sentinel-audit-v1",
+      "name": "Sentinel Audit",
+      "description": "Fast Solidity triage with access-control and external-call coverage",
+      "endpoint": "http://localhost:3005",
+      "taskType": "smart-contract-audit",
+      "skills": ["solidity", "access-control", "external-calls", "bnb", "evm"],
+      "price": "25000000000000000",
+      "currency": "tBNB",
+      "asset": { "chainId": 97, "kind": "native", "symbol": "tBNB", "decimals": 18 },
+      "agentId": "97:0x0000000000000000000000000000000000000005",
+      "paymentRails": ["legacy-native"],
+      "averageLatencyMs": 45000,
+      "offerVersion": "1",
+      "network": "eip155:97",
+      "provider": "0x0000000000000000000000000000000000000005"
+    },
+    {
+      "id": "verifier-v1",
+      "name": "Independent Finding Verifier",
+      "description": "Re-check security findings with deterministic static analysis",
+      "endpoint": "http://localhost:3004",
+      "taskType": "finding-verification",
+      "skills": ["solidity", "static-analysis", "finding-verification", "bnb", "evm"],
+      "price": "10000000000000000",
+      "currency": "tBNB",
+      "asset": { "chainId": 97, "kind": "native", "symbol": "tBNB", "decimals": 18 },
+      "agentId": "97:0x0000000000000000000000000000000000000003",
+      "paymentRails": ["legacy-native"],
+      "averageLatencyMs": 500,
+      "offerVersion": "1",
+      "network": "eip155:97",
+      "provider": "0x0000000000000000000000000000000000000003"
+    },
+    {
+      "id": "investigator-v1",
+      "name": "BNB Onchain Investigator",
+      "description": "Produce timestamped contract, token, wallet, ownership, proxy, and bytecode risk facts from BNB RPC",
+      "endpoint": "http://localhost:3005",
+      "taskType": "onchain-investigation",
+      "skills": ["onchain", "erc20", "ownership", "proxy", "bytecode", "risk", "bnb", "evm"],
+      "price": "15000000000000000",
+      "currency": "tBNB",
+      "asset": { "chainId": 97, "kind": "native", "symbol": "tBNB", "decimals": 18 },
+      "agentId": "97:0x0000000000000000000000000000000000000006",
+      "paymentRails": ["legacy-native"],
+      "averageLatencyMs": 2500,
+      "offerVersion": "1",
+      "network": "eip155:97",
+      "provider": "0x0000000000000000000000000000000000000006"
+    },
+    {
+      "id": "risk-verifier-v1",
+      "name": "Independent Token Risk Verifier",
+      "description": "Replay Investigator evidence at the exact historical block using an independent read-only BNB RPC transport",
+      "endpoint": "http://localhost:3004",
+      "taskType": "token-risk-verification",
+      "skills": [
+        "token-risk-verification",
+        "rpc-replay",
+        "evidence-validation",
+        "bnb",
+        "evm"
+      ],
+      "price": "10000000000000000",
+      "currency": "tBNB",
+      "asset": {
+        "chainId": 97,
+        "kind": "native",
+        "symbol": "tBNB",
+        "decimals": 18
+      },
+      "agentId": "97:0x0000000000000000000000000000000000000003",
+      "paymentRails": [
+        "legacy-native"
+      ],
+      "averageLatencyMs": 2500,
+      "offerVersion": "1",
+      "network": "eip155:97",
+      "provider": "0x0000000000000000000000000000000000000003"
     },
     {
       "id": "defi-analyst-v1",
@@ -30,11 +121,16 @@
       "description": "Analyze DeFi protocols with TVL, risk, and strategy guidance",
       "endpoint": "http://localhost:3001",
       "taskType": "defi-analysis",
-      "skills": ["tvl", "risk", "yield", "monad"],
+      "skills": ["tvl", "risk", "yield", "bnb"],
       "price": "15000000000000000",
-      "currency": "MON",
-      "network": "eip155:10143",
-      "provider": "0x0000000000000000000000000000000000000000"
+      "currency": "tBNB",
+      "asset": { "chainId": 97, "kind": "native", "symbol": "tBNB", "decimals": 18 },
+      "agentId": "97:0x0000000000000000000000000000000000000004",
+      "paymentRails": ["legacy-native"],
+      "averageLatencyMs": 70000,
+      "offerVersion": "1",
+      "network": "eip155:97",
+      "provider": "0x0000000000000000000000000000000000000004"
     }
   ]
 }

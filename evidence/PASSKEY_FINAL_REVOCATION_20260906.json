@@ -1,0 +1,64 @@
+{
+  "authority": {
+    "authorityId": "browser-cbb87207-05c8-4e4b-b053-e538b849c291",
+    "walletAddress": "0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c",
+    "sessionPublicKey": "0x04662c183556ff73eabf9bb4ac832e9138da4170590d5b2dc6b02a361639b47f7663087d52ad8c09eefe09a2f21f9dfeef7c173092499acd2c8add12bef79eab67",
+    "chainId": 97,
+    "allowedCalls": [
+      {
+        "to": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527"
+      },
+      {
+        "to": "0x7EA7fBf92d5355957C187976BFE7c5788B2F70bb"
+      },
+      {
+        "to": "0x7d6ec1246308502E5Ce216C4393e02523Ff201a4"
+      }
+    ],
+    "spendLimits": [
+      {
+        "asset": {
+          "chainId": 97,
+          "kind": "erc20",
+          "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+          "symbol": "U",
+          "decimals": 18
+        },
+        "limit": "1150000000000000000",
+        "period": "day"
+      }
+    ],
+    "expiry": 1788686276,
+    "status": "revoked",
+    "createdAt": 1788682676773,
+    "grantTxHash": "0xc4d06adaa1ac2038387668a20491afe22fb3cf664070d9ae721a9a1b262cf833",
+    "revokeTxHash": "0xea6cd2415c96c1860ed56fd1da7106e83243c7fe4aa17c957172af04f92f4269"
+  },
+  "lifecycle": {
+    "operation": "revoke",
+    "phase": "complete",
+    "transactions": {
+      "revokeChecker": "0x202e584aacc1e2a19673a6affa5614e63fe2c28541d808ababd267d4b9492f69",
+      "revokeAllowance": "0x2233b3f107f1eadb5d1366e4a6183f70da3513a09ebca939731df8c9510124dd",
+      "revokeSession": "0xea6cd2415c96c1860ed56fd1da7106e83243c7fe4aa17c957172af04f92f4269"
+    }
+  },
+  "updatedAt": 1788686381,
+  "revocation": {
+    "checkerApprovalTxHash": "0x202e584aacc1e2a19673a6affa5614e63fe2c28541d808ababd267d4b9492f69",
+    "permit2AllowanceTxHash": "0x2233b3f107f1eadb5d1366e4a6183f70da3513a09ebca939731df8c9510124dd",
+    "sessionRevokeTxHash": "0xea6cd2415c96c1860ed56fd1da7106e83243c7fe4aa17c957172af04f92f4269",
+    "negativeTest": {
+      "kind": "erc20-transfer",
+      "recipient": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+      "amount": "1",
+      "testedAt": 1788686379,
+      "rejected": true,
+      "outcome": "rejected",
+      "rejection": "Relay explicitly rejected the revoked session key"
+    },
+    "sessionMaterialDeleted": true
+  },
+  "sessionAbsenceVerified": true,
+  "checkedAt": "2026-09-06T09:19:41.396Z"
+}

@@ -15,7 +15,7 @@ interface AgentIdentityCardProps {
 
 /**
  * Renders Hunter Agent identity: loading / error / connected states.
- * Connected state shows name, description, wallet address (with copy), and MON balance.
+ * Connected state shows name, description, wallet address, and active-chain balance.
  */
 export function AgentIdentityCard({
     identity, identityLoading, identityError, onRetryIdentity,
@@ -79,7 +79,7 @@ export function AgentIdentityCard({
                 )}
                 {identity.balance && (
                     <span className="text-[10px] font-mono text-green-600/90">
-                        {parseFloat(identity.balance.mon).toFixed(4)} MON
+                        {identity.balanceFormatted ?? '--'} {identity.balance.asset.symbol}
                     </span>
                 )}
             </div>

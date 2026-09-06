@@ -1,0 +1,11 @@
+{
+  "id": "sentinel-audit-v1",
+  "name": "Sentinel Contract Auditor",
+  "enabledByDefault": false,
+  "description": "Alternative audit provider focused on adversarial transaction sequences and fund-accounting invariants.",
+  "taskTypes": ["smart-contract-audit", "audit"],
+  "skills": ["solidity", "vulnerability", "bnb", "evm", "accounting-invariants"],
+  "priceWei": "25000000000000000",
+  "output": { "type": "json", "schemaName": "audit-vulnerabilities-v1" },
+  "llm": { "temperature": 0.1 }
+}

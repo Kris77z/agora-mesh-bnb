@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "experimentId": "contract-audit",
+  "workflow": "ordinary-llm-direct-model-only",
+  "status": "frozen-before-ground-truth-scoring",
+  "inputBundle": "baseline-input.json",
+  "inputBundleHash": "sha256:fd63aa61dd7801c506f4c7a718f33efe136c45b77c86c27aa56b864b209e6bc3",
+  "taskHash": "sha256:27ddb09ccb4f17a6120234052fbc4b089c4f2b21448dc88c37d25225bc003267",
+  "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+  "model": {
+    "provider": "kimi",
+    "model": "kimi-k2.6",
+    "sessionCount": 1
+  },
+  "timing": {
+    "startedAt": "2026-09-02T00:58:26.192Z",
+    "completedAt": "2026-09-02T01:02:58.203Z",
+    "wallDurationMs": 272005.084,
+    "operatorActiveMinutes": 0,
+    "operatorType": "automated-codex-orchestrator"
+  },
+  "usage": {
+    "promptTokens": 335,
+    "completionTokens": 11764,
+    "totalTokens": 12099
+  },
+  "prompts": {
+    "system": "You are a general-purpose Solidity security analyst working without multi-agent orchestration.\nUse only the supplied task and source. Do not assume external facts or claim runtime exploitability.\nReturn JSON only with the top-level shape {\"vulnerabilities\": SecurityFinding[]}.\nEvery SecurityFinding must contain findingId, title, severity, description, evidence, exploitScenario, recommendation, and confidence.\nseverity must be critical, high, medium, low, or info. evidence must include file, lines, and an exact source snippet.\nReport distinct root causes; do not duplicate one issue under multiple names.",
+    "user": "Task: Audit this benchmark Solidity contract for loss-of-funds vulnerabilities and validate every finding independently.\nSource file: VulnerableVault.sol\n```solidity\npragma solidity ^0.8.20;\n\ncontract VulnerableVault {\n    mapping(address => uint256) public balances;\n    address public owner;\n\n    constructor() {\n        owner = msg.sender;\n    }\n\n    function deposit() external payable {\n        balances[msg.sender] += msg.value;\n    }\n\n    function withdraw(uint256 amount) external {\n        require(tx.origin == owner, \"not owner\");\n        require(balances[msg.sender] >= amount, \"insufficient\");\n        (bool ok, ) = msg.sender.call{value: amount}(\"\");\n        require(ok, \"transfer failed\");\n        balances[msg.sender] -= amount;\n    }\n\n    function execute(address target, bytes calldata data) external {\n        require(msg.sender == owner, \"not owner\");\n        (bool ok, ) = target.delegatecall(data);\n        require(ok, \"delegatecall failed\");\n    }\n}\n```"
+  },
+  "rawOutput": "{\"vulnerabilities\": [{\"findingId\":\"VULN-001\",\"title\":\"Reentrancy in Withdraw Function\",\"severity\":\"high\",\"description\":\"The `withdraw` function sends ETH to `msg.sender` with a low-level `.call` before updating the caller's balance in storage. This violates the checks-effects-interactions pattern and permits a malicious contract to recursively reenter `withdraw`, withdrawing far more than its recorded balance.\",\"evidence\":{\"file\":\"VulnerableVault.sol\",\"lines\":\"18-20\",\"snippet\":\"        (bool ok, ) = msg.sender.call{value: amount}(\\\"\\\");\\n        require(ok, \\\"transfer failed\\\");\\n        balances[msg.sender] -= amount;\"},\"exploitScenario\":\"An attacker deposits a small amount of ETH into the vault, then tricks the vault owner into initiating a transaction to an attacker-controlled contract (e.g., via a phishing site). Because `withdraw` authorizes based on `tx.origin`, the malicious contract can call `withdraw` and pass the owner check. During the ETH transfer, the attacker's fallback function reenters `withdraw` before the balance is decremented, repeating until the vault is drained.\",\"recommendation\":\"Apply the checks-effects-interactions pattern by deducting `balances[msg.sender] -= amount` before the external ETH transfer. Additionally, use a reentrancy guard (e.g., OpenZeppelin `nonReentrant`) for defense in depth.\",\"confidence\":\"high\"},{\"findingId\":\"VULN-002\",\"title\":\"Authorization Based on tx.origin\",\"severity\":\"high\",\"description\":\"The `withdraw` function relies on `tx.origin == owner` for access control. `tx.origin` reflects the transaction's original externally-owned account, not the immediate caller (`msg.sender`). This allows any intermediate contract invoked by the owner to pass the authorization check and trigger sensitive vault operations.\",\"evidence\":{\"file\":\"VulnerableVault.sol\",\"lines\":\"16\",\"snippet\":\"        require(tx.origin == owner, \\\"not owner\\\");\"},\"exploitScenario\":\"The vault owner is phished into calling a malicious contract. That contract calls `VulnerableVault.withdraw()`, and because `tx.origin` is still the owner address, the requirement passes. This authorization bypass lets the contract invoke restricted logic, which can be chained with reentrancy to siphon the vault's entire balance.\",\"recommendation\":\"Replace `tx.origin == owner` with `msg.sender == owner` so that only the direct caller is authorized to trigger the function.\",\"confidence\":\"high\"},{\"findingId\":\"VULN-003\",\"title\":\"Arbitrary Delegatecall in Execute Function\",\"severity\":\"critical\",\"description\":\"The `execute` function allows the owner to issue a `delegatecall` to any address with arbitrary calldata. Because `delegatecall` executes the target code in the context of `VulnerableVault`, the owner can overwrite any storage variable—including `balances` and `owner`—or self-destruct the vault, leading to a complete loss of all user funds.\",\"evidence\":{\"file\":\"VulnerableVault.sol\",\"lines\":\"23-27\",\"snippet\":\"    function execute(address target, bytes calldata data) external {\\n        require(msg.sender == owner, \\\"not owner\\\");\\n        (bool ok, ) = target.delegatecall(data);\\n        require(ok, \\\"delegatecall failed\\\");\\n    }\"},\"exploitScenario\":\"A compromised or malicious owner calls `execute` with an attacker-controlled target contract. The delegatecall runs in the vault's storage context, allowing the owner to arbitrarily credit themselves with all deposited balances or invoke `selfdestruct` to destroy the contract and redirect all held ETH to an attacker address.\",\"recommendation\":\"Remove the arbitrary `delegatecall` functionality. If privileged maintenance is required, implement explicit, audited upgrade or administrative functions rather than permitting unconstrained code execution in the contract's context.\",\"confidence\":\"high\"}]}",
+  "blindness": {
+    "llmContextExcludedAgentOutputs": true,
+    "llmContextExcludedGroundTruth": true,
+    "operatorWasIndependentHuman": false,
+    "operatorHadPriorProjectContext": true
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "experimentId": "token-risk",
+  "workflow": "without-agent-human-plus-ordinary-llm",
+  "status": "ready-for-blind-execution",
+  "task": "Investigate the onchain token and contract risk of 0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565 on BNB Testnet.",
+  "taskHash": "sha256:9d47ed28ce37ae4bed7c9490641d0e798f508f1a7920f13981f9f9543afb7623",
+  "bindings": {
+    "chainId": 97,
+    "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "reportBlock": 128449782,
+    "agentReportHashForPostFreezeScoringOnly": "sha256:9353ac941c96561edb1093b9439c1a5157284c3e181df75727d3154b2fd87c0c"
+  },
+  "materials": [
+    {
+      "path": "evidence/experiment-2-token-risk/input.md",
+      "contentHash": "sha256:65a121fe5720816426d774aa8b7f4dd0a121dded557e30ff419af19155597f81"
+    },
+    {
+      "path": "evidence/experiment-2-token-risk/baseline-protocol.md",
+      "contentHash": "sha256:7cea571bc7b1f3b0566f96ac04f11dc9eb3b419196174e7ea0aac4c66584d340"
+    }
+  ],
+  "allowedWorkflow": [
+    "one ordinary general-purpose LLM chat",
+    "BSC explorer",
+    "direct read-only JSON-RPC"
+  ],
+  "forbiddenInputsUntilOutputFrozen": [
+    "evidence/experiment-2-token-risk/paid-run-output.json",
+    "evidence/experiment-2-token-risk/security-review-output.json",
+    "evidence/experiment-2-token-risk/indexed-enrichment-output.json",
+    "evidence/experiment-2-token-risk/ground-truth-candidate.json"
+  ],
+  "captureRequirements": {
+    "blindRun": {
+      "groundTruthHiddenUntilOutputFrozen": true,
+      "agentOutputsHiddenUntilOutputFrozen": true,
+      "contemporaneousTimingRequired": true
+    },
+    "timing": [
+      "startedAt",
+      "completedAt",
+      "wallDurationMs",
+      "operatorActiveMinutes"
+    ],
+    "model": [
+      "provider",
+      "model",
+      "sessionCount",
+      "rawPromptArtifact",
+      "rawOutputArtifact"
+    ],
+    "tools": [
+      "name",
+      "version",
+      "commands",
+      "rawOutputArtifacts"
+    ],
+    "cost": [
+      "modelUsd",
+      "toolUsd",
+      "humanUsd",
+      "totalUsd",
+      "basis"
+    ],
+    "review": [
+      "reviewer",
+      "reviewedAt",
+      "groundTruthOrRubric",
+      "scoreArtifact"
+    ]
+  },
+  "expectedOutput": {
+    "artifact": "evidence/experiment-2-token-risk/baseline-output.json",
+    "factsRequire": [
+      "claim",
+      "source",
+      "observationBlock",
+      "status"
+    ],
+    "reportRequire": [
+      "riskSignals",
+      "coverage",
+      "limitations",
+      "recommendation"
+    ],
+    "comparisonStatusBeforeReview": "pending"
+  }
+}

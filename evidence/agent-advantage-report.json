@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "artifactKind": "termix-agent-advantage-report",
+  "status": "complete-for-official-termix",
+  "generatedAt": "2026-09-02T15:35:38.454Z",
+  "officialRequirement": {
+    "source": "https://www.bnbchain.org/en/hackathons/smart-money-era",
+    "requiresHumanReviewer": false,
+    "interpretation": "Three real tasks were run with agents hired through Agora Mesh and without marketplace hiring; time, cost, output quality, and raw artifacts are attached."
+  },
+  "disclosure": {
+    "independentHumanReviewPerformed": false,
+    "statement": "Baseline operators and adjudicators are explicitly identified as automated operator or independent AI. No artifact claims a human review."
+  },
+  "methodology": {
+    "duration": "Wall-clock duration captured in each immutable run artifact. Experiment 1 may use the median of the three fresh consecutive paid rehearsals once present.",
+    "cost": "Agent cost is nominal testnet U settled onchain. Baseline cost is provider-list-price USD or a disclosed token-based estimate; the currencies are not asserted to be economically identical.",
+    "quality": "Experiment-specific 0-100 rubrics are declared in each baseline artifact. Deltas compare evidence quality, not model self-confidence."
+  },
+  "experiments": [
+    {
+      "experimentId": "contract-audit",
+      "baseline": {
+        "status": "measured",
+        "workflow": "without-marketplace-agent",
+        "reviewerType": "automated-operator",
+        "independentHuman": false,
+        "blindToAgentOutputs": true,
+        "model": {
+          "provider": "kimi",
+          "model": "kimi-k2.6",
+          "sessionCount": 1
+        },
+        "durationMs": 272005.084,
+        "totalTokens": 12099,
+        "costUsd": 0.047374,
+        "costBasis": "Estimated from recorded uncached input/output tokens at the Kimi K2.6 list-price equivalent ($0.95/$4.00 per 1M tokens); tax and subscription allocation excluded.",
+        "qualityScore": 86.67,
+        "qualityScale": 100,
+        "qualitySummary": "3/3 true positives, zero false positives, complete evidence; 1/3 severities matched the locked manifest.",
+        "artifact": "evidence/experiment-1-contract-audit/baseline-output.json",
+        "artifactHash": "sha256:63967b306657099d41a53bbe6dce15c0916055b9a35417fa9dcfea9faed37c2f"
+      },
+      "agent": {
+        "qualityScore": 100,
+        "qualityScale": 100,
+        "qualitySummary": "3/3 true positives, zero false positives/negatives, complete evidence and 3/3 severity matches; independent Slither verifier attached.",
+        "evidence": [
+          "registry/missions.json#8cb0e517-a843-4568-ac3b-e64e43662392",
+          "evidence/experiment-1-contract-audit/metrics.json",
+          "evidence/experiment-1-contract-audit/transactions.md"
+        ]
+      },
+      "comparison": {
+        "status": "completed",
+        "qualityDelta": 13.33,
+        "durationDeltaMs": 35114.91600000003,
+        "result": "Agora Mesh improved severity accuracy and added independently verified, signed, onchain provenance; wall time and nominal payment are reported without claiming a universal speed/cost win.",
+        "costCaveat": "0.75 testnet U onchain versus an estimated USD API-equivalent baseline cost; testnet U has no real monetary value."
+      },
+      "groundTruth": {
+        "status": "reviewed",
+        "benchmarkId": "vulnerable-vault-v1",
+        "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+        "findings": 3,
+        "reviewerType": "deterministic-operator",
+        "independentHuman": false,
+        "reviewMethod": [
+          "manual source review",
+          "Slither 0.11.6",
+          "agora-solidity-rules@1"
+        ],
+        "artifact": "evidence/experiment-1-contract-audit/ground-truth.json",
+        "artifactHash": "sha256:07d485077cee54597a7346c469b13bf6eb5865ed6427580b3dfeb9057f85aa22"
+      }
+    },
+    {
+      "experimentId": "token-risk",
+      "baseline": {
+        "status": "measured",
+        "workflow": "without-marketplace-agent",
+        "reviewerType": "automated-operator",
+        "independentHuman": false,
+        "blindToAgentOutputs": true,
+        "model": {
+          "provider": "kimi",
+          "model": "kimi-k2.7-code-highspeed",
+          "sessionCount": 1
+        },
+        "durationMs": 39867.003,
+        "totalTokens": 5738,
+        "costUsd": 0.038053,
+        "costBasis": "Estimated from recorded uncached input/output tokens at the Kimi K2.7 Code HighSpeed list price ($1.90/$8.00 per 1M tokens); tax and subscription allocation excluded.",
+        "qualityScore": 85,
+        "qualityScale": 100,
+        "qualitySummary": "11/11 available RPC facts were accurate, but only 5/8 evidence dimensions were measured.",
+        "artifact": "evidence/experiment-2-token-risk/baseline-output.json",
+        "artifactHash": "sha256:cd29bf8398f53bc36b02cfcd718c545fd1a421e811b974910f52e3bb4c4bfca2"
+      },
+      "agent": {
+        "qualityScore": 100,
+        "qualityScale": 100,
+        "qualitySummary": "11/11 facts replayed, 8/8 evidence dimensions measured, 422-holder supply reconciliation and an executed 0.1 U sell attached.",
+        "evidence": [
+          "evidence/experiment-2-token-risk/paid-run-output.json",
+          "evidence/experiment-2-token-risk/security-review-output.json",
+          "evidence/experiment-2-token-risk/indexed-enrichment-output.json"
+        ]
+      },
+      "comparison": {
+        "status": "completed",
+        "qualityDelta": 15,
+        "durationDeltaMs": 19945.997000000003,
+        "result": "Agora Mesh preserved baseline fact accuracy while closing holder, liquidity, recent-activity, and executable-sellability gaps with reproducible evidence.",
+        "costCaveat": "0.35 testnet U onchain versus an estimated USD API-equivalent baseline cost; post-run read-only enrichment had no settlement."
+      },
+      "groundTruth": {
+        "status": "reviewed",
+        "benchmarkId": "u-token-risk-chain97-block128449782",
+        "sourceHash": "sha256:9353ac941c96561edb1093b9439c1a5157284c3e181df75727d3154b2fd87c0c",
+        "findings": 8,
+        "reviewerType": "deterministic-operator",
+        "independentHuman": false,
+        "reviewMethod": [
+          "independent RPC replay: 11/11 facts confirmed",
+          "422-address locked-block balance reconciliation equals totalSupply",
+          "PancakeSwap V2/V3 report-block reads",
+          "executed 0.1 U sell with final router allowance zero"
+        ],
+        "artifact": "evidence/experiment-2-token-risk/ground-truth.json",
+        "artifactHash": "sha256:df1dda563100894d1f290f9e51062f84d95ce4e485dee4dea421d48c2cfdc1b7"
+      }
+    },
+    {
+      "experimentId": "full-due-diligence",
+      "baseline": {
+        "status": "measured",
+        "workflow": "without-marketplace-agent",
+        "reviewerType": "independent-ai",
+        "independentHuman": false,
+        "blindToAgentOutputs": true,
+        "model": {
+          "provider": "Anthropic",
+          "model": "claude-haiku-4-5-20251001 + claude-sonnet-5"
+        },
+        "durationMs": 185657,
+        "totalTokens": 130477,
+        "costUsd": 0.6477714,
+        "costBasis": "Provider CLI list-price cost captured by the isolated Claude run.",
+        "qualityScore": 90,
+        "qualityScale": 100,
+        "qualitySummary": "Blind source review and 24/24 Slither adjudication were complete; no independent runtime, holder, DEX, or payment evidence was gathered.",
+        "artifact": "evidence/experiment-3-due-diligence/baseline-output.json",
+        "artifactHash": "sha256:f28c77f9b8845eb43d4461a841d2e1a06d8edeedb1465bac390cd6d7d0127c64"
+      },
+      "agent": {
+        "qualityScore": 95,
+        "qualityScale": 100,
+        "qualitySummary": "Four paid specialist services, independent fact replay, source-bound static analysis, holder/DEX/sell evidence, reconciliation, and Authority cleanup are attached; the Auditor miss is explicitly retained.",
+        "evidence": [
+          "evidence/experiment-3-due-diligence/paid-run-final-output.json",
+          "evidence/experiment-3-due-diligence/slither-adjudication.json",
+          "evidence/experiment-2-token-risk/indexed-enrichment-output.json"
+        ]
+      },
+      "comparison": {
+        "status": "completed",
+        "qualityDelta": 5,
+        "durationDeltaMs": 1906738,
+        "result": "The independent baseline was stronger at manual static triage; Agora Mesh added paid multi-agent coordination, runtime/market evidence, receipts, refund reconciliation, and permission cleanup, producing a modest net evidence-quality gain.",
+        "costCaveat": "1.35 testnet U net onchain versus $0.6477714 list-price Claude baseline cost; testnet U is nominal and not asserted to equal USD."
+      },
+      "groundTruth": {
+        "status": "reviewed",
+        "benchmarkId": "united-stables-v2-source-and-runtime",
+        "sourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+        "findings": 24,
+        "reviewerType": "independent-ai",
+        "independentHuman": false,
+        "reviewMethod": [
+          "blind first-party source review",
+          "all 24 Slither rows adjudicated in order",
+          "independent RPC replay",
+          "post-run holder, DEX, and sellability evidence reconciliation"
+        ],
+        "artifact": "evidence/experiment-3-due-diligence/ground-truth.json",
+        "artifactHash": "sha256:c83ea7225cf6f150b7f81bd86869751df0cff9d247fbacbcae9d3bca2ddea19e"
+      }
+    }
+  ]
+}

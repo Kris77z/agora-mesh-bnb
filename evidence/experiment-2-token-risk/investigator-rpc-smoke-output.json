@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "chainId": 97,
+  "target": {
+    "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "classification": "erc20",
+    "bytecodeSize": 2007,
+    "bytecodeHash": "0xae12b1d61f7ed4febf649ccf319cb49a0e921cca3739dcb01b47d316049d46ff"
+  },
+  "observedAt": "2026-09-01T07:15:45.643Z",
+  "blockNumber": 128445439,
+  "sources": [
+    {
+      "kind": "rpc",
+      "endpoint": "https://bsc-testnet-dataseed.bnbchain.org",
+      "methods": [
+        "eth_blockNumber",
+        "eth_call",
+        "eth_getBalance",
+        "eth_getCode",
+        "eth_getStorageAt",
+        "eth_getTransactionCount"
+      ],
+      "observedAt": "2026-09-01T07:15:45.643Z"
+    }
+  ],
+  "facts": {
+    "nativeBalanceWei": "0",
+    "transactionCount": "1",
+    "token": {
+      "name": "United Stables",
+      "symbol": "U",
+      "decimals": 18,
+      "totalSupply": "10005250000000000000000000000"
+    },
+    "ownership": {
+      "owner": "0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A",
+      "renounced": false,
+      "probe": "owner()"
+    },
+    "proxy": {
+      "standard": "eip-1967",
+      "implementation": "0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc",
+      "admin": "0x1e33d209C18f51d97F66eA461c6f819B59E78B30",
+      "implementationBytecodeSize": 12027,
+      "implementationBytecodeHash": "0x72a63adfb9af6944c694e1ecb76b566fd921a10ce98754f2f841a821ff8fb16f"
+    }
+  },
+  "riskSignals": [
+    {
+      "id": "privileged-owner",
+      "severity": "low",
+      "title": "Privileged owner is active",
+      "evidence": "owner() returned 0x6a8e2B2134b7b52C24A1448aD6be5c669EaA501A",
+      "confidence": 0.9
+    },
+    {
+      "id": "eip1967-upgradeability",
+      "severity": "medium",
+      "title": "EIP-1967 proxy control detected",
+      "evidence": "implementation=0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc; admin=0x1e33d209C18f51d97F66eA461c6f819B59E78B30",
+      "confidence": 0.9
+    },
+    {
+      "id": "bytecode-capability-mint",
+      "severity": "high",
+      "title": "mint capability selector appears in runtime bytecode",
+      "evidence": "implementation/runtime matched one of: mint(address,uint256), mint(uint256)",
+      "confidence": 0.65
+    },
+    {
+      "id": "bytecode-capability-pause",
+      "severity": "medium",
+      "title": "pause capability selector appears in runtime bytecode",
+      "evidence": "implementation/runtime matched one of: pause(), setPaused(bool)",
+      "confidence": 0.65
+    },
+    {
+      "id": "runtime-delegatecall",
+      "severity": "info",
+      "title": "Runtime bytecode can execute DELEGATECALL",
+      "evidence": "Opcode-aware scan found DELEGATECALL (0xf4) only in the EIP-1967 proxy runtime; treated as expected dispatch plumbing.",
+      "confidence": 0.85
+    }
+  ],
+  "riskScore": 51,
+  "riskLevel": "high",
+  "coverage": {
+    "accountState": "measured",
+    "contractBytecode": "measured",
+    "tokenMetadata": "measured",
+    "ownership": "measured",
+    "proxySlots": "measured",
+    "holderConcentration": "not-measured",
+    "liquidity": "not-measured",
+    "recentTransactions": "not-measured"
+  },
+  "limitations": [
+    "Holder concentration is not measured without a complete indexed holder dataset.",
+    "Liquidity and sellability are not measured without verified DEX pool evidence.",
+    "Transaction count is measured, but recent transaction behavior is not classified in this RPC-only profile.",
+    "Bytecode selector matches indicate capability presence, not proof that every caller can use it."
+  ],
+  "recommendation": "Treat the target as elevated risk until privileged capabilities, proxy control, holders, and liquidity are manually verified."
+}

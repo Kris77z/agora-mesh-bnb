@@ -1,0 +1,489 @@
+{
+  "version": 1,
+  "artifactKind": "without-marketplace-agent-baseline",
+  "experimentId": "full-due-diligence",
+  "status": "measured",
+  "workflow": "independent-llm-plus-supplied-slither",
+  "reviewerDeclaration": {
+    "operatorType": "independent-ai",
+    "independentHuman": false,
+    "officialTermixWithoutAgentEligible": true,
+    "eligibilityBasis": "The official TermiX requirement asks for the same real task without an agent hired through the marketplace; it does not require a human reviewer. The reviewer type remains explicitly disclosed.",
+    "modelBlindToAgentOutputs": true,
+    "modelBlindToGroundTruth": true
+  },
+  "input": {
+    "task": "Reviewed whether the United Stables (U) contract used by Apex on BNB Testnet (proxy 0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565, EIP-1967 implementation 0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc) should be trusted, using only the supplied verified source (src/StablecoinV2.sol, sourceHash sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c) and a supplied raw Slither v0.11.6 output (24 detections). This is a blind, source-hash-bound static review with no access to Agora Mesh outputs, ground truth, or any prior human/agent triage. No RPC calls, no bytecode diffing, no live-chain state reads, and no independent hash recomputation were performed by this candidate; all such facts are taken as asserted by the supplied materials.",
+    "artifacts": [
+      "evidence/experiment-3-due-diligence/input.md",
+      "evidence/experiment-3-due-diligence/baseline-protocol.md",
+      "evidence/experiment-3-due-diligence/baseline-input.json",
+      "evidence/experiment-3-due-diligence/verified-source-input.json",
+      "evidence/experiment-3-due-diligence/baseline-slither-output-attempt-2.json"
+    ]
+  },
+  "model": {
+    "provider": "Anthropic",
+    "requestedModel": "sonnet",
+    "canonicalModels": [
+      "claude-haiku-4-5-20251001",
+      "claude-sonnet-5"
+    ],
+    "sessionId": "48e95b83-1762-4cf0-9955-40f46bbf0003",
+    "totalCostUsdListBasis": 0.6477714,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 96611,
+      "cache_read_input_tokens": 15342,
+      "output_tokens": 18522,
+      "output_tokens_details": {
+        "thinking_tokens": 10321
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 96611,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "not_available",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 18522,
+          "cache_read_input_tokens": 15342,
+          "cache_creation_input_tokens": 96611,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 96611
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard"
+    }
+  },
+  "usage": {
+    "totalTokens": 130477
+  },
+  "timing": {
+    "startedAt": "2026-09-02T03:28:49.694Z",
+    "completedAt": "2026-09-02T03:31:55.350Z",
+    "wallDurationMs": 185657
+  },
+  "cost": {
+    "currency": "USD",
+    "modelUsd": 0.6477714,
+    "toolUsd": 0,
+    "humanUsd": null,
+    "totalUsd": 0.6477714,
+    "basis": "Provider CLI list-price cost captured by the isolated Claude run."
+  },
+  "quality": {
+    "score": 90,
+    "scale": 100,
+    "rubric": "40% Slither-row adjudication + 30% source-finding evidence + 20% trust-decision clarity + 10% independent runtime coverage",
+    "metrics": {
+      "slitherRowsAdjudicated": 24,
+      "slitherRowsTotal": 24,
+      "sourceFindings": 5,
+      "trustDecision": "caution",
+      "independentRuntimeReads": 0
+    }
+  },
+  "report": {
+    "schemaVersion": 1,
+    "reviewerType": "independent-ai-candidate",
+    "blind": true,
+    "taskSummary": "Reviewed whether the United Stables (U) contract used by Apex on BNB Testnet (proxy 0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565, EIP-1967 implementation 0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc) should be trusted, using only the supplied verified source (src/StablecoinV2.sol, sourceHash sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c) and a supplied raw Slither v0.11.6 output (24 detections). This is a blind, source-hash-bound static review with no access to Agora Mesh outputs, ground truth, or any prior human/agent triage. No RPC calls, no bytecode diffing, no live-chain state reads, and no independent hash recomputation were performed by this candidate; all such facts are taken as asserted by the supplied materials.",
+    "trustDecision": "caution",
+    "findings": [
+      {
+        "findingId": "F1",
+        "title": "Fully centralized privileged control: owner and autoOwner govern mint, pause, and freeze with no on-chain verified custody",
+        "severity": "medium",
+        "sourceUnit": "src/Stablecoin.sol",
+        "lines": [],
+        "evidence": "owner (Ownable2StepUpgradeable) can call mint(uint256), mint(address,uint256), burn, pause/unpause, freeze/unfreeze any address, and set autoMintMaxLimit; a separate autoOwner role can autoMint up to autoMintMaxLimit per call with no cumulative/global supply cap enforced in this source unit. transferAutoOwnership/renounceAutoOwnership are also owner-gated.",
+        "assessment": "This is standard architecture for a permissioned/regulated stablecoin (comparable to USDC/USDT patterns) and is not a code defect. It is, however, the dominant trust factor: token holders are fully exposed to whoever controls the owner and autoOwner keys (arbitrary mint, freeze of any address, global pause). The supplied materials do not identify whether these roles are EOAs, multisigs, or timelocked, and this review performed no RPC call to check current role holders, pause state, or frozen-address list on the bound implementation/proxy at report block 128449782. This is a structural/governance observation, not a proven exploit.",
+        "confidence": "high"
+      },
+      {
+        "findingId": "F2",
+        "title": "Inconsistent modifier coverage between self-mint/burn and directed mint/burn",
+        "severity": "low",
+        "sourceUnit": "src/Stablecoin.sol",
+        "lines": [],
+        "evidence": "mint(uint256) and burn(uint256) (self-directed, onlyOwner) lack whenNotPaused/notFrozen modifiers, whereas mint(address,uint256) and autoMint/autoBurn apply whenNotPaused (and notFrozen where relevant).",
+        "assessment": "Because both variants are onlyOwner-gated, this cannot be exploited by a non-privileged party; it only lets the already-fully-trusted owner mint/burn to themselves while the contract is 'paused'. It is a code-quality/consistency gap worth fixing but not a security vulnerability given the existing trust model.",
+        "confidence": "medium"
+      },
+      {
+        "findingId": "F3",
+        "title": "EIP-7598/ERC-3009-style typehash constants not independently recomputed",
+        "severity": "informational",
+        "sourceUnit": "src/libraries/EIP7598Constants.sol",
+        "lines": [],
+        "evidence": "TRANSFER_WITH_AUTHORIZATION_TYPEHASH and RECEIVE_WITH_AUTHORIZATION_TYPEHASH are hardcoded bytes32 constants claimed to equal keccak256 of specific struct signature strings.",
+        "assessment": "Both constants are correctly sized (32 bytes) and the surrounding _transferOrReceiveWithAuthorization logic (time-window checks, per-authorizer nonce mapping, EIP-712 digest construction via _hashTypedDataV4, SignatureCheckerUpgradeable for EOA+ERC-1271, front-running guard requiring msg.sender==to on receiveWithAuthorization) matches the expected ERC-3009 pattern. This review did not execute keccak256 to independently confirm the constants match their stated preimages; an incorrect constant would most likely fail-safe (signatures never validate) rather than create an exploitable bypass, but independent verification is recommended before relying on this feature.",
+        "confidence": "medium"
+      },
+      {
+        "findingId": "F4",
+        "title": "V2 storage-gap/slot layout claims are documentation, not independently verified against deployed storage",
+        "severity": "informational",
+        "sourceUnit": "src/StablecoinV2.sol",
+        "lines": [],
+        "evidence": "Comments assert _authorizationStates occupies slot 359, eip7598EnableFlag slot 360, with a uint256[48] __gap following, based on the inherited OZ upgradeable gap sizes.",
+        "assessment": "The stated layout is plausible from reading the inheritance chain's gap sizes, but this review did not compile the contract or query eth_getStorageAt against the bound implementation to confirm no storage collision occurred during the V1→V2 upgrade. This is a structural claim, not a proven fact.",
+        "confidence": "medium"
+      },
+      {
+        "findingId": "F5",
+        "title": "renounceOwnership permanently disabled",
+        "severity": "informational",
+        "sourceUnit": "src/Stablecoin.sol",
+        "lines": [],
+        "evidence": "renounceOwnership() is overridden to always revert(\"Unsupported\"), so the contract can never be left without an owner.",
+        "assessment": "This guarantees a privileged owner will always exist (cannot be accidentally/maliciously renounced to no-owner), which is favorable for avoiding a bricked contract but also means the centralization risk described in F1 can never be voluntarily removed via renouncement alone (only via transferOwnership to a new, potentially better-governed address).",
+        "confidence": "high"
+      }
+    ],
+    "slitherTriage": [
+      {
+        "index": 0,
+        "check": "incorrect-exp",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+        "lines": [
+          117
+        ],
+        "verdict": "dependency-signal",
+        "reason": "The `^` in `inverse = (3 * denominator) ^ 2` is part of OpenZeppelin's audited Newton-Raphson modular-inverse seed for mulDiv (Remco Bloemen's full-precision 512-bit division algorithm), not an accidental substitution for exponentiation. Unmodified third-party dependency code.",
+        "confidence": "high"
+      },
+      {
+        "index": 1,
+        "check": "divide-before-multiply",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+        "lines": [
+          102
+        ],
+        "verdict": "dependency-signal",
+        "reason": "Part of OZ's standard mulDiv full-precision algorithm; the division-then-multiplication sequence is intentional and mathematically exact by construction, not a truncation bug. Unmodified dependency code.",
+        "confidence": "high"
+      },
+      {
+        "index": 2,
+        "check": "divide-before-multiply",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+        "lines": [
+          102
+        ],
+        "verdict": "dependency-signal",
+        "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site within the same audited routine.",
+        "confidence": "high"
+      },
+      {
+        "index": 3,
+        "check": "divide-before-multiply",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+        "lines": [
+          102
+        ],
+        "verdict": "dependency-signal",
+        "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site.",
+        "confidence": "high"
+      },
+      {
+        "index": 4,
+        "check": "divide-before-multiply",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+        "lines": [
+          102
+        ],
+        "verdict": "dependency-signal",
+        "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site.",
+        "confidence": "high"
+      },
+      {
+        "index": 5,
+        "check": "divide-before-multiply",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+        "lines": [
+          102
+        ],
+        "verdict": "dependency-signal",
+        "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site.",
+        "confidence": "high"
+      },
+      {
+        "index": 6,
+        "check": "divide-before-multiply",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+        "lines": [
+          102
+        ],
+        "verdict": "dependency-signal",
+        "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site.",
+        "confidence": "high"
+      },
+      {
+        "index": 7,
+        "check": "divide-before-multiply",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+        "lines": [
+          102
+        ],
+        "verdict": "dependency-signal",
+        "reason": "Same mulDiv algorithm instance as index 1, different flagged multiplication site.",
+        "confidence": "high"
+      },
+      {
+        "index": 8,
+        "check": "divide-before-multiply",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol",
+        "lines": [
+          105
+        ],
+        "verdict": "dependency-signal",
+        "reason": "Final `result = prod0 * inverse` step of the same audited mulDiv routine; division by `twos` earlier is exact by the algorithm's construction. Unmodified dependency code.",
+        "confidence": "high"
+      },
+      {
+        "index": 9,
+        "check": "shadowing-local",
+        "sourceUnit": "src/StablecoinV2.sol",
+        "lines": [
+          249
+        ],
+        "verdict": "true-positive",
+        "reason": "cancelAuthorization's `bytes32 nonce` parameter genuinely shadows the unrelated `uint256 public nonce` sequence counter inherited from Stablecoin. Confirmed by reading both declarations. Purely a naming collision — the function never references the state variable — so it is a code-quality issue, not a logic bug.",
+        "confidence": "high"
+      },
+      {
+        "index": 10,
+        "check": "shadowing-local",
+        "sourceUnit": "src/Stablecoin.sol",
+        "lines": [
+          242
+        ],
+        "verdict": "true-positive",
+        "reason": "_approve's local `owner` parameter shadows the inherited `owner()` function; standard pattern, no logic error observed (function correctly uses the parameter throughout).",
+        "confidence": "high"
+      },
+      {
+        "index": 11,
+        "check": "shadowing-local",
+        "sourceUnit": "src/StablecoinV2.sol",
+        "lines": [
+          169
+        ],
+        "verdict": "true-positive",
+        "reason": "receiveWithAuthorization(...,bytes) `nonce` parameter shadows Stablecoin.nonce; same benign naming-collision pattern as index 9.",
+        "confidence": "high"
+      },
+      {
+        "index": 12,
+        "check": "shadowing-local",
+        "sourceUnit": "src/StablecoinV2.sol",
+        "lines": [
+          204
+        ],
+        "verdict": "true-positive",
+        "reason": "_transferOrReceiveWithAuthorization's `nonce` parameter shadows Stablecoin.nonce; internal helper correctly uses the parameter for the authorization-nonce mapping, unrelated to the sequence counter.",
+        "confidence": "high"
+      },
+      {
+        "index": 13,
+        "check": "shadowing-local",
+        "sourceUnit": "src/Stablecoin.sol",
+        "lines": [
+          50
+        ],
+        "verdict": "true-positive",
+        "reason": "initialize's `_symbol` parameter shadows ERC20Upgradeable._symbol; standard OZ initializer parameter-naming convention, value is passed into __ERC20_init correctly, no bug.",
+        "confidence": "high"
+      },
+      {
+        "index": 14,
+        "check": "shadowing-local",
+        "sourceUnit": "src/StablecoinV2.sol",
+        "lines": [
+          141
+        ],
+        "verdict": "true-positive",
+        "reason": "receiveWithAuthorization(...,v,r,s) `nonce` parameter shadows Stablecoin.nonce; same benign pattern as index 9.",
+        "confidence": "high"
+      },
+      {
+        "index": 15,
+        "check": "shadowing-local",
+        "sourceUnit": "src/Stablecoin.sol",
+        "lines": [
+          178
+        ],
+        "verdict": "true-positive",
+        "reason": "autoBurn's local `owner` variable (captured from owner()) shadows the owner() function; used correctly as a cached value, no logic error observed.",
+        "confidence": "high"
+      },
+      {
+        "index": 16,
+        "check": "shadowing-local",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+        "lines": [
+          47
+        ],
+        "verdict": "dependency-signal",
+        "reason": "__ERC20Permit_init's `name` parameter shadowing ERC20Upgradeable.name() is unmodified upstream OpenZeppelin code, not first-party.",
+        "confidence": "high"
+      },
+      {
+        "index": 17,
+        "check": "shadowing-local",
+        "sourceUnit": "src/Stablecoin.sol",
+        "lines": [
+          50
+        ],
+        "verdict": "true-positive",
+        "reason": "initialize's `_name` parameter shadows ERC20Upgradeable._name; same benign initializer pattern as index 13.",
+        "confidence": "high"
+      },
+      {
+        "index": 18,
+        "check": "shadowing-local",
+        "sourceUnit": "src/StablecoinV2.sol",
+        "lines": [
+          112
+        ],
+        "verdict": "true-positive",
+        "reason": "transferWithAuthorization(...,v,r,s) `nonce` parameter shadows Stablecoin.nonce; same benign pattern as index 9.",
+        "confidence": "high"
+      },
+      {
+        "index": 19,
+        "check": "shadowing-local",
+        "sourceUnit": "src/StablecoinV2.sol",
+        "lines": [
+          88
+        ],
+        "verdict": "true-positive",
+        "reason": "transferWithAuthorization(...,bytes) `nonce` parameter shadows Stablecoin.nonce; same benign pattern as index 9.",
+        "confidence": "high"
+      },
+      {
+        "index": 20,
+        "check": "shadowing-local",
+        "sourceUnit": "src/StablecoinV2.sol",
+        "lines": [
+          183
+        ],
+        "verdict": "true-positive",
+        "reason": "authorizationState's `nonce` parameter shadows Stablecoin.nonce in a view function; purely cosmetic, no state mutation involved.",
+        "confidence": "high"
+      },
+      {
+        "index": 21,
+        "check": "missing-zero-check",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol",
+        "lines": [
+          42
+        ],
+        "verdict": "dependency-signal",
+        "reason": "Unmodified OZ Ownable2Step code; the two-step design (acceptOwnership must be called by the new pendingOwner) means setting newOwner to address(0) only blocks completion of that particular transfer attempt — the current owner retains ownership until acceptance, so this cannot brick or hijack ownership. Standard, low-impact, long-accepted OZ pattern.",
+        "confidence": "high"
+      },
+      {
+        "index": 22,
+        "check": "timestamp",
+        "sourceUnit": "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+        "lines": [
+          65
+        ],
+        "verdict": "dependency-signal",
+        "reason": "Standard EIP-2612 permit deadline check using block.timestamp in unmodified OZ code; miner timestamp manipulation tolerance (~seconds) is immaterial to a signature-expiry deadline.",
+        "confidence": "high"
+      },
+      {
+        "index": 23,
+        "check": "timestamp",
+        "sourceUnit": "src/StablecoinV2.sol",
+        "lines": [
+          208
+        ],
+        "verdict": "true-positive",
+        "reason": "First-party validAfter/validBefore window checks in _transferOrReceiveWithAuthorization do use block.timestamp for comparisons; this is the standard, expected ERC-3009-style pattern and the small miner-manipulable drift is not a practically exploitable issue for a payment-authorization time window. Real detection, benign/low severity.",
+        "confidence": "high"
+      }
+    ],
+    "verifiedFacts": [
+      {
+        "claim": "Verified source unit is src/StablecoinV2.sol, inheriting Stablecoin (ERC20PermitUpgradeable, Ownable2StepUpgradeable, PausableUpgradeable), compiled with Solidity ^0.8.28.",
+        "source": "verified-source-input.json (materials supplied)",
+        "status": "as-asserted-in-materials, not independently recompiled/hash-checked by this reviewer"
+      },
+      {
+        "claim": "The proxy (0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565) points to implementation 0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc per EIP-1967 at report block 128449782.",
+        "source": "input.md / baseline-input.json bindings",
+        "status": "as-asserted-in-materials; no independent eth_getStorageAt/RPC read performed"
+      },
+      {
+        "claim": "The contract implements owner-gated mint/burn/freeze/pause and a separate autoOwner role for sequence-nonce-gated cross-chain-style auto-mint/auto-burn with a per-call cap (autoMintMaxLimit) but no enforced cumulative supply ceiling in this source unit.",
+        "source": "src/Stablecoin.sol (verified-source-input.json)",
+        "status": "confirmed by direct source reading"
+      },
+      {
+        "claim": "StablecoinV2 adds EIP-7598/ERC-3009-style transferWithAuthorization/receiveWithAuthorization/cancelAuthorization gated by an `eip7598EnableFlag` owner-toggle, with EIP-712 signature verification via SignatureCheckerUpgradeable (EOA + ERC-1271).",
+        "source": "src/StablecoinV2.sol (verified-source-input.json)",
+        "status": "confirmed by direct source reading"
+      },
+      {
+        "claim": "renounceOwnership() is permanently disabled (always reverts), so the contract can never be left ownerless via that path.",
+        "source": "src/Stablecoin.sol (verified-source-input.json)",
+        "status": "confirmed by direct source reading"
+      },
+      {
+        "claim": "Raw Slither run (v0.11.6) against the verified source package produced 24 detections: 1 incorrect-exp, 8 divide-before-multiply, 12 shadowing-local, 1 missing-zero-check, 2 timestamp — all Medium/Low impact per Slither's own labels, none High/Critical.",
+        "source": "baseline-slither-output-attempt-2.json",
+        "status": "confirmed by direct enumeration of the supplied raw output"
+      },
+      {
+        "claim": "All 9 incorrect-exp/divide-before-multiply detections and both dependency-code shadowing/missing-zero-check/timestamp detections are located in unmodified OpenZeppelin Upgradeable library files, not first-party code.",
+        "source": "baseline-slither-output-attempt-2.json file paths (lib/openzeppelin-contracts-upgradeable/...)",
+        "status": "confirmed by direct enumeration"
+      }
+    ],
+    "requiredActions": [
+      "Independently confirm current owner and autoOwner addresses on-chain (eth_call to owner()/autoOwner()) at or after report block 128449782, and determine whether either is an EOA, a multisig, or a timelocked contract.",
+      "Independently confirm current pause state (paused()) and check for any addresses in the frozen mapping via event logs (Freeze/Unfreeze) to assess whether censorship powers have been exercised.",
+      "Independently recompute keccak256 of the TRANSFER_WITH_AUTHORIZATION_TYPEHASH and RECEIVE_WITH_AUTHORIZATION_TYPEHASH preimage strings in src/libraries/EIP7598Constants.sol and compare to the hardcoded constants.",
+      "Compile the full verified source (with the supplied remappings) and run `forge inspect StablecoinV2 storage-layout` (or equivalent) to confirm the claimed V1→V2 storage-gap layout against actual deployed storage — do not rely on the in-source comments alone.",
+      "Confirm via BscScan/explorer that the deployed implementation bytecode at 0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc actually matches (compiles to) the supplied verified-source-input.json content and sourceHash, since this review only consumed the pre-supplied source text and did not re-derive it from the chain.",
+      "Review autoMintMaxLimit's current on-chain value and mint/AutoMint event history to gauge realistic maximum single-transaction dilution exposure.",
+      "If this token is intended for materially trusted use (custody of user funds via Apex), obtain confirmation of governance process changes (e.g., timelock, multisig threshold) around owner/autoOwner key management, since the source code places no on-chain limits on owner discretion beyond the two-step ownership transfer."
+    ],
+    "limitations": [
+      "This is a pure static/source review of materials supplied in the prompt; no tool execution, RPC calls, block-explorer browsing, DEX inspection, or independent hash/keccak256 recomputation was performed by this reviewer.",
+      "Line numbers for findings not directly sourced from a Slither detection (F1–F5) are approximate/omitted because this reviewer does not have access to a line-numbered compiled artifact for the merged source; only Slither's own reported line numbers (used in slitherTriage) are precise.",
+      "No dynamic/fuzz testing, formal verification, or fork-based transaction simulation was performed; conclusions about 'no exploitable bug found' reflect static reading only and cannot rule out logic issues outside the reviewed control flow (e.g., subtle interactions with as-yet-unseen future upgrades).",
+      "This review did not have access to, and explicitly did not use, any Agora Mesh candidate/auditor/verifier output, ground-truth manifest, or prior human triage — per the blind-baseline protocol.",
+      "Governance/custody facts (who holds owner/autoOwner keys, whether multisig/timelock is used, current pause/freeze state) are unknown from the supplied materials and were not independently queried; the trust decision is therefore bounded by code-level review only, not operational/key-custody assurance."
+    ],
+    "noHumanGroundTruth": true,
+    "modelSelfIdentification": "This review was produced by an AI language model (Claude, Anthropic) acting as an automated candidate reviewer in a blinded comparison protocol. It is not a human reviewer, has no access to human-authored ground truth, prior Agora Mesh outputs, or any materials beyond what was supplied in this prompt, and performed no tool execution (no RPC calls, no local Slither invocation, no browser inspection) — all analysis is derived from reading the supplied source text and the supplied pre-generated raw Slither JSON."
+  },
+  "source": {
+    "candidateArtifact": "evidence/experiment-3-due-diligence/claude-blind-review-candidate.json",
+    "candidateArtifactHash": "sha256:7a1aafeabed633b9ec94a6f7fccb6bcf20b09a807e019f9b5ad59fe3e40eda6b",
+    "slitherAdjudicationArtifact": "evidence/experiment-3-due-diligence/slither-adjudication.json",
+    "slitherAdjudicationArtifactHash": "sha256:c99309e8fe7b53481a5e66edf93aeb28d6d6c6dd8dd943a7133796542645a464"
+  },
+  "limitations": [
+    "This is a pure static/source review of materials supplied in the prompt; no tool execution, RPC calls, block-explorer browsing, DEX inspection, or independent hash/keccak256 recomputation was performed by this reviewer.",
+    "Line numbers for findings not directly sourced from a Slither detection (F1–F5) are approximate/omitted because this reviewer does not have access to a line-numbered compiled artifact for the merged source; only Slither's own reported line numbers (used in slitherTriage) are precise.",
+    "No dynamic/fuzz testing, formal verification, or fork-based transaction simulation was performed; conclusions about 'no exploitable bug found' reflect static reading only and cannot rule out logic issues outside the reviewed control flow (e.g., subtle interactions with as-yet-unseen future upgrades).",
+    "This review did not have access to, and explicitly did not use, any Agora Mesh candidate/auditor/verifier output, ground-truth manifest, or prior human triage — per the blind-baseline protocol.",
+    "Governance/custody facts (who holds owner/autoOwner keys, whether multisig/timelock is used, current pause/freeze state) are unknown from the supplied materials and were not independently queried; the trust decision is therefore bounded by code-level review only, not operational/key-custody assurance."
+  ]
+}

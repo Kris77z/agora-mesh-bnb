@@ -4,10 +4,11 @@ import { useI18n } from '@/components/i18n/locale-provider';
 import { formatLocaleTime } from '@/lib/i18n';
 import { AgentEvent, PaymentStatus } from "@/types/agent";
 import { cn } from "@/lib/utils";
+import { publicChainConfig } from "@/lib/chain-config";
 import { motion, AnimatePresence } from "motion/react";
 import {
     Play, CheckCircle, AlertOctagon, Wallet,
-    Search, Zap, ArrowRight, Brain, FileCheck
+    Search, Zap, ArrowRight, Brain, FileCheck, ShieldCheck, FileSearch
 } from "lucide-react";
 
 interface TraceTimelineProps {
@@ -78,6 +79,21 @@ function getEventConfig(event: AgentEvent, translate: (key: string) => string): 
         bg: 'bg-blue-50', border: 'border-blue-200',
         title: `🎯 ${translate('trace.service_selected')}`, accent: 'text-blue-800',
     };
+    if (eventType === 'security_input_resolved') return {
+        icon: <FileSearch className="w-3.5 h-3.5" />,
+        bg: 'bg-violet-50', border: 'border-violet-200',
+        title: `📄 ${translate('trace.security_input_resolved')}`, accent: 'text-violet-800',
+    };
+    if (eventType === 'verifier_hired') return {
+        icon: <ShieldCheck className="w-3.5 h-3.5" />,
+        bg: 'bg-teal-50', border: 'border-teal-200',
+        title: `🛡️ ${translate('trace.verifier_hired')}`, accent: 'text-teal-800',
+    };
+    if (eventType === 'finding_verified') return {
+        icon: <ShieldCheck className="w-3.5 h-3.5" />,
+        bg: 'bg-teal-50', border: 'border-teal-200',
+        title: `🔎 ${translate('trace.finding_verified')}`, accent: 'text-teal-800',
+    };
     if (eventType === 'tool_call') return {
         icon: <Brain className="w-3.5 h-3.5" />,
         bg: 'bg-amber-50', border: 'border-amber-200',
@@ -147,6 +163,19 @@ function getEventDetail(event: AgentEvent, t: (key: string, variables?: Record<s
             return <p className="font-mono text-xs">{serviceId}</p>;
         }
     }
+    if (type === 'security_input_resolved' && typeof data?.sourceHash === 'string') {
+        return <p className="font-mono text-xs break-all">{data.sourceHash}</p>;
+    }
+    if (type === 'verifier_hired' && typeof data?.serviceId === 'string') {
+        return <p>{t('trace.verifierDetail', { service: data.serviceId })}</p>;
+    }
+    if (
+        type === 'finding_verified' &&
+        typeof data?.findingId === 'string' &&
+        typeof data?.status === 'string'
+    ) {
+        return <p className="font-mono text-xs">{data.findingId}: {data.status}</p>;
+    }
     if (type === 'tool_call' && data?.tool) {
         const toolName = typeof data.tool === 'string' ? data.tool : undefined;
         if (!toolName) {
@@ -167,7 +196,7 @@ function getEventDetail(event: AgentEvent, t: (key: string, variables?: Record<s
         return <p>{t('trace.price', { amount: data.amount })}</p>;
     if (type === 'payment_state' && typeof data?.txHash === 'string') {
         return (
-            <a href={`https://testnet.monadscan.com/tx/${data.txHash}`}
+            <a href={`${publicChainConfig.explorerUrl}/tx/${data.txHash}`}
                 target="_blank" rel="noopener noreferrer"
                 className="text-teal-700 hover:underline text-xs font-mono inline-flex items-center gap-1">
                 {t('trace.viewOnExplorer')} →

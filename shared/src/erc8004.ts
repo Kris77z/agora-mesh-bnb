@@ -24,22 +24,24 @@ export async function registerAgentOnIdentityRegistry(input: {
 
   const tx = await registry.register(input.agentUri);
   const receipt = await tx.wait(1);
+  if (!receipt || receipt.status !== 1) {
+    throw new Error(`ERC-8004 registration transaction was not confirmed successfully: ${tx.hash}`);
+  }
 
   let agentId: string | undefined;
-  if (receipt) {
-    for (const log of receipt.logs) {
-      try {
-        const parsed = registry.interface.parseLog(log);
-        if (parsed && parsed.name === "Registered") {
-          const id = parsed.args?.agentId;
-          agentId = typeof id === "bigint" ? id.toString(10) : undefined;
-          break;
-        }
-      } catch {
-        continue;
+  for (const log of receipt.logs) {
+    try {
+      const parsed = registry.interface.parseLog(log);
+      if (parsed && parsed.name === "Registered") {
+        const id = parsed.args?.agentId;
+        agentId = typeof id === "bigint" ? id.toString(10) : undefined;
+        break;
       }
+    } catch {
+      continue;
     }
   }
+  if (!agentId) throw new Error(`ERC-8004 registration receipt did not contain a Registered event: ${tx.hash}`);
 
   return {
     txHash: tx.hash,

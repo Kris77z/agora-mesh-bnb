@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "settlement": {
+    "status": "not-paid",
+    "reason": "Local Experiment 3 candidate run"
+  },
+  "sourceHash": "sha256:eeadc74efc28fa6c3f680f50da61cc14cf1a17c37b59f7e86997127bf7f6e279",
+  "packageSourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+  "auditScope": {
+    "kind": "verified-first-party-source-units",
+    "packageSourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+    "scopeSourceHash": "sha256:eeadc74efc28fa6c3f680f50da61cc14cf1a17c37b59f7e86997127bf7f6e279",
+    "includedSourceUnits": [
+      "src/Stablecoin.sol",
+      "src/StablecoinV2.sol",
+      "src/libraries/EIP7598Constants.sol"
+    ],
+    "omittedDependencySourceUnits": [
+      "lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/access/OwnableUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/interfaces/IERC1271Upgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/security/PausableUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/ERC20Upgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/IERC20Upgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/IERC20MetadataUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-IERC20PermitUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/utils/CountersUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/ECDSAUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/EIP712Upgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/SignatureCheckerUpgradeable.sol",
+      "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol"
+    ],
+    "sourceBytes": 19110,
+    "limitation": "The LLM review is scoped to explorer-verified first-party src/ units. Omitted dependency units remain in the package and must be covered by compiler-backed analysis and dependency provenance review."
+  },
+  "targetImplementation": "0x6b5C44Cbd4bbDDf11723557BA1B77ec5E33225Cc",
+  "timing": {
+    "startedAt": "2026-09-01T15:12:46.193Z",
+    "completedAt": "2026-09-01T15:15:18.172Z",
+    "durationMs": 151977.852,
+    "evidenceReused": true,
+    "reusedAt": "2026-09-01T15:28:53.086Z",
+    "reuseValidationMs": 8.822
+  },
+  "engine": {
+    "serviceId": "auditor-v1",
+    "agentId": "97:0x3bd3fd38ecc72378946c790780c8c1216e4c5527",
+    "provider": "kimi",
+    "model": "kimi-k2.7-code-highspeed",
+    "status": "measured",
+    "evidenceReused": true,
+    "scope": {
+      "kind": "verified-first-party-source-units",
+      "packageSourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+      "scopeSourceHash": "sha256:eeadc74efc28fa6c3f680f50da61cc14cf1a17c37b59f7e86997127bf7f6e279",
+      "includedSourceUnits": [
+        "src/Stablecoin.sol",
+        "src/StablecoinV2.sol",
+        "src/libraries/EIP7598Constants.sol"
+      ],
+      "omittedDependencySourceUnits": [
+        "lib/openzeppelin-contracts-upgradeable/contracts/access/Ownable2StepUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/access/OwnableUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/interfaces/IERC1271Upgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/security/PausableUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/ERC20Upgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/IERC20Upgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/IERC20MetadataUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/draft-IERC20PermitUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/utils/CountersUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/ECDSAUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/EIP712Upgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/utils/cryptography/SignatureCheckerUpgradeable.sol",
+        "lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol"
+      ],
+      "sourceBytes": 19110,
+      "limitation": "The LLM review is scoped to explorer-verified first-party src/ units. Omitted dependency units remain in the package and must be covered by compiler-backed analysis and dependency provenance review."
+    }
+  },
+  "report": {
+    "vulnerabilities": [
+      {
+        "findingId": "unbounded-auto-mint-limit-bypass",
+        "title": "Auto-mint max limit is per-transaction, allowing unbounded total minting",
+        "severity": "high",
+        "description": "autoMint enforces `autoMintMaxLimit >= amount` but does not track cumulative auto-minted supply. Because `nonce` simply increments each call and there is no aggregate cap or per-window accumulator, the autoOwner can call `autoMint` repeatedly up to the limit. This renders `autoMintMaxLimit` ineffective as a total issuance cap and allows arbitrary inflation of the token supply.",
+        "evidence": {
+          "file": "src/Stablecoin.sol",
+          "lines": "101-104, 140-150",
+          "snippet": "function setAutoMintMaxLimit(uint256 limit) external onlyOwner {\n    emit SetAutoMintMaxLimit(autoMintMaxLimit, limit);\n    autoMintMaxLimit = limit;\n}\n\nfunction autoMint(address to, uint256 amount, uint256 seq, uint256 chain) external whenNotPaused notFrozen(to) onlyAutoOwner returns (bool) {\n    require(seq == nonce, InvalidNonce(seq));\n    require(chain == chainId, InvalidChainId(chain));\n    require(amount > 0, InvalidAmount(amount));  \n    require(autoMintMaxLimit >= amount, MintLimitExceeded(amount, autoMintMaxLimit));\n    nonce++;\n    _mint(to, amount);\n    ..."
+        },
+        "exploitScenario": "The owner sets `autoMintMaxLimit` to 1,000,000 tokens to constrain the hot autoOwner wallet. The autoOwner (or a compromised autoOwner key) calls `autoMint(to, 1_000_000, nonce, chainId)` repeatedly. Each call mints another 1,000,000 tokens and increments `nonce`. After 100 iterations, 100,000,000 tokens have been minted, diluting all holders and breaking the stablecoin peg.",
+        "recommendation": "Introduce a cumulative auto-mint accumulator (e.g., per-day or total minted) and enforce `autoMintMaxLimit` against that total. If the limit is intended only as a per-transaction cap, rename the variable and error to avoid ambiguity and add explicit documentation.",
+        "confidence": 0.85
+      },
+      {
+        "findingId": "auto-burns-owner-balance",
+        "title": "autoBurn can destroy the contract owner's balance without allowance",
+        "severity": "medium",
+        "description": "autoBurn is callable only by the autoOwner role, yet it burns tokens from `owner()` rather than from the caller or a specified `from` account. There is no allowance check or signature from the owner. If the autoOwner is a distinct hot wallet or service, this grants it unilateral power to destroy owner-held funds.",
+        "evidence": {
+          "file": "src/Stablecoin.sol",
+          "lines": "172-182",
+          "snippet": "function autoBurn(uint256 amount, uint256 seq, uint256 chain) external whenNotPaused onlyAutoOwner returns (bool) {\n   require(seq == nonce, InvalidNonce(seq));\n    require(chain == chainId, InvalidChainId(chain));\n    require(amount > 0, InvalidAmount(amount));  \n    nonce++;\n    address owner = owner();\n    _burn(owner, amount);\n    emit Burn(autoOwner, owner, amount);\n    emit AutoBurn(autoOwner,owner, seq, amount);\n    return true;\n}"
+        },
+        "exploitScenario": "The owner (treasury) holds a large token balance. The autoOwner key is compromised or the autoOwner service is malicious. It calls `autoBurn(treasuryBalance, nonce, chainId)`, which passes `owner()` to `_burn` and permanently destroys all tokens held by the owner.",
+        "recommendation": "Change `autoBurn` to burn from `msg.sender`, or add a `from` parameter and require an allowance/signature from that account. Align the burn semantics with `autoMint`, where the autoOwner already chooses the destination.",
+        "confidence": 0.65
+      },
+      {
+        "findingId": "v2-initializer-unprotected",
+        "title": "V2 initializer can be called by anyone, force-enabling EIP-7598",
+        "severity": "medium",
+        "description": "StablecoinV2.initializeV2 uses `reinitializer(2)` but has no access-control modifier. After a proxy is upgraded to V2, any account can call `initializeV2()` once and set `eip7598EnableFlag = true`, enabling signature-based transfers before the owner intends to activate them.",
+        "evidence": {
+          "file": "src/StablecoinV2.sol",
+          "lines": "47-52",
+          "snippet": "/**\n * @dev Initialize the contract for V2 upgrade\n */   \nfunction initializeV2() public reinitializer(2) {  \n    eip7598EnableFlag = true;\n}"
+        },
+        "exploitScenario": "The owner upgrades the proxy to the StablecoinV2 implementation but plans to keep EIP-7598 disabled until off-chain integrations are audited. An attacker monitors the upgrade transaction and calls `initializeV2()` first, enabling EIP-7598. Any pre-signed authorizations that signers expected to be unusable while disabled can now be executed, potentially moving user funds unexpectedly.",
+        "recommendation": "Add `onlyOwner` to `initializeV2`, or invoke it atomically as part of the upgrade transaction by the proxy admin.",
+        "confidence": 0.75
+      },
+      {
+        "findingId": "front-runnable-v1-initializer",
+        "title": "V1 initializer can be front-run, granting attacker full ownership",
+        "severity": "high",
+        "description": "Stablecoin.initialize is unprotected and sets `msg.sender` as both the `owner` and `autoOwner`. If the proxy is deployed without being initialized in the same transaction, a malicious actor can call `initialize` first and obtain all privileged roles.",
+        "evidence": {
+          "file": "src/Stablecoin.sol",
+          "lines": "50-59",
+          "snippet": "function initialize(string memory _name, string memory _symbol) public initializer {\n    __Context_init();\n    __ERC20_init(_name, _symbol);\n    __ERC20Permit_init(_name);\n    __Ownable2Step_init();\n    __Pausable_init();\n    __AutoOwnerInit(msg.sender);\n\n    chainId = block.chainid;\n}"
+        },
+        "exploitScenario": "The team deploys the implementation and an upgradeable proxy pointing to it, but initialization is submitted separately. An attacker front-runs the initialize call with `initialize(\"Stablecoin\",\"STB\")`, becoming both `owner` and `autoOwner`. The attacker then mints arbitrary tokens, freezes legitimate addresses, and takes full control of the contract and its funds.",
+        "recommendation": "Initialize the proxy atomically in the deployment transaction, or use a factory/deployment script that ensures only the deployer can call `initialize`. Alternatively, protect `initialize` so that it can only be called by the intended deployer address.",
+        "confidence": 0.8
+      }
+    ]
+  },
+  "reusedAt": "2026-09-01T15:28:53.086Z",
+  "originalEvidencePreserved": true
+}

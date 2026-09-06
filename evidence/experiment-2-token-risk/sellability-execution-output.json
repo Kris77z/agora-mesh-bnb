@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "evidenceKind": "executed-sellability-test",
+  "status": "confirmed",
+  "observedAt": "2026-09-02T03:45:54.129Z",
+  "chainId": 97,
+  "wallet": "0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d",
+  "input": {
+    "symbol": "U",
+    "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "decimals": 18,
+    "amountRaw": "100000000000000000"
+  },
+  "output": {
+    "symbol": "WBNB",
+    "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+    "decimals": 18,
+    "amountRaw": "36600134870660"
+  },
+  "route": {
+    "venue": "PancakeSwap V2",
+    "router": "0xD99D1c33F9fC3444f8101754aBC46c52416550D1",
+    "pair": "0x55ed32b1808d4Bb9aD8DF8201494b74B982915F8",
+    "path": [
+      "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+    ],
+    "routerCodeHash": "0x89c56da835bced0ca70200b1628ccc5c2af177e22d2471f5637977419b1681a1",
+    "pairCodeHash": "0x3d0e7f1e341e5f6c886edc91f3b92bef13faef208182137e95420f544f024061",
+    "wrappedCodeHash": "0xb7d84205eaaf83ce7b3940c6beaad6d22790255e34a9a2b486aa8cdfff118fe6",
+    "reserve0BeforeRaw": "60306922251279596",
+    "reserve1BeforeRaw": "164343059621873690905"
+  },
+  "protection": {
+    "slippageBps": 500,
+    "initialQuoteOutRaw": "36600134870660",
+    "liveQuoteOutRaw": "36600134870660",
+    "minimumOutRaw": "34770128127127",
+    "deadline": 1788321337
+  },
+  "balances": {
+    "nativeBeforeRaw": "42920328461469604",
+    "nativeAfterRaw": "42900806261469604",
+    "inputBeforeRaw": "8150000000000000000",
+    "inputAfterRaw": "8050000000000000000",
+    "outputBeforeRaw": "0",
+    "outputAfterRaw": "36600134870660",
+    "routerAllowanceBeforeRaw": "0",
+    "routerAllowanceAfterApprovalRaw": "100000000000000000",
+    "routerAllowanceAfterSwapRaw": "0"
+  },
+  "transactions": {
+    "exactApproval": {
+      "hash": "0x84dd00669c5dbae51d370ee6f3472512a92ecbaa08d16a435241755ef75a393f",
+      "blockNumber": 128609323,
+      "gasUsed": "60257"
+    },
+    "swap": {
+      "hash": "0x42899ccd795f4d4b0584eb1c29456c398a7a199180b2c381cf0f585cfc86980e",
+      "blockNumber": 128609428,
+      "gasUsed": "134965"
+    }
+  },
+  "interpretation": "The wallet sold exactly 0.1 U for WBNB through the bound PancakeSwap V2 pair; the output met the 5% minimum and the exact Router allowance was fully consumed."
+}

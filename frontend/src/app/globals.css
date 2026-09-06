@@ -4,7 +4,8 @@
 @import "streamdown/styles.css";
 
 @layer base {
-  :root {
+:root {
+    --font-halant: Georgia, 'Times New Roman', serif;
     /* ============================
      * Claura-inspired Warm Theme
      * Background: warm cream #FCF6EF

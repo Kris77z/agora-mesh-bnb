@@ -3,22 +3,43 @@ import type {
   CommanderPhaseResult,
   ExecuteSuccessResponse,
   PaymentRequiredResponse,
-  ServiceInfo
+  ServiceInfo,
+  TokenRiskVerificationReport,
+  VerificationReport,
+  X402ExecuteSuccessResponse,
+  X402PaymentRequirement
 } from "@rebel/shared";
 import type { Experience } from "./memory.js";
 
 interface BaseHunterRunResult {
+  missionId: string;
   goal: string;
   service: ServiceInfo;
-  quote: PaymentRequiredResponse;
+  quote: PaymentRequiredResponse | X402PaymentRequirement;
   paymentTx: string;
-  execution: ExecuteSuccessResponse;
+  execution: ExecuteSuccessResponse | X402ExecuteSuccessResponse;
   receiptVerified: boolean;
   evaluation: {
     score: number;
     summary: string;
   };
   reflection?: Experience;
+  verification?: {
+    service: ServiceInfo;
+    quote: PaymentRequiredResponse | X402PaymentRequirement;
+    paymentTx: string;
+    execution: ExecuteSuccessResponse | X402ExecuteSuccessResponse;
+    receiptVerified: boolean;
+    report: VerificationReport;
+  };
+  riskReview?: {
+    service: ServiceInfo;
+    quote: PaymentRequiredResponse | X402PaymentRequirement;
+    paymentTx: string;
+    execution: ExecuteSuccessResponse | X402ExecuteSuccessResponse;
+    receiptVerified: boolean;
+    report: TokenRiskVerificationReport;
+  };
   finalMessage: string;
 }
 

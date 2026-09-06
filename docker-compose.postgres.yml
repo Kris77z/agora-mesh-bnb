@@ -1,0 +1,23 @@
+name: agora-mesh-postgres
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: agora_mesh
+      POSTGRES_USER: agora_migrator
+      POSTGRES_PASSWORD: agora_migrator_local
+    ports:
+      - "127.0.0.1:55432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agora_migrator -d agora_mesh"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    volumes:
+      - agora-postgres-data:/var/lib/postgresql/data
+      - ./database/bootstrap/00-roles.sql:/docker-entrypoint-initdb.d/00-roles.sql:ro
+
+volumes:
+  agora-postgres-data:

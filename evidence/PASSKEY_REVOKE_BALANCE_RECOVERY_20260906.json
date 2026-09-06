@@ -1,0 +1,8 @@
+{
+  "authorityId": "browser-cbb87207-05c8-4e4b-b053-e538b849c291",
+  "checkedAt": "2026-09-06T08:57:14.892Z",
+  "pendingStep": "revokeChecker",
+  "reportedFailure": "eth_getBalance HTTP 502",
+  "ownerConfirmation": "Clicked revoke; device verification had not occurred",
+  "action": "Clear unsent intent only; preserve invalid Authority and revoke lifecycle"
+}

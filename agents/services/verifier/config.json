@@ -1,0 +1,18 @@
+{
+  "id": "verifier-v1",
+  "name": "Independent Finding Verifier",
+  "description": "Re-check structured security findings with Slither and deterministic Solidity rules",
+  "taskTypes": ["finding-verification", "verify-findings"],
+  "skills": ["solidity", "static-analysis", "finding-verification", "bnb", "evm"],
+  "priceWei": "10000000000000000",
+  "output": {
+    "type": "json",
+    "schemaName": "finding-verification-v1"
+  },
+  "llm": {
+    "temperature": 0
+  },
+  "fallback": {
+    "summary": "Deterministic verification unavailable; do not treat the original finding as independently confirmed."
+  }
+}

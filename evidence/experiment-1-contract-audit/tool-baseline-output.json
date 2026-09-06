@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "experimentId": "contract-audit",
+  "baselineKind": "tool-only-static-analysis",
+  "controlledHumanBaselineStatus": "pending",
+  "input": {
+    "sourceFile": "evidence/experiment-1-contract-audit/VulnerableVault.sol",
+    "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+    "benchmarkId": "vulnerable-vault-v1"
+  },
+  "runtime": {
+    "tool": "Slither",
+    "version": "0.11.6",
+    "command": "slither <source> --json - --disable-color --solc-disable-warnings --exclude-informational --exclude-optimization"
+  },
+  "timing": {
+    "startedAt": "2026-09-01T06:51:46.733Z",
+    "completedAt": "2026-09-01T06:51:47.708Z",
+    "durationMs": 974.817
+  },
+  "cost": {
+    "currency": "USD",
+    "amount": 0,
+    "basis": "Local open-source tool execution; hardware cost not allocated."
+  },
+  "output": {
+    "ok": true,
+    "available": true,
+    "version": "0.11.6",
+    "detections": [
+      {
+        "id": "controlled-delegatecall",
+        "title": "controlled-delegatecall",
+        "line": 25,
+        "lines": [25],
+        "snippet": "(bool ok, ) = target.delegatecall(data);",
+        "note": "VulnerableVault.execute(address,bytes) (VulnerableVault.sol#23-27) uses delegatecall to a input-controlled function id - (ok,None) = target.delegatecall(data) (VulnerableVault.sol#25) Impact: High; Slither confidence: Medium.",
+        "keywords": ["controlled-delegatecall", "controlled delegatecall", "delegatecall", "delegate call"]
+      },
+      {
+        "id": "reentrancy-eth",
+        "title": "reentrancy-eth",
+        "line": 18,
+        "lines": [18],
+        "snippet": "(bool ok, ) = msg.sender.call{value: amount}(\"\");",
+        "note": "Reentrancy in VulnerableVault.withdraw(uint256) (VulnerableVault.sol#15-21): External call occurs before balances[msg.sender] is updated. Impact: High; Slither confidence: Medium.",
+        "keywords": ["reentrancy-eth", "reentrancy eth", "reentrancy", "external call", "state update"]
+      },
+      {
+        "id": "tx-origin",
+        "title": "tx-origin",
+        "line": 16,
+        "lines": [16],
+        "snippet": "require(tx.origin == owner, \"not owner\");",
+        "note": "VulnerableVault.withdraw(uint256) (VulnerableVault.sol#15-21) uses tx.origin for authorization at VulnerableVault.sol#16. Impact: Medium; Slither confidence: Medium.",
+        "keywords": ["tx-origin", "tx origin", "tx.origin", "authorization", "authentication"]
+      },
+      {
+        "id": "missing-zero-check",
+        "title": "missing-zero-check",
+        "line": 23,
+        "lines": [23],
+        "snippet": "function execute(address target, bytes calldata data) external {",
+        "note": "VulnerableVault.execute(address,bytes).target lacks a zero-address check before delegatecall at VulnerableVault.sol#25. Impact: Low; Slither confidence: Medium.",
+        "keywords": ["missing-zero-check", "missing zero check"]
+      }
+    ]
+  },
+  "quality": {
+    "benchmarkId": "vulnerable-vault-v1",
+    "groundTruthSourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+    "groundTruthFindings": 3,
+    "truePositives": 3,
+    "falsePositives": 1,
+    "falseNegatives": 0,
+    "precision": 0.75,
+    "recall": 1,
+    "evidenceCompleteness": 1,
+    "matchedGroundTruthIds": [
+      "ground-reentrancy-withdraw",
+      "ground-tx-origin-auth",
+      "ground-arbitrary-delegatecall"
+    ],
+    "missedGroundTruthIds": []
+  },
+  "limitations": [
+    "This is a reproducible tool-only reference, not the plan's controlled human plus ordinary-LLM baseline.",
+    "No manual triage or LLM interpretation was performed.",
+    "Ground truth was loaded only after Slither completed, then used for deterministic scoring."
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "experimentId": "full-due-diligence",
+  "triageKind": "read-only-initializer-and-role-replay",
+  "settlement": {
+    "status": "not-paid",
+    "reason": "Read-only eth_call and eth_getStorageAt; no transaction was signed or broadcast."
+  },
+  "source": {
+    "candidateFile": "candidate-output.json",
+    "sourceHash": "sha256:9f1ddcbd5fab6622ba8ab3a761f76b0f352bcbf890cf5f36698b778ebd7ed78c",
+    "target": "0xc70b8741b8b07a6d61e54fd4b20f22fa648e5565",
+    "reportBlock": 128449782
+  },
+  "rpc": {
+    "endpoint": "https://bsc-testnet-rpc.publicnode.com",
+    "methods": [
+      "eth_blockNumber",
+      "eth_call",
+      "eth_getStorageAt"
+    ]
+  },
+  "timing": {
+    "startedAt": "2026-09-01T15:19:03.133Z",
+    "completedAt": "2026-09-01T15:19:12.154Z",
+    "durationMs": 9019.958
+  },
+  "observations": [
+    {
+      "status": "unavailable",
+      "blockNumber": 128449782,
+      "blockTag": "0x7a7fcf6",
+      "reason": "RPC eth_call failed: state at block #128449783 is pruned"
+    },
+    {
+      "status": "measured",
+      "blockNumber": 128509865,
+      "blockTag": "0x7a8e7a9",
+      "owner": "0x6a8e2b2134b7b52c24a1448ad6be5c669eaa501a",
+      "autoOwner": "0x6a8e2b2134b7b52c24a1448ad6be5c669eaa501a",
+      "autoMintMaxLimit": "0",
+      "nonce": "0",
+      "configuredChainId": "97",
+      "eip7598EnableFlag": true,
+      "ownerBalanceRaw": "20000000000000000000",
+      "autoOwnerBalanceRaw": "20000000000000000000",
+      "initializableStorageSlot0": {
+        "raw": "0x0000000000000000000000000000000000000000000000000000000000000002",
+        "initializedVersionCandidate": 2,
+        "interpretation": "OpenZeppelin Initializable stores uint8 _initialized in the low byte for this verified dependency layout; initializer simulations provide the stronger runtime check."
+      },
+      "initializeSimulation": {
+        "status": "reverted",
+        "detail": "RPC eth_call failed: execution reverted: Initializable: contract is already initialized"
+      },
+      "initializeV2Simulation": {
+        "status": "reverted",
+        "detail": "RPC eth_call failed: execution reverted: Initializable: contract is already initialized"
+      }
+    }
+  ],
+  "limitations": [
+    "Initializer simulations prove only the observed block states; they do not prove that deployment and upgrade initialization were atomic.",
+    "A pruned historical RPC state is recorded as unavailable and is never replaced by a latest-state claim.",
+    "Role and limit semantics still require protocol-policy review; a successful read does not establish that the configured addresses are multisigs or timelocks.",
+    "No state-changing method was submitted and no sellability claim is made."
+  ]
+}

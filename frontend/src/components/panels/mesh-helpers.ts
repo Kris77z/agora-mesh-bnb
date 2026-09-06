@@ -2,7 +2,7 @@ import type { AgentEvent, HunterRunResult } from '@/types/agent';
 
 /* ── Types ── */
 
-export type AgentKind = 'writer' | 'auditor' | 'defi' | 'gas' | 'scanner' | 'decoder' | 'abi' | 'yield' | 'unknown';
+export type AgentKind = 'writer' | 'auditor' | 'investigator' | 'defi' | 'gas' | 'scanner' | 'decoder' | 'abi' | 'yield' | 'unknown';
 
 export interface MeshNode {
     id: string;
@@ -40,6 +40,7 @@ export interface ServiceMeta {
 export const AGENT_KIND_STYLE: Record<AgentKind, { marker: string; labelKey: string; cls: string }> = {
     writer: { marker: 'W', labelKey: 'mesh.kind.writer', cls: 'text-sky-700' },
     auditor: { marker: 'A', labelKey: 'mesh.kind.auditor', cls: 'text-amber-700' },
+    investigator: { marker: 'R', labelKey: 'mesh.kind.investigator', cls: 'text-cyan-700' },
     defi: { marker: 'D', labelKey: 'mesh.kind.defi', cls: 'text-emerald-700' },
     gas: { marker: 'G', labelKey: 'mesh.kind.gas', cls: 'text-orange-600' },
     scanner: { marker: 'S', labelKey: 'mesh.kind.scanner', cls: 'text-red-600' },
@@ -85,6 +86,7 @@ function toTitle(id: string): string {
 export function classifyServiceKind(input: { taskType?: string; id?: string }): AgentKind {
     const t = input.taskType?.toLowerCase() ?? '';
     const id = input.id?.toLowerCase() ?? '';
+    if (t.includes('investigation') || id.includes('investigator')) return 'investigator';
     if (t.includes('audit') || id.includes('audit')) return 'auditor';
     if (t.includes('gas') || id.includes('gas')) return 'gas';
     if (t.includes('token') || id.includes('scanner') || id.includes('token')) return 'scanner';

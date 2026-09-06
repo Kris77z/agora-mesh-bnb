@@ -4,15 +4,28 @@ import type { CommanderBudget } from "@rebel/shared";
 import { runCommanderHunter } from "./commander-flow.js";
 import type { SingleHunterRunResult } from "./run-types.js";
 
+const TBNB = {
+  chainId: 97,
+  kind: "native" as const,
+  symbol: "tBNB",
+  decimals: 18
+};
+
+function money(amount: string) {
+  return { asset: TBNB, amount };
+}
+
 function mockSingleResult(input: {
   amountWei: string;
   content: string;
   taskType?: string;
   serviceId?: string;
+  verificationAmountWei?: string;
 }): SingleHunterRunResult {
   const taskType = input.taskType ?? "content-generation";
   const serviceId = input.serviceId ?? "writer-v1";
-  return {
+  const result: SingleHunterRunResult = {
+    missionId: "mission-test",
     goal: "mock-goal",
     mode: "scripted",
     service: {
@@ -23,8 +36,9 @@ function mockSingleResult(input: {
       taskType,
       skills: [taskType],
       price: input.amountWei,
-      currency: "MON",
-      network: "monad-testnet",
+      currency: "tBNB",
+      asset: TBNB,
+      network: "eip155:97",
       provider: "mock"
     },
     quote: {
@@ -36,7 +50,7 @@ function mockSingleResult(input: {
       accepts: [
         {
           scheme: "native-transfer",
-          network: "monad-testnet",
+          network: "eip155:97",
           amount: input.amountWei,
           asset: "native",
           payTo: "0x0000000000000000000000000000000000000001",
@@ -62,7 +76,7 @@ function mockSingleResult(input: {
       payment: {
         status: "payment-completed",
         transaction: "0xtx",
-        network: "monad-testnet"
+        network: "eip155:97"
       }
     },
     receiptVerified: true,
@@ -72,20 +86,120 @@ function mockSingleResult(input: {
     },
     finalMessage: "mock complete"
   };
+  if (input.verificationAmountWei) {
+    const verifier = serviceForVerification(input.verificationAmountWei);
+    result.verification = verifier;
+  }
+  return result;
+}
+
+function serviceForVerification(amount: string): NonNullable<SingleHunterRunResult["verification"]> {
+  const service = {
+    id: "verifier-v1",
+    name: "Verifier",
+    description: "mock",
+    endpoint: "http://localhost/verifier",
+    taskType: "finding-verification",
+    skills: ["finding-verification"],
+    price: amount,
+    currency: "tBNB",
+    asset: TBNB,
+    network: "eip155:97",
+    provider: "0x0000000000000000000000000000000000000002"
+  };
+  const quote = {
+    x402Version: 2 as const,
+    resource: { url: "http://localhost/verifier", description: "mock" },
+    accepts: [
+      {
+        scheme: "native-transfer" as const,
+        network: "eip155:97",
+        amount,
+        asset: "native" as const,
+        payTo: "0x0000000000000000000000000000000000000002",
+        maxTimeoutSeconds: 60
+      }
+    ],
+    paymentContext: {
+      requestHash: "0xverifier-request",
+      taskType: "finding-verification",
+      timestamp: Date.now()
+    }
+  };
+  const execution = {
+    result: "{}",
+    receipt: {
+      requestHash: "0xverifier-request",
+      resultHash: "0xresult",
+      provider: service.provider,
+      timestamp: Date.now(),
+      signature: "0xsig"
+    },
+    payment: {
+      status: "payment-completed" as const,
+      transaction: "0xverifier-tx",
+      network: "eip155:97"
+    }
+  };
+  return {
+    service,
+    quote,
+    paymentTx: "0xverifier-tx",
+    execution,
+    receiptVerified: true,
+    report: {
+      sourceName: "Vault.sol",
+      sourceHash: `sha256:${"a".repeat(64)}`,
+      engine: { method: "ast-rule", name: "rules", version: "1" },
+      verifications: [],
+      summary: { confirmed: 0, rejected: 0, partial: 0, inconclusive: 0, missed: 0 }
+    }
+  };
 }
 
 function mockBudget(overrides: Partial<CommanderBudget> = {}): CommanderBudget {
   return {
-    maxTotalWei: "100",
-    maxPerPhaseWei: "100",
+    maxTotal: money("100"),
+    maxPerPhase: money("100"),
     maxPhases: 6,
-    spentWei: "0",
+    spent: money("0"),
     phaseCount: 0,
     ...overrides
   };
 }
 
 describe("runCommanderHunter regression", () => {
+  it("charges Auditor and Verifier purchases to the same phase budget", async () => {
+    const result = await runCommanderHunter(
+      "audit contract",
+      {},
+      {
+        llm: { provider: "openai", apiKey: "test-key", model: "test-model" },
+        createMissionId: () => "mission-security-spend",
+        buildBudget: () => mockBudget(),
+        executePhase: async () =>
+          mockSingleResult({
+            amountWei: "12",
+            verificationAmountWei: "5",
+            content: "audit",
+            taskType: "smart-contract-audit"
+          }),
+        runScriptedHunter: async () => {
+          throw new Error("runScriptedHunter should not be called");
+        },
+        runPlanner: async ({ hireAgentSpec }) => {
+          await hireAgentSpec.execute({ goal: "audit" });
+          return "done";
+        }
+      }
+    );
+    assert.equal(result.mode, "commander");
+    if (result.mode !== "commander") {
+      throw new Error("Expected commander result");
+    }
+    assert.equal(result.budget.spent.amount, "17");
+  });
+
   it("stops further hiring when budget is exceeded", async () => {
     const events: Array<{ type: string; data?: unknown }> = [];
     const toolOutputs: unknown[] = [];
@@ -103,7 +217,7 @@ describe("runCommanderHunter regression", () => {
           model: "test-model"
         },
         createMissionId: () => "mission-budget",
-        buildBudget: () => mockBudget({ maxTotalWei: "10", maxPerPhaseWei: "100" }),
+        buildBudget: () => mockBudget({ maxTotal: money("10"), maxPerPhase: money("100") }),
         executePhase: async () => mockSingleResult({ amountWei: "12", content: "phase-1" }),
         runScriptedHunter: async () => {
           throw new Error("runScriptedHunter should not be called");
@@ -119,7 +233,7 @@ describe("runCommanderHunter regression", () => {
     assert.equal(result.mode, "commander");
     assert.equal(result.phases.length, 1);
     assert.equal(result.phases[0].success, true);
-    assert.equal(result.budget.spentWei, "12");
+    assert.equal(result.budget.spent.amount, "12");
     assert.equal(result.budget.phaseCount, 1);
 
     const secondTool = toolOutputs[1] as { blocked?: boolean; reason?: string };

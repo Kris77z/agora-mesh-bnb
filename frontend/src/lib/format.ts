@@ -1,21 +1,25 @@
-/**
- * Convert a wei-denominated value to human-readable MON string.
- * 1 MON = 10^18 wei.
- *
- * @example formatMON('10000000000000000') => '0.01'
- * @example formatMON('1000000000000000000') => '1'
- */
+export function formatTokenAmount(
+    rawValue: string | number | undefined | null,
+    decimals = 18,
+    maxFractionDigits = 4,
+): string {
+    if (rawValue === undefined || rawValue === null || rawValue === '') return '--';
+    const raw = String(rawValue);
+    if (!/^\d+$/.test(raw) || !Number.isSafeInteger(decimals) || decimals < 0) return '--';
+
+    const padded = raw.padStart(decimals + 1, '0');
+    const whole = decimals === 0 ? padded : padded.slice(0, -decimals);
+    if (decimals === 0 || maxFractionDigits === 0) return whole;
+    const fraction = padded
+        .slice(-decimals)
+        .slice(0, Math.max(0, maxFractionDigits))
+        .replace(/0+$/, '');
+    return fraction ? `${whole}.${fraction}` : whole;
+}
+
+/** Legacy alias for existing native-token views during the UI migration. */
 export function formatMON(weiValue: string | number | undefined | null): string {
-    if (weiValue === undefined || weiValue === null || weiValue === '') return '--';
-
-    const wei = Number(weiValue);
-    if (!Number.isFinite(wei) || wei === 0) return '0';
-
-    const mon = wei / 1e18;
-
-    if (mon >= 1) return mon.toFixed(2);
-    if (mon >= 0.001) return mon.toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
-    return mon.toPrecision(3);
+    return formatTokenAmount(weiValue, 18, 4);
 }
 
 /**

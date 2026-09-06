@@ -1,4 +1,5 @@
 import type { AgentFeedback, AgentIdentity } from "./types.js";
+import { getProcessPostgresStore } from "./storage-backend.js";
 
 const identities = new Map<string, AgentIdentity>();
 const feedbackByAgent = new Map<string, AgentFeedback[]>();
@@ -68,3 +69,49 @@ export function getAgentReputation(agentId: string): {
   };
 }
 
+export async function persistAgentIdentity(identity: AgentIdentity): Promise<AgentIdentity> {
+  const normalized = normalizeIdentity(identity);
+  const postgres = await getProcessPostgresStore("agora-agent-registry");
+  if (!postgres) return registerAgentIdentity(normalized);
+  const result = await postgres.pool.query<{ identity: AgentIdentity }>(`
+    INSERT INTO agent_identities (agent_id, identity, active, registered_at)
+    VALUES ($1, $2::jsonb, $3, $4)
+    ON CONFLICT (agent_id) DO UPDATE SET
+      identity = EXCLUDED.identity || jsonb_build_object(
+        'registeredAt', floor(extract(epoch FROM LEAST(
+          agent_identities.registered_at, EXCLUDED.registered_at
+        )))::bigint
+      ),
+      active = EXCLUDED.active,
+      registered_at = LEAST(agent_identities.registered_at, EXCLUDED.registered_at),
+      updated_at = clock_timestamp()
+    RETURNING identity
+  `, [
+    normalized.agentId, JSON.stringify(normalized), normalized.active,
+    new Date(normalized.registeredAt * 1_000)
+  ]);
+  return normalizeIdentity(result.rows[0].identity);
+}
+
+export async function getPersistedAgentIdentity(agentId: string): Promise<AgentIdentity | undefined> {
+  const postgres = await getProcessPostgresStore("agora-agent-registry");
+  if (!postgres) return getAgentIdentity(agentId);
+  const result = await postgres.pool.query<{ identity: AgentIdentity }>(
+    "SELECT identity FROM agent_identities WHERE agent_id = $1",
+    [agentId]
+  );
+  return result.rows[0] ? normalizeIdentity(result.rows[0].identity) : undefined;
+}
+
+export async function listPersistedAgentIdentities(
+  input: { activeOnly?: boolean } = {}
+): Promise<AgentIdentity[]> {
+  const postgres = await getProcessPostgresStore("agora-agent-registry");
+  if (!postgres) return listAgentIdentities(input);
+  const result = await postgres.pool.query<{ identity: AgentIdentity }>(`
+    SELECT identity FROM agent_identities
+    WHERE ($1::boolean = false OR active = true)
+    ORDER BY registered_at, agent_id
+  `, [Boolean(input.activeOnly)]);
+  return result.rows.map((row) => normalizeIdentity(row.identity));
+}

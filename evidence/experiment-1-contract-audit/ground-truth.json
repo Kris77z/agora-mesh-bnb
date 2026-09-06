@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "benchmarkId": "vulnerable-vault-v1",
+  "reviewStatus": "reviewed",
+  "sourceHash": "sha256:6150ad8a13418e3e3486840e1961f3d64f9a942a8a2181329088e02cce3d4fda",
+  "acceptedLegacyInputHashes": [
+    "sha256:cdb602e6c57982cfaab242a8fa8109b2a973e48aac1a888ab59d638ecd9bac83"
+  ],
+  "reviewedAt": "2026-09-01T05:00:00.000Z",
+  "reviewMethod": [
+    "manual source review",
+    "Slither 0.11.6",
+    "agora-solidity-rules@1"
+  ],
+  "findings": [
+    {
+      "id": "ground-reentrancy-withdraw",
+      "category": "reentrancy",
+      "severity": "critical",
+      "lines": "15-20",
+      "matchingFindingIds": ["reentrancy-eth-transfer", "reentrancy-withdraw", "reentrancy-eth"],
+      "rationale": "withdraw sends ETH before reducing balances[msg.sender], so a receiver can re-enter before the accounting effect."
+    },
+    {
+      "id": "ground-tx-origin-auth",
+      "category": "tx-origin",
+      "severity": "high",
+      "lines": "16",
+      "matchingFindingIds": ["tx-origin-authentication", "tx-origin-authorization", "tx-origin"],
+      "rationale": "Authorization depends on tx.origin, allowing a malicious intermediary contract to act during an owner-originated transaction."
+    },
+    {
+      "id": "ground-arbitrary-delegatecall",
+      "category": "delegatecall",
+      "severity": "high",
+      "lines": "23-26",
+      "matchingFindingIds": ["arbitrary-delegatecall", "delegatecall-user-target", "controlled-delegatecall"],
+      "rationale": "execute runs owner-selected foreign code in the vault storage context, creating a privileged storage-corruption and loss-of-funds path."
+    }
+  ]
+}
