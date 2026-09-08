@@ -35,6 +35,22 @@ export const DEFAULT_SERVICE_RANKING_WEIGHTS: ServiceRankingWeights = {
   latency: 0.15
 };
 
+export const SERVICE_RANKING_PREFERENCES = {
+  balanced: DEFAULT_SERVICE_RANKING_WEIGHTS,
+  "reputation-first": { capability: 0.3, reputation: 0.45, price: 0.1, latency: 0.15 },
+  "price-first": { capability: 0.3, reputation: 0.1, price: 0.45, latency: 0.15 }
+} as const satisfies Record<string, ServiceRankingWeights>;
+
+export type ServiceRankingPreference = keyof typeof SERVICE_RANKING_PREFERENCES;
+
+export function isServiceRankingPreference(value: unknown): value is ServiceRankingPreference {
+  return typeof value === "string" && value in SERVICE_RANKING_PREFERENCES;
+}
+
+export function resolveServiceRankingPreference(preference?: ServiceRankingPreference): ServiceRankingWeights {
+  return SERVICE_RANKING_PREFERENCES[preference ?? "balanced"];
+}
+
 function clampScore(value: number): number {
   return Math.max(0, Math.min(1, value));
 }

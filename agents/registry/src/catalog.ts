@@ -5,8 +5,10 @@ import {
   fetchAdvertisedServices,
   listDynamicServices,
   rankServiceOffers,
+  resolveServiceRankingPreference,
   type RankedServiceOffer,
   type ServiceInfo,
+  type ServiceRankingPreference,
   type ServiceRegistry
 } from "@rebel/shared";
 import { registryConfig } from "./config.js";
@@ -79,6 +81,7 @@ export async function compareCatalogServices(input: {
   serviceIds?: string[];
   taskType?: string;
   requiredSkills?: string[];
+  preference?: ServiceRankingPreference;
 }): Promise<RankedServiceOffer[]> {
   const catalog = await loadCatalogServices();
   const eligible = filterServicesByPaymentMode(catalog, registryConfig);
@@ -100,6 +103,7 @@ export async function compareCatalogServices(input: {
   });
   return rankServiceOffers(candidates, {
     taskType: input.taskType,
-    requiredSkills: input.requiredSkills
+    requiredSkills: input.requiredSkills,
+    weights: resolveServiceRankingPreference(input.preference)
   });
 }

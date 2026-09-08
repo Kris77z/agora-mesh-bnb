@@ -1,0 +1,286 @@
+{
+  "checkedAt": "2026-09-06T14:09:10.734587+00:00",
+  "kind": "read-only live ranking; no new paid execution; preference-driven choice change",
+  "method": "POST /services/compare on the local Registry with live x402 identity probes; preference maps to named weight presets in shared/src/service-ranking.ts (SERVICE_RANKING_PREFERENCES); the same transparent capability/reputation/price/latency model is reweighted, all component scores remain visible.",
+  "cases": [
+    {
+      "goal": "Routine pre-deployment audit of an internal test contract; budget-conscious, standard depth is fine.",
+      "input": {
+        "taskType": "smart-contract-audit",
+        "requiredSkills": [
+          "solidity"
+        ],
+        "preference": "balanced"
+      },
+      "response": {
+        "rankings": [
+          {
+            "service": {
+              "id": "sentinel-audit-v1",
+              "name": "Sentinel Contract Auditor",
+              "description": "Alternative audit provider focused on adversarial transaction sequences and fund-accounting invariants.",
+              "endpoint": "http://localhost:3006",
+              "taskType": "smart-contract-audit",
+              "skills": [
+                "solidity",
+                "vulnerability",
+                "bnb",
+                "evm",
+                "accounting-invariants"
+              ],
+              "price": "400000000000000000",
+              "currency": "U",
+              "asset": {
+                "chainId": 97,
+                "kind": "erc20",
+                "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+                "symbol": "U",
+                "decimals": 18
+              },
+              "agentId": "97:0x1ef8eeb640e60d5d3bc3efe1a4b2ffcd64132c2c",
+              "paymentRails": [
+                "x402"
+              ],
+              "averageLatencyMs": 45000,
+              "offerVersion": "2",
+              "network": "eip155:97",
+              "provider": "0x1Ef8eEb640e60d5d3Bc3eFe1A4b2fFCd64132c2C",
+              "availability": {
+                "available": true
+              }
+            },
+            "score": 0.7,
+            "scores": {
+              "capability": 1,
+              "reputation": 0,
+              "price": 1,
+              "latency": 1
+            },
+            "weights": {
+              "capability": 0.35000000000000003,
+              "reputation": 0.30000000000000004,
+              "price": 0.20000000000000004,
+              "latency": 0.15000000000000002
+            },
+            "reason": "Selected by capability match 100% and price 100%",
+            "rank": 1
+          },
+          {
+            "service": {
+              "id": "auditor-v1",
+              "name": "Smart Contract Auditor",
+              "description": "Task execution service for smart-contract-audit",
+              "endpoint": "http://localhost:3001",
+              "taskType": "smart-contract-audit",
+              "skills": [
+                "solidity",
+                "vulnerability",
+                "bnb",
+                "evm"
+              ],
+              "price": "500000000000000000",
+              "currency": "U",
+              "asset": {
+                "chainId": 97,
+                "kind": "erc20",
+                "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+                "symbol": "U",
+                "decimals": 18
+              },
+              "agentId": "97:0x3bd3fd38ecc72378946c790780c8c1216e4c5527",
+              "paymentRails": [
+                "x402"
+              ],
+              "averageLatencyMs": 105000,
+              "offerVersion": "2",
+              "network": "eip155:97",
+              "provider": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+              "availability": {
+                "available": true
+              },
+              "reputation": {
+                "score": 4,
+                "count": 12,
+                "trend": "up",
+                "recentScores": [
+                  50,
+                  90,
+                  50,
+                  90,
+                  90
+                ],
+                "lastUsedAt": 1788362129,
+                "qualified": true
+              }
+            },
+            "score": 0.599,
+            "scores": {
+              "capability": 1,
+              "reputation": 0.83,
+              "price": 0,
+              "latency": 0
+            },
+            "weights": {
+              "capability": 0.35000000000000003,
+              "reputation": 0.30000000000000004,
+              "price": 0.20000000000000004,
+              "latency": 0.15000000000000002
+            },
+            "reason": "Selected by capability match 100% and reputation 83%",
+            "rank": 2
+          }
+        ],
+        "count": 2,
+        "preference": "balanced",
+        "policy": {
+          "chainId": 97,
+          "paymentRail": "x402",
+          "liveIdentityRequired": true
+        }
+      }
+    },
+    {
+      "goal": "High-stakes treasury contract audit before mainnet funds migration; the buyer explicitly prioritizes a provider with a proven, feedback-backed delivery record over price.",
+      "input": {
+        "taskType": "smart-contract-audit",
+        "requiredSkills": [
+          "solidity"
+        ],
+        "preference": "reputation-first"
+      },
+      "response": {
+        "rankings": [
+          {
+            "service": {
+              "id": "auditor-v1",
+              "name": "Smart Contract Auditor",
+              "description": "Task execution service for smart-contract-audit",
+              "endpoint": "http://localhost:3001",
+              "taskType": "smart-contract-audit",
+              "skills": [
+                "solidity",
+                "vulnerability",
+                "bnb",
+                "evm"
+              ],
+              "price": "500000000000000000",
+              "currency": "U",
+              "asset": {
+                "chainId": 97,
+                "kind": "erc20",
+                "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+                "symbol": "U",
+                "decimals": 18
+              },
+              "agentId": "97:0x3bd3fd38ecc72378946c790780c8c1216e4c5527",
+              "paymentRails": [
+                "x402"
+              ],
+              "averageLatencyMs": 105000,
+              "offerVersion": "2",
+              "network": "eip155:97",
+              "provider": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+              "availability": {
+                "available": true
+              },
+              "reputation": {
+                "score": 4,
+                "count": 12,
+                "trend": "up",
+                "recentScores": [
+                  50,
+                  90,
+                  50,
+                  90,
+                  90
+                ],
+                "lastUsedAt": 1788362129,
+                "qualified": true
+              }
+            },
+            "score": 0.6735,
+            "scores": {
+              "capability": 1,
+              "reputation": 0.83,
+              "price": 0,
+              "latency": 0
+            },
+            "weights": {
+              "capability": 0.3,
+              "reputation": 0.45,
+              "price": 0.1,
+              "latency": 0.15
+            },
+            "reason": "Selected by capability match 100% and reputation 83%",
+            "rank": 1
+          },
+          {
+            "service": {
+              "id": "sentinel-audit-v1",
+              "name": "Sentinel Contract Auditor",
+              "description": "Alternative audit provider focused on adversarial transaction sequences and fund-accounting invariants.",
+              "endpoint": "http://localhost:3006",
+              "taskType": "smart-contract-audit",
+              "skills": [
+                "solidity",
+                "vulnerability",
+                "bnb",
+                "evm",
+                "accounting-invariants"
+              ],
+              "price": "400000000000000000",
+              "currency": "U",
+              "asset": {
+                "chainId": 97,
+                "kind": "erc20",
+                "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+                "symbol": "U",
+                "decimals": 18
+              },
+              "agentId": "97:0x1ef8eeb640e60d5d3bc3efe1a4b2ffcd64132c2c",
+              "paymentRails": [
+                "x402"
+              ],
+              "averageLatencyMs": 45000,
+              "offerVersion": "2",
+              "network": "eip155:97",
+              "provider": "0x1Ef8eEb640e60d5d3Bc3eFe1A4b2fFCd64132c2C",
+              "availability": {
+                "available": true
+              }
+            },
+            "score": 0.55,
+            "scores": {
+              "capability": 1,
+              "reputation": 0,
+              "price": 1,
+              "latency": 1
+            },
+            "weights": {
+              "capability": 0.3,
+              "reputation": 0.45,
+              "price": 0.1,
+              "latency": 0.15
+            },
+            "reason": "Selected by capability match 100% and price 100%",
+            "rank": 2
+          }
+        ],
+        "count": 2,
+        "preference": "reputation-first",
+        "policy": {
+          "chainId": 97,
+          "paymentRail": "x402",
+          "liveIdentityRequired": true
+        }
+      }
+    }
+  ],
+  "invalidPreferenceRejection": {
+    "status": 400,
+    "body": {
+      "code": "INVALID_PAYLOAD",
+      "message": "preference must be one of: balanced, reputation-first, price-first"
+    }
+  }
+}

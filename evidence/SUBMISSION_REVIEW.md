@@ -25,11 +25,11 @@ Start with [submission copy](SUBMISSION_DRAFT.md), [Agent Advantage report](AGEN
 
 - Stable public full-stack URL: missing; owner deferred hosting.
 - Fresh browser acceptance: paused by owner, 0/3.
-- Altana Explorer account/session/transaction visible indexing: not visually verified.
+- Altana Explorer account/session/transaction visible indexing: visually verified 2026-09-06 for both smart accounts (see `altana-explorer/INDEXED_DISPLAY_ACCEPTANCE.md`); resolved.
 - Final source revision: local working tree is not frozen or published as a final release.
 - Video: narration ready; recording/export/upload missing.
 - Team details and final submission: owner review required; no form has been submitted.
-- Marketplace selection change and matched model/tool dollar costs / user hands-on time: not demonstrated or measured.
+- Marketplace selection change: demonstrated 2026-09-06 via named ranking preferences on the live compare path (balanced → Sentinel; reputation-first → Auditor); see `SELECTION_PREFERENCE_CASES_20260906.json` and `selection-preference/`. Matched model/tool dollar costs / user hands-on time: still not measured.
 
 Official reference: https://www.bnbchain.org/en/hackathons/smart-money-era?tab=tracks (checked 2026-09-06). TermiX requires three with/without comparisons with time, cost, quality and outputs, and will hire services itself. Altana requires real transactions visible in its explorer and in-product permission control. These organizer requirements remain distinct from our internal three-clean-browser-run gate.
 

@@ -5,13 +5,13 @@
   "files": [
     {
       "path": "evidence/SUBMISSION_DRAFT.md",
-      "bytes": 9102,
-      "sha256": "f05f4d91d146382fd2c89e97acf0b5f3cefb596b2cc8c04a06e05509914cb73f"
+      "bytes": 9763,
+      "sha256": "f572ffa28c216d9b7ed07c390599f56ddc0efdb41e5e99da64d1e5a15124e191"
     },
     {
       "path": "evidence/SUBMISSION_REVIEW.md",
-      "bytes": 3172,
-      "sha256": "2fd18ca517e3ac3180ad172863d08defb435ae9deb7affed0550c4b1841d0cc5"
+      "bytes": 3464,
+      "sha256": "ceafdfb7e4ce14c565989fd5c0f8b79aedd0075b8ea63aafb0289d080433cf5c"
     },
     {
       "path": "evidence/DEMO_NARRATION_EN.md",
@@ -132,6 +132,37 @@
       "path": "evidence/experiment-3-due-diligence/authority-revoke-output.json",
       "bytes": 1257,
       "sha256": "825ba197368d08641af597281e539312a4d7bdc5fe647b97aa58787d189feff4"
+    },
+    {
+      "path": "evidence/altana-explorer/INDEXED_DISPLAY_ACCEPTANCE.md",
+      "bytes": 1985,
+      "sha256": "e07eb7be8041731de4a9ce3f1b743dabef389ab377cac32661c9741f6bcf19bf"
+    },
+    {
+      "path": "evidence/altana-explorer/keystore-account-0x8BA5-activity-20260906.jpg",
+      "bytes": 52180,
+      "sha256": "fa2983721fe7ffae22e930c2fa88c27684c18f822c9728d5a79fd9423956a1d7"
+    },
+    {
+      "path": "evidence/altana-explorer/keystore-account-0x8BA5-keys-20260906.jpg",
+      "bytes": 55860,
+      "sha256": "787bc1612f03b05b0d8cf2091a8da67ac9cd30cf4893a29e2068e46034b39195"
+    },
+    {
+      "path": "evidence/altana-explorer/passkey-account-0xc7B8-keys-20260906.jpg",
+      "bytes": 57941,
+      "sha256": "04befc58b3c08e1b77b54d18ab19667adb67479d0a19c0fc2ab1b5519e272240"
+    },
+    {
+      "path": "evidence/selection-preference/compare-balanced-sentinel-first-20260906.jpg",
+      "bytes": 64804,
+      "sha256": "da5834e072f4dd0fda1a2ad6d3b79c2f4dcb027e9a6e9d89fab15048714c3b7b"
+    },
+    {
+      "path": "evidence/selection-preference/compare-reputation-first-auditor-first-20260906.jpg",
+      "bytes": 64665,
+      "sha256": "27f50dfb56687eb69d4238435a85e8637e645915f89bd6fd18cf0134f2496f2e"
     }
-  ]
+  ],
+  "updatedAt": "2026-09-08"
 }

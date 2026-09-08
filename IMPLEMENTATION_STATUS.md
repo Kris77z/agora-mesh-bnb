@@ -58,7 +58,9 @@ ERC-8183, mainnet operations, expanded DeFi agents and human review remain optio
 
 ## 2026-09-06 local recovery continuation
 
-Browser paid-audit recovery implemented with original receipt binding, no additional Auditor authorization, shared CLI/browser lock and progress polling. Nine related tests, Hunter typecheck and frontend build passed. `scripts/start-local-demo.py` restores missing local services with original Sentinel Keychain identity. Readiness 11/11 passed; two live auditors verified. Fresh browser acceptance remains 0/3; choice-change, Explorer indexed display, final video/source/deployment remain pending. See `evidence/LOCAL_DEMO.md`.
+Browser paid-audit recovery implemented with original receipt binding, no additional Auditor authorization, shared CLI/browser lock and progress polling. Nine related tests, Hunter typecheck and frontend build passed. `scripts/start-local-demo.py` restores missing local services with original Sentinel Keychain identity. Readiness 11/11 passed; two live auditors verified. Fresh browser acceptance remains 0/3; final video/source/deployment remain pending. See `evidence/LOCAL_DEMO.md`.
+
+2026-09-06 later same day: Altana Explorer indexed display visually accepted for both smart accounts (`evidence/altana-explorer/INDEXED_DISPLAY_ACCEPTANCE.md`). Named ranking preferences (balanced / reputation-first / price-first) added to the shared ranking model, Registry compare API and Compare UI; a live probe and browser check demonstrate an explainable provider switch (balanced → Sentinel, reputation-first → feedback-backed Auditor) with an invalid preference rejected by 400 (`evidence/SELECTION_PREFERENCE_CASES_20260906.json`, `evidence/selection-preference/`). Hunter's paid hiring path still uses the balanced default.
 
 ## 2026-09-06 owner-paused local acceptance
 

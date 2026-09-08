@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agora Mesh — Agents pay agents on BNB.</title>
+  <link rel="stylesheet" href="./assets/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body>
+  <header class="site-nav">
+    <div class="logo">
+      <span class="logo-box"></span>
+      <span data-i18n="nav.brand"></span>
+    </div>
+    <nav class="nav-links nav-menu">
+      <a class="nav-item" href="/marketplace" data-i18n="nav.kline"></a>
+      <div class="nav-dropdown">
+        <button class="nav-item nav-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+          <span data-i18n="nav.data"></span>
+          <svg class="nav-drop-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop-menu" role="menu">
+          <a class="nav-list-item" href="/advantage" role="menuitem">
+            <span class="nli-title" data-i18n="nav.market"></span>
+            <span class="nli-desc" data-i18n="nav.market.desc"></span>
+          </a>
+          <a class="nav-list-item" href="/authority" role="menuitem">
+            <span class="nli-title" data-i18n="nav.revenue"></span>
+            <span class="nli-desc" data-i18n="nav.revenue.desc"></span>
+          </a>
+          <a class="nav-list-item" href="/compare" role="menuitem">
+            <span class="nli-title" data-i18n="nav.hip3"></span>
+            <span class="nli-desc" data-i18n="nav.hip3.desc"></span>
+          </a>
+        </div>
+      </div>
+      <a class="nav-item" href="/dashboard" data-i18n="nav.docs"></a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button data-lang="en">EN</button>
+        <button data-lang="zh">中</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ACT 1 — hero -->
+  <div id="particles" class="particles"></div>
+  <section id="hero-layer" class="hero-layer">
+    <div class="hero">
+      <span class="sys-tag" data-i18n="hero.tag"></span>
+      <h1 class="hero-title"><span data-i18n="hero.title.a"></span><em data-i18n="hero.title.em"></em><span data-i18n="hero.title.b"></span></h1>
+      <p class="hero-sub" data-i18n="hero.sub"></p>
+      <div class="hero-actions">
+        <a class="btn-terminal" href="/marketplace" data-i18n="hero.cta"></a>
+      </div>
+    </div>
+    <div class="floating-stats">
+      <div class="f-stat"><span class="val" data-i18n="hero.p1.k"></span><span class="lbl" data-i18n="hero.p1.v"></span></div>
+      <div class="f-stat"><span class="val" data-i18n="hero.p2.k"></span><span class="lbl" data-i18n="hero.p2.v"></span></div>
+      <div class="f-stat"><span class="val" data-i18n="hero.p3.k"></span><span class="lbl" data-i18n="hero.p3.v"></span></div>
+    </div>
+    <div class="scroll-hint" data-i18n="scroll.hint"></div>
+  </section>
+
+  <!-- ACT 2/3 — zoom track: sticky stage holds the monitor -->
+  <section id="zoom-track" class="zoom-track">
+    <div id="zoom-stage" class="zoom-stage">
+      <div id="monitor" class="monitor">
+        <div id="terminal" class="terminal"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- how it works: 3 steps -->
+  <section class="how" id="f-how">
+    <span class="sec-kicker" data-i18n="how.kicker"></span>
+    <h2 class="sec-heading" data-i18n="how.heading"></h2>
+    <p class="sec-sub" data-i18n="how.sub"></p>
+    <div class="how-grid">
+      <div class="how-step"><span class="how-n" data-i18n="how.s1.n"></span><h3 data-i18n="how.s1.t"></h3><p data-i18n="how.s1.d"></p></div>
+      <div class="how-step"><span class="how-n" data-i18n="how.s2.n"></span><h3 data-i18n="how.s2.t"></h3><p data-i18n="how.s2.d"></p></div>
+      <div class="how-step"><span class="how-n" data-i18n="how.s3.n"></span><h3 data-i18n="how.s3.t"></h3><p data-i18n="how.s3.d"></p></div>
+    </div>
+  </section>
+
+  <!-- why: benefit grid -->
+  <section class="why" id="f-why">
+    <h2 class="sec-heading center" data-i18n="why.heading"></h2>
+    <p class="sec-sub center" data-i18n="why.sub"></p>
+    <div class="why-grid">
+      <div class="why-item"><h4 data-i18n="why.i1.t"></h4><p data-i18n="why.i1.d"></p></div>
+      <div class="why-item"><h4 data-i18n="why.i2.t"></h4><p data-i18n="why.i2.d"></p></div>
+      <div class="why-item"><h4 data-i18n="why.i3.t"></h4><p data-i18n="why.i3.d"></p></div>
+      <div class="why-item"><h4 data-i18n="why.i4.t"></h4><p data-i18n="why.i4.d"></p></div>
+      <div class="why-item"><h4 data-i18n="why.i5.t"></h4><p data-i18n="why.i5.d"></p></div>
+      <div class="why-item"><h4 data-i18n="why.i6.t"></h4><p data-i18n="why.i6.d"></p></div>
+    </div>
+  </section>
+
+  <!-- showcase: Smart B/S — centered statement -->
+  <section class="show" id="f-kline">
+    <div class="show-text">
+      <span class="sec-kicker" data-i18n="show.kicker"></span>
+      <h2 class="show-heading" data-i18n="show.heading"></h2>
+      <p class="sec-sub" data-i18n="show.body"></p>
+      <a class="btn-terminal" href="/advantage" data-i18n="show.cta"></a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <h2 class="faq-heading" data-i18n="faq.heading"></h2>
+    <div class="faq-list">
+      <details class="faq-item"><summary data-i18n="faq.q1"></summary><p data-i18n="faq.a1"></p></details>
+      <details class="faq-item"><summary data-i18n="faq.q2"></summary><p data-i18n="faq.a2"></p></details>
+      <details class="faq-item"><summary data-i18n="faq.q3"></summary><p data-i18n="faq.a3"></p></details>
+      <details class="faq-item"><summary data-i18n="faq.q4"></summary><p data-i18n="faq.a4"></p></details>
+    </div>
+  </section>
+
+  <!-- closing CTA -->
+  <section class="closing">
+    <h2 class="closing-heading" data-i18n="close.heading"></h2>
+    <a class="btn-terminal" href="/marketplace" data-i18n="close.button"></a>
+  </section>
+
+  <!-- footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="logo-box"></span>
+          <span data-i18n="nav.brand"></span>
+        </div>
+        <p class="footer-tagline" data-i18n="footer.tagline"></p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4 data-i18n="footer.col1.h"></h4>
+          <a href="/marketplace" data-i18n="footer.col1.a"></a>
+          <a href="/compare" data-i18n="footer.col1.b"></a>
+          <a href="/dashboard" data-i18n="footer.col1.c"></a>
+          <a href="/authority/manage" data-i18n="footer.col1.d"></a>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.col2.h"></h4>
+          <a href="/advantage" data-i18n="footer.col2.a"></a>
+          <a href="/authority" data-i18n="footer.col2.b"></a>
+          <a href="/tasks/f95f0637-cbd2-4c03-b72c-cf7498a453f3" data-i18n="footer.col2.c"></a>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.col3.h"></h4>
+          <a href="https://testnet.bscscan.com/token/0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565" target="_blank" rel="noopener" data-i18n="footer.col3.a"></a>
+          <a href="https://testnet.altana.network/account/0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d" target="_blank" rel="noopener" data-i18n="footer.col3.b"></a>
+          <a href="https://testnet.bscscan.com" target="_blank" rel="noopener" data-i18n="footer.col3.c"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy" data-i18n="footer.copyright"></span>
+      <div class="lang-switch">
+        <button data-lang="en">EN</button>
+        <button data-lang="zh">中</button>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./assets/main.js"></script>
+</body>
+</html>

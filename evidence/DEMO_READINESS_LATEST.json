@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-06T10:07:16.083Z",
+  "checkedAt": "2026-09-06T14:07:23.242Z",
   "origin": "http://localhost:3000",
   "allPassed": true,
   "checks": [
@@ -7,67 +7,67 @@
       "name": "/advantage",
       "ok": true,
       "detail": "HTTP 200",
-      "elapsedMs": 244
+      "elapsedMs": 539
     },
     {
       "name": "/authority/manage",
       "ok": true,
       "detail": "HTTP 200",
-      "elapsedMs": 100
+      "elapsedMs": 418
     },
     {
       "name": "/compare",
       "ok": true,
       "detail": "HTTP 200",
-      "elapsedMs": 99
+      "elapsedMs": 413
     },
     {
       "name": "/marketplace",
       "ok": true,
       "detail": "HTTP 200",
-      "elapsedMs": 134
+      "elapsedMs": 435
     },
     {
       "name": "/tasks/f95f0637-cbd2-4c03-b72c-cf7498a453f3",
       "ok": true,
       "detail": "HTTP 200",
-      "elapsedMs": 229
+      "elapsedMs": 538
     },
     {
       "name": "Altana Relay",
       "ok": true,
       "detail": "Chain 97 capabilities available",
-      "elapsedMs": 813
+      "elapsedMs": 1390
     },
     {
       "name": "Auditor",
       "ok": true,
       "detail": "Healthy on BNB testnet",
-      "elapsedMs": 120
+      "elapsedMs": 416
     },
     {
       "name": "BNB RPC",
       "ok": true,
       "detail": "Chain 97 confirmed",
-      "elapsedMs": 672
+      "elapsedMs": 1009
     },
     {
       "name": "Hunter",
       "ok": true,
       "detail": "Healthy on BNB testnet",
-      "elapsedMs": 201
+      "elapsedMs": 513
     },
     {
       "name": "Independent Verifier",
       "ok": true,
       "detail": "Slither 0.11.6 available on chain 97",
-      "elapsedMs": 513
+      "elapsedMs": 58
     },
     {
       "name": "Live audit competition",
       "ok": true,
       "detail": "2 independent audit providers",
-      "elapsedMs": 513
+      "elapsedMs": 515
     }
   ],
   "notCovered": [

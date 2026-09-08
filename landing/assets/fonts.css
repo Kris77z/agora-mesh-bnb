@@ -1,0 +1,69 @@
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 300 400;
+  font-display: swap;
+  src: url("./fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKky2F7g.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url("./fonts/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDD-iNM8A_6pUKz9.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("./fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("./fonts/tDbV2o-flEEny0FZhsfKu5WU4xD7OwGtT0rU.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "VT323";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/pxiKyp0ihIEF2isfFJXUdVNF.woff2") format("woff2");
+}
+
+/* BDO Grotesk: bundled locally for standalone hosting. */
+@font-face {
+  font-family: "BDO Grotesk";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/BDOGrotesk-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "BDO Grotesk";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./fonts/BDOGrotesk-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "BDO Grotesk";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("./fonts/BDOGrotesk-DemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "BDO Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./fonts/BDOGrotesk-Bold.woff2") format("woff2");
+}

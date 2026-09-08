@@ -12,7 +12,9 @@ import {
   FixedWindowRateLimiter,
   getProcessPostgresStore,
   isAllowedCorsOrigin,
+  isServiceRankingPreference,
   normalizeRequestId,
+  SERVICE_RANKING_PREFERENCES,
   type ServiceInfo,
   type AgentIdentity
 } from "@rebel/shared";
@@ -151,7 +153,7 @@ app.get("/services/:serviceId", async (req, res) => {
 
 app.post("/services/compare", async (req, res) => {
   try {
-    const body = req.body as { serviceIds?: unknown; taskType?: unknown; requiredSkills?: unknown } | undefined;
+    const body = req.body as { serviceIds?: unknown; taskType?: unknown; requiredSkills?: unknown; preference?: unknown } | undefined;
     if (body?.serviceIds !== undefined &&
       (!Array.isArray(body.serviceIds) || body.serviceIds.some((item) => typeof item !== "string"))) {
       res.status(400).json({ code: "INVALID_PAYLOAD", message: "serviceIds must be a string array" });
@@ -162,12 +164,23 @@ app.post("/services/compare", async (req, res) => {
       res.status(400).json({ code: "INVALID_PAYLOAD", message: "requiredSkills must be a string array" });
       return;
     }
+    if (body?.preference !== undefined && !isServiceRankingPreference(body.preference)) {
+      res.status(400).json({
+        code: "INVALID_PAYLOAD",
+        message: `preference must be one of: ${Object.keys(SERVICE_RANKING_PREFERENCES).join(", ")}`
+      });
+      return;
+    }
+    const preference = body?.preference !== undefined && isServiceRankingPreference(body.preference)
+      ? body.preference
+      : undefined;
     const rankings = await compareCatalogServices({
       serviceIds: body?.serviceIds as string[] | undefined,
       taskType: typeof body?.taskType === "string" ? body.taskType : undefined,
-      requiredSkills: body?.requiredSkills as string[] | undefined
+      requiredSkills: body?.requiredSkills as string[] | undefined,
+      preference
     });
-    res.status(200).json({ rankings, count: rankings.length, policy: {
+    res.status(200).json({ rankings, count: rankings.length, preference: preference ?? "balanced", policy: {
       chainId: registryConfig.chainId, paymentRail: registryConfig.x402Enabled ? "x402" : "legacy-native",
       liveIdentityRequired: registryConfig.x402Enabled
     } });

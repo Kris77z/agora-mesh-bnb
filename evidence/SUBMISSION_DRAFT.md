@@ -39,7 +39,7 @@ The first local Passkey lifecycle is complete: user device grant, a 0.75 U Audit
 
 ## Submission status
 
-This is a working prototype with historical onchain evidence, not a certified publicly usable submission. Local browser acceptance is paused; public deployment, uploaded video, final public source revision and actual Altana Explorer indexed display remain outstanding. The latest live-offer probe found Auditor and Sentinel available, but all three recorded selection cases ranked Sentinel first. No requirement-driven provider switch has been demonstrated.
+This is a working prototype with historical onchain evidence, not a certified publicly usable submission. Local browser acceptance is paused; public deployment, uploaded video and final public source revision remain outstanding. Altana Explorer indexed display for both smart accounts was visually accepted on 2026-09-06 (`evidence/altana-explorer/INDEXED_DISPLAY_ACCEPTANCE.md`). The latest live-offer probes found Auditor and Sentinel available. A requirement-driven provider switch is now demonstrated on the live ranking path: with balanced weights the cheaper, faster Sentinel wins; when the buyer selects the reputation-first preference, the feedback-backed Smart Contract Auditor (83% reputation) wins instead, with all component scores and reweighted weights visible (`evidence/SELECTION_PREFERENCE_CASES_20260906.json`, `evidence/selection-preference/`). Hunter's paid hiring path currently uses the balanced default.
 
 ## Proof points
 
@@ -49,7 +49,7 @@ This is a working prototype with historical onchain evidence, not a certified pu
 - Authority: `browser-cbb87207-05c8-4e4b-b053-e538b849c291`; 1.15 U cap, three service recipients, 1-hour expiry.
 - Completed recovered mission: `f95f0637-cbd2-4c03-b72c-cf7498a453f3`; Auditor 0.5 U + Verifier 0.25 U. The recorded post-run balance was 0.40 U; a later 0.75 U test funding top-up is a separate event, not service revenue or another completed run.
 - All three revoke transactions confirmed; allowance zero; old key explicitly rejected; Session material absent from encrypted store.
-- Altana account: https://testnet.altana.network/account/0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c . This is the official account URL format; indexed account/session/transaction display still needs visual acceptance.
+- Altana account: https://testnet.altana.network/account/0xc7B8c226fFdac9b5218ab570bc6c1d443275d28c . Indexed display visually accepted 2026-09-06: Smart account, Root key Active, one Session Expired, one Session Revoked, 4 BNB events. See `evidence/altana-explorer/INDEXED_DISPLAY_ACCEPTANCE.md`.
 - Evidence: `evidence/PASSKEY_SECOND_RUN_20260906.json`, `evidence/PASSKEY_FINAL_REVOCATION_20260906.json`, `evidence/PASSKEY_ACCEPTANCE.md`.
 - Limitations: operator-assisted recovery; negative check completed after expiry; not a speed/cost benchmark or a clean-browser stability pass.
 
@@ -60,7 +60,7 @@ This is a working prototype with historical onchain evidence, not a certified pu
 - Auditor delivery mode: `settlement-recovered`; no duplicate debit.
 - Authority revoked, allowance cleared, negative payment test rejected.
 - Evidence: `evidence/stability/auditor-verifier-paid-acceptance.json`, `evidence/stability/sentinel-paid-acceptance.json`, `registry/authority-evidence.json`.
-- Altana Keystore account: https://testnet.altana.network/account/0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d (official account URL format; live indexed display still requires browser acceptance).
+- Altana Keystore account: https://testnet.altana.network/account/0x8BA5452112F7E9c339da8E6f38C896B2A0B2E53d . Indexed display visually accepted 2026-09-06: Smart account, 7 keys (Root Active, sessions Revoked), 13 register/revoke events on BNB. See `evidence/altana-explorer/INDEXED_DISPLAY_ACCEPTANCE.md`.
 
 
 ### Stability Authority

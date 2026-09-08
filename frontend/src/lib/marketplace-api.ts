@@ -31,11 +31,14 @@ export function getMarketplaceAgent(agentId: string): Promise<{
   return requestJson(`${apiBase.registry}/agents/${encodeURIComponent(agentId)}`);
 }
 
+export type RankingPreference = 'balanced' | 'reputation-first' | 'price-first';
+
 export function compareMarketplaceServices(input: {
   serviceIds: string[];
   taskType?: string;
   requiredSkills?: string[];
-}): Promise<{ rankings: ServiceRanking[]; count: number }> {
+  preference?: RankingPreference;
+}): Promise<{ rankings: ServiceRanking[]; count: number; preference?: RankingPreference }> {
   return requestJson(`${apiBase.registry}/services/compare`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
