@@ -7,7 +7,9 @@
     "build": "next build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predev": "node scripts/sync-landing.mjs",
+    "prebuild": "node scripts/sync-landing.mjs"
   },
   "dependencies": {
     "@altananetwork/sdk": "0.8.0",

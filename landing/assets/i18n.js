@@ -113,7 +113,7 @@ export const dict = {
     "faq.a4": "This terminal replays frozen evidence. The marketplace, compare, task-trace and authority pages behind it run against the live services.",
 
     "close.heading": "Give one goal. Watch the mesh do the rest.",
-    "close.button": "Enter the Marketplace",
+    "close.button": "Give Hunter a Goal",
 
     "footer.tagline": "Semantic protocols as law. Trustless money as salary.",
     "footer.col1.h": "Product",
@@ -230,7 +230,7 @@ export const dict = {
     "faq.a4": "这个终端回放的是冻结证据。它背后的市场、对比、任务追踪和授权页面都运行在真实服务之上。",
 
     "close.heading": "给一个目标，看网格完成其余一切。",
-    "close.button": "进入市场",
+    "close.button": "给 Hunter 一个目标",
 
     "footer.tagline": "以语义化协议为法律，以免信任的货币为薪水。",
     "footer.col1.h": "产品",

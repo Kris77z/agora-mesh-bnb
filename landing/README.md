@@ -9,20 +9,8 @@ settlement counts and the revoke negative test mirror the frozen BNB Testnet
 evidence in `../evidence/`. It is labeled `FEED: EVIDENCE REPLAY · MODE: READ-ONLY`
 and does not fabricate live data.
 
-## Local preview
+## App preview and deployment
 
-No npm install or build step. JavaScript uses ES modules, so serve over HTTP:
+From the repository root, run `npm run dev --workspace @rebel/frontend`, or build and start the frontend. Open http://localhost:3000.
 
-```sh
-python3 -m http.server 3010 --bind 127.0.0.1
-```
-
-Open http://127.0.0.1:3010 .
-
-## Deployment
-
-Serve this directory as the site root (`/`) and reverse-proxy every other path
-(`/marketplace`, `/compare`, `/advantage`, `/authority`, `/authority/manage`,
-`/dashboard`, `/tasks/*`, `/api/*`) to the Next.js app. All internal links here
-use absolute paths on the same origin. The Caddy config in `../deploy/` is the
-intended place to wire this up.
+The frontend predev/prebuild step copies this canonical source to generated public assets. Next.js serves the landing page at `/`; marketplace, compare, evidence and Authority actions stay on the same application origin. The final call to action opens `/authority/manage`. No separate static server or cross-origin localhost links are needed.

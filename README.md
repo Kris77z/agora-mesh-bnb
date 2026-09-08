@@ -4,15 +4,12 @@
 > 
 > 人类的网络依靠精美的 UI 和信用卡，而 Agent 的数字经济需要的则是：以语义化的协议为法律，以免信任的数字货币为薪水。Agora Mesh 为此而生。
 
-![Agora Mesh Landing Page](./assets/screenshot2.png)
-*(Agora Mesh - 官网首页)*
-
-![Agora Mesh Dashboard](./assets/screenshot1.png)
-*(Agora Mesh - Dashboard 控制台)*
+![Agora Mesh Landing Page](./assets/agora-mesh-landing-current.png)
+*(Agora Mesh — 当前 BNB 版本落地页)*
 
 Agora Mesh 是一个以 BNB Smart Chain Testnet 为默认网络的 Agent Commerce 原型，旨在让 AI Agent 能够**自主发现、比较、雇佣、支付并验证服务**。当前迁移重点是 Altana Scoped Session、通用多资产预算模型，以及后端发起的 x402/B402 服务支付；Monad Testnet 作为 Legacy Preset 保留。
 
-当前核心落地状态：P0/P1 的 BNB Testnet、Altana scoped Authority、x402、独立 Auditor/Verifier/Investigator/Sentinel、Marketplace/Authority/Advantage 页面、Revoke 负向测试和三组 Agent 实验均已形成可校验证据。Experiment 2 的后验风险覆盖为 8/8（含 422-holder 完整快照和 `0.1 U` 实际 sellability）；全新付费 Experiment 3 的四项服务净支出为 `1.35 U`，误结算 `0.5 U` 已退款，两个 Authority 均已撤销。全新 `agora-termix-stability-20260902` Authority 下的三次连续付费审计也已完成：每轮 `0.5 U` Auditor + `0.25 U` Verifier，共六笔唯一链上结算、总计 `2.25 U`，随后立即 Revoke、Permit2 allowance 归零且负向测试被拒绝；证据见 [`evidence/stability/three-consecutive-paid-runs.json`](evidence/stability/three-consecutive-paid-runs.json)。TermiX 要求的三组“有 Marketplace Agent / 无 Marketplace Agent”对照已完成，时间、估算成本、质量和原始输出见 [`evidence/AGENT_ADVANTAGE_REPORT.md`](evidence/AGENT_ADVANTAGE_REPORT.md)。2026-09-04 的 offer-v2 付费验收也已完成：同一限额 Authority 支付 Auditor、Verifier 和独立 Sentinel 共 `1.15 U`，按精确请求与交易证据恢复一次已结算交付，未重复扣款，随后完成 Revoke 与负向测试。后端的 PostgreSQL 多副本状态、文件快照原子导入和本地双进程恢复验收已经落地。Authority 管理面确定为显式确认的本地 CLI，浏览器页面只读验收公共证据，Admin 私钥不会进入前端。仍需依赖公开 HTTPS URI 的 ERC-8004 实际注册、获批准的独立部署环境及最终提交工作。详见 [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) 和 [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md)。
+当前核心落地状态：P0/P1 的 BNB Testnet、Altana scoped Authority、x402、独立 Auditor/Verifier/Investigator/Sentinel、Marketplace/Authority/Advantage 页面、Revoke 负向测试和三组 Agent 实验均已形成可校验证据。Experiment 2 的后验风险覆盖为 8/8（含 422-holder 完整快照和 `0.1 U` 实际 sellability）；全新付费 Experiment 3 的四项服务净支出为 `1.35 U`，误结算 `0.5 U` 已退款，两个 Authority 均已撤销。全新 `agora-termix-stability-20260902` Authority 下的三次连续付费审计也已完成：每轮 `0.5 U` Auditor + `0.25 U` Verifier，共六笔唯一链上结算、总计 `2.25 U`，随后立即 Revoke、Permit2 allowance 归零且负向测试被拒绝；证据见 [`evidence/stability/three-consecutive-paid-runs.json`](evidence/stability/three-consecutive-paid-runs.json)。TermiX 要求的三组“有 Marketplace Agent / 无 Marketplace Agent”对照已完成，时间、估算成本、质量和原始输出见 [`evidence/AGENT_ADVANTAGE_REPORT.md`](evidence/AGENT_ADVANTAGE_REPORT.md)。2026-09-04 的 offer-v2 付费验收也已完成：同一限额 Authority 支付 Auditor、Verifier 和独立 Sentinel 共 `1.15 U`，按精确请求与交易证据恢复一次已结算交付，未重复扣款，随后完成 Revoke 与负向测试。后端的 PostgreSQL 多副本状态、文件快照原子导入和本地双进程恢复验收已经落地。Authority 管理支持浏览器 Passkey 授权与撤销，Admin 私钥不会进入前端；独立浏览器完整验收仍暂停，尚未计为通过。仍需依赖公开 HTTPS URI 的 ERC-8004 实际注册、获批准的独立部署环境及最终提交工作。详见 [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) 和 [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md)。
 
 提交用英文文案和基于已冻结链上证据的三分钟录屏流程分别见 [`evidence/SUBMISSION_DRAFT.md`](evidence/SUBMISSION_DRAFT.md) 与 [`evidence/DEMO_RUNBOOK.md`](evidence/DEMO_RUNBOOK.md)。
 

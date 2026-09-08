@@ -7,7 +7,7 @@ const repoRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const nextConfig = {
     outputFileTracingRoot: repoRoot,
     async rewrites() {
-        return [
+        return { beforeFiles: [{ source: "/", destination: "/site/index.html" }], afterFiles: [
             {
                 source: '/api/hunter/:path*',
                 destination: `${process.env.HUNTER_INTERNAL_URL ?? 'http://localhost:3002'}/:path*`,
@@ -20,7 +20,7 @@ const nextConfig = {
                 source: '/api/auditor/:path*',
                 destination: `${process.env.WRITER_INTERNAL_URL ?? 'http://localhost:3001'}/:path*`,
             },
-        ];
+        ], fallback: [] };
     },
 };
 

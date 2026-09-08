@@ -43,3 +43,6 @@ registry/x402-purchases/
 registry/runs.json*
 
 .local-demo/
+
+# Generated from the canonical landing/ source
+frontend/public/site/
