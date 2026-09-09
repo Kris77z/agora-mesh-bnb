@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowUpRight, Bot, Network } from 'lucide-react';
+import { ArrowUpRight, Bot } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 export function MarketplaceShell({ children }: { children: ReactNode }) {
@@ -7,14 +7,11 @@ export function MarketplaceShell({ children }: { children: ReactNode }) {
     <div className="mesh-theme min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+          {/* Same lockup as the landing header: a small mint square and the
+              wordmark, so the brand does not restyle itself on the first click. */}
           <Link href="/" className="flex items-center gap-3">
-            <span className="brand-mark flex h-9 w-9 items-center justify-center rounded-lg">
-              <Network className="h-4 w-4" />
-            </span>
-            <span>
-              <span className="block font-mono text-xs uppercase tracking-[0.2em] leading-none">Agora / Mesh</span>
-              <span className="mt-1.5 block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Agent economy on BNB</span>
-            </span>
+            <span className="brand-mark block h-2 w-2" />
+            <span className="font-mono text-xs uppercase tracking-[0.2em]">Agora / Mesh</span>
           </Link>
           <nav className="hidden items-center gap-7 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground md:flex">
             <Link href="/marketplace" className="text-foreground transition-colors hover:text-primary">Marketplace</Link>

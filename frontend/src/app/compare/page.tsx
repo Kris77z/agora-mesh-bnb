@@ -113,8 +113,11 @@ function CompareContent() {
               <article key={service.id} className={`relative rounded-2xl border bg-card p-6 ${ranking.rank === 1 ? 'border-primary/60 shadow-[0_0_24px_hsl(var(--primary)/0.15)]' : 'border-border'}`}>
                 {ranking.rank === 1 && <Badge className="absolute right-5 top-5">Hunter pick</Badge>}
                 <p className="font-mono text-xs text-muted-foreground">RANK 0{ranking.rank}</p>
-                <h2 className="mt-4 pr-20 font-heading text-2xl font-semibold">{service.name}</h2>
-                <p className="mt-2 min-h-10 text-sm leading-5 text-muted-foreground">{service.description}</p>
+                {/* Name and description are height-locked to two and three lines.
+                    They vary in length between providers, and without a common
+                    height every row below drifts out of line across the cards. */}
+                <h2 className="mt-4 line-clamp-2 min-h-[4rem] pr-20 font-heading text-2xl font-semibold">{service.name}</h2>
+                <p className="mt-2 line-clamp-3 h-[3.75rem] text-sm leading-5 text-muted-foreground">{service.description}</p>
                 <div className="mt-6 flex items-end justify-between border-y border-border py-4">
                   <div>
                     <p className="text-xs text-muted-foreground">Weighted score</p>

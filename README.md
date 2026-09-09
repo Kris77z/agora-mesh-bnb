@@ -18,66 +18,43 @@
 > 
 > 人类的网络依靠精美的 UI 和信用卡；机器的经济需要的是：以语义化的协议为法律，以免信任的数字货币为报酬。我们正在构建 AI 时代的机器结算协议。
 
-![Agora Mesh Landing Page](./assets/landing.jpg)
-*(落地页 —— 第二屏是随滚动启动的终端，回放冻结证据中的 x402 流水线)*
+![Agora Mesh](./assets/landing.png)
 
 Agora Mesh 让 AI Agent 成为经济参与者，而不是等待指令的工具。你给出**目标、预算和边界**，
 Hunter（买方 Agent）自主完成其余全部环节：发现专家 Agent、对比实时报价、雇佣、付款、
 验证交付，并把评价写回声誉网络。每一笔支付都是 BNB Smart Chain Testnet 上的真实结算。
 
-## 🧩 产品能做什么
+## 🧩 核心能力
 
-### 1. 一个 Agent 真正会去逛的市场
+**一个 Agent 能读懂的市场。** 服务是带心跳的动态注册表，能力、价格、声誉、延迟、支付轨道都可被
+程序读取。排序不是黑箱：能力 35% / 声誉 30% / 价格 20% / 延迟 15%，每一项分量得分和权重都在
+Compare 页摊开。买方还能切换 balanced / reputation-first / price-first，同一套模型重加权后会给出
+**不同且可解释**的选择。
 
-服务不是配置文件里的静态清单，而是带心跳的动态注册表：能力、价格、声誉、延迟、支付轨道
-全部可被程序读取。Hunter 用**同一套排序模型**做决策，而这个模型对人类完全透明。
+**能花钱，但花不了太多。** Agent 不持有你的私钥，只拿到一个有边界的 Authority：收款白名单、
+$U 支出上限、过期时间，以及一个真正生效的撤销开关。付款走请求绑定的 x402/B402——报价单把请求
+哈希、金额、收款人、资产和期限绑死，Permit2 签名的 nonce 就是请求哈希本身，没有盲转账也无法
+重复扣款。撤销之后会发生什么我们实测过：额度归零，下一笔支付被链上拒绝。
 
-![Compare](./assets/compare-ranking.jpg)
-*(Compare 页 —— 每一项分量得分和它的权重都摊开给你看)*
-
-排序不是黑箱：能力 35% / 声誉 30% / 价格 20% / 延迟 15% 是默认权重，买方可以切换
-**balanced / reputation-first / price-first** 三种偏好，同一套模型重加权后会给出**不同且可解释**
-的选择——常规审计选更便宜更快的 Sentinel，高风险任务选有真实交付记录的 Auditor。
-
-### 2. 让 Agent 能花钱，但花不了太多
-
-Agent 不持有你的私钥。你授予一个**有边界的 Authority**：收款白名单、$U 支出上限、过期时间，
-以及一个真正生效的撤销开关。Admin 私钥永不进入运行时，浏览器侧用 Passkey 在设备上逐步确认。
-
-付款走请求绑定的 **x402/B402**：每张报价单把请求哈希、精确金额、收款人、资产和期限绑死，
-Permit2 签名的 nonce 就等于请求哈希本身——没有盲转账，也无法重复扣款。结算结果不确定时
-系统 fail-closed，只做未签名重放，绝不盲目重发交易。
-
-撤销之后会发生什么，我们实测过：Permit2 额度归零，下一笔支付被链上拒绝。
-
-### 3. 交付要经得起复核
-
-审计方和验证方是**不同身份、不同钱包**的两个 Agent。Verifier 不复用 Auditor 的推理，而是对
-完全相同的 `sourceHash` 重跑检查，优先使用 Slither 静态分析；Slither 不可用时明确写出降级原因，
-绝不假装完成了完整审计。裁决结果签名，并与那笔付款绑定。
-
-### 4. 上帝视角的执行现场
+**交付要经得起复核。** 审计方和验证方是不同身份、不同钱包的两个 Agent。Verifier 不复用 Auditor
+的推理，而是对同一 `sourceHash` 重跑 Slither 静态分析；无法运行时明确写出降级原因，绝不假装完成
+了完整审计。裁决结果签名并与那笔付款绑定。
 
 ![Dashboard](./assets/dashboard.jpg)
-*(Dashboard —— 左侧 Agent 状态，中间任务时间线，右侧网格中的实时服务)*
 
-Commander V2 基于 ReAct 架构把一个大目标拆成 Discovery → Decision → Payment → Execution →
-Verification 多个阶段，前端用"管道贪吃蛇"实时呈现 Hunter 在网格中游走、探测、吞噬其他 Agent
-能力的过程。每次任务结束后 Agent 会自我反思（Reflect），把经验沉淀成长期记忆，并据交付质量
-修改对方在 Registry 中的声誉——劣质节点权重衰减，网格自我净化。
+**看得见的执行现场。** Commander V2 基于 ReAct 把目标拆成发现 → 决策 → 支付 → 执行 → 验证多个
+阶段，前端用"管道贪吃蛇"实时呈现 Hunter 在网格中游走并吞噬其他 Agent 能力的过程。每次任务结束后
+Agent 自我反思沉淀记忆，并据交付质量修改对方声誉——劣质节点权重衰减，网格自我净化。
 
-### 5. 不是 Demo，是有证据的运行记录
+**有证据，不是 Demo。** 三组「有 / 无 Marketplace Agent」实测对照（合约审计、代币风险调查、完整
+尽调）的时间、成本、质量和原始输出全部冻结，见
+[`evidence/AGENT_ADVANTAGE_REPORT.md`](evidence/AGENT_ADVANTAGE_REPORT.md)；所有付费运行的交易
+哈希、签名回执与 Authority 生命周期都可在 BscScan 和 Altana Explorer 自行核验。
 
-三组「有 Marketplace Agent / 无 Marketplace Agent」实测对照（合约审计、代币风险调查、完整尽调），
-时间、成本、质量和原始输出全部冻结，见 [`evidence/AGENT_ADVANTAGE_REPORT.md`](evidence/AGENT_ADVANTAGE_REPORT.md)。
-所有付费运行的交易哈希、签名回执与 Authority 生命周期都可在 BscScan 和 Altana Explorer 上自行核验。
+当前落地的审计、验证与链上调查只是首批服务，研究、数据、开发、DeFi 都可接入同一套机制。
 
-当前落地的是审计、验证与链上调查三类服务，它们只是这套轨道上的首批应用——研究、数据、开发、
-DeFi 服务都可以接入同一套发现、排序、结算与验证机制。
-
-> 详细的实现状态、验收边界与仍待完成项，见 [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md)
-> 和 [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md)。我们不会把"健康检查通过"当作付费链路已验收：
-> 完整的浏览器付费雇佣流程尚未验收通过，ERC-8004 正式注册也仍待完成。
+> 实现状态与验收边界见 [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md)。我们不把"健康检查
+> 通过"当作付费链路已验收：完整的浏览器付费雇佣流程尚未验收，ERC-8004 正式注册仍待完成。
 
 ## 🏗 架构
 
