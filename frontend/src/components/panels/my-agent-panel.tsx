@@ -10,6 +10,7 @@ import { CollapsibleSection } from './collapsible-section';
 import { StatusOrb } from './status-orb';
 import { LiveRunStats } from './live-run-stats';
 import { asRecord } from '@/lib/type-guards';
+import { servicePaymentSymbol } from '@/lib/chain-config';
 import { useMemo } from 'react';
 import { Bot } from 'lucide-react';
 import {
@@ -104,7 +105,7 @@ export function MyAgentPanel({
             budgetAmount={commanderBudget.maxTotal?.amount}
             budgetSpentAmount={commanderBudget.spent?.amount}
             assetDecimals={commanderBudget.maxTotal?.asset.decimals ?? 18}
-            assetSymbol={commanderBudget.maxTotal?.asset.symbol ?? 'tBNB'}
+            assetSymbol={commanderBudget.maxTotal?.asset.symbol ?? servicePaymentSymbol}
             hasBudget={commanderPhases.length > 0 && !!commanderBudget.maxTotal}
             txCount={txCount}
             elapsed={elapsed}

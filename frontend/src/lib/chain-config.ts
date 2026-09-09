@@ -46,3 +46,6 @@ export const publicChainConfig: PublicChainConfig = {
         : base.id,
     rpcUrl: process.env.NEXT_PUBLIC_RPC_URL?.trim() || base.rpcUrl,
 };
+
+/** Default service settlement asset; native gas uses publicChainConfig.token. */
+export const servicePaymentSymbol = preset === 'bnb-testnet' ? 'U' : 'MON';

@@ -3,7 +3,7 @@
 import { useI18n } from '@/components/i18n/locale-provider';
 import { cn } from '@/lib/utils';
 import { formatMON } from '@/lib/format';
-import { publicChainConfig } from '@/lib/chain-config';
+import { servicePaymentSymbol } from '@/lib/chain-config';
 import { formatRelativeUnixTime } from '@/lib/i18n';
 import { motion } from 'motion/react';
 import { useRegistryServices } from '@/hooks/use-registry-services';
@@ -119,7 +119,7 @@ export function AgentMeshPanel({ events, result }: AgentMeshPanelProps) {
                 <div className="mt-3 space-y-1 text-[11px]">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">{t('mesh.price')}</span>
-                    <span>{formatMON(node.price)} {publicChainConfig.token}</span>
+                    <span>{formatMON(node.price)} {registryServices.find((service) => service.id === node.id)?.currency || servicePaymentSymbol}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-muted-foreground">{t('mesh.rep')}</span>

@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { asRecord } from '@/lib/type-guards';
 import { formatTokenAmount } from '@/lib/format';
-import { publicChainConfig } from '@/lib/chain-config';
+import { servicePaymentSymbol } from '@/lib/chain-config';
 import type { AgentEvent } from '@/types/agent';
 
 /* ─── Budget Bar (血条) ─── */
@@ -20,7 +20,7 @@ export function BudgetBar({
     spentAmount,
     maxAmount,
     assetDecimals = 18,
-    assetSymbol = publicChainConfig.token,
+    assetSymbol = servicePaymentSymbol,
 }: BudgetBarProps) {
     const spent = BigInt(spentAmount ?? '0');
     const max = BigInt(maxAmount ?? '0');
@@ -91,7 +91,7 @@ export function PaymentStrike({ events }: PaymentStrikeProps) {
         if (!latestPayment || latestPayment.id === lastPaymentId.current) return;
         lastPaymentId.current = latestPayment.id;
         setAmountText(latestPayment.amount
-            ? `-${formatTokenAmount(latestPayment.amount)} ${publicChainConfig.token}`
+            ? `-${formatTokenAmount(latestPayment.amount)} ${servicePaymentSymbol}`
             : 'PAID');
         setVisible(true);
         const t = setTimeout(() => setVisible(false), 2000);
