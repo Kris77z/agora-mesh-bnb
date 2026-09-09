@@ -182,8 +182,12 @@ export function browserAuthorityRouter(providerOverride?: ethers.Provider) {
     if ([...recoveries.entries()].some(([key, job]) => key.startsWith(`${id}:`) && job.status === 'running')) throw new HunterError(409, 'RECOVERY_IN_PROGRESS', 'Wait for the original task recovery to finish.');
     const goal = req.body?.goal;
     if (typeof goal !== 'string' || !goal.trim() || goal.length > 12000) throw new HunterError(400, 'INVALID_GOAL', 'Enter a goal of 1–12000 characters.');
+    const mode = req.body?.mode ?? 'single';
+    const locale = req.body?.locale ?? 'en-US';
+    if (mode !== 'single' && mode !== 'commander') throw new HunterError(400, 'INVALID_MODE', 'Choose single or commander mode.');
+    if (locale !== 'en-US' && locale !== 'zh-CN') throw new HunterError(400, 'INVALID_LOCALE', 'Choose en-US or zh-CN.');
     const { manager } = await managerFor(id);
-    const result = await manager.submit({ goal: goal.trim(), idempotencyKey: validateRunIdempotencyKey(req.get('idempotency-key')), requestMode: 'single', locale: 'en-US' });
+    const result = await manager.submit({ goal: goal.trim(), idempotencyKey: validateRunIdempotencyKey(req.get('idempotency-key')), requestMode: mode, locale });
     res.status(result.admission.kind === 'conflict' ? 409 : 202).json(publicRunRecord(result.admission.record));
   }));
   router.get('/:id/runs/:missionId', handle(async (req, res) => {
