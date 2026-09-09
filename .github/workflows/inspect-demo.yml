@@ -14,4 +14,4 @@ jobs:
           printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy
           chmod 600 ~/.ssh/deploy
           ssh-keyscan -T 20 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
-          ssh -o BatchMode=yes -i ~/.ssh/deploy "$DEPLOY_USER@$DEPLOY_HOST" "sudo grep -E 'handle|reverse_proxy' /etc/caddy/Caddyfile; systemctl list-units --type=service --no-pager | grep -E 'agora|altana'; sudo journalctl -u agora-altana-bridge -n 50 --no-pager"
+          ssh -o BatchMode=yes -i ~/.ssh/deploy "$DEPLOY_USER@$DEPLOY_HOST" "sudo grep -E 'handle|reverse_proxy' /etc/caddy/Caddyfile; systemctl list-units --type=service --no-pager | grep -E 'agora|altana'; sudo systemctl cat agora-mesh@hunter | grep ExecStart; sudo journalctl -u agora-mesh@hunter -u agora-mesh@registry -n 45 --no-pager"
