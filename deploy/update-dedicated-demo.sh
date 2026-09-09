@@ -27,7 +27,8 @@ test -d "$task_base/state/memory"
 task_previous=$(readlink -f "$task_base/current")
 if [ "$task_previous" = "$task_release" ]; then
   runuser -u agora-mesh -- node "$task_release/frontend/scripts/sync-landing.mjs"
-  echo "Revision $task_revision is already active; landing assets synced."
+  systemctl restart agora-mesh@frontend
+  echo "Revision $task_revision is already active; landing assets synced and frontend restarted."
   exit 0
 fi
 
