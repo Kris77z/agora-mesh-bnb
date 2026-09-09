@@ -26,8 +26,7 @@ Status at 2026-09-09 12:45 Beijing time:
   the private decryption key was generated on the target server. No plaintext
   credential values were put in cloud command records.
 - Seven app systemd units enabled. Hunter, Registry, and all four specialist health checks pass; all specialist heartbeats succeed and Slither is available.
-- Caddy configuration validated; trusted certificates issued for the website and specialist subdomains. HTTPS TCP 443 rule is prepared in Tencent console,
-  awaiting action-time approval under the browser tool's firewall policy.
+- Caddy configuration validated; trusted certificates issued for the website and specialist subdomains. External HTTPS was verified reachable on 2026-09-09 at 13:39 Beijing time.
 - Intended temporary origin: `https://43-165-167-118.sslip.io`.
 - Public HTTP API exposes browser Authority operations and evidence. Legacy Hunter
   `/run` endpoints remain internal; use `/authority/manage` to start a paid task.
@@ -35,7 +34,7 @@ Status at 2026-09-09 12:45 Beijing time:
 
 Server-side HTTPS checks pass for the six product pages, Authority configuration,
 service listing, comparison POST, all specialist health endpoints, and Altana RPC /
-Relay read calls. External browser acceptance is still pending TCP 443 approval.
+Relay read calls. TCP 443 is now externally reachable; full paid browser acceptance still requires the model configuration.
 The same-origin check now uses the fixed `AGORA_PUBLIC_ORIGIN` behind the TLS proxy;
 8 relevant tests and frontend type checking passed, followed by a successful server build.
 
