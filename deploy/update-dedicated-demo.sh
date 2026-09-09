@@ -30,6 +30,9 @@ for task_pair in registry:registry agents/hunter/memory:memory; do
 done
 chown -R agora-mesh:agora-mesh "$task_release"
 install -m 0644 "$task_release/deploy/agora-altana-bridge.service" /etc/systemd/system/agora-altana-bridge.service
+task_node=$(command -v node)
+test -x "$task_node"
+sed -i "s|ExecStart=/usr/bin/node |ExecStart=$task_node |" /etc/systemd/system/agora-altana-bridge.service
 systemctl daemon-reload
 ln -sfn "$task_release" "$task_base/current.new"
 mv -Tf "$task_base/current.new" "$task_base/current"
@@ -37,6 +40,7 @@ rollback() {
   ln -sfn "$task_previous" "$task_base/current.new"
   mv -Tf "$task_base/current.new" "$task_base/current"
   systemctl restart agora-mesh@registry agora-mesh@auditor agora-mesh@sentinel agora-mesh@verifier agora-mesh@investigator agora-mesh@hunter
+  systemctl stop agora-altana-bridge
   echo 'Backend activation failed; previous code restored.' >&2
 }
 trap rollback ERR
