@@ -77,3 +77,21 @@ The server SDK probes used its `maxTokens` option; the successful local raw prob
 used `max_completion_tokens`. Their request shapes and output budgets are not
 proven equivalent. Long-form/task completion and gateway parameter compatibility
 remain unverified. Temporary probe files were removed.
+
+
+## Gemini compatibility acceptance — 2026-09-09 14:57 Beijing
+
+Patch `f6c0e43` is deployed to the active server release. All seven SDK provider
+instances use the shared llmgtw adapter. Only the exact gateway origin/path and
+`gemini-3.1-pro-preview` are adapted: non-streaming JSON, `max_tokens` mapped to
+`max_completion_tokens`, and temperature omitted to match the successful raw
+probe. The adapter performs one transport attempt and rejects redirects. Other
+providers and models are unchanged. Five offline tests passed locally and on the
+server, including the existing SDK's tool-result round trip; three workspace
+type checks passed locally.
+
+The actual server SDK then autonomously called a local multiplication tool and
+answered `391`: two requests, one tool execution, 558 total tokens, gateway-reported
+USD 0.002494. This supersedes the failed minimal SDK probes above for the adapted
+request format. It does not establish long-context reliability or full paid
+browser-task acceptance. No blockchain transaction was sent by the probe.
