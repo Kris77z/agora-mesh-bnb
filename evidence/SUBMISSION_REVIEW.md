@@ -13,7 +13,7 @@ Start with [submission copy](SUBMISSION_DRAFT.md), [Agent Advantage report](AGEN
 | Two providers live at probe time | LIVE_AUDITOR_SELECTION_20260906.json | Snapshot only; all recorded cases chose Sentinel |
 | Nominal test funds restored | PASSKEY_TOPUP_20260906.json | Funding transfer, not a service purchase or completed task |
 | In-product paid audit recovery | Local implementation and tests in LOCAL_DEMO.md | Fresh real recovery acceptance still pending |
-| Publicly usable full demo | None certified | Deployment deferred |
+| Publicly usable full demo | https://agora-mesh-bnb.vercel.app, backend on the dedicated host | Pages, service discovery and health checks verified; a paid browser hiring run is not part of this check |
 
 ## Experiment reading order
 
@@ -23,7 +23,7 @@ Start with [submission copy](SUBMISSION_DRAFT.md), [Agent Advantage report](AGEN
 
 ## Actual remaining gates
 
-- Stable public full-stack URL: missing; owner deferred hosting.
+- Stable public full-stack URL: https://agora-mesh-bnb.vercel.app (website) with https://43-165-167-118.sslip.io serving `/api/*`; resolved.
 - Fresh browser acceptance: paused by owner, 0/3.
 - Altana Explorer account/session/transaction visible indexing: visually verified 2026-09-06 for both smart accounts (see `altana-explorer/INDEXED_DISPLAY_ACCEPTANCE.md`); resolved.
 - Final source revision: local working tree is not frozen or published as a final release.

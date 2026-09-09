@@ -111,10 +111,11 @@ BNB Smart Chain Testnet, Altana scoped sessions, Permit2, x402/B402, ERC-8004 in
 
 ## Links
 
-- Canonical demo: `OWNER INPUT — approved dedicated deployment target required`. The former Aliyun deployment was unauthorized and removed; it must not be retried.
-- Local demo: `http://localhost:3000` when the local stack is running. No temporary public URL is currently certified for submission.
-- Source repository: `OWNER INPUT — public repository URL and final commit`
+- Canonical demo: https://agora-mesh-bnb.vercel.app — the website, deployed from `main`.
+- Backend origin: https://43-165-167-118.sslip.io — Hunter, Registry and the four specialist services, reached from the site through same-origin `/api/*`. Not a separate site; opening it directly is not the demo.
+- Source repository: https://github.com/Kris77z/agora-mesh-bnb — branch `main`. `OWNER INPUT — final commit SHA at submission time`.
 - Demo video: `OWNER INPUT — uploaded video URL`
+- The former Aliyun deployment was unauthorized and removed; it must not be retried.
 
 ## Track framing
 

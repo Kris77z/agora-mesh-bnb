@@ -1,6 +1,6 @@
 # Remaining work — 2026-09-06
 
-Decision: TermiX first, Altana second. Keep ERC-8183/four-category DeFi expansion outside the critical path. Public deployment is deferred, not completed.
+Decision: TermiX first, Altana second. Keep ERC-8183/four-category DeFi expansion outside the critical path. Public deployment is done: Vercel serves the website from `main`, the dedicated host serves `/api/*`.
 
 | Priority | Deliverable | Acceptance criterion | Current gap |
 |---|---|---|---|
@@ -9,11 +9,11 @@ Decision: TermiX first, Altana second. Keep ERC-8183/four-category DeFi expansio
 | P0 | Altana indexed-display proof | Wallet, Session/Keystore and relevant transactions visibly inspectable in Altana Explorer, linked in submission | DONE 2026-09-06: both smart accounts visually verified in the Keystore Explorer (keys, states, register/revoke events); screenshots and boundary note in `altana-explorer/INDEXED_DISPLAY_ACCEPTANCE.md` |
 | P1 | Two live competing auditors | Both independent offers live and eligible; two documented goals/budgets produce explainable choices using the actual ranking path | DONE 2026-09-06: named ranking preferences (balanced / reputation-first / price-first) added to the shared ranking model, Registry compare API and Compare UI; live probe shows balanced → Sentinel (price+latency) and reputation-first → Auditor (83% feedback-backed reputation), invalid preference rejected with 400. Evidence: `SELECTION_PREFERENCE_CASES_20260906.json`, `selection-preference/*.jpg`. Hunter's paid hiring path still uses the balanced default; goal-level preference plumbing into paid missions remains optional follow-up |
 | P1 | Advantage evidence | Three matched tasks, comparable elapsed/active time, actual cost units and auditable quality; no unsupported faster/cheaper claims | Existing 3/3 reports preserved, no new matched speed/cost benchmark; human active time absent |
-| P0 for submission | Public demo + submission package | Externally usable full stack, public source/final commit, uploaded video, completed form | Dedicated host unavailable; deployment deferred by owner; final links/commit not verified |
+| P0 for submission | Public demo + submission package | Externally usable full stack, public source/final commit, uploaded video, completed form | Site live at https://agora-mesh-bnb.vercel.app with the backend on the dedicated host; public repository is https://github.com/Kris77z/agora-mesh-bnb. Uploaded video, final commit and the submission form remain outstanding |
 
 Completed now: first assisted Passkey lifecycle and Session deletion; network/receipt-classifier fixes; submission draft updated; current recording runbook written; read-only preflight script added and executed. Preflight does not spend funds or exercise an LLM.
 
-Next work order: product recovery/status visibility and repeatable local startup; second live provider plus selection examples; fresh browser acceptance with the owner; Altana indexed display; matched Advantage reruns and final recording. Deployment resumes only when a suitable host is available. A new paid run requires a fresh user-granted Authority; the old key has been deleted.
+Next work order: product recovery/status visibility and repeatable local startup; second live provider plus selection examples; fresh browser acceptance with the owner; Altana indexed display; matched Advantage reruns and final recording. A new paid run requires a fresh user-granted Authority; the old key has been deleted.
 
 Official requirements checked against https://www.bnbchain.org/en/hackathons/smart-money-era?tab=tracks on 2026-09-06. TermiX judges will hire directly and require at least three with/without-agent task comparisons. Altana requires visible live transactions in its explorer and in-product user revoke. Three fresh browser runs are our project acceptance gate, not an extra official rule.
 

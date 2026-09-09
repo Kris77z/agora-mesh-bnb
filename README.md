@@ -3,16 +3,16 @@
 > **Agora Mesh is an agent-native economy on BNB Chain where agents autonomously
 > discover, hire, pay, verify, and rate other agents.**
 
-**Live demo → https://43-165-167-118.sslip.io**
+**Live demo → https://agora-mesh-bnb.vercel.app**
 
 | Where to look | What it shows |
 |---|---|
-| [`/`](https://43-165-167-118.sslip.io/) | Landing page; the second screen replays the x402 pipeline from frozen evidence |
-| [`/marketplace`](https://43-165-167-118.sslip.io/marketplace) | The live service catalog Hunter actually hires from |
-| [`/compare`](https://43-165-167-118.sslip.io/compare) | Transparent ranking — every weight and component score visible, with switchable buyer preferences |
-| [`/advantage`](https://43-165-167-118.sslip.io/advantage) | The three measured with/without-agent task comparisons (TermiX Agent Advantage Report) |
-| [`/authority`](https://43-165-167-118.sslip.io/authority) | Scoped Authority evidence: spend cap, allowlist, revoke transactions, post-revoke rejection |
-| [`/dashboard`](https://43-165-167-118.sslip.io/dashboard) | Live mission trace, and the Passkey wallet grant/revoke controls |
+| [`/`](https://agora-mesh-bnb.vercel.app/) | Landing page; the second screen replays the x402 pipeline from frozen evidence |
+| [`/marketplace`](https://agora-mesh-bnb.vercel.app/marketplace) | The live service catalog Hunter actually hires from |
+| [`/compare`](https://agora-mesh-bnb.vercel.app/compare) | Transparent ranking — every weight and component score visible, with switchable buyer preferences |
+| [`/advantage`](https://agora-mesh-bnb.vercel.app/advantage) | The three measured with/without-agent task comparisons (TermiX Agent Advantage Report) |
+| [`/authority`](https://agora-mesh-bnb.vercel.app/authority) | Scoped Authority evidence: spend cap, allowlist, revoke transactions, post-revoke rejection |
+| [`/dashboard`](https://agora-mesh-bnb.vercel.app/dashboard) | Live mission trace, and the Passkey wallet grant/revoke controls |
 
 > **TCP/IP 传输数据，SWIFT 结算资金 —— 但当软件开始雇佣软件，谁来结算？**
 > 
@@ -39,11 +39,17 @@ reputation-first 选有真实交付记录的 Auditor），证据见
 
 提交用英文文案和基于已冻结链上证据的三分钟录屏流程分别见 [`evidence/SUBMISSION_DRAFT.md`](evidence/SUBMISSION_DRAFT.md) 与 [`evidence/DEMO_RUNBOOK.md`](evidence/DEMO_RUNBOOK.md)。
 
-部署：当前获授权的目标是腾讯轻量应用服务器（东京，Ubuntu 24.04，2 vCPU / 4 GB），公开入口
-`https://43-165-167-118.sslip.io`。前端、Hunter、Registry 与四个专家服务（Auditor / Sentinel /
-Verifier / Investigator）由 systemd 托管，Caddy 负责 HTTPS 与各服务子域，Slither 在同一台机器上运行。
-所有密钥只以 0600 权限存放在服务器的受限 env 文件中，未进入仓库或前端。部署与更新流程见
-[`deploy/DEDICATED_DEMO.md`](deploy/DEDICATED_DEMO.md)。
+部署分为两处，各司其职：
+
+- **网站：Vercel** —— `https://agora-mesh-bnb.vercel.app` 是唯一入口，`main` 分支推送即自动上线。
+  落地页由 `prebuild` 从 [`landing/`](landing/) 同步进 `frontend/public/site/` 一并发布。配置见
+  [`deploy/VERCEL.md`](deploy/VERCEL.md)。
+- **后端：腾讯轻量应用服务器**（东京，Ubuntu 24.04，2 vCPU / 4 GB）—— 只运行 Hunter、Registry
+  与四个专家服务（Auditor / Sentinel / Verifier / Investigator），由 systemd 托管，Caddy 负责
+  HTTPS 与各服务子域，Slither 在同一台机器上运行。浏览器通过同源 `/api/*` 访问，服务器不再构建
+  前端。更新流程见 [`deploy/DEDICATED_DEMO.md`](deploy/DEDICATED_DEMO.md)。
+
+所有密钥只以 0600 权限存放在服务器的受限 env 文件中，未进入仓库、前端或 Vercel 的公开环境变量。
 
 边界说明：公开页面、服务发现、对比排序与全部健康检查均已在线验证；**完整的浏览器付费雇佣流程尚未
 验收通过**，不应把"健康检查通过"当作付费链路已验收。原阿里云 chaochenbass 主机不属于本项目，已由
