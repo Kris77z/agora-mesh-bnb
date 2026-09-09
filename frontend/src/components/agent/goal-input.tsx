@@ -8,7 +8,7 @@ import type { LanguageCode } from '@/types/agent';
 import { buildPresets, compilePresetGoal, PresetForm, type Preset } from './preset-form';
 
 interface GoalInputProps {
-    onRun: (goal: string, mode?: RunRequestMode, locale?: LanguageCode) => void;
+    onRun: (goal: string, mode?: RunRequestMode, locale?: LanguageCode) => void | boolean;
     isLoading?: boolean;
     /** Externally injected goal (e.g. from history) */
     externalGoal?: string;
@@ -47,11 +47,12 @@ export function GoalInput({ onRun, isLoading, externalGoal }: GoalInputProps) {
         const trimmed = goal.trim();
         if (trimmed && !isLoading) {
             const expandedPreset = expandPresetCommand(trimmed, presets);
-            onRun(
+            const accepted = onRun(
                 expandedPreset?.goal ?? trimmed,
                 expandedPreset?.mode ?? (commanderMode ? 'commander' : 'single'),
                 locale
             );
+            if (accepted === false) return;
             setGoal('');
             if (textareaRef.current) {
                 textareaRef.current.style.height = `${LINE_HEIGHT}px`;

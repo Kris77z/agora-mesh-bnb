@@ -132,14 +132,14 @@ export function TerminalOnboarding({ onComplete }: Props) {
     }, [agentName, pushLines, t]);
 
     /* ═══ Wallet connection (async) ═══ */
-    const connectAndOpenWorkspace = useCallback(async () => {
+    const connectAndOpenWorkspace = useCallback(async (recover = false) => {
         pushLines([
             { text: t('onboarding.terminal.command.connectWallet'), style: 'cmd' },
             { text: t('onboarding.terminal.launchingWallet'), style: 'out' },
         ]);
         setPhase('wallet_connect');
 
-        const connectedAddress = await wallet.connectAccount();
+        const connectedAddress = await wallet.connectAccount(recover);
 
         if (!connectedAddress) {
             // User cancelled or connection failed
@@ -205,6 +205,8 @@ export function TerminalOnboarding({ onComplete }: Props) {
 
     /* ═══ Render ═══ */
     return (
+        <>
+        {phase === 'confirm' && inputMode !== 'none' && <button className="mx-4 mt-2 border border-primary/40 px-3 py-2 font-mono text-xs text-primary" onClick={() => void connectAndOpenWorkspace(true)}>{t('onboarding.recoverPasskey')}</button>}
         <div className="h-full flex flex-col font-mono text-xs cursor-text" onClick={() => inputRef.current?.focus()}>
             <div ref={scrollRef} className="flex-1 overflow-y-auto scrollbar-thin p-4 space-y-px">
                 {lines.map((l, i) => (
@@ -232,5 +234,6 @@ export function TerminalOnboarding({ onComplete }: Props) {
                 )}
             </div>
         </div>
+        </>
     );
 }

@@ -10,14 +10,15 @@ import { MyAgentPanel, type MyAgentStatus } from '@/components/panels/my-agent-p
 import { MissionTimeline } from '@/components/timeline/mission-timeline';
 import { MissionHistoryDrawer } from '@/components/history/mission-history-drawer';
 import { useAgentIdentity } from '@/hooks/use-agent-identity';
-import { useAgentStream } from '@/hooks/use-agent-stream';
-import { useHunterProfile } from '@/hooks/use-hunter-profile';
+import { useBrowserAuthority } from '@/hooks/use-browser-authority';
+import { AuthorityControls } from '@/components/authority/authority-controls';
+import { boundedRunView } from '@/lib/bounded-run-view';
 import { useMissionHistory } from '@/hooks/use-mission-history';
 import type { AgentEvent } from '@/types/agent';
 import { asRecord } from '@/lib/type-guards';
 import { AlertCircle, History } from 'lucide-react';
 import Link from 'next/link';
-import { publicChainConfig } from '@/lib/chain-config';
+import { formatTokenAmount } from '@/lib/format';
 
 /* ─── Helpers ─── */
 
@@ -55,20 +56,31 @@ type TabKey = (typeof TABS)[number]['key'];
 /* ─── Page ─── */
 
 export default function DashboardPage() {
-  const { t } = useI18n();
-  const { status, events, result, error, startRun } = useAgentStream();
+  const { t, locale } = useI18n();
+  const authority = useBrowserAuthority();
+  const { status, events, result, error: runError } = boundedRunView(authority.run);
+  const error = authority.error || runError;
+  const [permissionsOpen, setPermissionsOpen] = useState(false);
+  const permissionsDialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => { if (new URLSearchParams(window.location.search).get('panel') === 'authority') setPermissionsOpen(true); }, []);
+  useEffect(() => { const dialog=permissionsDialog.current; if (permissionsOpen && dialog && !dialog.open) dialog.showModal(); else if (!permissionsOpen && dialog?.open) dialog.close(); }, [permissionsOpen]);
+  const startRun = (goal: string, mode: 'single' | 'commander' = 'single', language: 'en-US' | 'zh-CN' = locale) => {
+    if (!authority.active) { setInjectedGoal(goal); setPermissionsOpen(true); return false; }
+    void authority.startRun(goal, mode, language); return true;
+  };
   const { hunter, loading: idLoading, hunterError, refresh } = useAgentIdentity();
-  const { profile, loading: profileLoading, error: profileError, mutate: mutateProfile } = useHunterProfile();
+
   const { history, addRecord, clearHistory } = useMissionHistory();
   const agentStatus = deriveAgentStatus(status, events);
   const currentMission = extractMission(events);
   const [activeTab, setActiveTab] = useState<TabKey>('mission');
   const [historyOpen, setHistoryOpen] = useState(false);
   const [injectedGoal, setInjectedGoal] = useState<string | undefined>();
+  useEffect(() => { if (authority.access?.requestGoal && !authority.access.missionId) setInjectedGoal(authority.access.requestGoal); }, [authority.access]);
 
   // Track which run we've already saved to history
   const savedRunRef = useRef<string | null>(null);
-  const refreshedProfileRunRef = useRef<string | null>(null);
+
 
   // Auto-save completed/failed missions to history
   useEffect(() => {
@@ -108,7 +120,7 @@ export default function DashboardPage() {
       goal,
       status: status === 'COMPLETED' ? 'completed' : 'error',
       spentAmount,
-      assetSymbol: publicChainConfig.token,
+      assetSymbol: 'U',
       assetDecimals: 18,
       score,
       serviceName,
@@ -116,17 +128,12 @@ export default function DashboardPage() {
     });
   }, [status, events, addRecord]);
 
-  // Refresh long-term memory profile once a mission ends.
-  useEffect(() => {
-    if (status !== 'COMPLETED' && status !== 'ERROR') return;
-    const startedAt = events.find((event) => event.type === 'run_started')?.at ?? `${events.length}`;
-    if (refreshedProfileRunRef.current === startedAt) return;
-    refreshedProfileRunRef.current = startedAt;
-    void mutateProfile().catch(() => undefined);
-  }, [status, events, mutateProfile]);
-
   return (
     <div className="h-screen flex flex-col">
+      <dialog ref={permissionsDialog} onClose={() => setPermissionsOpen(false)} aria-label={locale === 'zh-CN' ? '钱包与权限' : 'Wallet and permissions'} className="m-auto max-h-[90dvh] w-[min(44rem,95vw)] overflow-y-auto border border-border bg-background p-0 text-foreground backdrop:bg-black/60">
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-card px-4 py-3 font-mono text-sm"><span>{locale === 'zh-CN' ? '钱包 · 预算 · 撤权' : 'Wallet · Budget · Revoke'}</span><button onClick={() => setPermissionsOpen(false)} aria-label={locale === 'zh-CN' ? '关闭权限面板' : 'Close permissions'} className="px-3 py-1">✕</button></div>
+        <AuthorityControls controller={authority} />
+      </dialog>
       {/* ═══ History Drawer ═══ */}
       <MissionHistoryDrawer
         open={historyOpen}
@@ -156,6 +163,7 @@ export default function DashboardPage() {
             </Link>
           </div>
           <div className="flex items-center gap-3 text-xs text-muted-foreground">
+            <button onClick={() => setPermissionsOpen(true)} className="border border-primary/40 px-2 py-1 text-primary" data-testid="wallet-permissions">{locale === 'zh-CN' ? '钱包 / 预算' : 'Wallet / Budget'}{authority.active ? ' ✓' : ''}</button>
             {/* History button */}
             <button
               onClick={() => setHistoryOpen(true)}
@@ -196,6 +204,12 @@ export default function DashboardPage() {
         ))}
       </div>
 
+      <div className="flex flex-wrap items-center gap-3 border-b border-border px-4 py-2 font-mono text-[11px]">
+        <span>{authority.wallet ? `${authority.wallet.address.slice(0,6)}…${authority.wallet.address.slice(-4)}` : (locale === 'zh-CN' ? '尚未连接 Passkey 钱包' : 'Passkey wallet not connected')}</span>
+        <span>{authority.active ? (locale === 'zh-CN' ? '预算授权已生效' : 'Budget authorized') : (locale === 'zh-CN' ? '开始任务前设置预算授权' : 'Set a wallet budget before starting')}</span>
+        {authority.snapshot?.spending?.[0] && <span>{locale === 'zh-CN' ? '已花费' : 'Spent'} {formatTokenAmount(authority.snapshot.spending[0].spent, 18, 3)} U</span>}
+        {authority.run?.missionId && <Link className="underline" href={`/tasks/${authority.run.missionId}`}>{locale === 'zh-CN' ? '任务凭证' : 'Task evidence'}</Link>}
+      </div>
       {/* ═══ Error Banner ═══ */}
       {error && (
         <div className="mx-4 mt-2 bg-destructive/10 text-destructive p-2.5 flex items-center gap-2 border border-destructive/30 text-xs">
@@ -212,7 +226,7 @@ export default function DashboardPage() {
               status={agentStatus} mission={currentMission} events={events} result={result}
               identity={hunter} identityLoading={idLoading}
               identityError={hunterError} onRetryIdentity={refresh}
-              profile={profile} profileLoading={profileLoading} profileError={profileError}
+              profile={null} profileLoading={false} profileError={null}
             />
           </aside>
           <section className="col-span-6 h-full min-h-0 flex flex-col">
@@ -235,7 +249,7 @@ export default function DashboardPage() {
               status={agentStatus} mission={currentMission} events={events} result={result}
               identity={hunter} identityLoading={idLoading}
               identityError={hunterError} onRetryIdentity={refresh}
-              profile={profile} profileLoading={profileLoading} profileError={profileError}
+              profile={null} profileLoading={false} profileError={null}
             />
           )}
           {activeTab === 'mission' && (
