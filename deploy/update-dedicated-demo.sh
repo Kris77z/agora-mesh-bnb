@@ -26,7 +26,8 @@ test -d "$task_base/state/memory"
 
 task_previous=$(readlink -f "$task_base/current")
 if [ "$task_previous" = "$task_release" ]; then
-  echo "Revision $task_revision is already active."
+  runuser -u agora-mesh -- node "$task_release/frontend/scripts/sync-landing.mjs"
+  echo "Revision $task_revision is already active; landing assets synced."
   exit 0
 fi
 
@@ -57,6 +58,8 @@ if [ ! -d "$task_release" ]; then
 fi
 
 test -f "$task_release/frontend/.next/BUILD_ID"
+# Public files are separate from .next and must exist even with a CI build.
+runuser -u agora-mesh -- node "$task_release/frontend/scripts/sync-landing.mjs"
 
 # The live registry and Hunter memory belong to state/, not to a release. Swap the
 # new release's seed copies for links, exactly as the activate script does, so an
