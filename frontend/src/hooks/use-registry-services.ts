@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { apiBase } from '@/lib/api-config';
 
 interface RegistryService {
     id: string;
@@ -33,18 +34,18 @@ function parseTrend(value: unknown): 'up' | 'down' | 'stable' {
 export function useRegistryServices() {
     const [services, setServices] = useState<RegistryService[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         let cancelled = false;
 
         async function fetchServices() {
             try {
-                const registryUrl = process.env.NEXT_PUBLIC_REGISTRY_URL ?? 'http://localhost:3003';
-                const res = await fetch(`${registryUrl}/services`);
-                if (!res.ok) return;
+                const res = await fetch(`${apiBase.registry}/services`, { signal: AbortSignal.timeout(15_000) });
+                if (!res.ok) throw new Error('Registry request failed');
 
                 const data = (await res.json()) as { services?: unknown[] };
-                if (!Array.isArray(data.services)) return;
+                if (!Array.isArray(data.services)) throw new Error('Invalid service directory');
 
                 const parsed = data.services
                     .filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === 'object')
@@ -82,9 +83,12 @@ export function useRegistryServices() {
                     }))
                     .filter((item) => item.id.length > 0);
 
-                if (!cancelled) setServices(parsed);
+                if (!cancelled) {
+                    setServices(parsed);
+                    setError(false);
+                }
             } catch {
-                // Registry unavailable — keep empty
+                if (!cancelled) setError(true);
             } finally {
                 if (!cancelled) setLoading(false);
             }
@@ -97,5 +101,5 @@ export function useRegistryServices() {
         return () => { cancelled = true; clearInterval(interval); };
     }, []);
 
-    return { services, loading };
+    return { services, loading, error };
 }

@@ -34,7 +34,7 @@ function ReputationBar({ value }: { value: number }) {
 
 export function AgentMeshPanel({ events, result }: AgentMeshPanelProps) {
   const { locale, t } = useI18n();
-  const { services: registryServices } = useRegistryServices();
+  const { services: registryServices, loading, error } = useRegistryServices();
   const eventNodes = buildMeshNodes(events, result);
   const eventNodeIds = new Set(eventNodes.map((n) => n.id));
   const isScanning = useIsScanning(events);
@@ -73,6 +73,17 @@ export function AgentMeshPanel({ events, result }: AgentMeshPanelProps) {
       <div className="px-1 py-2 mb-2 widget-label">─ {t('mesh.title')}</div>
 
       <div className="space-y-3 flex-1 overflow-y-auto pr-1 scrollbar-thin">
+        {error ? (
+          <p role="status" className="text-xs text-amber-600">
+            {locale === 'zh-CN' ? '服务目录加载失败，正在定期重试。' : 'Service directory unavailable. Retrying periodically.'}
+          </p>
+        ) : nodes.length === 0 && (
+          <p role="status" className="text-xs text-muted-foreground">
+            {loading
+              ? (locale === 'zh-CN' ? '正在加载服务 Agent…' : 'Loading service agents…')
+              : (locale === 'zh-CN' ? '暂无已注册的服务 Agent。' : 'No service agents registered yet.')}
+          </p>
+        )}
         {nodes.map((node) => {
           const st = STATUS_TERMINAL[node.status];
           const kind = AGENT_KIND_STYLE[node.kind];
