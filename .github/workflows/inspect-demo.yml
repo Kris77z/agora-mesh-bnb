@@ -1,0 +1,17 @@
+name: Inspect demo routing
+on: workflow_dispatch
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect backend routes
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy
+          chmod 600 ~/.ssh/deploy
+          ssh-keyscan -T 20 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          ssh -o BatchMode=yes -i ~/.ssh/deploy "$DEPLOY_USER@$DEPLOY_HOST" "sudo grep -E 'handle|reverse_proxy' /etc/caddy/Caddyfile; systemctl list-units --type=service --no-pager | grep -E 'agora|altana'"
