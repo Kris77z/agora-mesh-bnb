@@ -39,11 +39,21 @@ if [ ! -d "$task_release" ]; then
   chown -R agora-mesh:agora-mesh "$task_release"
   runuser -u agora-mesh -- env npm_config_cache="$task_base/state/npm-cache" \
     npm ci --prefix "$task_release" --no-audit --no-fund
-  cd "$task_release"
-  # Peak build memory was measured at 2.9 GB on this 4 GB host with nothing else
-  # running. If the build is OOM-killed, stop agora-mesh@frontend and re-run.
-  runuser -u agora-mesh -- env NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max-old-space-size=1536 \
-    npm run build --workspace @rebel/frontend
+
+  if [ -n "${AGORA_PREBUILT_NEXT:-}" ]; then
+    # CI already built this revision on a larger machine. `next build` peaks near
+    # 2.9 GB here, which does not fit beside the running services on 4 GB.
+    test -f "$AGORA_PREBUILT_NEXT"
+    rm -rf "$task_release/frontend/.next"
+    tar -C "$task_release/frontend" -xzf "$AGORA_PREBUILT_NEXT"
+    chown -R agora-mesh:agora-mesh "$task_release/frontend/.next"
+  else
+    cd "$task_release"
+    # If this is OOM-killed, stop agora-mesh@frontend and re-run, or build in CI
+    # and pass AGORA_PREBUILT_NEXT.
+    runuser -u agora-mesh -- env NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max-old-space-size=1536 \
+      npm run build --workspace @rebel/frontend
+  fi
 fi
 
 test -f "$task_release/frontend/.next/BUILD_ID"

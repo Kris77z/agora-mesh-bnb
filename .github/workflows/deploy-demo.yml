@@ -1,0 +1,75 @@
+name: Deploy demo host
+
+# The demo host is a 2 vCPU / 4 GB box and `next build` peaks near 2.9 GB there,
+# so the build runs here instead and only the compiled output is shipped.
+# Manual dispatch by default; flip the `push` trigger on once a run has been
+# verified end to end.
+on:
+  workflow_dispatch:
+    inputs:
+      revision:
+        description: Commit SHA to deploy (defaults to the ref being run)
+        required: false
+  # push:
+  #   branches: [feat/bnb-agora-mesh]
+
+concurrency:
+  group: deploy-demo
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.revision || github.sha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci --no-audit --no-fund
+
+      - name: Build frontend
+        run: npm run build --workspace @rebel/frontend
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+
+      - name: Package build output
+        run: tar -C frontend -czf next-build.tgz .next
+
+      - name: Open SSH to the demo host
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy
+          chmod 600 ~/.ssh/deploy
+          ssh-keyscan -T 20 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+
+      - name: Ship and activate
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          REVISION: ${{ github.event.inputs.revision || github.sha }}
+        run: |
+          scp -i ~/.ssh/deploy next-build.tgz "$DEPLOY_USER@$DEPLOY_HOST:/tmp/next-build.tgz"
+          ssh -i ~/.ssh/deploy "$DEPLOY_USER@$DEPLOY_HOST" \
+            "sudo env AGORA_PREBUILT_NEXT=/tmp/next-build.tgz bash -c '
+               set -e
+               cd /tmp && rm -rf agora-upd
+               git clone -q --depth 50 -b ${{ github.ref_name }} https://github.com/Kris77z/agora-mesh-bnb.git agora-upd
+               bash agora-upd/deploy/update-dedicated-demo.sh $REVISION
+             '"
+
+      - name: Verify the public origin
+        run: |
+          for path in / /marketplace /compare /advantage /authority; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "https://43-165-167-118.sslip.io$path")
+            echo "$path -> $code"
+            [ "$code" = "200" ] || exit 1
+          done
