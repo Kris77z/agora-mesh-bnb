@@ -33,6 +33,21 @@ install -m 0644 "$task_release/deploy/agora-altana-bridge.service" /etc/systemd/
 task_node=$(command -v node)
 test -x "$task_node"
 sed -i "s|ExecStart=/usr/bin/node |ExecStart=$task_node |" /etc/systemd/system/agora-altana-bridge.service
+# Remove the old Next.js cache mount from the shared backend unit.
+python3 - <<'UNITPY'
+from pathlib import Path
+files=[Path('/etc/systemd/system/agora-mesh@.service'), *Path('/etc/systemd/system/agora-mesh@.service.d').glob('*.conf')]
+for p in files:
+ if not p.exists(): continue
+ lines=[]
+ for line in p.read_text().splitlines():
+  if line.startswith('ReadWritePaths='):
+   values=line.split('=',1)[1].split()
+   values=[v for v in values if '/frontend/.next' not in v]
+   line='ReadWritePaths='+' '.join(values)
+  lines.append(line)
+ p.write_text(chr(10).join(lines)+chr(10))
+UNITPY
 systemctl daemon-reload
 ln -sfn "$task_release" "$task_base/current.new"
 mv -Tf "$task_base/current.new" "$task_base/current"
@@ -48,6 +63,16 @@ systemctl restart agora-mesh@registry agora-mesh@auditor agora-mesh@sentinel ago
 systemctl enable agora-altana-bridge
 systemctl restart agora-altana-bridge
 curl --fail --retry 15 --retry-delay 2 --retry-all-errors -sS http://127.0.0.1:3007/health
+for task_port in 3001 3002 3003 3004 3005 3006; do
+  # HTTP 401 is also evidence that the protected backend is listening.
+  task_up=false
+  for task_attempt in $(seq 1 20); do
+    task_code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 3 "http://127.0.0.1:$task_port/health" || true)
+    if [ "$task_code" = 200 ] || [ "$task_code" = 401 ]; then task_up=true; break; fi
+    sleep 2
+  done
+  [ "$task_up" = true ]
+done
 # Keep the existing API routes, tokens and specialist hosts; replace only the website fallback.
 python3 - <<'PY'
 import json,os,pathlib,subprocess
