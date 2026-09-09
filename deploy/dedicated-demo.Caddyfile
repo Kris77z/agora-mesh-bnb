@@ -1,0 +1,110 @@
+# Set AGORA_DOMAIN and AGORA_HUNTER_TOKEN in Caddy's restricted environment file.
+# This template is for 43.165.167.118 only; validate before activation.
+{$AGORA_DOMAIN} {
+    encode zstd gzip
+    request_body {
+        max_size 3MB
+    }
+    handle_path /api/hunter/* {
+        # Public evidence and the per-Authority API. Authority operations also
+        # require their browser management token and device-approved signatures.
+        @browser path /browser-authority/*
+        handle @browser {
+            reverse_proxy 127.0.0.1:3002 {
+                header_up X-Agora-Token {$AGORA_HUNTER_TOKEN}
+                flush_interval -1
+            }
+        }
+        @evidence {
+            method GET
+            path /health /identity /agent-registration.json /authority /missions /missions/* /advantage
+        }
+        handle @evidence {
+            reverse_proxy 127.0.0.1:3002 {
+                header_up X-Agora-Token {$AGORA_HUNTER_TOKEN}
+            }
+        }
+        handle {
+            respond "Use /authority/manage to authorize a task." 403
+        }
+    }
+    handle_path /api/registry/* {
+        @compare {
+            method POST
+            path /services/compare
+        }
+        handle @compare {
+            reverse_proxy 127.0.0.1:3003
+        }
+        @read method GET
+        handle @read {
+            reverse_proxy 127.0.0.1:3003
+        }
+        handle {
+            respond "Registry writes are internal." 403
+        }
+    }
+    handle_path /api/auditor/* {
+        @legacy path /execute
+        respond @legacy "Use the x402 payment endpoint." 403
+        reverse_proxy 127.0.0.1:3001
+    }
+    handle_path /api/verifier/* {
+        @legacy path /execute
+        respond @legacy "Use the x402 payment endpoint." 403
+        reverse_proxy 127.0.0.1:3004
+    }
+    handle_path /api/investigator/* {
+        @legacy path /execute
+        respond @legacy "Use the x402 payment endpoint." 403
+        reverse_proxy 127.0.0.1:3005
+    }
+    handle_path /api/sentinel/* {
+        @legacy path /execute
+        respond @legacy "Use the x402 payment endpoint." 403
+        reverse_proxy 127.0.0.1:3006
+    }
+    handle {
+        reverse_proxy 127.0.0.1:3000
+    }
+}
+
+auditor.{$AGORA_DOMAIN} {
+    encode gzip
+    request_body {
+        max_size 3MB
+    }
+    @legacy path /execute
+    respond @legacy "Use the x402 payment endpoint." 403
+    reverse_proxy 127.0.0.1:3001
+}
+
+verifier.{$AGORA_DOMAIN} {
+    encode gzip
+    request_body {
+        max_size 3MB
+    }
+    @legacy path /execute
+    respond @legacy "Use the x402 payment endpoint." 403
+    reverse_proxy 127.0.0.1:3004
+}
+
+investigator.{$AGORA_DOMAIN} {
+    encode gzip
+    request_body {
+        max_size 3MB
+    }
+    @legacy path /execute
+    respond @legacy "Use the x402 payment endpoint." 403
+    reverse_proxy 127.0.0.1:3005
+}
+
+sentinel.{$AGORA_DOMAIN} {
+    encode gzip
+    request_body {
+        max_size 3MB
+    }
+    @legacy path /execute
+    respond @legacy "Use the x402 payment endpoint." 403
+    reverse_proxy 127.0.0.1:3006
+}

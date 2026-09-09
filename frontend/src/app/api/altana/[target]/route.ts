@@ -1,4 +1,5 @@
 import { forwardAltanaRpc } from '@/lib/altana-rpc-transport';
+import { isAllowedAltanaOrigin } from '@/lib/altana-request-origin';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -12,7 +13,7 @@ export async function POST(request: Request, context: {params: Promise<{target: 
   const upstream = target === 'relay' ? 'https://testnet-relay.altana.network/' : target === 'rpc' ? 'https://bsc-testnet-rpc.publicnode.com/' : undefined;
   if (!upstream) return new Response('Not found', {status: 404});
   const origin = request.headers.get('origin');
-  if (origin && origin !== new URL(request.url).origin) return new Response('Origin denied', {status: 403});
+  if (!isAllowedAltanaOrigin(origin, request.url, process.env.AGORA_PUBLIC_ORIGIN)) return new Response('Origin denied', {status: 403});
   const body = await request.text();
   if (Buffer.byteLength(body) > 1_048_576) return new Response('Request too large', {status: 413});
   try {
