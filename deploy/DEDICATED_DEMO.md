@@ -1,3 +1,5 @@
+> Current topology: Vercel is the sole website. Use `update-dedicated-demo.sh` for backend-only updates; old frontend activation/build instructions below are historical. See [VERCEL.md](VERCEL.md).
+
 # Dedicated demo deployment
 
 Authorized target: `43.165.167.118`, Tencent Lighthouse Tokyo, Ubuntu 24.04, 2 CPU / 4 GB.

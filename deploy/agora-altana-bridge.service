@@ -1,0 +1,17 @@
+[Unit]
+Description=Agora Mesh Altana backend bridge
+After=network-online.target
+[Service]
+Type=simple
+User=agora-mesh
+Group=agora-mesh
+WorkingDirectory=/srv/agora-mesh/current
+ExecStart=/usr/bin/node --import tsx deploy/altana-bridge.ts
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+[Install]
+WantedBy=multi-user.target

@@ -1,9 +1,6 @@
-name: Deploy demo host
+name: Deploy backend host
 
-# The demo host is a 2 vCPU / 4 GB box and `next build` peaks near 2.9 GB there,
-# so the build runs here instead and only the compiled output is shipped.
-# Manual dispatch by default; flip the `push` trigger on once a run has been
-# verified end to end.
+# Vercel deploys the frontend independently from main. This workflow deploys only backend services.
 on:
   workflow_dispatch:
     inputs:
@@ -26,21 +23,6 @@ jobs:
         with:
           ref: ${{ github.event.inputs.revision || github.sha }}
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
-
-      - run: npm ci --no-audit --no-fund
-
-      - name: Build frontend
-        run: npm run build --workspace @rebel/frontend
-        env:
-          NEXT_TELEMETRY_DISABLED: '1'
-
-      - name: Package build output
-        run: tar -C frontend -czf next-build.tgz .next
-
       - name: Open SSH to the demo host
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
@@ -57,19 +39,19 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           REVISION: ${{ github.event.inputs.revision || github.sha }}
         run: |
-          scp -i ~/.ssh/deploy next-build.tgz "$DEPLOY_USER@$DEPLOY_HOST:/tmp/next-build.tgz"
-          ssh -i ~/.ssh/deploy "$DEPLOY_USER@$DEPLOY_HOST" \
-            "sudo env AGORA_PREBUILT_NEXT=/tmp/next-build.tgz bash -c '
-               set -e
-               cd /tmp && rm -rf agora-upd
-               git clone -q --depth 50 -b ${{ github.ref_name }} https://github.com/Kris77z/agora-mesh-bnb.git agora-upd
-               bash agora-upd/deploy/update-dedicated-demo.sh $REVISION
-             '"
+          [[ "$REVISION" =~ ^[a-f0-9]{40}$ ]]
+          scp -o BatchMode=yes -i ~/.ssh/deploy deploy/update-dedicated-demo.sh "$DEPLOY_USER@$DEPLOY_HOST:/tmp/agora-backend-update.sh"
+          ssh -o BatchMode=yes -i ~/.ssh/deploy "$DEPLOY_USER@$DEPLOY_HOST" "sudo bash /tmp/agora-backend-update.sh $REVISION"
 
       - name: Verify the public origin
         run: |
-          for path in / /dashboard /marketplace /compare /advantage /authority /api/hunter/health /api/registry/services; do
-            code=$(curl --retry 12 --retry-delay 5 --retry-all-errors --fail -sS -o /dev/null -w '%{http_code}' --max-time 30 "https://43-165-167-118.sslip.io$path")
-            echo "$path -> $code"
-            [ "$code" = "200" ] || exit 1
+          for path in /api/hunter/health /api/registry/services /api/hunter/browser-authority/config; do
+            curl --retry 12 --retry-delay 5 --retry-all-errors --fail -sS -o /dev/null --max-time 30 "https://43-165-167-118.sslip.io$path"
+            echo "$path -> OK"
           done
+          for path in / /dashboard /marketplace; do
+            location=$(curl -sS -o /dev/null -w '%{redirect_url}' --max-time 30 "https://43-165-167-118.sslip.io$path")
+            [ "$location" = "https://agora-mesh-bnb.vercel.app$path" ]
+            echo "$path -> Vercel"
+          done
+          curl --fail -sS --max-time 30 -H 'Content-Type: application/json' --data '{"jsonrpc":"2.0","id":1,"method":"eth_chainId","params":[]}' https://agora-mesh-bnb.vercel.app/api/altana/rpc | python3 -c 'import json,sys; assert json.load(sys.stdin)["result"] == "0x61"'

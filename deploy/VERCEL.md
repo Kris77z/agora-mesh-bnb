@@ -38,3 +38,16 @@ health, browser Authority configuration and the Registry service list. The hoste
 Altana bridge returned JSON-RPC results for `eth_chainId` and
 `wallet_getCapabilities`. Chrome rendered all five live service listings.
 No new paid execution or device signing was performed in this deployment check.
+
+## Single website entry (2026-09-09)
+
+Vercel is the only website runtime. The dedicated server redirects page paths to
+`https://agora-mesh-bnb.vercel.app` while preserving paths and query strings.
+Hunter, Registry, specialist services, persistent state and the standalone Altana
+bridge remain on the server. `agora-mesh@frontend` is disabled.
+
+`deploy-demo.yml` now installs only backend workspace dependencies and activates
+backend services; it never builds or uploads Next.js. It remains manually
+triggered for backend changes. Frontend-only changes need only a push to `main`.
+The Altana bridge reuses the existing transport implementation and its signed
+submission retry policy; it listens on loopback port 3007 behind Caddy.

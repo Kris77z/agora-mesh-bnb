@@ -64,8 +64,14 @@
         respond @legacy "Use the x402 payment endpoint." 403
         reverse_proxy 127.0.0.1:3006
     }
+    handle /api/altana/* {
+        reverse_proxy 127.0.0.1:3007
+    }
+    handle /api/* {
+        respond "Not found" 404
+    }
     handle {
-        reverse_proxy 127.0.0.1:3000
+        redir https://agora-mesh-bnb.vercel.app{uri} 308
     }
 }
 
