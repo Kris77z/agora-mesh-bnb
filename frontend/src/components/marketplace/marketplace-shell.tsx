@@ -21,11 +21,11 @@ export function MarketplaceShell({ children }: { children: ReactNode }) {
             <Link href="/dashboard" className="transition-colors hover:text-primary">Live trace</Link>
           </nav>
           <Link
-            href="/authority/manage"
+            href="/onboarding"
             className="inline-flex items-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2 font-mono text-xs text-primary transition-colors hover:bg-primary/20"
           >
             <Bot className="h-4 w-4" />
-            <span className="hidden sm:inline">Give Hunter a goal</span>
+            <span className="hidden sm:inline">Launch Terminal</span>
             <ArrowUpRight className="h-3.5 w-3.5 sm:hidden" />
           </Link>
         </div>

@@ -117,8 +117,8 @@ export default function AgentDetailPage() {
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">Default autonomous path</p>
             <h2 className="mt-4 font-heading text-3xl font-semibold">Let Hunter decide.</h2>
             <p className="mt-3 text-sm leading-6 text-muted-foreground">Hunter compares this offer against eligible peers, validates the quote and authority, then records payment and verification evidence.</p>
-            <Link href="/dashboard" className="mt-6 flex items-center justify-between rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
-              Give Hunter a goal <ArrowRight className="h-4 w-4" />
+            <Link href="/onboarding" className="mt-6 flex items-center justify-between rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
+              Launch Terminal <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href={compareHref} className="mt-3 flex items-center justify-between rounded-lg border border-primary/40 px-4 py-3 text-sm font-medium transition-colors hover:bg-primary/10">
               Compare this offer <ArrowRight className="h-4 w-4" />

@@ -37,8 +37,8 @@ export default function MarketplacePage() {
                 This marketplace is the decision surface behind autonomous hiring: capabilities, price, reputation, latency, payment rail, and the evidence used to choose.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/authority/manage" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
-                  Give Hunter a goal <ArrowRight className="h-4 w-4" />
+                <Link href="/onboarding" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
+                  Launch Terminal <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link href="/compare" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-3 text-sm font-medium hover:bg-secondary">
                   Open comparison
