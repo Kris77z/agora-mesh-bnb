@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useI18n } from '@/components/i18n/locale-provider';
 import { useWallet } from '@/hooks/use-wallet';
-import { apiBase } from '@/lib/api-config';
 
 /* ─── Types ─── */
 type Style = 'cmd' | 'out' | 'ok' | 'dim' | 'accent' | 'err';
@@ -102,17 +101,10 @@ export function TerminalOnboarding({ onComplete }: Props) {
         if (mode !== 'none') setPendingInput({ mode, prompt: promptText });
     }, []);
 
-    /* ═══ Registration API call ═══ */
-    const doRegister = useCallback(async (walletAddr: string) => {
+    /* ═══ Prepare personal workspace ═══ */
+    const prepareWorkspace = useCallback(async (walletAddr: string) => {
         try {
-            const res = await fetch(`${apiBase.registry}/agents/register`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: agentName, description: '', walletAddress: walletAddr,
-                    trustModels: ['reputation'], capabilities: [],
-                }),
-            });
-            if (!res.ok) throw new Error(t('onboarding.error.httpStatus', { status: res.status }));
+            // A personal workspace does not publish a provider to the Registry.
             localStorage.setItem('rebel_agent_profile', JSON.stringify({ name: agentName, walletAddress: walletAddr }));
 
             if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
@@ -139,17 +131,17 @@ export function TerminalOnboarding({ onComplete }: Props) {
         }
     }, [agentName, pushLines, t]);
 
-    /* ═══ Wallet connect + register (async) ═══ */
-    const connectAndRegister = useCallback(async () => {
+    /* ═══ Wallet connection (async) ═══ */
+    const connectAndOpenWorkspace = useCallback(async () => {
         pushLines([
             { text: t('onboarding.terminal.command.connectWallet'), style: 'cmd' },
             { text: t('onboarding.terminal.launchingWallet'), style: 'out' },
         ]);
         setPhase('wallet_connect');
 
-        const success = await wallet.connect();
+        const connectedAddress = await wallet.connectAccount();
 
-        if (!success || !wallet.address) {
+        if (!connectedAddress) {
             // User cancelled or connection failed
             pushLines([
                 { text: t('onboarding.terminal.walletCancelled'), style: 'err' },
@@ -159,16 +151,16 @@ export function TerminalOnboarding({ onComplete }: Props) {
             return;
         }
 
-        // Connected — proceed to register
-        const short = `${wallet.address.slice(0, 6)}...${wallet.address.slice(-4)}`;
+        // Connected — prepare the personal workspace
+        const short = `${connectedAddress.slice(0, 6)}...${connectedAddress.slice(-4)}`;
         pushLines([
             { text: t('onboarding.terminal.connected', { address: short }), style: 'ok' },
             { text: t('onboarding.terminal.network'), style: 'ok' },
             { text: t('onboarding.terminal.registering'), style: 'out' },
         ]);
         setPhase('register');
-        await doRegister(wallet.address);
-    }, [wallet, pushLines, doRegister, t]);
+        await prepareWorkspace(connectedAddress);
+    }, [wallet, pushLines, prepareWorkspace, t]);
 
     /* ═══ Input handler (wallet-last flow) ═══ */
     const handleSubmit = useCallback(() => {
@@ -194,12 +186,12 @@ export function TerminalOnboarding({ onComplete }: Props) {
             ], 'enter', t('onboarding.terminal.prompt.register'));
             setPhase('confirm');
         } else if (phase === 'confirm') {
-            void connectAndRegister();
+            void connectAndOpenWorkspace();
         } else if (phase === 'done') {
             onComplete?.();
         }
         setInput('');
-    }, [phase, input, pushLines, connectAndRegister, onComplete, t]);
+    }, [phase, input, pushLines, connectAndOpenWorkspace, onComplete, t]);
 
     /* Global Enter key for 'enter' mode */
     useEffect(() => {

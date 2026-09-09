@@ -51,21 +51,23 @@ export function useWallet() {
         return () => sub.unsubscribe();
     }, []);
 
-    const connect = useCallback(async (): Promise<boolean> => {
+    const connectAccount = useCallback(async (): Promise<string | null> => {
         setState((prev) => ({ ...prev, connecting: true }));
         try {
             const wallets = await onboard.connectWallet();
             if (wallets.length === 0) {
                 setState((prev) => ({ ...prev, connecting: false }));
-                return false;
+                return null;
             }
-            // State will be updated by the subscription above
-            return true;
+            // Return the connected account directly; React state updates on the next render.
+            return wallets[0].accounts[0]?.address ?? null;
         } catch {
             setState((prev) => ({ ...prev, connecting: false }));
-            return false;
+            return null;
         }
     }, []);
+
+    const connect = useCallback(async () => Boolean(await connectAccount()), [connectAccount]);
 
     const disconnect = useCallback(async () => {
         const wallets = onboard.state.get().wallets;
@@ -74,5 +76,5 @@ export function useWallet() {
         }
     }, []);
 
-    return { ...state, connect, disconnect };
+    return { ...state, connect, connectAccount, disconnect };
 }

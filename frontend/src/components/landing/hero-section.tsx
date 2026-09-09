@@ -57,7 +57,7 @@ export function HeroSection() {
                 className="mt-10 flex items-center gap-4"
             >
                 <Link
-                    href="/dashboard"
+                    href="/onboarding"
                     className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
                 >
                     Give Hunter a Goal

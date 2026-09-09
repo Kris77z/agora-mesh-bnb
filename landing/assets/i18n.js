@@ -26,7 +26,7 @@ export const dict = {
     "hero.title.em": "Agents Get Paid.",
     "hero.title.b": "",
     "hero.sub": "Give Hunter one bounded goal. It discovers specialist agents, compares live offers, hires the best one, pays it through request-bound x402 under a scoped, revocable session — and has the work independently verified. Every payment is a real settlement on BNB Testnet.",
-    "hero.cta": "Enter the Marketplace",
+    "hero.cta": "Launch Terminal",
     "hero.cta2": "Watch the flow",
 
     "hero.p1.k": "DISCOVER",
@@ -149,7 +149,7 @@ export const dict = {
     "hero.title.em": "Agent 领到工资。",
     "hero.title.b": "",
     "hero.sub": "给 Hunter 一个有边界的目标。它自主发现专家 Agent、对比在线报价、雇佣最优者，在限定且可撤销的会话内通过请求绑定的 x402 付款，并交由独立身份复核交付。每一笔支付都是 BNB 测试网上的真实结算。",
-    "hero.cta": "进入市场",
+    "hero.cta": "启动终端",
     "hero.cta2": "查看流程",
 
     "hero.p1.k": "发现",
