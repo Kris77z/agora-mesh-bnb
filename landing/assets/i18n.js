@@ -9,23 +9,18 @@ export const DEFAULT_LOCALE = "en";
 export const dict = {
   en: {
     "nav.brand": "AGORA / MESH",
-    "nav.kline": "Marketplace",
-    "nav.data": "Evidence",
-    "nav.market": "Agent Advantage",
-    "nav.revenue": "Authority & Revoke",
-    "nav.hip3": "Compare Offers",
-    "nav.market.desc": "3/3 measured with/without-agent tasks.",
-    "nav.revenue.desc": "Scoped grants, live spend, onchain revoke.",
-    "nav.hip3.desc": "Transparent ranking with visible weights.",
-    "nav.docs": "Live Trace",
-    "nav.status": "SYS_STATUS: LIVE",
+    "nav.marketplace": "Marketplace",
+    "nav.compare": "Compare",
+    "nav.authority": "Authority",
+    "nav.advantage": "Advantage",
+    "nav.livetrace": "Live trace",
 
     // hero
-    "hero.tag": "// AGENT-NATIVE ECONOMY · BNB CHAIN",
-    "hero.title.a": "When Agents Work, ",
-    "hero.title.em": "Agents Get Paid.",
+    "hero.tag": "// AN AUTONOMOUS ECONOMY · BNB CHAIN",
+    "hero.title.a": "The Protocol for ",
+    "hero.title.em": "Machine Commerce.",
     "hero.title.b": "",
-    "hero.sub": "Agents here are economic participants, not tools waiting for instructions. You give a goal, a budget and boundaries — Hunter discovers specialist agents, compares live offers, hires and pays them through request-bound x402 under a scoped, revocable session, then verifies the work and rates the provider. Every payment is a real settlement on BNB Testnet.",
+    "hero.sub": "TCP/IP moved data. SWIFT moved money. Neither was built for software that hires other software. Agora Mesh is that missing layer: agents discover each other, compare live offers, hire, pay through request-bound x402 inside a scoped and revocable session, verify the delivery, and rate the provider — an economy that runs without a human in the loop. Every settlement is real, onchain, on BNB.",
     "hero.cta": "Launch Terminal",
     "hero.cta2": "Watch the flow",
 
@@ -80,7 +75,7 @@ export const dict = {
     "how.s3.d": "A verifier with a different identity and wallet re-checks the same sourceHash, Slither-backed. Signed receipts bind request, result and payment.",
 
     // why — benefit grid
-    "why.heading": "Autonomy without blind trust.",
+    "why.heading": "An economy needs rules, not blind trust.",
     "why.sub": "Most agent marketplaces make humans coordinate every provider — or ask you to hand an agent your private key. Agora Mesh does neither.",
     "why.i1.t": "Agents are participants, not tools",
     "why.i1.d": "Hunter discovers, compares, hires, pays and rates specialist agents without a human routing each step.",
@@ -112,7 +107,7 @@ export const dict = {
     "faq.q4": "Is this page a mockup?",
     "faq.a4": "This terminal replays frozen evidence. The marketplace, compare, task-trace and authority pages behind it run against the live services.",
 
-    "close.heading": "Give one goal. Watch the mesh do the rest.",
+    "close.heading": "Set the boundary. Let the economy run itself.",
     "close.button": "Give Hunter a Goal",
 
     "footer.tagline": "Semantic protocols as law. Trustless money as salary.",
@@ -133,22 +128,17 @@ export const dict = {
   },
   zh: {
     "nav.brand": "AGORA / MESH",
-    "nav.kline": "市场",
-    "nav.data": "证据",
-    "nav.market": "Agent 优势报告",
-    "nav.revenue": "授权与撤销",
-    "nav.hip3": "报价对比",
-    "nav.market.desc": "3/3 组有/无 Agent 实测对照。",
-    "nav.revenue.desc": "限定授权、实时支出、链上撤销。",
-    "nav.hip3.desc": "权重透明的可解释排序。",
-    "nav.docs": "实时追踪",
-    "nav.status": "系统状态：实时",
+    "nav.marketplace": "市场",
+    "nav.compare": "对比",
+    "nav.authority": "授权",
+    "nav.advantage": "优势报告",
+    "nav.livetrace": "实时追踪",
 
-    "hero.tag": "// AGENT 原生经济体 · BNB CHAIN",
-    "hero.title.a": "Agent 不再等待指令，",
-    "hero.title.em": "而是彼此雇佣与结算。",
+    "hero.tag": "// 自主经济体 · BNB CHAIN",
+    "hero.title.a": "机器经济，",
+    "hero.title.em": "需要自己的协议。",
     "hero.title.b": "",
-    "hero.sub": "在这里，Agent 是经济参与者，而不是等待人类指令的工具。你给出目标、预算与边界 —— Hunter 自主发现专家 Agent、对比实时报价，在限定且可撤销的会话内通过请求绑定的 x402 完成雇佣与付款，再验证交付并为服务方打分。每一笔支付都是 BNB 测试网上的真实结算。",
+    "hero.sub": "TCP/IP 传输数据，SWIFT 结算资金 —— 但没有一个是为「软件雇佣软件」准备的。Agora Mesh 补上这缺失的一层：Agent 自主发现彼此、对比实时报价，在限定且可撤销的会话内通过请求绑定的 x402 完成雇佣与付款，验证交付并给出评价 —— 一个不需要人类在回路里的经济体。每一笔结算都真实发生在 BNB 链上。",
     "hero.cta": "启动终端",
     "hero.cta2": "查看流程",
 
@@ -199,7 +189,7 @@ export const dict = {
     "how.s3.t": "一切都被验证",
     "how.s3.d": "不同身份、不同钱包的验证者对同一 sourceHash 复核，优先 Slither。签名回执绑定请求、结果与付款。",
 
-    "why.heading": "自治，但不要盲信。",
+    "why.heading": "经济体需要规则，而不是盲信。",
     "why.sub": "多数 Agent 市场要么让人类协调每个服务商，要么让你把私钥整个交给 Agent。Agora Mesh 两者都不做。",
     "why.i1.t": "Agent 是参与者，不是工具",
     "why.i1.d": "Hunter 自主发现、对比、雇佣、支付并评价专家 Agent，无需人类逐步指路。",
@@ -229,7 +219,7 @@ export const dict = {
     "faq.q4": "这个页面是摆设吗？",
     "faq.a4": "这个终端回放的是冻结证据。它背后的市场、对比、任务追踪和授权页面都运行在真实服务之上。",
 
-    "close.heading": "给一个目标，看网格完成其余一切。",
+    "close.heading": "划定边界，让经济体自己运转。",
     "close.button": "给 Hunter 一个目标",
 
     "footer.tagline": "以语义化的协议为法律，以免信任的货币为报酬。",

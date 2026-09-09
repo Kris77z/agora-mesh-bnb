@@ -301,7 +301,7 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
                 <div className="flex flex-wrap items-center justify-between gap-3"><span className={`rounded-full border px-2.5 py-1 font-mono text-[10px] font-semibold uppercase ${severityStyle(finding.severity)}`}>{finding.severity}</span>{typeof finding.confidence === 'number' && <span className="font-mono text-xs text-muted-foreground">{Math.round(finding.confidence * 100)}% confidence</span>}</div>
                 <h3 className="mt-4 font-heading text-2xl font-semibold">{finding.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-muted-foreground">{finding.description}</p>
-                {finding.evidence?.snippet && <pre className="mt-4 max-w-full overflow-auto rounded-lg bg-foreground p-4 font-mono text-xs leading-5 text-background">{finding.evidence.lines ? `${finding.evidence.file ?? 'Contract.sol'}:${finding.evidence.lines}\n` : ''}{finding.evidence.snippet}</pre>}
+                {finding.evidence?.snippet && <pre className="mt-4 max-w-full overflow-auto rounded-lg border border-border bg-secondary p-4 font-mono text-xs leading-5 text-foreground">{finding.evidence.lines ? `${finding.evidence.file ?? 'Contract.sol'}:${finding.evidence.lines}\n` : ''}{finding.evidence.snippet}</pre>}
                 {finding.recommendation && <p className="mt-4 border-t border-border pt-4 text-sm leading-6"><span className="font-medium">Fix:</span> {finding.recommendation}</p>}
               </article>
             ))}
