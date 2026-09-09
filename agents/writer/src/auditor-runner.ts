@@ -142,6 +142,8 @@ export async function runProductionAudit(
     const { text } = await withHardTimeout(
       writerConfig.llm.timeoutMs,
       (abortSignal) => generateText({
+        maxRetries: 0,
+        maxTokens: 4096,
         model: provider.chat(writerConfig.llm.model),
         system: [
           skill.prompt,

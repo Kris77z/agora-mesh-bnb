@@ -135,6 +135,8 @@ export async function decomposeMission(
     });
 
     const response = await generateText({
+      maxRetries: 0,
+      maxTokens: 4096,
       model: provider.chat(hunterConfig.llm.model),
       system: buildCommanderDecomposePrompt(locale),
       prompt: `Mission:\n${goal}\nRequested locale: ${locale}`,

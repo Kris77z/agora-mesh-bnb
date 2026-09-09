@@ -125,6 +125,8 @@ export async function runReactHunter(
             compatibility: "compatible"
           });
           const result = await generateText({
+            maxRetries: 0,
+            maxTokens: 4096,
             model: provider.chat(hunterConfig.llm.model),
             system: systemPrompt,
             prompt: goal,

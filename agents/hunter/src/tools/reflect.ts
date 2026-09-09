@@ -64,6 +64,8 @@ async function summarizeLesson(input: ReflectInput): Promise<string> {
       compatibility: "compatible"
     });
     const { text } = await generateText({
+      maxRetries: 0,
+      maxTokens: 4096,
       model: provider.chat(hunterConfig.llm.model),
       system: [
         "You summarize one concrete lesson from mission outcomes.",

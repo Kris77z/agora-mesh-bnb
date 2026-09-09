@@ -219,6 +219,8 @@ export async function executeTask(input: {
     const { text } = await withHardTimeout(
       writerConfig.llm.timeoutMs,
       (abortSignal) => generateText({
+        maxRetries: 0,
+        maxTokens: 4096,
         model: provider.chat(writerConfig.llm.model),
         system: buildWriterSystemPrompt(skill, locale),
         prompt: [

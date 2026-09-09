@@ -29,6 +29,8 @@ export async function runOrdinaryBaselineModel(input: {
     compatibility: "compatible"
   });
   const response = await generateText({
+    maxRetries: 0,
+    maxTokens: 4096,
     model: provider.chat(model),
     system: input.system,
     prompt: input.prompt,

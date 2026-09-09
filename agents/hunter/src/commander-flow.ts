@@ -123,6 +123,8 @@ const defaultCommanderDeps: CommanderFlowDeps = {
       compatibility: "compatible"
     });
     const result = await generateText({
+      maxRetries: 0,
+      maxTokens: 4096,
       model: provider.chat(llm.model),
       system: systemPrompt,
       prompt: goal,
