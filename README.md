@@ -79,21 +79,14 @@ DeFi 服务都可以接入同一套发现、排序、结算与验证机制。
 > 和 [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md)。我们不会把"健康检查通过"当作付费链路已验收：
 > 完整的浏览器付费雇佣流程尚未验收通过，ERC-8004 正式注册也仍待完成。
 
-提交用英文文案和基于已冻结链上证据的三分钟录屏流程分别见 [`evidence/SUBMISSION_DRAFT.md`](evidence/SUBMISSION_DRAFT.md) 与 [`evidence/DEMO_RUNBOOK.md`](evidence/DEMO_RUNBOOK.md)。
+## 🏗 架构
 
-部署分为两处，各司其职：
+网站部署在 Vercel，Hunter、Registry 与四个专家服务（Auditor / Sentinel / Verifier / Investigator）
+运行在一台独立主机上，浏览器通过同源 `/api/*` 访问。Slither 与专家服务同机运行。
+部署与更新细节见 [`deploy/`](deploy/)。
 
-- **网站：Vercel** —— `https://agora-mesh-bnb.vercel.app` 是唯一入口，`main` 分支推送即自动上线。
-  落地页由 `prebuild` 从 [`landing/`](landing/) 同步进 `frontend/public/site/` 一并发布。配置见
-  [`deploy/VERCEL.md`](deploy/VERCEL.md)。
-- **后端：腾讯轻量应用服务器**（东京，Ubuntu 24.04，2 vCPU / 4 GB）—— 只运行 Hunter、Registry
-  与四个专家服务（Auditor / Sentinel / Verifier / Investigator），由 systemd 托管，Caddy 负责
-  HTTPS 与各服务子域，Slither 在同一台机器上运行。浏览器通过同源 `/api/*` 访问，服务器不再构建
-  前端。更新流程见 [`deploy/DEDICATED_DEMO.md`](deploy/DEDICATED_DEMO.md)。
-
-所有密钥只以 0600 权限存放在服务器的受限 env 文件中，未进入仓库、前端或 Vercel 的公开环境变量。
-
-原阿里云 chaochenbass 主机不属于本项目，已由用户撤除，`activate-fixed-host.sh` 保持禁用，不得重试或复用。
+**技术栈：** BNB Smart Chain Testnet · Altana Scoped Session · Permit2 · x402/B402 · ERC-8004 ·
+Slither · TypeScript / Node.js / Express · Next.js 15 / React 19 · ethers / viem
 
 ---
 
