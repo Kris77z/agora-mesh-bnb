@@ -35,6 +35,8 @@ export interface SnakePersistentState {
     foods: SnakeFood[];
     idleTicks: number;
     selectionLockedPhase: number | null;
+    /** Timestamp (ms) the selection lock was taken, for the expiry fallback */
+    selectionLockedAt: number | null;
 }
 
 /* ─── Constants ─── */
@@ -42,6 +44,10 @@ export interface SnakePersistentState {
 export const CELL = 8;
 export const SPEED_MS = 90;
 export const IDLE_SPEED_MS = 160;
+
+/** Single-goal runs emit no phase_started, so activePhaseIndex stays 0 and the
+ *  lock's "next phase" release condition can never fire. Expire it instead. */
+export const SELECTION_LOCK_MAX_MS = 2000;
 
 export const COLORS = {
     bg: '#f3f3f5',

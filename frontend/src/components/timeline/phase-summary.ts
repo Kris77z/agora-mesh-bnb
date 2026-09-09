@@ -50,6 +50,16 @@ export function summaryForPhase(
         return hasValue ? total : undefined;
     };
 
+    /* The phase holding run_failed is the one that broke: show why, in place of
+       that phase's normal summary. */
+    const failure = [...phaseEvents].reverse().find((e) => e.type === 'run_failed');
+    if (failure) {
+        const message = asRecord(failure.data)?.message;
+        if (typeof message === 'string' && message.trim()) {
+            return translate(locale, 'timeline.summary.failed', { message: compactText(message, 120) });
+        }
+    }
+
     if (phaseId === 'thinking') {
         const run = phaseEvents.find((e) => e.type === 'run_started');
         const goal = typeof asRecord(run?.data)?.goal === 'string' ? (asRecord(run?.data)?.goal as string) : '';

@@ -19,7 +19,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { SnakeNode, SnakeMode, SnakePersistentState } from './snake-engine';
 import {
-    CELL, SPEED_MS, IDLE_SPEED_MS,
+    CELL, SPEED_MS, IDLE_SPEED_MS, SELECTION_LOCK_MAX_MS,
     clamp, chooseIdleDirection, findTargetIndex,
     getDirectionToTarget, syncFoodsFromNodes, formatEatLabel, drawFrame,
     tickFoodCooldowns,
@@ -52,6 +52,7 @@ export function PipelineSnake({ nodes, activePhaseIndex, mode }: PipelineSnakePr
         if (runtime?.selectionLockedPhase !== null && runtime) {
             if (activePhaseIndex > runtime.selectionLockedPhase!) {
                 runtime.selectionLockedPhase = null;
+                runtime.selectionLockedAt = null;
             }
         }
         syncRequiredRef.current = true;
@@ -84,6 +85,7 @@ export function PipelineSnake({ nodes, activePhaseIndex, mode }: PipelineSnakePr
                 foods: [],
                 idleTicks: 0,
                 selectionLockedPhase: null,
+                selectionLockedAt: null,
             };
         }
 
@@ -106,6 +108,17 @@ export function PipelineSnake({ nodes, activePhaseIndex, mode }: PipelineSnakePr
 
             /* Respawn foods whose cooldown has expired */
             tickFoodCooldowns(runtime);
+
+            /* The lock normally lifts when the pipeline reaches the next phase.
+               Runs that report no phase progression would hold it forever, so
+               expire it and let the snake resume hunting the respawned foods. */
+            if (
+                runtime.selectionLockedAt !== null &&
+                Date.now() - runtime.selectionLockedAt >= SELECTION_LOCK_MAX_MS
+            ) {
+                runtime.selectionLockedPhase = null;
+                runtime.selectionLockedAt = null;
+            }
 
             const phaseLock = runtime.selectionLockedPhase;
             const lockActive = phaseLock !== null && activePhaseRef.current <= phaseLock;
@@ -141,6 +154,7 @@ export function PipelineSnake({ nodes, activePhaseIndex, mode }: PipelineSnakePr
                 target.cooldownUntil = Date.now() + 1500; // respawn after 1.5s
                 ate = true;
                 runtime.selectionLockedPhase = target.phaseIndex;
+                runtime.selectionLockedAt = Date.now();
                 setEvalLabel(formatEatLabel(target));
             }
 

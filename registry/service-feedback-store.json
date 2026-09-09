@@ -473,6 +473,60 @@
       "taskType": "content-generation",
       "comment": "Detailed and high-signal output.",
       "timestamp": 1772192780
+    },
+    {
+      "serviceId": "auditor-v1",
+      "hunterId": "97:0x8ba5452112f7e9c339da8e6f38c896b2a0b2e53d",
+      "missionId": "459c4f20-e19d-47c5-9879-508ee72cc70d",
+      "score": 90,
+      "taskType": "smart-contract-audit",
+      "comment": "Detailed and high-signal output.",
+      "timestamp": 1788235927
+    },
+    {
+      "serviceId": "investigator-v1",
+      "hunterId": "97:0x8ba5452112f7e9c339da8e6f38c896b2a0b2e53d",
+      "missionId": "ed7c47dd-3941-4976-b020-283e0104dc11",
+      "score": 90,
+      "taskType": "onchain-investigation",
+      "comment": "Detailed and high-signal output.",
+      "timestamp": 1788248907
+    },
+    {
+      "serviceId": "auditor-v1",
+      "hunterId": "97:0x8ba5452112f7e9c339da8e6f38c896b2a0b2e53d",
+      "missionId": "c311466f-85e4-469c-bbd7-e1ced0a3fe57",
+      "score": 50,
+      "taskType": "smart-contract-audit",
+      "comment": "Result is short; could be expanded.",
+      "timestamp": 1788321148
+    },
+    {
+      "serviceId": "investigator-v1",
+      "hunterId": "97:0x8ba5452112f7e9c339da8e6f38c896b2a0b2e53d",
+      "missionId": "4d3dca34-439f-469d-99f1-4de40849087d",
+      "score": 90,
+      "taskType": "onchain-investigation",
+      "comment": "Detailed and high-signal output.",
+      "timestamp": 1788323172
+    },
+    {
+      "serviceId": "auditor-v1",
+      "hunterId": "97:0x8ba5452112f7e9c339da8e6f38c896b2a0b2e53d",
+      "missionId": "bb9c4274-af7a-4ff5-8c84-1e878ded7db1",
+      "score": 90,
+      "taskType": "smart-contract-audit",
+      "comment": "Detailed and high-signal output.",
+      "timestamp": 1788361618
+    },
+    {
+      "serviceId": "auditor-v1",
+      "hunterId": "97:0x8ba5452112f7e9c339da8e6f38c896b2a0b2e53d",
+      "missionId": "0eb3cf2c-0635-4809-beab-07c75693f7f0",
+      "score": 90,
+      "taskType": "smart-contract-audit",
+      "comment": "Detailed and high-signal output.",
+      "timestamp": 1788362129
     }
   ]
 }

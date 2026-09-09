@@ -52,6 +52,84 @@
   }
 }
 
+
+/* ============================================================
+ * Landing-matched fonts, served from the synced landing assets.
+ * ============================================================ */
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal; font-weight: 300 400; font-display: swap;
+  src: url("/site/assets/fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKky2F7g.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic; font-weight: 300; font-display: swap;
+  src: url("/site/assets/fonts/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDD-iNM8A_6pUKz9.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal; font-weight: 300 700; font-display: swap;
+  src: url("/site/assets/fonts/tDbV2o-flEEny0FZhsfKu5WU4xD7OwGtT0rU.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal; font-weight: 300 900; font-display: swap;
+  src: url("/site/assets/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2") format("woff2");
+}
+
+/* ============================================================
+ * .mesh-theme — the evidence surfaces (marketplace, compare,
+ * agents, advantage, authority, tasks) carry the landing page's
+ * palette so the brand does not break on the first click.
+ * Scoped, so :root (onboarding) and .terminal-theme (dashboard)
+ * are untouched.
+ * ============================================================ */
+.mesh-theme {
+  --background: 150 20% 2%;
+  --foreground: 0 0% 100%;
+  --card: 156 14% 5%;
+  --card-foreground: 0 0% 100%;
+  --popover: 156 14% 6%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 165 79% 55%;
+  --primary-foreground: 150 30% 4%;
+  --secondary: 156 10% 10%;
+  --secondary-foreground: 0 0% 92%;
+  --muted: 156 10% 10%;
+  --muted-foreground: 160 6% 58%;
+  --accent: 156 12% 12%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 358 70% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 160 12% 13%;
+  --input: 160 12% 16%;
+  --ring: 165 79% 55%;
+  --radius: 0.5rem;
+  --font-halant: "Cormorant Garamond", Georgia, serif;
+  --font-geist-sans: "Inter", system-ui, sans-serif;
+  --font-geist-mono: "JetBrains Mono", ui-monospace, monospace;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Display type matches the landing hero: light serif, tight tracking.
+   Beats the pages' own font-semibold utility by specificity. */
+.mesh-theme .font-heading {
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* Mint brand mark, echoing the landing logo box. */
+.mesh-theme .brand-mark {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 0 18px hsl(var(--primary) / 0.45);
+}
+
+/* Hairline separators read too heavy at full opacity on near-black. */
+.mesh-theme hr,
+.mesh-theme .border-border { border-color: hsl(var(--border)); }
+
 @layer base {
   * {
     @apply border-border;

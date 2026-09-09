@@ -2,16 +2,82 @@
   "insights": [
     {
       "lesson": "Reasonable detail for MVP task.",
+      "lessonTranslations": {
+        "en-US": "Reasonable detail for MVP task.",
+        "zh-CN": "这个 MVP 任务的细节粒度基本合理。"
+      },
       "count": 3,
       "taskTypes": [
         "defi-analysis",
         "content-generation"
       ],
-      "updatedAt": 1771997810,
+      "updatedAt": 1771997810
+    },
+    {
+      "lesson": "Always decrement user balances before executing external ETH transfers to prevent reentrancy attacks.",
       "lessonTranslations": {
-        "en-US": "Reasonable detail for MVP task.",
-        "zh-CN": "这个 MVP 任务的细节粒度基本合理。"
-      }
+        "en-US": "Always decrement user balances before executing external ETH transfers to prevent reentrancy attacks."
+      },
+      "count": 1,
+      "taskTypes": [
+        "smart-contract-audit"
+      ],
+      "updatedAt": 1788362143
+    },
+    {
+      "lesson": "Always apply checks-effects-interactions: update balances before external calls to prevent reentrancy drainage.",
+      "lessonTranslations": {
+        "en-US": "Always apply checks-effects-interactions: update balances before external calls to prevent reentrancy drainage."
+      },
+      "count": 1,
+      "taskTypes": [
+        "smart-contract-audit"
+      ],
+      "updatedAt": 1788361634
+    },
+    {
+      "lesson": "代币调查应同时核验代理实现、所有权、供应量与暂停状态。",
+      "lessonTranslations": {
+        "zh-CN": "代币调查应同时核验代理实现、所有权、供应量与暂停状态。"
+      },
+      "count": 1,
+      "taskTypes": [
+        "onchain-investigation"
+      ],
+      "updatedAt": 1788323177
+    },
+    {
+      "lesson": "A smart-contract audit with empty findings and no methodology provides weak assurance; always require scope, verification steps, and risk justification before trusting a clean report.",
+      "lessonTranslations": {
+        "en-US": "A smart-contract audit with empty findings and no methodology provides weak assurance; always require scope, verification steps, and risk justification before trusting a clean report."
+      },
+      "count": 1,
+      "taskTypes": [
+        "smart-contract-audit"
+      ],
+      "updatedAt": 1788321150
+    },
+    {
+      "lesson": "审查代币须查代理实现、管理员及所有权，防范未授权升级与操控风险。",
+      "lessonTranslations": {
+        "zh-CN": "审查代币须查代理实现、管理员及所有权，防范未授权升级与操控风险。"
+      },
+      "count": 1,
+      "taskTypes": [
+        "onchain-investigation"
+      ],
+      "updatedAt": 1788248959
+    },
+    {
+      "lesson": "Detailed and high-signal output.",
+      "lessonTranslations": {
+        "zh-CN": "Detailed and high-signal output."
+      },
+      "count": 1,
+      "taskTypes": [
+        "smart-contract-audit"
+      ],
+      "updatedAt": 1788235946
     },
     {
       "lesson": "**MONAD DeFi ALLOCATION STRATEGY** *Investment Brief | Pre-Mainnet Positioning* **Current Status** Monad mainnet deployment scheduled Q4 2024–Q1 2025. Network currently in advanced testnet phase (EVM-",
@@ -23,75 +89,75 @@
     },
     {
       "lesson": "Do not run automated token scans on pre-launch protocols; manually verify team credentials and audit reports until contracts deploy.",
+      "lessonTranslations": {
+        "en-US": "Do not run automated token scans on pre-launch protocols; manually verify team credentials and audit reports until contracts deploy.",
+        "zh-CN": "对尚未正式上线的协议不要做自动化代币扫描；在合约部署前应人工核验团队背景和审计报告。"
+      },
       "count": 1,
       "taskTypes": [
         "token-scan"
       ],
-      "updatedAt": 1772192681,
-      "lessonTranslations": {
-        "en-US": "Do not run automated token scans on pre-launch protocols; manually verify team credentials and audit reports until contracts deploy.",
-        "zh-CN": "对尚未正式上线的协议不要做自动化代币扫描；在合约部署前应人工核验团队背景和审计报告。"
-      }
+      "updatedAt": 1772192681
     },
     {
       "lesson": "Verify mainnet is live before researching yields; pre-launch chains lack real TVL and only offer speculative point accrual.",
+      "lessonTranslations": {
+        "en-US": "Verify mainnet is live before researching yields; pre-launch chains lack real TVL and only offer speculative point accrual.",
+        "zh-CN": "研究收益前先确认主网已上线；预发布链没有真实 TVL，只提供投机性的积分积累。"
+      },
       "count": 1,
       "taskTypes": [
         "yield-search"
       ],
-      "updatedAt": 1772192589,
-      "lessonTranslations": {
-        "en-US": "Verify mainnet is live before researching yields; pre-launch chains lack real TVL and only offer speculative point accrual.",
-        "zh-CN": "研究收益前先确认主网已上线；预发布链没有真实 TVL，只提供投机性的积分积累。"
-      }
+      "updatedAt": 1772192589
     },
     {
       "lesson": "Reject any contracts claiming Monad mainnet deployment until Q2 2025 launch; verify all tokens are testnet-only to avoid scams.",
+      "lessonTranslations": {
+        "en-US": "Reject any contracts claiming Monad mainnet deployment until Q2 2025 launch; verify all tokens are testnet-only to avoid scams.",
+        "zh-CN": "在 Monad 主网 Q2 2025 正式上线前，应拒绝相信任何声称已主网上线的合约；确认所有代币仍是测试网资产以规避诈骗。"
+      },
       "count": 1,
       "taskTypes": [
         "token-scan"
       ],
-      "updatedAt": 1772109171,
-      "lessonTranslations": {
-        "en-US": "Reject any contracts claiming Monad mainnet deployment until Q2 2025 launch; verify all tokens are testnet-only to avoid scams.",
-        "zh-CN": "在 Monad 主网 Q2 2025 正式上线前，应拒绝相信任何声称已主网上线的合约；确认所有代币仍是测试网资产以规避诈骗。"
-      }
+      "updatedAt": 1772109171
     },
     {
       "lesson": "Always confirm mainnet status before DeFi yield research; pre-launch networks have zero real TVL and offer only non-liquid testnet incentives.",
+      "lessonTranslations": {
+        "en-US": "Always confirm mainnet status before DeFi yield research; pre-launch networks have zero real TVL and offer only non-liquid testnet incentives.",
+        "zh-CN": "做 DeFi 收益研究前务必确认主网是否已上线；预发布网络没有真实 TVL，只提供不可流通的测试网激励。"
+      },
       "count": 1,
       "taskTypes": [
         "defi-analysis"
       ],
-      "updatedAt": 1772109022,
-      "lessonTranslations": {
-        "en-US": "Always confirm mainnet status before DeFi yield research; pre-launch networks have zero real TVL and offer only non-liquid testnet incentives.",
-        "zh-CN": "做 DeFi 收益研究前务必确认主网是否已上线；预发布网络没有真实 TVL，只提供不可流通的测试网激励。"
-      }
+      "updatedAt": 1772109022
     },
     {
       "lesson": "Implement optimistic parallel execution with dynamic dependency resolution to eliminate sequential bottlenecks and achieve sub-second latency for AI agent coordination.",
-      "count": 1,
-      "taskTypes": [
-        "content-generation"
-      ],
-      "updatedAt": 1772108215,
       "lessonTranslations": {
         "en-US": "Implement optimistic parallel execution with dynamic dependency resolution to eliminate sequential bottlenecks and achieve sub-second latency for AI agent coordination.",
         "zh-CN": "通过动态依赖解析实现乐观并行执行，消除串行瓶颈，把 AI Agent 协同延迟压到秒级以内。"
-      }
-    },
-    {
-      "lesson": "Implement optimistic parallel execution to eliminate sequential bottlenecks and enable real-time AI inference for on-chain autonomous agents.",
+      },
       "count": 1,
       "taskTypes": [
         "content-generation"
       ],
-      "updatedAt": 1772104428,
+      "updatedAt": 1772108215
+    },
+    {
+      "lesson": "Implement optimistic parallel execution to eliminate sequential bottlenecks and enable real-time AI inference for on-chain autonomous agents.",
       "lessonTranslations": {
         "en-US": "Implement optimistic parallel execution to eliminate sequential bottlenecks and enable real-time AI inference for on-chain autonomous agents.",
         "zh-CN": "实现乐观并行执行，消除串行瓶颈，让链上自治 Agent 支持实时 AI 推理。"
-      }
+      },
+      "count": 1,
+      "taskTypes": [
+        "content-generation"
+      ],
+      "updatedAt": 1772104428
     },
     {
       "lesson": "**Monad DeFi Portfolio Allocation Framework: Early-Stage Risk Management** ### Market Context & Constraints Monad mainnet (Q1 2025) exhibits classic launch economics: emission-driven APYs (50-400%) ar",
@@ -103,39 +169,39 @@
     },
     {
       "lesson": "Avoid protocols with EOA proxy admins and un-timelocked validator sets; owner-controlled instant upgrades enable immediate stake drainage.",
+      "lessonTranslations": {
+        "en-US": "Avoid protocols with EOA proxy admins and un-timelocked validator sets; owner-controlled instant upgrades enable immediate stake drainage.",
+        "zh-CN": "避免选择由 EOA 控制代理管理员且验证者集合没有 timelock 的协议；所有者可即时升级时，质押资产可能被立即抽走。"
+      },
       "count": 1,
       "taskTypes": [
         "token-scan"
       ],
-      "updatedAt": 1772017713,
-      "lessonTranslations": {
-        "en-US": "Avoid protocols with EOA proxy admins and un-timelocked validator sets; owner-controlled instant upgrades enable immediate stake drainage.",
-        "zh-CN": "避免选择由 EOA 控制代理管理员且验证者集合没有 timelock 的协议；所有者可即时升级时，质押资产可能被立即抽走。"
-      }
+      "updatedAt": 1772017713
     },
     {
       "lesson": "Avoid large positions in sub-$10M Monad pools due to slippage, and treat 50-400% APYs as temporary incentives with elevated smart contract risk.",
+      "lessonTranslations": {
+        "en-US": "Avoid large positions in sub-$10M Monad pools due to slippage, and treat 50-400% APYs as temporary incentives with elevated smart contract risk.",
+        "zh-CN": "避免在 TVL 低于 1000 万美元的 Monad 池子里重仓；50-400% 的 APY 只应视作临时激励，并伴随更高的合约风险。"
+      },
       "count": 1,
       "taskTypes": [
         "yield-search"
       ],
-      "updatedAt": 1772017600,
-      "lessonTranslations": {
-        "en-US": "Avoid large positions in sub-$10M Monad pools due to slippage, and treat 50-400% APYs as temporary incentives with elevated smart contract risk.",
-        "zh-CN": "避免在 TVL 低于 1000 万美元的 Monad 池子里重仓；50-400% 的 APY 只应视作临时激励，并伴随更高的合约风险。"
-      }
+      "updatedAt": 1772017600
     },
     {
       "lesson": "Quantify how parallel execution reduces AI agent latency and compute costs to make throughput advantages economically concrete.",
+      "lessonTranslations": {
+        "en-US": "Quantify how parallel execution reduces AI agent latency and compute costs to make throughput advantages economically concrete.",
+        "zh-CN": "量化并行执行如何降低 AI Agent 延迟与计算成本，让吞吐优势在经济上更具体。"
+      },
       "count": 1,
       "taskTypes": [
         "content-generation"
       ],
-      "updatedAt": 1772017440,
-      "lessonTranslations": {
-        "en-US": "Quantify how parallel execution reduces AI agent latency and compute costs to make throughput advantages economically concrete.",
-        "zh-CN": "量化并行执行如何降低 AI Agent 延迟与计算成本，让吞吐优势在经济上更具体。"
-      }
+      "updatedAt": 1772017440
     },
     {
       "lesson": "**Lesson:** Always require contract addresses or source code upfront; without inputs, security tools return null results, leaving critical vulnerabilities undetected and delaying risk mitigation. ---",
@@ -147,83 +213,15 @@
     },
     {
       "lesson": "Validate contract address or source code exists before executing gas optimization analysis.",
-      "count": 1,
-      "taskTypes": [
-        "gas-optimization"
-      ],
-      "updatedAt": 1772011563,
       "lessonTranslations": {
         "en-US": "Validate contract address or source code exists before executing gas optimization analysis.",
         "zh-CN": "执行 gas 优化分析前先确认合约地址或源码已提供。"
-      }
-    },
-    {
-      "lesson": "Provide contract address or bytecode before scanning; empty input yields zero signal.",
-      "count": 1,
-      "taskTypes": [
-        "token-scan"
-      ],
-      "updatedAt": 1772011526,
-      "lessonTranslations": {
-        "en-US": "Provide contract address or bytecode before scanning; empty input yields zero signal.",
-        "zh-CN": "扫描前先提供合约地址或字节码；空输入不会产生有效信号。"
-      }
-    },
-    {
-      "lesson": "Never submit empty vulnerability arrays; comprehensive audits require detailed line-by-line analysis with severity ratings for every checked security pattern.",
-      "count": 1,
-      "taskTypes": [
-        "smart-contract-audit"
-      ],
-      "updatedAt": 1772011478,
-      "lessonTranslations": {
-        "en-US": "Never submit empty vulnerability arrays; comprehensive audits require detailed line-by-line analysis with severity ratings for every checked security pattern.",
-        "zh-CN": "不要提交空漏洞数组；完整审计需要对每个检查项给出逐行分析和严重级别。"
-      }
-    },
-    {
-      "lesson": "**TOKEN SECURITY AUDIT REPORT TEMPLATE** **Document Control** - **Project:** [TOKEN_NAME / TICKER] - **Contract Address:** [0x... on Monad Network] - **Audit Date:** [YYYY-MM-DD] - **Auditor:** [NAME/",
-      "count": 1,
-      "taskTypes": [
-        "content-generation"
-      ],
-      "updatedAt": 1772010118
-    },
-    {
-      "lesson": "Provide contract source code or deployment address to enable gas optimization analysis and storage packing recommendations.",
+      },
       "count": 1,
       "taskTypes": [
         "gas-optimization"
       ],
-      "updatedAt": 1772009948,
-      "lessonTranslations": {
-        "en-US": "Provide contract source code or deployment address to enable gas optimization analysis and storage packing recommendations.",
-        "zh-CN": "提供合约源码或部署地址，才能进行 gas 优化分析和存储打包建议。"
-      }
-    },
-    {
-      "lesson": "Always provide the contract address or source code before requesting a scan; token security analysis cannot proceed without target bytecode.",
-      "count": 1,
-      "taskTypes": [
-        "token-scan"
-      ],
-      "updatedAt": 1772009877,
-      "lessonTranslations": {
-        "en-US": "Always provide the contract address or source code before requesting a scan; token security analysis cannot proceed without target bytecode.",
-        "zh-CN": "发起扫描前必须提供合约地址或源码；没有目标字节码就无法进行代币安全分析。"
-      }
-    },
-    {
-      "lesson": "Never return empty vulnerability arrays without verified inputs; always request contract code or address when absent.",
-      "count": 1,
-      "taskTypes": [
-        "smart-contract-audit"
-      ],
-      "updatedAt": 1772009828,
-      "lessonTranslations": {
-        "en-US": "Never return empty vulnerability arrays without verified inputs; always request contract code or address when absent.",
-        "zh-CN": "在未验证输入的情况下不要返回空漏洞数组；缺少信息时应先索取合约代码或地址。"
-      }
+      "updatedAt": 1772011563
     }
   ]
 }

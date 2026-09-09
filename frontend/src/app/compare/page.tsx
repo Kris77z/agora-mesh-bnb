@@ -66,7 +66,7 @@ function CompareContent() {
                 key={service.id}
                 onClick={() => toggle(service.id)}
                 disabled={disabled}
-                className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs transition-colors ${selected ? 'border-foreground bg-foreground text-background' : 'border-border hover:bg-secondary'} ${disabled ? 'cursor-not-allowed opacity-40' : ''}`}
+                className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs transition-colors ${selected ? 'border-primary bg-primary text-primary-foreground' : 'border-border hover:bg-secondary'} ${disabled ? 'cursor-not-allowed opacity-40' : ''}`}
               >
                 {selected ? <Check className="h-3 w-3" /> : <span className="h-3 w-3 rounded-sm border" />}
                 {service.name}
@@ -88,7 +88,7 @@ function CompareContent() {
                 key={option.value}
                 onClick={() => setPreference(option.value)}
                 title={option.hint}
-                className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs transition-colors ${preference === option.value ? 'border-foreground bg-foreground text-background' : 'border-border hover:bg-secondary'}`}
+                className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs transition-colors ${preference === option.value ? 'border-primary bg-primary text-primary-foreground' : 'border-border hover:bg-secondary'}`}
               >
                 {preference === option.value && <Check className="h-3 w-3" />}
                 {option.label}
@@ -110,7 +110,7 @@ function CompareContent() {
             const { service } = ranking;
             const decimals = service.asset?.decimals ?? 18;
             return (
-              <article key={service.id} className={`relative rounded-2xl border bg-card p-6 ${ranking.rank === 1 ? 'border-foreground shadow-md' : 'border-border'}`}>
+              <article key={service.id} className={`relative rounded-2xl border bg-card p-6 ${ranking.rank === 1 ? 'border-primary/60 shadow-[0_0_24px_hsl(var(--primary)/0.15)]' : 'border-border'}`}>
                 {ranking.rank === 1 && <Badge className="absolute right-5 top-5">Hunter pick</Badge>}
                 <p className="font-mono text-xs text-muted-foreground">RANK 0{ranking.rank}</p>
                 <h2 className="mt-4 pr-20 font-heading text-2xl font-semibold">{service.name}</h2>

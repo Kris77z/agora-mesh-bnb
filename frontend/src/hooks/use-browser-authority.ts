@@ -18,9 +18,10 @@ type Snapshot = {
 export type Run = { missionId: string; status: string; recoveryRequired?: boolean; recovery?: {status: string; message: string}; error?: {code?: string; message: string}; events: AgentEvent[]; result?: HunterRunResult };
 const walletStorage = 'agora.passkey-wallet.v1';
 const accessStorage = 'agora.passkey-authority.v1';
+/** i18n keys, not display strings — callers resolve them through t(). */
 const labels: Record<Step, string> = {
-  grantSession: 'Grant bounded session', approveChecker: 'Allow service payment signatures', approveAllowance: 'Approve exact U budget',
-  revokeChecker: 'Disable payment signatures', revokeAllowance: 'Clear remaining U allowance', revokeSession: 'Revoke session in Keystore',
+  grantSession: 'authority.step.grantSession', approveChecker: 'authority.step.approveChecker', approveAllowance: 'authority.step.approveAllowance',
+  revokeChecker: 'authority.step.revokeChecker', revokeAllowance: 'authority.step.revokeAllowance', revokeSession: 'authority.step.revokeSession',
 };
 const grantSteps: Step[] = ['grantSession', 'approveChecker', 'approveAllowance'];
 const revokeSteps: Step[] = ['revokeChecker', 'revokeAllowance', 'revokeSession'];

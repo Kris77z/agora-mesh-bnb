@@ -130,7 +130,7 @@ export default async function AuthorityPage() {
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
-                <Link href="/authority/manage" className="rounded-lg bg-foreground px-4 py-2 text-sm text-background">Manage Passkey Authority</Link>
+                <Link href="/authority/manage" className="rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground transition-opacity hover:opacity-90">Manage Passkey Authority</Link>
                 <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-mono text-xs font-semibold uppercase ${statusStyles(authority.status)}`}>
                   <span className="h-2 w-2 rounded-full bg-current" /> {authority.status}
                 </span>
@@ -167,7 +167,7 @@ export default async function AuthorityPage() {
                   ))}
                 </div>
                 <div className="mt-7 h-2 overflow-hidden rounded-full bg-secondary" aria-label={`${spendPercent(primarySpend)}% of daily limit spent`}>
-                  <div className="h-full rounded-full bg-foreground" style={{ width: `${spendPercent(primarySpend)}%` }} />
+                  <div className="h-full rounded-full bg-primary" style={{ width: `${spendPercent(primarySpend)}%` }} />
                 </div>
                 <div className="mt-3 flex flex-wrap justify-between gap-2 text-xs text-muted-foreground">
                   <span>{spendPercent(primarySpend)}% used {authority.status === 'revoked' ? 'when access was revoked' : 'in the current UTC day'}</span>

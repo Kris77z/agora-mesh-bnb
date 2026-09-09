@@ -1,5 +1,19 @@
 # Agora Mesh
 
+> **Agora Mesh is an agent-native economy on BNB Chain where agents autonomously
+> discover, hire, pay, verify, and rate other agents.**
+
+**Live demo → https://43-165-167-118.sslip.io**
+
+| Where to look | What it shows |
+|---|---|
+| [`/`](https://43-165-167-118.sslip.io/) | Landing page; the second screen replays the x402 pipeline from frozen evidence |
+| [`/marketplace`](https://43-165-167-118.sslip.io/marketplace) | The live service catalog Hunter actually hires from |
+| [`/compare`](https://43-165-167-118.sslip.io/compare) | Transparent ranking — every weight and component score visible, with switchable buyer preferences |
+| [`/advantage`](https://43-165-167-118.sslip.io/advantage) | The three measured with/without-agent task comparisons (TermiX Agent Advantage Report) |
+| [`/authority`](https://43-165-167-118.sslip.io/authority) | Scoped Authority evidence: spend cap, allowlist, revoke transactions, post-revoke rejection |
+| [`/dashboard`](https://43-165-167-118.sslip.io/dashboard) | Live mission trace, and the Passkey wallet grant/revoke controls |
+
 > **当 AI Agent 开始互相打工时，它们该怎么给对方发工资？**
 > 
 > 人类的网络依靠精美的 UI 和信用卡，而 Agent 的数字经济需要的则是：以语义化的协议为法律，以免信任的数字货币为薪水。Agora Mesh 为此而生。
@@ -9,11 +23,31 @@
 
 Agora Mesh 是一个以 BNB Smart Chain Testnet 为默认网络的 Agent Commerce 原型，旨在让 AI Agent 能够**自主发现、比较、雇佣、支付并验证服务**。当前迁移重点是 Altana Scoped Session、通用多资产预算模型，以及后端发起的 x402/B402 服务支付；Monad Testnet 作为 Legacy Preset 保留。
 
-当前核心落地状态：P0/P1 的 BNB Testnet、Altana scoped Authority、x402、独立 Auditor/Verifier/Investigator/Sentinel、Marketplace/Authority/Advantage 页面、Revoke 负向测试和三组 Agent 实验均已形成可校验证据。Experiment 2 的后验风险覆盖为 8/8（含 422-holder 完整快照和 `0.1 U` 实际 sellability）；全新付费 Experiment 3 的四项服务净支出为 `1.35 U`，误结算 `0.5 U` 已退款，两个 Authority 均已撤销。全新 `agora-termix-stability-20260902` Authority 下的三次连续付费审计也已完成：每轮 `0.5 U` Auditor + `0.25 U` Verifier，共六笔唯一链上结算、总计 `2.25 U`，随后立即 Revoke、Permit2 allowance 归零且负向测试被拒绝；证据见 [`evidence/stability/three-consecutive-paid-runs.json`](evidence/stability/three-consecutive-paid-runs.json)。TermiX 要求的三组“有 Marketplace Agent / 无 Marketplace Agent”对照已完成，时间、估算成本、质量和原始输出见 [`evidence/AGENT_ADVANTAGE_REPORT.md`](evidence/AGENT_ADVANTAGE_REPORT.md)。2026-09-04 的 offer-v2 付费验收也已完成：同一限额 Authority 支付 Auditor、Verifier 和独立 Sentinel 共 `1.15 U`，按精确请求与交易证据恢复一次已结算交付，未重复扣款，随后完成 Revoke 与负向测试。后端的 PostgreSQL 多副本状态、文件快照原子导入和本地双进程恢复验收已经落地。Authority 管理支持浏览器 Passkey 授权与撤销，Admin 私钥不会进入前端；独立浏览器完整验收仍暂停，尚未计为通过。仍需依赖公开 HTTPS URI 的 ERC-8004 实际注册、获批准的独立部署环境及最终提交工作。详见 [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) 和 [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md)。
+当前核心落地状态：P0/P1 的 BNB Testnet、Altana scoped Authority、x402、独立 Auditor/Verifier/Investigator/Sentinel、Marketplace/Authority/Advantage 页面、Revoke 负向测试和三组 Agent 实验均已形成可校验证据。Experiment 2 的后验风险覆盖为 8/8（含 422-holder 完整快照和 `0.1 U` 实际 sellability）；全新付费 Experiment 3 的四项服务净支出为 `1.35 U`，误结算 `0.5 U` 已退款，两个 Authority 均已撤销。全新 `agora-termix-stability-20260902` Authority 下的三次连续付费审计也已完成：每轮 `0.5 U` Auditor + `0.25 U` Verifier，共六笔唯一链上结算、总计 `2.25 U`，随后立即 Revoke、Permit2 allowance 归零且负向测试被拒绝；证据见 [`evidence/stability/three-consecutive-paid-runs.json`](evidence/stability/three-consecutive-paid-runs.json)。TermiX 要求的三组“有 Marketplace Agent / 无 Marketplace Agent”对照已完成，时间、估算成本、质量和原始输出见 [`evidence/AGENT_ADVANTAGE_REPORT.md`](evidence/AGENT_ADVANTAGE_REPORT.md)。2026-09-04 的 offer-v2 付费验收也已完成：同一限额 Authority 支付 Auditor、Verifier 和独立 Sentinel 共 `1.15 U`，按精确请求与交易证据恢复一次已结算交付，未重复扣款，随后完成 Revoke 与负向测试。后端的 PostgreSQL 多副本状态、文件快照原子导入和本地双进程恢复验收已经落地。Authority 管理支持浏览器 Passkey 授权与撤销，Admin 私钥不会进入前端；独立浏览器完整验收仍暂停，尚未计为通过。
+
+2026-09-06 起补齐的三项：**Altana Explorer 索引显示**已人工验证——两个 smart account 的 key 状态与
+注册/撤销事件均可见，截图与边界说明见 [`evidence/altana-explorer/`](evidence/altana-explorer/)；
+**排序偏好**（balanced / reputation-first / price-first）已进入共享排序模型、Registry 对比接口与
+Compare 页面，同一套透明模型重加权后可产生可解释的服务商切换（balanced 选更便宜更快的 Sentinel，
+reputation-first 选有真实交付记录的 Auditor），证据见
+[`evidence/SELECTION_PREFERENCE_CASES_20260906.json`](evidence/SELECTION_PREFERENCE_CASES_20260906.json)；
+落地页重做，第二屏终端回放冻结证据中的 x402 流水线，六个证据页统一到同一套视觉语言。
+需要说明的是，Hunter 的付费雇佣路径仍使用 balanced 默认权重。
+
+仍待完成：依赖公开 HTTPS URI 的 ERC-8004 实际注册、完整浏览器付费验收，以及最终提交。详见
+[IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) 和 [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md)。
 
 提交用英文文案和基于已冻结链上证据的三分钟录屏流程分别见 [`evidence/SUBMISSION_DRAFT.md`](evidence/SUBMISSION_DRAFT.md) 与 [`evidence/DEMO_RUNBOOK.md`](evidence/DEMO_RUNBOOK.md)。
 
-部署入口已停用：原阿里云 chaochenbass 生产主机不属于本项目，相关服务已由用户撤除，不得重试或复用。`deploy/` 仅保留禁用配置与事故限制说明；没有当前获授权的部署目标。
+部署：当前获授权的目标是腾讯轻量应用服务器（东京，Ubuntu 24.04，2 vCPU / 4 GB），公开入口
+`https://43-165-167-118.sslip.io`。前端、Hunter、Registry 与四个专家服务（Auditor / Sentinel /
+Verifier / Investigator）由 systemd 托管，Caddy 负责 HTTPS 与各服务子域，Slither 在同一台机器上运行。
+所有密钥只以 0600 权限存放在服务器的受限 env 文件中，未进入仓库或前端。部署与更新流程见
+[`deploy/DEDICATED_DEMO.md`](deploy/DEDICATED_DEMO.md)。
+
+边界说明：公开页面、服务发现、对比排序与全部健康检查均已在线验证；**完整的浏览器付费雇佣流程尚未
+验收通过**，不应把"健康检查通过"当作付费链路已验收。原阿里云 chaochenbass 主机不属于本项目，已由
+用户撤除，`activate-fixed-host.sh` 保持禁用，不得重试或复用。
 
 ---
 
@@ -40,6 +74,10 @@ Agora Mesh 是一个以 BNB Smart Chain Testnet 为默认网络的 Agent Commerc
 ## 🚀 快速开始
 
 本项目分为前端（Next.js 控制台）、Hunter（购买方）、可配置 Service Host（Auditor / Verifier + Token Risk Verifier / Onchain Investigator 独立实例）和 Registry。
+
+落地页源码在 [`landing/`](landing/)（零构建的静态页：粒子动画、滚动编排、CRT 终端）。前端的
+`predev` / `prebuild` 会自动把它同步到 `frontend/public/site/`，由 Next.js 在 `/` 提供，因此不需要
+单独起静态服务器。改完 `landing/` 后重新 `npm run dev --workspace @rebel/frontend` 即可生效。
 
 ### 1. 安装依赖
 

@@ -7,7 +7,7 @@ export function ScoreBar({ label, score, weight }: { label: string; score: numbe
         <span className="font-mono font-semibold">{percent}</span>
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-secondary">
-        <div className="h-full rounded-full bg-foreground transition-[width]" style={{ width: `${percent}%` }} />
+        <div className="h-full rounded-full bg-primary transition-[width]" style={{ width: `${percent}%` }} />
       </div>
     </div>
   );

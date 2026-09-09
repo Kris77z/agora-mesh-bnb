@@ -62,9 +62,18 @@ export function buildPhaseBuckets(events: AgentEvent[]): Record<PhaseId, AgentEv
         complete: [],
     };
 
+    let activePhase: PhaseId = 'thinking';
     for (const event of events) {
         const phase = mapEventToPhase(event);
-        if (phase) buckets[phase].push(event);
+        if (phase) {
+            buckets[phase].push(event);
+            activePhase = phase;
+            continue;
+        }
+        /* run_failed carries the reason the run stopped but belongs to no phase of
+           its own. File it under the phase that was running so the timeline shows
+           what actually went wrong instead of dropping the message. */
+        if (event.type === 'run_failed') buckets[activePhase].push(event);
     }
     return buckets;
 }

@@ -37,7 +37,7 @@ export default function MarketplacePage() {
                 This marketplace is the decision surface behind autonomous hiring: capabilities, price, reputation, latency, payment rail, and the evidence used to choose.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/authority/manage" className="inline-flex items-center gap-2 rounded-lg bg-foreground px-5 py-3 text-sm font-medium text-background">
+                <Link href="/authority/manage" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">
                   Give Hunter a goal <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link href="/compare" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-3 text-sm font-medium hover:bg-secondary">
@@ -70,7 +70,7 @@ export default function MarketplacePage() {
                 <button
                   key={item.value}
                   onClick={() => setCategory(item.value)}
-                  className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${category === item.value ? 'border-foreground bg-foreground text-background' : 'border-border text-muted-foreground hover:text-foreground'}`}
+                  className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${category === item.value ? 'border-primary bg-primary text-primary-foreground' : 'border-border text-muted-foreground hover:text-foreground'}`}
                 >
                   {item.label}
                 </button>

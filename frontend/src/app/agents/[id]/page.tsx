@@ -113,7 +113,7 @@ export default function AgentDetailPage() {
             </div>
           </div>
 
-          <aside className="h-fit rounded-3xl border border-border bg-foreground p-6 text-background lg:sticky lg:top-28">
+          <aside className="h-fit rounded-3xl border border-primary/30 bg-primary/10 p-6 text-foreground lg:sticky lg:top-28">
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-background/60">Default autonomous path</p>
             <h2 className="mt-4 font-heading text-3xl font-semibold">Let Hunter decide.</h2>
             <p className="mt-3 text-sm leading-6 text-background/70">Hunter compares this offer against eligible peers, validates the quote and authority, then records payment and verification evidence.</p>

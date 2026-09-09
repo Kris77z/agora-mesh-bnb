@@ -7,11 +7,11 @@
       "taskType": "defi-analysis",
       "score": 7,
       "lesson": "Reasonable detail for MVP task.",
-      "timestamp": 1771993583,
       "lessonTranslations": {
         "en-US": "Reasonable detail for MVP task.",
         "zh-CN": "这个 MVP 任务的细节粒度基本合理。"
-      }
+      },
+      "timestamp": 1771993583
     },
     {
       "missionId": "96b90861-ff6d-400a-8e2b-0634fdff4a33",
@@ -20,11 +20,11 @@
       "taskType": "content-generation",
       "score": 7,
       "lesson": "Reasonable detail for MVP task.",
-      "timestamp": 1771993638,
       "lessonTranslations": {
         "en-US": "Reasonable detail for MVP task.",
         "zh-CN": "这个 MVP 任务的细节粒度基本合理。"
-      }
+      },
+      "timestamp": 1771993638
     },
     {
       "missionId": "6a95fc8a-3204-4d9d-9dbf-2366682c7dda",
@@ -33,11 +33,11 @@
       "taskType": "content-generation",
       "score": 7,
       "lesson": "Reasonable detail for MVP task.",
-      "timestamp": 1771997810,
       "lessonTranslations": {
         "en-US": "Reasonable detail for MVP task.",
         "zh-CN": "这个 MVP 任务的细节粒度基本合理。"
-      }
+      },
+      "timestamp": 1771997810
     },
     {
       "missionId": "3aa72b5b-1639-4523-b1b3-7e115296f739",
@@ -46,11 +46,11 @@
       "taskType": "smart-contract-audit",
       "score": 5,
       "lesson": "Expand audit reports with detailed per-function analysis; empty vulnerability arrays indicate incomplete coverage for comprehensive reviews.",
-      "timestamp": 1771999631,
       "lessonTranslations": {
         "en-US": "Expand audit reports with detailed per-function analysis; empty vulnerability arrays indicate incomplete coverage for comprehensive reviews.",
         "zh-CN": "审计报告要补充分函数分析；如果漏洞数组为空，通常说明综合审查覆盖不足。"
-      }
+      },
+      "timestamp": 1771999631
     },
     {
       "missionId": "c57f00f4-d14b-46b5-8e3b-565103f0810e",
@@ -59,11 +59,11 @@
       "taskType": "content-generation",
       "score": 9,
       "lesson": "Explicitly connect parallel execution mechanics to AI agent perception-action loops to demonstrate throughput requirements for real-time autonomy.",
-      "timestamp": 1771999647,
       "lessonTranslations": {
         "en-US": "Explicitly connect parallel execution mechanics to AI agent perception-action loops to demonstrate throughput requirements for real-time autonomy.",
         "zh-CN": "要把并行执行机制和 AI Agent 的感知-行动回路明确关联起来，说明实时自治对吞吐的要求。"
-      }
+      },
+      "timestamp": 1771999647
     },
     {
       "missionId": "40c7d518-2c87-4e41-9304-8410d1199fcb",
@@ -72,11 +72,11 @@
       "taskType": "smart-contract-audit",
       "score": 5,
       "lesson": "Always document tested code sections and attack vectors when returning empty results to prove thoroughness and avoid short evaluations.",
-      "timestamp": 1772000324,
       "lessonTranslations": {
         "en-US": "Always document tested code sections and attack vectors when returning empty results to prove thoroughness and avoid short evaluations.",
         "zh-CN": "即使结果为空，也要记录已测试的代码段和攻击向量，证明覆盖充分，避免评估过短。"
-      }
+      },
+      "timestamp": 1772000324
     },
     {
       "missionId": "575c4691-0c2e-4021-90d3-dcf749d91e2b",
@@ -85,11 +85,11 @@
       "taskType": "token-scan",
       "score": 9,
       "lesson": "Always provide contract source code or verified address before scanning; missing inputs generate false \"safe\" ratings while hiding actual rug-pull risks.",
-      "timestamp": 1772000362,
       "lessonTranslations": {
         "en-US": "Always provide contract source code or verified address before scanning; missing inputs generate false \"safe\" ratings while hiding actual rug-pull risks.",
         "zh-CN": "扫描前必须提供合约源码或已验证地址；缺少输入会产生虚假的“安全”评级，并掩盖真实的 rug-pull 风险。"
-      }
+      },
+      "timestamp": 1772000362
     },
     {
       "missionId": "ff94c10d-cba9-4536-8822-99c936c5e45c",
@@ -98,11 +98,11 @@
       "taskType": "gas-optimization",
       "score": 9,
       "lesson": "Submit contract source code or bytecode with every gas optimization request to analyze storage patterns and opcode sequences.",
-      "timestamp": 1772000424,
       "lessonTranslations": {
         "en-US": "Submit contract source code or bytecode with every gas optimization request to analyze storage patterns and opcode sequences.",
         "zh-CN": "每次发起 gas 优化请求都应附带合约源码或字节码，才能分析存储模式和操作码序列。"
-      }
+      },
+      "timestamp": 1772000424
     },
     {
       "missionId": "0111cb2e-5cf0-4b88-b983-ac1b95224f40",
@@ -111,11 +111,11 @@
       "taskType": "content-generation",
       "score": 9,
       "lesson": "Provide complete contract source code or deployed address before initiating security audits; missing inputs yield inconclusive results and unquantified risks.",
-      "timestamp": 1772000472,
       "lessonTranslations": {
         "en-US": "Provide complete contract source code or deployed address before initiating security audits; missing inputs yield inconclusive results and unquantified risks.",
         "zh-CN": "发起安全审计前先提供完整源码或已部署地址；缺少输入只会得到不确定结论和无法量化的风险。"
-      }
+      },
+      "timestamp": 1772000472
     },
     {
       "missionId": "74b58d3f-9ea6-4060-af93-55c55823e8fd",
@@ -124,11 +124,11 @@
       "taskType": "defi-analysis",
       "score": 9,
       "lesson": "Validate token contract address, chain, and deployment status before initiating DeFi analysis to prevent workflow blocking.",
-      "timestamp": 1772008850,
       "lessonTranslations": {
         "en-US": "Validate token contract address, chain, and deployment status before initiating DeFi analysis to prevent workflow blocking.",
         "zh-CN": "开始 DeFi 分析前先核实代币合约地址、链别和部署状态，避免流程阻塞。"
-      }
+      },
+      "timestamp": 1772008850
     },
     {
       "missionId": "7fc58efe-bd11-42e6-99c6-bfdb67a03a64",
@@ -137,11 +137,11 @@
       "taskType": "smart-contract-audit",
       "score": 5,
       "lesson": "Never return empty vulnerability arrays without verified inputs; always request contract code or address when absent.",
-      "timestamp": 1772009828,
       "lessonTranslations": {
         "en-US": "Never return empty vulnerability arrays without verified inputs; always request contract code or address when absent.",
         "zh-CN": "在未验证输入的情况下不要返回空漏洞数组；缺少信息时应先索取合约代码或地址。"
-      }
+      },
+      "timestamp": 1772009828
     },
     {
       "missionId": "7fc58efe-bd11-42e6-99c6-bfdb67a03a64",
@@ -150,11 +150,11 @@
       "taskType": "token-scan",
       "score": 9,
       "lesson": "Always provide the contract address or source code before requesting a scan; token security analysis cannot proceed without target bytecode.",
-      "timestamp": 1772009877,
       "lessonTranslations": {
         "en-US": "Always provide the contract address or source code before requesting a scan; token security analysis cannot proceed without target bytecode.",
         "zh-CN": "发起扫描前必须提供合约地址或源码；没有目标字节码就无法进行代币安全分析。"
-      }
+      },
+      "timestamp": 1772009877
     },
     {
       "missionId": "7fc58efe-bd11-42e6-99c6-bfdb67a03a64",
@@ -163,11 +163,11 @@
       "taskType": "gas-optimization",
       "score": 9,
       "lesson": "Provide contract source code or deployment address to enable gas optimization analysis and storage packing recommendations.",
-      "timestamp": 1772009948,
       "lessonTranslations": {
         "en-US": "Provide contract source code or deployment address to enable gas optimization analysis and storage packing recommendations.",
         "zh-CN": "提供合约源码或部署地址，才能进行 gas 优化分析和存储打包建议。"
-      }
+      },
+      "timestamp": 1772009948
     },
     {
       "missionId": "7fc58efe-bd11-42e6-99c6-bfdb67a03a64",
@@ -185,11 +185,11 @@
       "taskType": "smart-contract-audit",
       "score": 5,
       "lesson": "Never submit empty vulnerability arrays; comprehensive audits require detailed line-by-line analysis with severity ratings for every checked security pattern.",
-      "timestamp": 1772011478,
       "lessonTranslations": {
         "en-US": "Never submit empty vulnerability arrays; comprehensive audits require detailed line-by-line analysis with severity ratings for every checked security pattern.",
         "zh-CN": "不要提交空漏洞数组；完整审计需要对每个检查项给出逐行分析和严重级别。"
-      }
+      },
+      "timestamp": 1772011478
     },
     {
       "missionId": "ad3687eb-5cd7-42ae-a089-b223dbd8763b",
@@ -198,11 +198,11 @@
       "taskType": "token-scan",
       "score": 9,
       "lesson": "Provide contract address or bytecode before scanning; empty input yields zero signal.",
-      "timestamp": 1772011526,
       "lessonTranslations": {
         "en-US": "Provide contract address or bytecode before scanning; empty input yields zero signal.",
         "zh-CN": "扫描前先提供合约地址或字节码；空输入不会产生有效信号。"
-      }
+      },
+      "timestamp": 1772011526
     },
     {
       "missionId": "ad3687eb-5cd7-42ae-a089-b223dbd8763b",
@@ -211,11 +211,11 @@
       "taskType": "gas-optimization",
       "score": 7,
       "lesson": "Validate contract address or source code exists before executing gas optimization analysis.",
-      "timestamp": 1772011563,
       "lessonTranslations": {
         "en-US": "Validate contract address or source code exists before executing gas optimization analysis.",
         "zh-CN": "执行 gas 优化分析前先确认合约地址或源码已提供。"
-      }
+      },
+      "timestamp": 1772011563
     },
     {
       "missionId": "ad3687eb-5cd7-42ae-a089-b223dbd8763b",
@@ -233,11 +233,11 @@
       "taskType": "content-generation",
       "score": 9,
       "lesson": "Quantify how parallel execution reduces AI agent latency and compute costs to make throughput advantages economically concrete.",
-      "timestamp": 1772017440,
       "lessonTranslations": {
         "en-US": "Quantify how parallel execution reduces AI agent latency and compute costs to make throughput advantages economically concrete.",
         "zh-CN": "量化并行执行如何降低 AI Agent 延迟与计算成本，让吞吐优势在经济上更具体。"
-      }
+      },
+      "timestamp": 1772017440
     },
     {
       "missionId": "b164b13c-11ab-4161-b574-6564833e5cf0",
@@ -246,11 +246,11 @@
       "taskType": "yield-search",
       "score": 9,
       "lesson": "Avoid large positions in sub-$10M Monad pools due to slippage, and treat 50-400% APYs as temporary incentives with elevated smart contract risk.",
-      "timestamp": 1772017600,
       "lessonTranslations": {
         "en-US": "Avoid large positions in sub-$10M Monad pools due to slippage, and treat 50-400% APYs as temporary incentives with elevated smart contract risk.",
         "zh-CN": "避免在 TVL 低于 1000 万美元的 Monad 池子里重仓；50-400% 的 APY 只应视作临时激励，并伴随更高的合约风险。"
-      }
+      },
+      "timestamp": 1772017600
     },
     {
       "missionId": "b164b13c-11ab-4161-b574-6564833e5cf0",
@@ -259,11 +259,11 @@
       "taskType": "token-scan",
       "score": 9,
       "lesson": "Avoid protocols with EOA proxy admins and un-timelocked validator sets; owner-controlled instant upgrades enable immediate stake drainage.",
-      "timestamp": 1772017713,
       "lessonTranslations": {
         "en-US": "Avoid protocols with EOA proxy admins and un-timelocked validator sets; owner-controlled instant upgrades enable immediate stake drainage.",
         "zh-CN": "避免选择由 EOA 控制代理管理员且验证者集合没有 timelock 的协议；所有者可即时升级时，质押资产可能被立即抽走。"
-      }
+      },
+      "timestamp": 1772017713
     },
     {
       "missionId": "b164b13c-11ab-4161-b574-6564833e5cf0",
@@ -281,11 +281,11 @@
       "taskType": "content-generation",
       "score": 9,
       "lesson": "Implement optimistic parallel execution to eliminate sequential bottlenecks and enable real-time AI inference for on-chain autonomous agents.",
-      "timestamp": 1772104428,
       "lessonTranslations": {
         "en-US": "Implement optimistic parallel execution to eliminate sequential bottlenecks and enable real-time AI inference for on-chain autonomous agents.",
         "zh-CN": "实现乐观并行执行，消除串行瓶颈，让链上自治 Agent 支持实时 AI 推理。"
-      }
+      },
+      "timestamp": 1772104428
     },
     {
       "missionId": "ea561d0c-0c2f-4db6-8567-e434469570a1",
@@ -294,11 +294,11 @@
       "taskType": "content-generation",
       "score": 9,
       "lesson": "Implement optimistic parallel execution with dynamic dependency resolution to eliminate sequential bottlenecks and achieve sub-second latency for AI agent coordination.",
-      "timestamp": 1772108215,
       "lessonTranslations": {
         "en-US": "Implement optimistic parallel execution with dynamic dependency resolution to eliminate sequential bottlenecks and achieve sub-second latency for AI agent coordination.",
         "zh-CN": "通过动态依赖解析实现乐观并行执行，消除串行瓶颈，把 AI Agent 协同延迟压到秒级以内。"
-      }
+      },
+      "timestamp": 1772108215
     },
     {
       "missionId": "b1aa716c-eee7-4f7b-a0c8-f84ea867423f",
@@ -307,11 +307,11 @@
       "taskType": "defi-analysis",
       "score": 9,
       "lesson": "Always confirm mainnet status before DeFi yield research; pre-launch networks have zero real TVL and offer only non-liquid testnet incentives.",
-      "timestamp": 1772109022,
       "lessonTranslations": {
         "en-US": "Always confirm mainnet status before DeFi yield research; pre-launch networks have zero real TVL and offer only non-liquid testnet incentives.",
         "zh-CN": "做 DeFi 收益研究前务必确认主网是否已上线；预发布网络没有真实 TVL，只提供不可流通的测试网激励。"
-      }
+      },
+      "timestamp": 1772109022
     },
     {
       "missionId": "b1aa716c-eee7-4f7b-a0c8-f84ea867423f",
@@ -320,11 +320,11 @@
       "taskType": "token-scan",
       "score": 9,
       "lesson": "Reject any contracts claiming Monad mainnet deployment until Q2 2025 launch; verify all tokens are testnet-only to avoid scams.",
-      "timestamp": 1772109171,
       "lessonTranslations": {
         "en-US": "Reject any contracts claiming Monad mainnet deployment until Q2 2025 launch; verify all tokens are testnet-only to avoid scams.",
         "zh-CN": "在 Monad 主网 Q2 2025 正式上线前，应拒绝相信任何声称已主网上线的合约；确认所有代币仍是测试网资产以规避诈骗。"
-      }
+      },
+      "timestamp": 1772109171
     },
     {
       "missionId": "7b2055bf-1d87-4c7a-9d6f-72b34913c610",
@@ -333,11 +333,11 @@
       "taskType": "yield-search",
       "score": 9,
       "lesson": "Verify mainnet is live before researching yields; pre-launch chains lack real TVL and only offer speculative point accrual.",
-      "timestamp": 1772192589,
       "lessonTranslations": {
         "en-US": "Verify mainnet is live before researching yields; pre-launch chains lack real TVL and only offer speculative point accrual.",
         "zh-CN": "研究收益前先确认主网已上线；预发布链没有真实 TVL，只提供投机性的积分积累。"
-      }
+      },
+      "timestamp": 1772192589
     },
     {
       "missionId": "7b2055bf-1d87-4c7a-9d6f-72b34913c610",
@@ -346,11 +346,11 @@
       "taskType": "token-scan",
       "score": 9,
       "lesson": "Do not run automated token scans on pre-launch protocols; manually verify team credentials and audit reports until contracts deploy.",
-      "timestamp": 1772192681,
       "lessonTranslations": {
         "en-US": "Do not run automated token scans on pre-launch protocols; manually verify team credentials and audit reports until contracts deploy.",
         "zh-CN": "对尚未正式上线的协议不要做自动化代币扫描；在合约部署前应人工核验团队背景和审计报告。"
-      }
+      },
+      "timestamp": 1772192681
     },
     {
       "missionId": "7b2055bf-1d87-4c7a-9d6f-72b34913c610",
@@ -360,6 +360,78 @@
       "score": 9,
       "lesson": "**MONAD DeFi ALLOCATION STRATEGY** *Investment Brief | Pre-Mainnet Positioning* **Current Status** Monad mainnet deployment scheduled Q4 2024–Q1 2025. Network currently in advanced testnet phase (EVM-",
       "timestamp": 1772192816
+    },
+    {
+      "missionId": "459c4f20-e19d-47c5-9879-508ee72cc70d",
+      "goal": "Audit this benchmark Solidity contract for loss-of-funds vulnerabilities and hire the independent verifier to validate every finding. Source:\npragma solidity ^0.8.20;\n\ncontract VulnerableVault {\n    mapping(address => uint256) public balances;\n    address public owner;\n\n    constructor() {\n        owner = msg.sender;\n    }\n\n    function deposit() external payable {\n        balances[msg.sender] += msg.value;\n    }\n\n    function withdraw(uint256 amount) external {\n        require(tx.origin == owner, \"not owner\");\n        require(balances[msg.sender] >= amount, \"insufficient\");\n        (bool ok, ) = msg.sender.call{value: amount}(\"\");\n        require(ok, \"transfer failed\");\n        balances[msg.sender] -= amount;\n    }\n\n    function execute(address target, bytes calldata data) external {\n        require(msg.sender == owner, \"not owner\");\n        (bool ok, ) = target.delegatecall(data);\n        require(ok, \"delegatecall failed\");\n    }\n}",
+      "serviceUsed": "auditor-v1",
+      "taskType": "smart-contract-audit",
+      "score": 9,
+      "lesson": "Detailed and high-signal output.",
+      "lessonTranslations": {
+        "zh-CN": "Detailed and high-signal output."
+      },
+      "timestamp": 1788235946
+    },
+    {
+      "missionId": "ed7c47dd-3941-4976-b020-283e0104dc11",
+      "goal": "Investigate the onchain token and contract risk of 0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565 on BNB Testnet.",
+      "serviceUsed": "investigator-v1",
+      "taskType": "onchain-investigation",
+      "score": 9,
+      "lesson": "审查代币须查代理实现、管理员及所有权，防范未授权升级与操控风险。",
+      "lessonTranslations": {
+        "zh-CN": "审查代币须查代理实现、管理员及所有权，防范未授权升级与操控风险。"
+      },
+      "timestamp": 1788248959
+    },
+    {
+      "missionId": "c311466f-85e4-469c-bbd7-e1ced0a3fe57",
+      "goal": "Run exactly two paid due-diligence phases for BNB Testnet proxy 0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565. Phase 1 must be smart-contract-audit and must hire the independent finding verifier. Phase 2 must be onchain-investigation and must hire the independent token-risk verifier. Do not hire any other task type or repeat a phase. Preserve source, proxy, implementation, report-block, receipt, and payment bindings, then synthesize one final trust recommendation.",
+      "serviceUsed": "auditor-v1",
+      "taskType": "smart-contract-audit",
+      "score": 5,
+      "lesson": "A smart-contract audit with empty findings and no methodology provides weak assurance; always require scope, verification steps, and risk justification before trusting a clean report.",
+      "lessonTranslations": {
+        "en-US": "A smart-contract audit with empty findings and no methodology provides weak assurance; always require scope, verification steps, and risk justification before trusting a clean report."
+      },
+      "timestamp": 1788321150
+    },
+    {
+      "missionId": "4d3dca34-439f-469d-99f1-4de40849087d",
+      "goal": "在 BNB Smart Chain Testnet（chainId 97）对代币合约 0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565 执行全新的付费链上调查（onchain investigation）：核验代理实现、权限、供应量、暂停/冻结状态、交易与风险信号，并由独立 token-risk verifier 对同一报告逐项复核。",
+      "serviceUsed": "investigator-v1",
+      "taskType": "onchain-investigation",
+      "score": 9,
+      "lesson": "代币调查应同时核验代理实现、所有权、供应量与暂停状态。",
+      "lessonTranslations": {
+        "zh-CN": "代币调查应同时核验代理实现、所有权、供应量与暂停状态。"
+      },
+      "timestamp": 1788323177
+    },
+    {
+      "missionId": "bb9c4274-af7a-4ff5-8c84-1e878ded7db1",
+      "goal": "{\"source\":\"pragma solidity ^0.8.20;\\n\\ncontract VulnerableVault {\\n    mapping(address => uint256) public balances;\\n    address public owner;\\n\\n    constructor() {\\n        owner = msg.sender;\\n    }\\n\\n    function deposit() external payable {\\n        balances[msg.sender] += msg.value;\\n    }\\n\\n    function withdraw(uint256 amount) external {\\n        require(tx.origin == owner, \\\"not owner\\\");\\n        require(balances[msg.sender] >= amount, \\\"insufficient\\\");\\n        (bool ok, ) = msg.sender.call{value: amount}(\\\"\\\");\\n        require(ok, \\\"transfer failed\\\");\\n        balances[msg.sender] -= amount;\\n    }\\n\\n    function execute(address target, bytes calldata data) external {\\n        require(msg.sender == owner, \\\"not owner\\\");\\n        (bool ok, ) = target.delegatecall(data);\\n        require(ok, \\\"delegatecall failed\\\");\\n    }\\n}\",\"sourceName\":\"VulnerableVault.sol\"}",
+      "serviceUsed": "auditor-v1",
+      "taskType": "smart-contract-audit",
+      "score": 9,
+      "lesson": "Always apply checks-effects-interactions: update balances before external calls to prevent reentrancy drainage.",
+      "lessonTranslations": {
+        "en-US": "Always apply checks-effects-interactions: update balances before external calls to prevent reentrancy drainage."
+      },
+      "timestamp": 1788361634
+    },
+    {
+      "missionId": "0eb3cf2c-0635-4809-beab-07c75693f7f0",
+      "goal": "{\"source\":\"pragma solidity ^0.8.20;\\n\\ncontract VulnerableVault {\\n    mapping(address => uint256) public balances;\\n    address public owner;\\n\\n    constructor() {\\n        owner = msg.sender;\\n    }\\n\\n    function deposit() external payable {\\n        balances[msg.sender] += msg.value;\\n    }\\n\\n    function withdraw(uint256 amount) external {\\n        require(tx.origin == owner, \\\"not owner\\\");\\n        require(balances[msg.sender] >= amount, \\\"insufficient\\\");\\n        (bool ok, ) = msg.sender.call{value: amount}(\\\"\\\");\\n        require(ok, \\\"transfer failed\\\");\\n        balances[msg.sender] -= amount;\\n    }\\n\\n    function execute(address target, bytes calldata data) external {\\n        require(msg.sender == owner, \\\"not owner\\\");\\n        (bool ok, ) = target.delegatecall(data);\\n        require(ok, \\\"delegatecall failed\\\");\\n    }\\n}\",\"sourceName\":\"VulnerableVault.sol\"}",
+      "serviceUsed": "auditor-v1",
+      "taskType": "smart-contract-audit",
+      "score": 9,
+      "lesson": "Always decrement user balances before executing external ETH transfers to prevent reentrancy attacks.",
+      "lessonTranslations": {
+        "en-US": "Always decrement user balances before executing external ETH transfers to prevent reentrancy attacks."
+      },
+      "timestamp": 1788362143
     }
   ]
 }
