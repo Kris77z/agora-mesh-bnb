@@ -62,7 +62,12 @@ the one-time server envelope decryption key/certificate were removed after impor
 
 `build-demo.sh <40-character-commit>` and `activate-dedicated-demo.sh <commit>`
 are initial-deployment helpers; they refuse to overwrite an existing release/current
-link. The active first deployment was made from 01ac84a with the HTTPS-origin fix
+link. Use `update-dedicated-demo.sh <40-character-commit>` for every subsequent
+release: it builds beside the running one, keeps `state/registry` and `state/memory`
+linked rather than reseeded, swaps `current` only after the build produces a
+BUILD_ID, restarts the seven units, and prints a rollback command. SSH to this host
+is closed by network interference on the operator's connection, so run it from the
+Tencent console's command panel. The active first deployment was made from 01ac84a with the HTTPS-origin fix
 applied before rebuilding. `AGORA_PUBLIC_ORIGIN` must match the external HTTPS origin.
 The compiled server runs its model inference through the external provider API.
 Service endpoints use individual subdomains because discovery validates origin URLs.
