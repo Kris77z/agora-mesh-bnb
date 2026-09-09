@@ -1,3 +1,4 @@
+import { createLlmgtwFetch } from "@rebel/shared";
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateText } from "ai";
 import { writerConfig } from "./config.js";
@@ -26,7 +27,8 @@ export async function runOrdinaryBaselineModel(input: {
     apiKey: writerConfig.llm.apiKey,
     baseURL: writerConfig.llm.baseURL,
     name: `${writerConfig.llm.provider}-ordinary-baseline`,
-    compatibility: "compatible"
+    compatibility: "compatible",
+    fetch: createLlmgtwFetch()
   });
   const response = await generateText({
     maxRetries: 0,

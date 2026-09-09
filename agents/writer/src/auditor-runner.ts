@@ -1,3 +1,4 @@
+import { createLlmgtwFetch } from "@rebel/shared";
 import { createHash } from "node:crypto";
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateText } from "ai";
@@ -136,7 +137,8 @@ export async function runProductionAudit(
     apiKey: writerConfig.llm.apiKey,
     baseURL: writerConfig.llm.baseURL,
     name: writerConfig.llm.provider,
-    compatibility: "compatible"
+    compatibility: "compatible",
+    fetch: createLlmgtwFetch()
   });
   try {
     const { text } = await withHardTimeout(

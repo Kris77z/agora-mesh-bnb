@@ -1,3 +1,4 @@
+import { createLlmgtwFetch } from "@rebel/shared";
 import { randomUUID } from "node:crypto";
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateText, tool } from "ai";
@@ -122,7 +123,8 @@ export async function runReactHunter(
             apiKey: hunterConfig.llm.apiKey,
             baseURL: hunterConfig.llm.baseURL,
             name: hunterConfig.llm.provider,
-            compatibility: "compatible"
+            compatibility: "compatible",
+            fetch: createLlmgtwFetch()
           });
           const result = await generateText({
             maxRetries: 0,

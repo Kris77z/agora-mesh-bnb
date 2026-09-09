@@ -17,3 +17,5 @@ export * from "./onchain-identity-store.js";
 export * from "./http-security.js";
 export * from "./file-lock.js";
 export * from "./service-eligibility.js";
+
+export { createLlmgtwFetch } from "./llmgtw-fetch.js";

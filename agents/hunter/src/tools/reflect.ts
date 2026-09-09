@@ -1,3 +1,4 @@
+import { createLlmgtwFetch } from "@rebel/shared";
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateText } from "ai";
 import { buildOutputLanguageInstruction, type LanguageCode } from "@rebel/shared";
@@ -61,7 +62,8 @@ async function summarizeLesson(input: ReflectInput): Promise<string> {
       apiKey: hunterConfig.llm.apiKey,
       baseURL: hunterConfig.llm.baseURL,
       name: hunterConfig.llm.provider,
-      compatibility: "compatible"
+      compatibility: "compatible",
+      fetch: createLlmgtwFetch()
     });
     const { text } = await generateText({
       maxRetries: 0,

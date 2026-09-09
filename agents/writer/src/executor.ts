@@ -1,3 +1,4 @@
+import { createLlmgtwFetch } from "@rebel/shared";
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateText } from "ai";
 import {
@@ -213,7 +214,8 @@ export async function executeTask(input: {
       apiKey: writerConfig.llm.apiKey,
       baseURL: writerConfig.llm.baseURL,
       name: writerConfig.llm.provider,
-      compatibility: "compatible"
+      compatibility: "compatible",
+      fetch: createLlmgtwFetch()
     });
 
     const { text } = await withHardTimeout(

@@ -1,3 +1,4 @@
+import { createLlmgtwFetch } from "@rebel/shared";
 import { randomUUID } from "node:crypto";
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateText, tool } from "ai";
@@ -120,7 +121,8 @@ const defaultCommanderDeps: CommanderFlowDeps = {
       apiKey: llm.apiKey,
       baseURL: llm.baseURL,
       name: llm.provider,
-      compatibility: "compatible"
+      compatibility: "compatible",
+      fetch: createLlmgtwFetch()
     });
     const result = await generateText({
       maxRetries: 0,

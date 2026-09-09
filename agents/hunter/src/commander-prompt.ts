@@ -1,3 +1,4 @@
+import { createLlmgtwFetch } from "@rebel/shared";
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateText } from "ai";
 import {
@@ -131,7 +132,8 @@ export async function decomposeMission(
       apiKey: hunterConfig.llm.apiKey,
       baseURL: hunterConfig.llm.baseURL,
       name: hunterConfig.llm.provider,
-      compatibility: "compatible"
+      compatibility: "compatible",
+      fetch: createLlmgtwFetch()
     });
 
     const response = await generateText({
