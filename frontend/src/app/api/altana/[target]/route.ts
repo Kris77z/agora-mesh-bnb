@@ -21,6 +21,17 @@ export async function POST(request: Request, context: {params: Promise<{target: 
     const messages = Array.isArray(parsed) ? parsed : [parsed];
     const allowed = target === 'relay' ? relayMethods : readMethods;
     if (!messages.length || messages.length > 25 || messages.some((m) => !m || m.jsonrpc !== '2.0' || !allowed.has(m.method))) return new Response('Unsupported RPC method', {status: 400});
+    // Hosted frontends delegate to the dedicated bridge; never retry signed submissions here.
+    if (process.env.ALTANA_BRIDGE_ORIGIN) {
+      const response = await fetch(new URL(`/api/altana/${target}`, process.env.ALTANA_BRIDGE_ORIGIN), {
+        method: 'POST', headers: {'Content-Type': 'application/json'}, body,
+        cache: 'no-store', signal: AbortSignal.timeout(55_000), redirect: 'error',
+      });
+      return new Response(await response.text(), {
+        status: response.status,
+        headers: {'Content-Type': 'application/json', 'Cache-Control': 'no-store'},
+      });
+    }
     const output = await forwardAltanaRpc(target as 'rpc' | 'relay', body, messages.map((m) => m.method));
     return Response.json(output, {headers: {'Cache-Control': 'no-store'}});
   } catch {
