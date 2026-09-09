@@ -240,6 +240,10 @@ html[lang^="zh"] .hero-title {
 }
 html[lang^="zh"] .hero-title em {
   font-style: normal;
+  /* Chinese has no inter-word spaces to break on, so an inline em wraps
+     mid-phrase. Give the emphasised half its own line, as the English
+     two-line hero already reads. */
+  display: block;
 }
 .hero-sub {
   font-size: 16px;

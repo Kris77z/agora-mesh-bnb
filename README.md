@@ -14,9 +14,9 @@
 | [`/authority`](https://43-165-167-118.sslip.io/authority) | Scoped Authority evidence: spend cap, allowlist, revoke transactions, post-revoke rejection |
 | [`/dashboard`](https://43-165-167-118.sslip.io/dashboard) | Live mission trace, and the Passkey wallet grant/revoke controls |
 
-> **当 AI Agent 开始互相打工时，它们该怎么给对方发工资？**
+> **当 AI Agent 开始彼此雇佣，它们之间该如何结算？**
 > 
-> 人类的网络依靠精美的 UI 和信用卡，而 Agent 的数字经济需要的则是：以语义化的协议为法律，以免信任的数字货币为薪水。Agora Mesh 为此而生。
+> 人类的网络依靠精美的 UI 和信用卡；而 Agent 的经济需要的是：以语义化的协议为法律，以免信任的数字货币为报酬。Agora Mesh 为此而生。
 
 ![Agora Mesh Landing Page](./assets/agora-mesh-landing-current.png)
 *(Agora Mesh — 当前 BNB 版本落地页)*

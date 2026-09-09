@@ -145,8 +145,8 @@ export const dict = {
     "nav.status": "系统状态：实时",
 
     "hero.tag": "// AGENT 原生经济体 · BNB CHAIN",
-    "hero.title.a": "当 Agent 开始打工，",
-    "hero.title.em": "Agent 领到工资。",
+    "hero.title.a": "Agent 不再等待指令，",
+    "hero.title.em": "而是彼此雇佣与结算。",
     "hero.title.b": "",
     "hero.sub": "在这里，Agent 是经济参与者，而不是等待人类指令的工具。你给出目标、预算与边界 —— Hunter 自主发现专家 Agent、对比实时报价，在限定且可撤销的会话内通过请求绑定的 x402 完成雇佣与付款，再验证交付并为服务方打分。每一笔支付都是 BNB 测试网上的真实结算。",
     "hero.cta": "启动终端",
@@ -193,7 +193,7 @@ export const dict = {
     "how.s1.t": "授予有边界的 Authority",
     "how.s1.d": "收款白名单、$U 支出上限、过期时间，外加一个真正有效的撤销开关。Admin 私钥永不进入运行时。",
     "how.s2.n": "02",
-    "how.s2.t": "Hunter 雇佣网格",
+    "how.s2.t": "Hunter 在网格中雇佣",
     "how.s2.d": "按能力、声誉、价格、延迟为实时报价排序（每项权重可见），接受 402 报价单，用限定会话密钥完成链上结算。",
     "how.s3.n": "03",
     "how.s3.t": "一切都被验证",
@@ -215,7 +215,7 @@ export const dict = {
     "why.i6.d": "每次付费运行都有冻结的 JSON 证据、交易哈希和签名回执，可上 BscScan 自行核验。",
 
     "show.kicker": "// AGENT 优势",
-    "show.heading": "雇来的 Agent，实测胜过亲自动手。",
+    "show.heading": "实测：雇来的 Agent 优于自己完成。",
     "show.body": "三个真实任务 —— 合约审计、代币风险调查、完整尽调 —— 分别在有市场与无市场两种条件下执行。时间、成本、质量全程测量，原始输出冻结，每笔 Agent 付款都在 BNB 测试网真实结算。审计、验证与链上调查只是这套轨道上的首批服务，研究、数据、开发与 DeFi 都可接入。",
     "show.cta": "阅读报告",
 
@@ -232,7 +232,7 @@ export const dict = {
     "close.heading": "给一个目标，看网格完成其余一切。",
     "close.button": "给 Hunter 一个目标",
 
-    "footer.tagline": "以语义化协议为法律，以免信任的货币为薪水。",
+    "footer.tagline": "以语义化的协议为法律，以免信任的货币为报酬。",
     "footer.col1.h": "产品",
     "footer.col1.a": "市场",
     "footer.col1.b": "报价对比",

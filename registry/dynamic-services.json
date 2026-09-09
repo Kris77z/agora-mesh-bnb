@@ -1,6 +1,43 @@
 {
   "services": [
     {
+      "agentId": "97:0x3bd3fd38ecc72378946c790780c8c1216e4c5527",
+      "service": {
+        "id": "auditor-v1",
+        "name": "Smart Contract Auditor",
+        "description": "Task execution service for smart-contract-audit",
+        "endpoint": "http://localhost:3001",
+        "taskType": "smart-contract-audit",
+        "skills": [
+          "solidity",
+          "vulnerability",
+          "bnb",
+          "evm"
+        ],
+        "price": "500000000000000000",
+        "currency": "U",
+        "asset": {
+          "chainId": 97,
+          "kind": "erc20",
+          "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+          "symbol": "U",
+          "decimals": 18
+        },
+        "agentId": "97:0x3bd3fd38ecc72378946c790780c8c1216e4c5527",
+        "paymentRails": [
+          "x402"
+        ],
+        "offerVersion": "2",
+        "network": "eip155:97",
+        "provider": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
+        "availability": {
+          "available": true
+        }
+      },
+      "updatedAt": 1788944055,
+      "expiresAt": 1788944175
+    },
+    {
       "agentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb",
       "service": {
         "id": "risk-verifier-v1",
@@ -35,8 +72,8 @@
           "available": true
         }
       },
-      "updatedAt": 1788942563,
-      "expiresAt": 1788942683
+      "updatedAt": 1788944063,
+      "expiresAt": 1788944183
     },
     {
       "agentId": "97:0x7ea7fbf92d5355957c187976bfe7c5788b2f70bb",
@@ -73,8 +110,8 @@
           "available": true
         }
       },
-      "updatedAt": 1788942563,
-      "expiresAt": 1788942683
+      "updatedAt": 1788944063,
+      "expiresAt": 1788944183
     },
     {
       "agentId": "97:0x7d6ec1246308502e5ce216c4393e02523ff201a4",
@@ -114,8 +151,8 @@
           "available": true
         }
       },
-      "updatedAt": 1788942566,
-      "expiresAt": 1788942686
+      "updatedAt": 1788944066,
+      "expiresAt": 1788944186
     },
     {
       "agentId": "97:0x1ef8eeb640e60d5d3bc3efe1a4b2ffcd64132c2c",
@@ -152,45 +189,8 @@
           "available": true
         }
       },
-      "updatedAt": 1788942576,
-      "expiresAt": 1788942696
-    },
-    {
-      "agentId": "97:0x3bd3fd38ecc72378946c790780c8c1216e4c5527",
-      "service": {
-        "id": "auditor-v1",
-        "name": "Smart Contract Auditor",
-        "description": "Task execution service for smart-contract-audit",
-        "endpoint": "http://localhost:3001",
-        "taskType": "smart-contract-audit",
-        "skills": [
-          "solidity",
-          "vulnerability",
-          "bnb",
-          "evm"
-        ],
-        "price": "500000000000000000",
-        "currency": "U",
-        "asset": {
-          "chainId": 97,
-          "kind": "erc20",
-          "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
-          "symbol": "U",
-          "decimals": 18
-        },
-        "agentId": "97:0x3bd3fd38ecc72378946c790780c8c1216e4c5527",
-        "paymentRails": [
-          "x402"
-        ],
-        "offerVersion": "2",
-        "network": "eip155:97",
-        "provider": "0x3Bd3Fd38ecC72378946c790780c8C1216e4c5527",
-        "availability": {
-          "available": true
-        }
-      },
-      "updatedAt": 1788942585,
-      "expiresAt": 1788942705
+      "updatedAt": 1788944076,
+      "expiresAt": 1788944196
     }
   ]
 }
