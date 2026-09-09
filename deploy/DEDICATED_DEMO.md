@@ -38,10 +38,24 @@ Relay read calls. TCP 443 is now externally reachable; full paid browser accepta
 The same-origin check now uses the fixed `AGORA_PUBLIC_ORIGIN` behind the TLS proxy;
 8 relevant tests and frontend type checking passed, followed by a successful server build.
 
-Model API check: the configured China endpoint timed out from Tokyo; the global
-endpoint responded 401 to this key. Model execution is not yet accepted. Health's
-`llm.available` indicates a configured key, not verified inference availability.
-Do not report a fully working public hiring demo until model connectivity is resolved.
+Model configuration updated 2026-09-09 at 14:43 Beijing time: Hunter and all four
+specialists use the OpenAI-compatible endpoint `https://gateway.llmgtw.io/v1`,
+model `gemini-3.1-pro-preview`. The key is stored only in restricted server env
+files; it was transferred with RSA-OAEP encryption using a temporary server key,
+which was deleted after import. Kimi credentials are disabled in these profiles.
+All five public health checks return 200. The health provider label `openai`
+means the compatible transport, not an OpenAI-hosted model.
+
+Patch `7ba7072` was applied to the active server release: seven SDK generation
+calls now set `maxRetries: 0` and `maxTokens: 4096`. This is a requested output
+budget, not a guaranteed billing cap; the gateway has returned more completion
+tokens than requested in probes. Hunter retains the existing scripted mode.
+
+The first server probe using the actual AI SDK returned HTTP 200 with an empty
+answer and no tool call (538 total tokens; gateway-reported USD 0.003056).
+Model connectivity is verified, but a fully working paid hiring flow is not yet
+accepted. Do not treat configured-key health or a short local probe as full
+production model acceptance.
 
 All nine env files have mode 0600 and owner root. Temporary local env copies and
 the one-time server envelope decryption key/certificate were removed after import.
@@ -54,3 +68,12 @@ The compiled server runs its model inference through the external provider API.
 Service endpoints use individual subdomains because discovery validates origin URLs.
 Same-host routing is pinned in `/etc/hosts` for the public hostname and four service
 subdomains; external DNS continues to point to the dedicated public IP.
+
+Second server SDK probe explicitly selected the multiply tool, with a 128-token
+output request: HTTP 200, text `Format`, no tool execution, 293 total tokens,
+gateway-reported USD 0.00158. Two actual server inference requests consumed 831
+tokens and USD 0.004636 in reported charges. No further paid probes were run.
+The server SDK probes used its `maxTokens` option; the successful local raw probe
+used `max_completion_tokens`. Their request shapes and output budgets are not
+proven equivalent. Long-form/task completion and gateway parameter compatibility
+remain unverified. Temporary probe files were removed.
