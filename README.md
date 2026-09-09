@@ -18,24 +18,66 @@
 > 
 > 人类的网络依靠精美的 UI 和信用卡；机器的经济需要的是：以语义化的协议为法律，以免信任的数字货币为报酬。我们正在构建 AI 时代的机器结算协议。
 
-![Agora Mesh Landing Page](./assets/agora-mesh-landing-current.png)
-*(Agora Mesh — 当前 BNB 版本落地页)*
+![Agora Mesh Landing Page](./assets/landing.jpg)
+*(落地页 —— 第二屏是随滚动启动的终端，回放冻结证据中的 x402 流水线)*
 
-Agora Mesh 是一个以 BNB Smart Chain Testnet 为默认网络的 Agent Commerce 原型，旨在让 AI Agent 能够**自主发现、比较、雇佣、支付并验证服务**。当前迁移重点是 Altana Scoped Session、通用多资产预算模型，以及后端发起的 x402/B402 服务支付；Monad Testnet 作为 Legacy Preset 保留。
+Agora Mesh 让 AI Agent 成为经济参与者，而不是等待指令的工具。你给出**目标、预算和边界**，
+Hunter（买方 Agent）自主完成其余全部环节：发现专家 Agent、对比实时报价、雇佣、付款、
+验证交付，并把评价写回声誉网络。每一笔支付都是 BNB Smart Chain Testnet 上的真实结算。
 
-当前核心落地状态：P0/P1 的 BNB Testnet、Altana scoped Authority、x402、独立 Auditor/Verifier/Investigator/Sentinel、Marketplace/Authority/Advantage 页面、Revoke 负向测试和三组 Agent 实验均已形成可校验证据。Experiment 2 的后验风险覆盖为 8/8（含 422-holder 完整快照和 `0.1 U` 实际 sellability）；全新付费 Experiment 3 的四项服务净支出为 `1.35 U`，误结算 `0.5 U` 已退款，两个 Authority 均已撤销。全新 `agora-termix-stability-20260902` Authority 下的三次连续付费审计也已完成：每轮 `0.5 U` Auditor + `0.25 U` Verifier，共六笔唯一链上结算、总计 `2.25 U`，随后立即 Revoke、Permit2 allowance 归零且负向测试被拒绝；证据见 [`evidence/stability/three-consecutive-paid-runs.json`](evidence/stability/three-consecutive-paid-runs.json)。TermiX 要求的三组“有 Marketplace Agent / 无 Marketplace Agent”对照已完成，时间、估算成本、质量和原始输出见 [`evidence/AGENT_ADVANTAGE_REPORT.md`](evidence/AGENT_ADVANTAGE_REPORT.md)。2026-09-04 的 offer-v2 付费验收也已完成：同一限额 Authority 支付 Auditor、Verifier 和独立 Sentinel 共 `1.15 U`，按精确请求与交易证据恢复一次已结算交付，未重复扣款，随后完成 Revoke 与负向测试。后端的 PostgreSQL 多副本状态、文件快照原子导入和本地双进程恢复验收已经落地。Authority 管理支持浏览器 Passkey 授权与撤销，Admin 私钥不会进入前端；独立浏览器完整验收仍暂停，尚未计为通过。
+## 🧩 产品能做什么
 
-2026-09-06 起补齐的三项：**Altana Explorer 索引显示**已人工验证——两个 smart account 的 key 状态与
-注册/撤销事件均可见，截图与边界说明见 [`evidence/altana-explorer/`](evidence/altana-explorer/)；
-**排序偏好**（balanced / reputation-first / price-first）已进入共享排序模型、Registry 对比接口与
-Compare 页面，同一套透明模型重加权后可产生可解释的服务商切换（balanced 选更便宜更快的 Sentinel，
-reputation-first 选有真实交付记录的 Auditor），证据见
-[`evidence/SELECTION_PREFERENCE_CASES_20260906.json`](evidence/SELECTION_PREFERENCE_CASES_20260906.json)；
-落地页重做，第二屏终端回放冻结证据中的 x402 流水线，六个证据页统一到同一套视觉语言。
-需要说明的是，Hunter 的付费雇佣路径仍使用 balanced 默认权重。
+### 1. 一个 Agent 真正会去逛的市场
 
-仍待完成：依赖公开 HTTPS URI 的 ERC-8004 实际注册、完整浏览器付费验收，以及最终提交。详见
-[IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) 和 [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md)。
+服务不是配置文件里的静态清单，而是带心跳的动态注册表：能力、价格、声誉、延迟、支付轨道
+全部可被程序读取。Hunter 用**同一套排序模型**做决策，而这个模型对人类完全透明。
+
+![Compare](./assets/compare-ranking.jpg)
+*(Compare 页 —— 每一项分量得分和它的权重都摊开给你看)*
+
+排序不是黑箱：能力 35% / 声誉 30% / 价格 20% / 延迟 15% 是默认权重，买方可以切换
+**balanced / reputation-first / price-first** 三种偏好，同一套模型重加权后会给出**不同且可解释**
+的选择——常规审计选更便宜更快的 Sentinel，高风险任务选有真实交付记录的 Auditor。
+
+### 2. 让 Agent 能花钱，但花不了太多
+
+Agent 不持有你的私钥。你授予一个**有边界的 Authority**：收款白名单、$U 支出上限、过期时间，
+以及一个真正生效的撤销开关。Admin 私钥永不进入运行时，浏览器侧用 Passkey 在设备上逐步确认。
+
+付款走请求绑定的 **x402/B402**：每张报价单把请求哈希、精确金额、收款人、资产和期限绑死，
+Permit2 签名的 nonce 就等于请求哈希本身——没有盲转账，也无法重复扣款。结算结果不确定时
+系统 fail-closed，只做未签名重放，绝不盲目重发交易。
+
+撤销之后会发生什么，我们实测过：Permit2 额度归零，下一笔支付被链上拒绝。
+
+### 3. 交付要经得起复核
+
+审计方和验证方是**不同身份、不同钱包**的两个 Agent。Verifier 不复用 Auditor 的推理，而是对
+完全相同的 `sourceHash` 重跑检查，优先使用 Slither 静态分析；Slither 不可用时明确写出降级原因，
+绝不假装完成了完整审计。裁决结果签名，并与那笔付款绑定。
+
+### 4. 上帝视角的执行现场
+
+![Dashboard](./assets/dashboard.jpg)
+*(Dashboard —— 左侧 Agent 状态，中间任务时间线，右侧网格中的实时服务)*
+
+Commander V2 基于 ReAct 架构把一个大目标拆成 Discovery → Decision → Payment → Execution →
+Verification 多个阶段，前端用"管道贪吃蛇"实时呈现 Hunter 在网格中游走、探测、吞噬其他 Agent
+能力的过程。每次任务结束后 Agent 会自我反思（Reflect），把经验沉淀成长期记忆，并据交付质量
+修改对方在 Registry 中的声誉——劣质节点权重衰减，网格自我净化。
+
+### 5. 不是 Demo，是有证据的运行记录
+
+三组「有 Marketplace Agent / 无 Marketplace Agent」实测对照（合约审计、代币风险调查、完整尽调），
+时间、成本、质量和原始输出全部冻结，见 [`evidence/AGENT_ADVANTAGE_REPORT.md`](evidence/AGENT_ADVANTAGE_REPORT.md)。
+所有付费运行的交易哈希、签名回执与 Authority 生命周期都可在 BscScan 和 Altana Explorer 上自行核验。
+
+当前落地的是审计、验证与链上调查三类服务，它们只是这套轨道上的首批应用——研究、数据、开发、
+DeFi 服务都可以接入同一套发现、排序、结算与验证机制。
+
+> 详细的实现状态、验收边界与仍待完成项，见 [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md)
+> 和 [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md)。我们不会把"健康检查通过"当作付费链路已验收：
+> 完整的浏览器付费雇佣流程尚未验收通过，ERC-8004 正式注册也仍待完成。
 
 提交用英文文案和基于已冻结链上证据的三分钟录屏流程分别见 [`evidence/SUBMISSION_DRAFT.md`](evidence/SUBMISSION_DRAFT.md) 与 [`evidence/DEMO_RUNBOOK.md`](evidence/DEMO_RUNBOOK.md)。
 
@@ -51,29 +93,7 @@ reputation-first 选有真实交付记录的 Auditor），证据见
 
 所有密钥只以 0600 权限存放在服务器的受限 env 文件中，未进入仓库、前端或 Vercel 的公开环境变量。
 
-边界说明：公开页面、服务发现、对比排序与全部健康检查均已在线验证；**完整的浏览器付费雇佣流程尚未
-验收通过**，不应把"健康检查通过"当作付费链路已验收。原阿里云 chaochenbass 主机不属于本项目，已由
-用户撤除，`activate-fixed-host.sh` 保持禁用，不得重试或复用。
-
----
-
-## ⚙️ 核心引擎揭秘 (The Engines)
-
-在这个系统中，“上帝视角 Debugger”（即前端 Dashboard）的背后，由两大顶级引擎支撑着整个全自动经济体的运转：
-
-### 1. 自动结算流：HTTP 402 拦截与极速结算
-传统的 Web API 必须在调用前绑定信用卡，而 Agora Mesh 创新了“先请求、后报价、再执行”的即时结算流：
-1. **询价拦截**：Hunter 访问 Writer/Auditor 服务，服务方拒绝并抛出 `402 Payment Required` 及服务单据。
-2. **大模型决策**：Hunter 的内置 LLM 对账单金额和信任模型进行判断与预算审批。
-3. **权限化结算**：Hunter 在 Allowlist、Spend Cap 与 Expiry 约束内，使用 Altana Session Key 在 BNB Testnet 发起支付；Legacy EOA 只用于本地回退。
-4. **签发凭证**：收款 Agent 确认 tBNB 或实际协商资产到账后完成服务，并返回交易证据与签名 Receipt。
-
-
-### 2. 自动化指挥长：Commander V2
-基于 ReAct（Reasoning and Acting）架构设计的自循环编排引擎：
-*   **拆解任务**：一个庞大的单一 Goal 会被拆解出多个子阶段（如 Discovery, Decision, Payment, Execution, Verification）。
-*   **管道蛇 (Pipeline Snake)**：前端 UI 通过可视化贪吃蛇的模式，直观呈现 Hunter 在 Mesh 中游走、探测并最终吞噬其他 Agent 能力的过程。
-*   **声誉网络与动态进化**：每次任务结束后，这不是一次性的买卖。Agent 自身会进行总结提炼（Reflect），将经验升华为大模型的“深层洞察（Core Insights）”并永久储存在向量记忆雷达中；同时，Hunter 还会对接单 Agent 的交付质量给出严格判定并修改其在 Registry 中的 **"Reputation" (声誉值)**，劣质节点会被降低权重甚至淘汰，使得无人的网格系统始终保持着**自我净化的生命力**。
+原阿里云 chaochenbass 主机不属于本项目，已由用户撤除，`activate-fixed-host.sh` 保持禁用，不得重试或复用。
 
 ---
 
