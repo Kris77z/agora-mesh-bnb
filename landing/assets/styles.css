@@ -37,18 +37,50 @@ body {
 }
 
 /* ---------- fixed nav ---------- */
+/* Geometry mirrors the in-app header: a centred 1280px container with 32px/16px
+   padding, so the logo, nav and action sit at the same coordinates on both and
+   the bar does not jump when a visitor clicks through. Over the hero it stays
+   transparent; past the fold it takes the app's solid treatment. */
 .site-nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 200;
+  border-bottom: 1px solid transparent;
+  mix-blend-mode: difference;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.site-nav.is-scrolled {
+  mix-blend-mode: normal;
+  background: rgba(4, 6, 5, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom-color: rgb(29, 37, 34);
+}
+.site-nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 56px;
-  mix-blend-mode: difference;
 }
+/* Same button as the app header. */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(47, 230, 183, 0.4);
+  background: rgba(47, 230, 183, 0.1);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--mint);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+.nav-cta:hover { background: rgba(47, 230, 183, 0.2); }
 .logo {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -156,7 +188,7 @@ body {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
 }
 .sys-status {
   font-family: var(--font-mono);
@@ -961,7 +993,7 @@ html[lang^="zh"] .show-heading { font-family: var(--font-sans); font-size: 40px;
 }
 
 @media (max-width: 768px) {
-  .site-nav { padding: 18px 20px; }
+  .site-nav-inner { padding: 14px 20px; }
   .nav-links { display: none; }
   .hero-layer { padding: 0 24px; }
   html[lang^="zh"] .hero-title { font-size: 40px; }

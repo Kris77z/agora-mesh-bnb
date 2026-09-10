@@ -9,6 +9,7 @@ export const DEFAULT_LOCALE = "en";
 export const dict = {
   en: {
     "nav.brand": "AGORA / MESH",
+    "nav.cta": "Launch Terminal",
     "nav.marketplace": "Marketplace",
     "nav.compare": "Compare",
     "nav.authority": "Authority",
@@ -128,6 +129,7 @@ export const dict = {
   },
   zh: {
     "nav.brand": "AGORA / MESH",
+    "nav.cta": "启动终端",
     "nav.marketplace": "市场",
     "nav.compare": "对比",
     "nav.authority": "授权",

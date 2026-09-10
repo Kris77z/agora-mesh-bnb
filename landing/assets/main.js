@@ -105,6 +105,10 @@ function update() {
   const bootP = clamp01((p - 0.08) / 0.5);
   term.setBootProgress(bootP);
 
+  // Transparent over the hero, solid past it, which is what the in-app header
+  // looks like — so the bar reads as the same element after clicking through.
+  document.querySelector(".site-nav").classList.toggle("is-scrolled", window.scrollY > 80);
+
   const heroFade = clamp01(1 - p / 0.35);
   heroLayer.style.opacity = heroFade.toFixed(3);
   heroLayer.style.pointerEvents = heroFade < 0.05 ? "none" : "auto";
