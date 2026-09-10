@@ -102,15 +102,14 @@ body {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 28px;
 }
 .nav-item {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 12px;
+  padding: 8px 0;
   border: 0;
-  border-radius: 8px;
   background: transparent;
   /* Matches the in-app header (font-mono, 11px, uppercase, 0.14em) so the
      navigation does not change shape when a visitor clicks through. */
